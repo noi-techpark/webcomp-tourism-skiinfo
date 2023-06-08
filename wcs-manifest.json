@@ -1,5 +1,6 @@
 {
   "title": "Tourism Skiinfo",
+  "shortName": "tourism-skiinfo",
   "description": "A web component to display SkiAreas with all Information",
   "descriptionAbstract": "A web component to display SkiAreas with all Information",
   "license": "AGPL-3.0-or-later",
@@ -20,7 +21,7 @@
       "organizationUrl": "https://noi.bz.it"
     }
   ],
-  "image": "wcs-logo.png",
+  "image": "wcs-logo.png",  
   "searchTags": [
     "skiarea"
   ],
