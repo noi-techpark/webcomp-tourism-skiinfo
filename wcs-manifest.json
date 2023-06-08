@@ -1,0 +1,112 @@
+{
+  "title": "Tourism Skiinfo",
+  "description": "A web component to display SkiAreas with all Information",
+  "descriptionAbstract": "A web component to display SkiAreas with all Information",
+  "license": "AGPL-3.0-or-later",
+  "repositoryUrl": "https://github.com/noi-techpark/webcomp-tourism-skiinfo.git",
+  "copyrightHolders": [
+    {
+      "name": "NOI",
+      "email": "info@noi.bz.it",
+      "organization": "NOI AG/SpA Südtirol - Alto Adige",
+      "organizationUrl": "https://noi.bz.it"
+    }
+  ],
+  "authors": [    
+    {
+      "name": "Rudi Thoeni",
+      "email": "r.thoeni@noi.bz",
+      "organization": "NOI AG",
+      "organizationUrl": "https://noi.bz.it"
+    }
+  ],
+  "image": "wcs-logo.png",
+  "searchTags": [
+    "skiarea"
+  ],
+  "dist": {
+    "basePath": "dist",
+    "files": [
+      "odh-tourism-skiinfo.min.js"
+    ],
+    "scripts": [
+      {
+        "file": "odh-tourism-skiinfo.min.js",
+        "parameter": ""
+      }
+    ]
+  },
+  "configuration": {
+    "tagName": "odh-tourism-skiinfo",
+    "options": [     
+      {
+        "key": "content-id-list",
+        "type": "text",
+        "label": "List of content ids (see bottom right of a detail card; must match with the content type)",
+        "required": false,
+        "options": {
+          "default": ""
+        }
+      },           
+      {
+        "key": "language",
+        "type": "select",
+        "label": "language",
+        "required": false,
+        "options": {
+          "values": [
+            "en",
+            "de",
+            "it"
+          ],
+          "default": "de"
+        }
+      },
+      {
+        "key": "source-filter",
+        "type": "select",
+        "label": "Filter by dataprovider",
+        "required": false,
+        "options": {
+          "values": [
+            "lts",
+            "idm",
+            "siag",
+            "dss",
+            "suedtirolwein",
+            "sta",
+            "archapp"
+          ],
+          "default": null
+        }
+      },
+      {
+        "key": "loc-filter",
+        "type": "text",
+        "label": "Location Filter (pass type + id check out https://tourism.opendatahub.bz.it/v1/Location)",
+        "required": false,
+        "options": {
+          "default": ""
+        }
+      },     
+      {
+        "key": "enable-placeholder",
+        "type": "null",        
+        "label": "Enable Image Placeholder",
+        "required": false,
+        "options": {          
+          "default": true
+        }
+      },
+      {
+        "key": "page-size",
+        "type": "number",
+        "label": "Number of list items per page",
+        "required": false,
+        "options": {
+          "default": 30
+        }
+      }
+    ]
+  }
+}
