@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: NOI Techpark <digital@noi.bz.it>
+
+SPDX-License-Identifier: CC0-1.0
+-->
+
 # Tourism Skiinfo
 
 [![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomp-tourism-skiinfo)](https://api.reuse.software/info/github.com/noi-techpark/webcomp-tourism-skiinfo)

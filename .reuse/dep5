@@ -1,12 +1,8 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: webcomp-tourism-skiinfo
-Upstream-Contact: Peter Moser <p.moser@noi.bz.it>
+Upstream-Contact: NOI Techpark <digital@noi.bz.it>
 Source: https://github.com/noi-techpark/webcomp-tourism-skiinfo
 
-Files: src/* work/* dist/* odh-*.js .browserslistrc .eslintignore .eslintrc.js .prettierignore .prettierrc babel.config.js vue.config.js webcomp-tourism-skiinfo.iml dist/*.html
-Copyright: (c) 2021 NOI Techpark <info@noi.bz.it>
-License: AGPL-3.0-or-later
-
-Files: .github/workflows/main.yml *.md *.txt .env.* *.json .env infrastructure/* .editorconfig .gitignore docker-compose.yml yarn.lock webpack.* wcs-logo.png wcs-logo.webp karma.conf.js browserslist wcs-logo-new.png
-Copyright: (c) 2021 NOI Techpark <info@noi.bz.it>
+Files: .browserslistrc .eslintignore .prettierignore .prettierrc webcomp-tourism-skiinfo.iml .github/* infrastructure/* *.json .editorconfig .gitignore src/assets/* src/api/*
+Copyright: (c) NOI Techpark <digital@noi.bz.it>
 License: CC0-1.0
