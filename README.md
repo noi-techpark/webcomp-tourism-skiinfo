@@ -6,6 +6,7 @@ SPDX-License-Identifier: CC0-1.0
 
 # Tourism Skiinfo
 
+![REUSE Compliance](https://github.com/noi-techpark/webcomp-tourism-skiinfo/actions/workflows/reuse.yml/badge.svg)
 [![REUSE status](https://api.reuse.software/badge/github.com/noi-techpark/webcomp-tourism-skiinfo)](https://api.reuse.software/info/github.com/noi-techpark/webcomp-tourism-skiinfo)
 [![CI](https://github.com/noi-techpark/webcomp-tourism-skiinfo/actions/workflows/ci.yml/badge.svg)](https://github.com/noi-techpark/webcomp-tourism-skiinfo/actions/workflows/ci.yml)
 
