@@ -106,13 +106,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <external-link class="external-link icon"></external-link>
             <span class="prop-key">{{ $t('web') }}: </span>
             <a :href="itemContactInfos.Url" target="_blank">
-              {{ itemContactInfos.Url }}
+              Homepage
             </a>
           </li>
           <li v-if="itemContactInfos.Phonenumber">
             <phone class="phone icon"></phone>
             <span class="prop-key">{{ $t('phone') }}: </span>
             <span class="text-dark">{{ itemContactInfos.Phonenumber }}</span>
+          </li>
+          <li v-if="googleMapsLink">
+            <map-icon class="map-icon icon"></map-icon>
+            <a :href="googleMapsLink" target="_blank">Google Maps</a>
           </li>
           <li v-if="isSkiAreaOpen != null">
             <calendar class="calendar icon"></calendar>
@@ -138,7 +142,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <div
         v-if="itemDetail.BaseText"
         v-html="itemDetail.BaseText"
-        class="text"
+        class="text-justify"
       ></div>
 
       <!-- COMMON -->
@@ -306,6 +310,7 @@ export default {
   data() {
     return {
       item: null,
+      lifts: [],
       gastronomyTypes: [],
       showImage: false,
       imageUrl: null,
@@ -362,9 +367,9 @@ export default {
       }
 
       const showProps = [
-        //'LiftCount',
-        'SlopeKm',
-        'Altitude'
+        'LiftCount'
+        // 'SlopeKm',
+        // 'Altitude'
       ];
 
       const props = {};
@@ -483,20 +488,20 @@ export default {
           .join(', ');
     },
     getItemLocationInfo() {      
-      let municipality = "";
-      let district = "";
+      let tv = "";
+      let region = "";
 
-      if (this.item?.LocationInfo?.MunicipalityInfo?.Name[this.language]) {
-        municipality = this.item?.LocationInfo?.MunicipalityInfo?.Name[this.language];                       
+      if (this.item?.LocationInfo?.TvInfo?.Name[this.language]) {
+        tv = this.item?.LocationInfo?.TvInfo?.Name[this.language];                       
       }     
-      if (this.item?.LocationInfo?.DistrictInfo?.Name[this.language] ) {
+      if (this.item?.LocationInfo?.RegionInfo?.Name[this.language] ) {
 
-        if(municipality != this.item?.LocationInfo?.DistrictInfo?.Name[this.language]){
-          district = ' - ' + this.item?.LocationInfo?.DistrictInfo?.Name[this.language];                
+        if(tv != this.item?.LocationInfo?.RegionInfo?.Name[this.language]){
+          region = ' - ' + this.item?.LocationInfo?.RegionInfo?.Name[this.language];                
         }        
       }     
 
-      return municipality + district;
+      return tv + region;
     },
     isItemEmpty() {
       return Object.keys(this.itemDetail).length === 0;
@@ -521,6 +526,17 @@ export default {
         .singleSkiArea(this.contentId, '', this.language)
         .then((value) => {
           this.item = value.data;
+          this.isLoading = false;
+        });
+    },
+    loadSkiAreaLifts() {
+      new ODHActivityPoiApi()
+        .v1ODHActivityPoiGet(this.language,
+        1, 0, undefined, undefined, undefined, undefined, undefined, undefined, undefined, this.language, "ska" + this.contentId, undefined, undefined,
+        "pisten", undefined, undefined, true, undefined, undefined, undefined, undefined, undefined, undefined,undefined,undefined,undefined,undefined,
+        undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, false, [])
+        .then((value) => {
+          this.lifts = value.Items;
           this.isLoading = false;
         });
     },    
@@ -675,6 +691,11 @@ ul {
 
 .text {
   color: #2e3131;
+}
+
+.text-justify{
+  color: #2e3131;
+  text-align: justify;
 }
 
 .text-id {

@@ -62,14 +62,14 @@
     "IsPrepared": "Prepared",
     "FeetClimb": "Walkable",
     "IsOpen": "Open",
-    "LiftCount": "count lifts",
-    "SlopeKmBlue": "blue slopes",
-    "SlopeKmRed": "red slopes",
-    "SlopeKmBlack": "black slopes",
-    "TotalSlopeKm": "slopes (km)",
-    "AltitudeFrom": "altimeters from",
-    "AltitudeTo": "altimeters to",
-    "Altitude": "altimeters"
+    "LiftCount": "Lifts total",
+    "SlopeKmBlue": "Blue slopes",
+    "SlopeKmRed": "Red slopes",
+    "SlopeKmBlack": "Black slopes",
+    "TotalSlopeKm": "Slopes (km)",
+    "AltitudeFrom": "Altimeters from",
+    "AltitudeTo": "Altimeters to",
+    "Altitude": "Altimeters"
   },
   "yes": "Yes",
   "paging": {
