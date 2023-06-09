@@ -66,9 +66,10 @@
     "SlopeKmBlue": "blue slopes",
     "SlopeKmRed": "red slopes",
     "SlopeKmBlack": "black slopes",
-    "TotalSlopeKm": "kilometers slopes total",
-    "AltitudeFrom": "altimeters von",
-    "AltitudeTo": "altimeters to"
+    "TotalSlopeKm": "slopes (km)",
+    "AltitudeFrom": "altimeters from",
+    "AltitudeTo": "altimeters to",
+    "Altitude": "altimeters"
   },
   "yes": "Yes",
   "paging": {

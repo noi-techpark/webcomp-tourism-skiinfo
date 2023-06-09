@@ -66,9 +66,10 @@
         "SlopeKmBlue": "Blaue Pisten",
         "SlopeKmRed": "Rote Pisten",
         "SlopeKmBlack": "Schwarze Pisten",
-        "TotalSlopeKm": "Pistenkilometer insgesamt",
+        "TotalSlopeKm": "Pistenkilometer",
         "AltitudeFrom": "Höhe von",
-        "AltitudeTo": "Höhe bis"
+        "AltitudeTo": "Höhe bis",
+        "Altitude": "Höhe"
     },
     "yes": "Ja",
     "paging": {

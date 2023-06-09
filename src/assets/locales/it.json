@@ -62,13 +62,14 @@
     "IsPrepared": "Preparato",
     "FeetClimb": "Calpestabile",
     "IsOpen": "Aperto",
-    "LiftCount": "impianti",
+    "LiftCount": "impianti",    
     "SlopeKmBlue": "piste blu",
     "SlopeKmRed": "piste rosse",
     "SlopeKmBlack": "piste nere",
-    "TotalSlopeKm": "chilometri pista totale",
+    "TotalSlopeKm": "chilometri pista",
     "AltitudeFrom": "Altezza da",
-    "AltitudeTo": "Altezza a"
+    "AltitudeTo": "Altezza a",
+    "Altitude": "Altezza"
   },
   "yes": "Si",
   "paging": {

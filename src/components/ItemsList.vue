@@ -55,7 +55,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </div>
           </div>
           <div v-else>
-            <img class="thumbnail" :src="item.ImageGallery[0].ImageUrl" />
+            <img class="thumbnail" :src="item.ImageGallery[0].ImageUrl + '&height=200'" />
           </div>
           </div>
          

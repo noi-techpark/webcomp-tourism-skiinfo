@@ -7,9 +7,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <template>
   <div>
     <div class="back-button" @click.prevent="close" v-if="isListAvailable">
-      <div
-        style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px"
-      >
+      <div style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px">
         <arrow-icon-left viewBox="0 0 24 24" width="100%" height="40px" />
       </div>
       <span>{{ $t('back') }}</span>
@@ -20,35 +18,66 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <div v-else-if="item" class="item">
       <div class="title-container" :style="titleImage">
         <div class="title">
-          <h1>{{ itemDetail.Title }}</h1>
-          <!-- Gastronomy Temporary Hide -->
-          <!-- <div v-if="itemGastroCategoryInfo" class="props">
-            <div>
-              <span class="prop-key" v-if="item.CategoryCodes.length > 1"
-                >{{ $t('categories') }}:</span>
-              <span class="prop-key" v-else>{{ $t('category') }}:</span>
-              {{ itemGastroCategoryInfo }}
-            </div>
-          </div> -->
-          <!-- POI / Activity -->
-          <div v-if="itemCategoryInfos" class="props">
-              <span class="prop-key">{{ $t('categories') }}:</span>
-                  <!-- <div v-for="(value,i) of itemCategoryInfos" :key="i" class="text">
-                     {{ value }}
-                  </div>                                -->
-                  {{ itemCategoryInfos }}            
-          </div>          
+          <h1>{{ itemDetail.Title }}</h1>         
         </div>
       </div>
 
       <div class="detail-box">
         <ul class="props">
-          <li v-if="item.Difficulty">
-            <difficulty class="difficulty icon"></difficulty>
-            <span class="prop-key">{{ $t('difficulty') }}:</span>
-            <span class="text-dark">{{ item.Difficulty }}</span>
+       
+          <!-- Show SkiRegion -->
+          <li v-if="item.SkiRegionName[language]">
+            <map-icon class="map-icon icon"></map-icon>
+             <span class="prop-key">{{ $t('skiregion') }}:</span>
+            <span class="text-dark">{{ item.SkiRegionName[language] }}</span>
           </li>
-          <li v-if="item.Altitude">
+
+          <!-- Show Lift Count -->
+          <li v-if="item.LiftCount">
+            <highlight class="highlight icon"></highlight>
+            <span class="prop-key">{{ $t('props.LiftCount') }}:</span>
+            <span class="text-dark">{{ item.LiftCount }}</span>
+          </li>
+
+          <!-- Show Total Slope KM with colors -->
+          <li v-if="item.TotalSlopeKm">
+            <distance-length  class="distance-length icon"></distance-length>
+            <span class="prop-key">{{ $t('props.TotalSlopeKm') }}:</span>
+            <span class="text-dark">{{ item.TotalSlopeKm }} km</span> (
+            <span style="color:blue">{{ item.SlopeKmBlue }}</span> /
+            <span style="color:red">{{ item.SlopeKmRed }}</span> /
+            <span style="color:black">{{ item.SlopeKmBlack }}</span> )
+          </li>          
+
+          <!-- Altitude
+          <li v-if="item.AltitudeTo && item.AltitudeFrom">
+            <altitude-difference class="altitude-difference icon"></altitude-difference>
+            <span class="prop-key">{{ $t('props.Altitude') }}:</span>
+            <span class="text-dark">{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span>
+          </li> -->
+
+
+          <li v-if="item.AltitudeFrom">
+            <altitude-lowest-point
+              class="altitude-lowest-point icon"
+            ></altitude-lowest-point>
+            <span class="prop-key"
+              >{{ $t('props.AltitudeFrom') }}:
+            </span>
+            <span class="text-dark">{{ item.AltitudeFrom }} m</span>
+          </li>
+
+          <li v-if="item.AltitudeTo">
+            <altitude-highest-point
+              class="altitude-highest-point icon"
+            ></altitude-highest-point>
+            <span class="prop-key"
+              >{{ $t('props.AltitudeTo') }}:
+            </span>
+            <span class="text-dark">{{ item.AltitudeTo }} m</span>
+          </li> 
+        
+          <!-- <li v-if="item.Altitude">
             <altitude-difference
               class="altitude-difference icon"
             ></altitude-difference>
@@ -62,40 +91,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <span class="prop-key">{{ $t('props.AltitudeDifference') }}: </span>
             <span class="text-dark">{{ item.AltitudeDifference }} m</span>
           </li>
-          <li v-if="item.AltitudeHighestPoint">
-            <altitude-highest-point
-              class="altitude-highest-point icon"
-            ></altitude-highest-point>
-            <span class="prop-key"
-              >{{ $t('props.AltitudeHighestPoint') }}:
-            </span>
-            <span class="text-dark">{{ item.AltitudeHighestPoint }} m</span>
-          </li>
-          <li v-if="item.AltitudeLowestPoint">
-            <altitude-lowest-point
-              class="altitude-lowest-point icon"
-            ></altitude-lowest-point>
-            <span class="prop-key"
-              >{{ $t('props.AltitudeLowestPoint') }}:
-            </span>
-            <span class="text-dark">{{ item.AltitudeLowestPoint }} m</span>
-          </li>
-          <li v-if="item.DistanceDuration">
-            <distance-duration
-              class="distance-duration icon"
-            ></distance-duration>
-            <span class="prop-key">{{ $t('props.DistanceDuration') }}: </span>
-            <span class="text-dark">{{ item.DistanceDuration }}</span>
-          </li>
-          <li v-if="item.DistanceLength">
-            <distance-length class="distance-length icon"></distance-length>
-            <span class="prop-key">{{ $t('props.DistanceLength') }}: </span>
-            <span class="text-dark">{{ item.DistanceLength }} m</span>
-          </li>
-          <li v-if="googleMapsLink">
-            <map-icon class="map-icon icon"></map-icon>
-            <a :href="googleMapsLink" target="_blank">Google Maps</a>
-          </li>
+                  -->
           <!-- <li v-if="itemContactInfos.City">
             <map-icon class="map-icon icon"></map-icon>
             <span class="prop-key">{{ $t('location') }}: </span>
@@ -118,21 +114,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <span class="prop-key">{{ $t('phone') }}: </span>
             <span class="text-dark">{{ itemContactInfos.Phonenumber }}</span>
           </li>
-          <li v-if="item.ODHTags.find((x) => x.Id === 'gastronomy') && isGastronomyItemOpen != null">
+          <li v-if="isSkiAreaOpen != null">
             <calendar class="calendar icon"></calendar>
-            <span v-if="isGastronomyItemOpen === true" style="color: #9BC320">{{
+            <span v-if="isSkiAreaOpen === true" style="color:#9BC320">{{
               $t(`scheduleTypes.1`)
             }}</span>
-            <span v-if="isGastronomyItemOpen === false" style="color: red">{{
+            <span v-if="isSkiAreaOpen === false" style="color:red">{{
               $t(`scheduleTypes.2`)
             }}</span>
           </li>
           <li v-else-if="item.IsOpen != null">
             <calendar class="calendar icon"></calendar>
-            <span v-if="item.IsOpen === true" style="color: '#9BC320'">{{ 
+            <span v-if="item.IsOpen === true" style="color:#9BC320">{{ 
               $t('scheduleTypes.1')
             }}</span>
-            <span v-if="item.IsOpen === false" style="color: 'red'">{{ 
+            <span v-if="item.IsOpen === false" style="color:red">{{ 
               $t('scheduleTypes.2')
             }}</span>
           </li>
@@ -146,10 +142,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       ></div>
 
       <!-- COMMON -->
-      <div v-if="item.ODHTags.find((x) => x.Id === 'gastronomy') && isGastronomyItemOpen != null && isGastronomyItemOpen.length">
+      <div v-if="isSkiAreaOpen != null && isSkiAreaOpen.length">
         <div class="subtitle">{{ $t('operationSchedule') }}</div>
         <div>
-          <div v-for="(schedule, i) of isGastronomyItemOpen" :key="i">
+          <div v-for="(schedule, i) of isSkiAreaOpen" :key="i">
             <!-- Opened || Closed -->
             <div v-if="schedule.Type === '1' || schedule.Type === '2'">
               <ul v-if="schedule.OperationScheduleTime">
@@ -249,15 +245,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <script>
 import ArrowIconLeft from '@/assets/img/arrow_left.svg';
 import ExternalLink from '@/assets/img/ic_external-link.svg';
-import AltitudeDifference from '@/assets/img/ic_altitudedifference.svg';
+//import AltitudeDifference from '@/assets/img/ic_altitudedifference.svg';
 import AltitudeHighestPoint from '@/assets/img/ic_altitudehighestpoint.svg';
 import AltitudeLowestPoint from '@/assets/img/ic_altitudelowestpoint.svg';
 import Calendar from '@/assets/img/ic_calendar.svg';
-import DistanceDuration from '@/assets/img/ic_distanceduration.svg';
-import DistanceLength from '@/assets/img/ic_distanceduration.svg';
+// import DistanceDuration from '@/assets/img/ic_distanceduration.svg';
+import DistanceLength from '@/assets/img/ic_distancelength.svg';
+import Highlight from '@/assets/img/ic_highlight.svg';
 import MapIcon from '@/assets/img/ic_map.svg';
 import Phone from '@/assets/img/ic_phone.svg';
-import Difficulty from '@/assets/img/ic_difficulty.svg';
 import { CommonApi, GastronomyApi, ODHActivityPoiApi } from '@/api';
 import ImageDetail from '@/components/ImageDetail';
 
@@ -283,16 +279,15 @@ export default {
   components: {
     ImageDetail,
     ArrowIconLeft,
-    Difficulty,
     ExternalLink,
-    AltitudeDifference,
+    //AltitudeDifference,
     AltitudeHighestPoint,
     AltitudeLowestPoint,
-    Calendar,
-    DistanceDuration,
+    Calendar,    
     DistanceLength,
     MapIcon,
     Phone,
+    Highlight,
   },
   props: {
     contentId: {
@@ -367,19 +362,18 @@ export default {
       }
 
       const showProps = [
-        'LiftCount',
-        'SlopeKmBlue',
-        'SlopeKmRed',
-        'SlopeKmBlack',
-        'TotalSlopeKm',
-        'AltitudeFrom',
-        'AltitudeTo'
+        //'LiftCount',
+        'SlopeKm',
+        'Altitude'
       ];
 
       const props = {};
       for (const key of showProps) {
+       
+          
+
         if (!!this.item[key] && this.item[key] !== '0.0') {
-          props[key] = this.item[key];
+            props[key] = this.item[key]; 
         }
       }
 
@@ -454,6 +448,30 @@ export default {
           }
         }
       }
+      return open;
+    },
+    isSkiAreaOpen() {
+      const schedules = this.item.OperationSchedule?.filter((s) => {
+        const start = new Date(s.Start);
+        const stop = new Date(s.Stop);
+        const now = new Date();
+        return ((s.Type === '1' || s.Type === '2' ||  s.Type === '3'));
+      });
+      const schedule =
+       schedules !== undefined && schedules !== null && schedules.length > 0 ? schedules[0] : null;
+      let open = null;
+      if (schedule !== null) {
+                
+
+        if(schedule.start < new Date() && schedule.stop > new Date())
+            open = true;
+        else
+            open = false;
+
+      }
+
+      console.log(open);
+
       return open;
     },
     getItemScheduleDays() {
