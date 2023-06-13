@@ -139,6 +139,23 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </ul>
       </div>
 
+      <div class="detail-box-lifts">
+
+        <div v-for="(liftvalue, key) of itemLifts" :key="key">
+          <ul class="props">
+            <li class="text">
+              <span class="prop-key"></span>{{ liftvalue.title }}
+              <span class="prop-key">Category</span>{{ liftvalue.category }} 
+              <span class="prop-key">Open:</span>{{ liftvalue.IsOpen }}              
+            </li>
+          </ul>
+        </div>
+        
+
+        
+
+      </div>
+
       <div
         v-if="itemDetail.BaseText"
         v-html="itemDetail.BaseText"
@@ -176,7 +193,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
-      <div v-if="Object.keys(itemProps).length" class="additional-props-box">
+      <!-- <div v-if="Object.keys(itemProps).length" class="additional-props-box">
         <ul
           class="props"
           :class="{ single: Object.keys(itemProps).length === 1 }"
@@ -186,7 +203,16 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             {{ value === true ? $t('yes') : value }}
           </li>
         </ul>
+      </div> -->
+
+      <div v-for="(ms, i) of itemMeasuringpoints" :key="i" class="additional-props-box">        
+        <ul class="props">
+          <li v-for="(value, key) of ms" :key="key" class="text">
+            <span class="prop-key">{{ key }}:</span>{{ value }}
+          </li>
+        </ul>
       </div>
+      
 
       <div v-if="itemCeremonies.length">
         <div class="subtitle">{{ $t('ceremonies') }}</div>
@@ -258,7 +284,7 @@ import DistanceLength from '@/assets/img/ic_distancelength.svg';
 import Highlight from '@/assets/img/ic_highlight.svg';
 import MapIcon from '@/assets/img/ic_map.svg';
 import Phone from '@/assets/img/ic_phone.svg';
-import { CommonApi, GastronomyApi, ODHActivityPoiApi } from '@/api';
+import { CommonApi, GastronomyApi, ODHActivityPoiApi, WeatherApi, TagApi } from '@/api';
 import ImageDetail from '@/components/ImageDetail';
 
 const GASTRONOMY_TYPES = [
@@ -311,7 +337,9 @@ export default {
     return {
       item: null,
       lifts: [],
+      measuringpoints: [],
       gastronomyTypes: [],
+      lifttypes: [],
       showImage: false,
       imageUrl: null,
       selectedImage: null,
@@ -374,18 +402,93 @@ export default {
 
       const props = {};
       for (const key of showProps) {
-       
-          
-
+                 
         if (!!this.item[key] && this.item[key] !== '0.0') {
             props[key] = this.item[key]; 
         }
       }
 
       return props;
+    },    
+    itemMeasuringpoints() {
+      if (this.measuringpoints.length == 0) {
+        return {};
+      }
+      
+      const showMeasuringpointProps = [
+        'Shortname',
+        'Temperature',
+        'SnowHeight',
+        'newSnowHeight',        
+        'LastSnowDate'        
+      ];
+
+      const measuringpointprops = [];
+
+      this.measuringpoints.forEach(
+
+        function(measuringpoint){
+
+          const measuringpointprop = {};
+         
+          for (const key of showMeasuringpointProps) {                               
+                 if (measuringpoint[key]) {
+                     measuringpointprop[key] = measuringpoint[key]; 
+                 }                          
+              }             
+            measuringpointprops.push(measuringpointprop);           
+        }
+      );
+      
+      return measuringpointprops;
+    },    
+    itemLifts(){
+
+      const liftsdetail = [];
+
+      if (this.lifts.length == 0) {
+        return {};
+      }
+      
+      const showLiftProps = [
+        'Detail.' + this.language + '.Title',
+        'IsOpen',
+        'DistanceLength',
+        'DistanceDuration',        
+        'AltitudeDifference',
+        'AltitudeLowestPoint',
+        'AltitudeHighestPoint'
+      ];
+
+      const availablelifttypes = this.lifttypes;      
+      const mylanguage = this.language;
+     
+      this.lifts.forEach(
+
+        function(lift){
+
+          const liftprop = {};                                  
+          
+          liftprop['title'] = lift?.Detail[mylanguage].Title;
+
+          liftprop['category'] = lift?.Tags?.map(
+                      (c) =>
+                      availablelifttypes?.find((t) => t.Id === c.Id)?.TagName[mylanguage]
+                    ).filter(n => n!==undefined).join(', ')
+                   
+          for (const key of showLiftProps) {                               
+                 if (key in lift) {
+                  liftprop[key] = lift[key]; 
+                 }                          
+              }             
+          liftsdetail.push(liftprop);           
+        }
+      );
+
+      return liftsdetail;
     },
     itemGastroCategoryInfo() {
-      console.log(this.item?.CategoryCodes);
+      //console.log(this.item?.CategoryCodes);
       return (        
         this.item?.CategoryCodes?.map(
           (c) =>
@@ -475,7 +578,7 @@ export default {
 
       }
 
-      console.log(open);
+      //console.log(open);
 
       return open;
     },
@@ -510,6 +613,9 @@ export default {
   created() {
     this.isLoading = true;
     this.loadSkiAreaItem();
+    this.loadSkiAreaMeasuringpoints();
+    this.loadLiftTypes();
+    this.loadSkiAreaLifts();
   },
   filters: {
     dateFormat(dateString) {
@@ -533,13 +639,28 @@ export default {
       new ODHActivityPoiApi()
         .v1ODHActivityPoiGet(this.language,
         1, 0, undefined, undefined, undefined, undefined, undefined, undefined, undefined, this.language, "ska" + this.contentId, undefined, undefined,
-        "pisten", undefined, undefined, true, undefined, undefined, undefined, undefined, undefined, undefined,undefined,undefined,undefined,undefined,
+        "aufstiegsanlagen", undefined, undefined, true, undefined, undefined, undefined, undefined, undefined, undefined,undefined,undefined,undefined,undefined,
         undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, false, [])
         .then((value) => {
-          this.lifts = value.Items;
-          this.isLoading = false;
+          this.lifts = value.data.Items;          
         });
     },    
+    loadSkiAreaMeasuringpoints(){
+      new WeatherApi()
+        .v1WeatherMeasuringpointGet(1, 25, undefined, undefined, undefined, this.contentId, this.language, undefined, true, undefined, undefined, undefined,
+        undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, false, [])
+        .then((value) => {
+          this.measuringpoints = value.data.Items;          
+        });
+    },
+    loadLiftTypes(){
+      new TagApi()
+      .v1TagGet(1, 0, this.language, undefined, undefined, undefined, undefined, undefined, 'Id,TagName',
+        undefined, 'eq(Mapping.odh.parent_id,"Aufstiegsanlagen")', undefined, undefined, false, [])
+        .then((value) => {
+          this.lifttypes = value.data.Items;
+        });
+    },
     close() {
       this.$emit('close');
     },
@@ -592,6 +713,11 @@ h2 {
 }
 .detail-box {
   border: 1px solid #e8ecf1;
+  padding: 2rem;
+}
+.detail-box-lifts {
+  border: 1px solid #e8ecf1;
+  background-color: #f3f6f8;
   padding: 2rem;
 }
 .additional-props-box {
@@ -696,6 +822,7 @@ ul {
 .text-justify{
   color: #2e3131;
   text-align: justify;
+  padding: 6px 4px 4px 6px; 
 }
 
 .text-id {
