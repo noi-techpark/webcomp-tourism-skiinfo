@@ -144,9 +144,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <div v-for="(liftvalue, key) of itemLifts" :key="key">
           <ul class="props">
             <li class="text">
-              <span class="prop-key"></span>{{ liftvalue.title }}
-              <span class="prop-key">Category</span>{{ liftvalue.category }} 
-              <span class="prop-key">Open:</span>{{ liftvalue.IsOpen }}              
+              <span class="prop-key">{{ liftvalue.title }} / {{ liftvalue.category }} </span>
+              
+              <span v-if="liftvalue.IsOpen === true" style="color:#9BC320">{{ 
+              $t('scheduleTypes.1')
+            }}</span>
+            <span v-if="liftvalue.IsOpen === false" style="color:red">{{ 
+              $t('scheduleTypes.2')
+            }}</span>                       
             </li>
           </ul>
         </div>
