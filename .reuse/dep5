@@ -3,6 +3,6 @@ Upstream-Name: webcomp-tourism-skiinfo
 Upstream-Contact: NOI Techpark <digital@noi.bz.it>
 Source: https://github.com/noi-techpark/webcomp-tourism-skiinfo
 
-Files: .browserslistrc .eslintignore .prettierignore .prettierrc webcomp-tourism-skiinfo.iml .github/* infrastructure/* *.json .editorconfig .gitignore src/assets/* src/api/* wcs-logo.png
+Files: .browserslistrc .eslintignore .pre-commit-config.yaml .prettierignore .prettierrc webcomp-tourism-skiinfo.iml .github/* infrastructure/* *.json .editorconfig .gitignore src/assets/* src/api/* wcs-logo.png
 Copyright: (c) NOI Techpark <digital@noi.bz.it>
 License: CC0-1.0
