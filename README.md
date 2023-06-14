@@ -56,7 +56,7 @@ Type: String
 Default: null
 
 To find content IDs of the content types shown under `content-type` go to
-https://tourism.opendatahub.bz.it/swagger and look at the categories `Activity`,
+https://tourism.opendatahub.com/swagger and look at the categories `Activity`,
 `Poi`, and `Gastronomy`. Make sure that the content type and the IDs match,
 otherwise you will get an empty result.
 
@@ -190,7 +190,7 @@ docker-compose run --rm app /bin/bash -c "npm run test"
 
 ### Support
 
-For support, please contact [help@opendatahub.bz.it](mailto:help@opendatahub.bz.it).
+For support, please contact [help@opendatahub.com](mailto:help@opendatahub.com).
 
 ### Contributing
 
