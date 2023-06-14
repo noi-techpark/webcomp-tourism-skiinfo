@@ -15,4 +15,4 @@
  export * from './apis/location-api';
  export * from './apis/weather-api';
  export * from './apis/odhactivity-poi-api';
-
+ export * from './apis/tag-api';
