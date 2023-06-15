@@ -84,7 +84,7 @@
       {
         "key": "loc-filter",
         "type": "text",
-        "label": "Location Filter (pass type + id check out https://tourism.opendatahub.bz.it/v1/Location)",
+        "label": "Location Filter (pass type + id check out https://tourism.opendatahub.com/v1/Location)",
         "required": false,
         "options": {
           "default": ""

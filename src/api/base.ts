@@ -16,7 +16,7 @@ import { Configuration } from "./configuration";
 // @ts-ignore
 import globalAxios, { AxiosPromise, AxiosInstance } from 'axios';
 
-//export const BASE_PATH = "https://tourism.api.opendatahub.bz.it/".replace(/\/+$/, "");
+//export const BASE_PATH = "https://tourism.api.opendatahub.com/".replace(/\/+$/, "");
 export const BASE_PATH = "https://api.tourism.testingmachine.eu/".replace(/\/+$/, "");
 
 /**
