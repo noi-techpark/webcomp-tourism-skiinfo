@@ -22,17 +22,17 @@ export interface PublishedonObject {
      * @type {string}
      * @memberof PublishedonObject
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PublishedonObject
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof PublishedonObject
      */
-    lastChange?: Date;
+    LastChange?: Date;
 }

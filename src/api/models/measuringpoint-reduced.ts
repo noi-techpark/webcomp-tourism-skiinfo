@@ -23,53 +23,53 @@ export interface MeasuringpointReduced {
      * @type {string}
      * @memberof MeasuringpointReduced
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof MeasuringpointReduced
      */
-    lastUpdate?: Date;
+    LastUpdate?: Date;
     /**
      * 
      * @type {string}
      * @memberof MeasuringpointReduced
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MeasuringpointReduced
      */
-    snowHeight?: string | null;
+    SnowHeight?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MeasuringpointReduced
      */
-    newSnowHeight?: string | null;
+    NewSnowHeight?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MeasuringpointReduced
      */
-    temperature?: string | null;
+    Temperature?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof MeasuringpointReduced
      */
-    lastSnowDate?: Date;
+    LastSnowDate?: Date;
     /**
      * 
      * @type {Array<WeatherObservation>}
      * @memberof MeasuringpointReduced
      */
-    weatherObservation?: Array<WeatherObservation> | null;
+    WeatherObservation?: Array<WeatherObservation> | null;
     /**
      * 
      * @type {string}
      * @memberof MeasuringpointReduced
      */
-    source?: string | null;
+    Source?: string | null;
 }

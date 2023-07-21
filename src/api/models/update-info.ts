@@ -22,11 +22,11 @@ export interface UpdateInfo {
      * @type {string}
      * @memberof UpdateInfo
      */
-    updatedBy?: string | null;
+    UpdatedBy?: string | null;
     /**
      * 
      * @type {string}
      * @memberof UpdateInfo
      */
-    updateSource?: string | null;
+    UpdateSource?: string | null;
 }

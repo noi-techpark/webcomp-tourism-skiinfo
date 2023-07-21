@@ -22,53 +22,53 @@ export interface Stationdata {
      * @type {Date}
      * @memberof Stationdata
      */
-    date?: Date;
+    Date?: Date;
     /**
      * 
      * @type {number}
      * @memberof Stationdata
      */
-    id?: number;
+    Id?: number;
     /**
      * 
      * @type {string}
      * @memberof Stationdata
      */
-    cityName?: string | null;
+    CityName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Stationdata
      */
-    weatherCode?: string | null;
+    WeatherCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Stationdata
      */
-    weatherDesc?: string | null;
+    WeatherDesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Stationdata
      */
-    weatherImgUrl?: string | null;
+    WeatherImgUrl?: string | null;
     /**
      * 
      * @type {number}
      * @memberof Stationdata
      */
-    minTemp?: number;
+    MinTemp?: number;
     /**
      * 
      * @type {number}
      * @memberof Stationdata
      */
-    maxtemp?: number;
+    Maxtemp?: number;
     /**
      * 
      * @type {number}
      * @memberof Stationdata
      */
-    maxTemp?: number;
+    MaxTemp?: number;
 }

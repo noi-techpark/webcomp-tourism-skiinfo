@@ -22,17 +22,17 @@ export interface RealTimeMeasurements {
      * @type {string}
      * @memberof RealTimeMeasurements
      */
-    code?: string | null;
+    Code?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RealTimeMeasurements
      */
-    description?: string | null;
+    Description?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RealTimeMeasurements
      */
-    imageUrl?: string | null;
+    ImageUrl?: string | null;
 }

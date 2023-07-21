@@ -22,53 +22,53 @@ export interface Forecast {
      * @type {Date}
      * @memberof Forecast
      */
-    date?: Date;
+    Date?: Date;
     /**
      * 
      * @type {number}
      * @memberof Forecast
      */
-    tempMaxmax?: number;
+    TempMaxmax?: number;
     /**
      * 
      * @type {number}
      * @memberof Forecast
      */
-    tempMaxmin?: number;
+    TempMaxmin?: number;
     /**
      * 
      * @type {number}
      * @memberof Forecast
      */
-    tempMinmax?: number;
+    TempMinmax?: number;
     /**
      * 
      * @type {number}
      * @memberof Forecast
      */
-    tempMinmin?: number;
+    TempMinmin?: number;
     /**
      * 
      * @type {string}
      * @memberof Forecast
      */
-    weatherdesc?: string | null;
+    Weatherdesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Forecast
      */
-    weathercode?: string | null;
+    Weathercode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Forecast
      */
-    weatherImgurl?: string | null;
+    WeatherImgurl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Forecast
      */
-    reliability?: string | null;
+    Reliability?: string | null;
 }

@@ -22,71 +22,71 @@ export interface OperationScheduleTime {
      * @type {string}
      * @memberof OperationScheduleTime
      */
-    start?: string;
+    Start?: string;
     /**
      * 
      * @type {string}
      * @memberof OperationScheduleTime
      */
-    end?: string;
+    End?: string;
     /**
      * 
      * @type {boolean}
      * @memberof OperationScheduleTime
      */
-    monday?: boolean;
+    Monday?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof OperationScheduleTime
      */
-    tuesday?: boolean;
+    Tuesday?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof OperationScheduleTime
      */
-    wednesday?: boolean;
+    Wednesday?: boolean;
     /**
      * Will be removed within 2023-12-31
      * @type {boolean}
      * @memberof OperationScheduleTime
      */
-    thuresday?: boolean;
+    Thuresday?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof OperationScheduleTime
      */
-    thursday?: boolean;
+    Thursday?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof OperationScheduleTime
      */
-    friday?: boolean;
+    Friday?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof OperationScheduleTime
      */
-    saturday?: boolean;
+    Saturday?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof OperationScheduleTime
      */
-    sunday?: boolean;
+    Sunday?: boolean;
     /**
      * 
      * @type {number}
      * @memberof OperationScheduleTime
      */
-    state?: number;
+    State?: number;
     /**
      * 
      * @type {number}
      * @memberof OperationScheduleTime
      */
-    timecode?: number;
+    Timecode?: number;
 }

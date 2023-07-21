@@ -22,71 +22,71 @@ export interface Conditions {
      * @type {Date}
      * @memberof Conditions
      */
-    date?: Date;
+    Date?: Date;
     /**
      * 
      * @type {string}
      * @memberof Conditions
      */
-    title?: string | null;
+    Title?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Conditions
      */
-    weatherCondition?: string | null;
+    WeatherCondition?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Conditions
      */
-    weatherImgurl?: string | null;
+    WeatherImgurl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Conditions
      */
-    temperatures?: string | null;
+    Temperatures?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Conditions
      */
-    weatherdesc?: string | null;
+    Weatherdesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Conditions
      */
-    reliability?: string | null;
+    Reliability?: string | null;
     /**
      * 
      * @type {number}
      * @memberof Conditions
      */
-    tempMaxmax?: number;
+    TempMaxmax?: number;
     /**
      * 
      * @type {number}
      * @memberof Conditions
      */
-    tempMaxmin?: number;
+    TempMaxmin?: number;
     /**
      * 
      * @type {number}
      * @memberof Conditions
      */
-    tempMinmax?: number;
+    TempMinmax?: number;
     /**
      * 
      * @type {number}
      * @memberof Conditions
      */
-    tempMinmin?: number;
+    TempMinmin?: number;
     /**
      * 
      * @type {number}
      * @memberof Conditions
      */
-    bulletinStatus?: number;
+    BulletinStatus?: number;
 }

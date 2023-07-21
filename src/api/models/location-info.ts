@@ -27,29 +27,29 @@ export interface LocationInfo {
      * @type {RegionInfo}
      * @memberof LocationInfo
      */
-    regionInfo?: RegionInfo;
+    RegionInfo?: RegionInfo;
     /**
      * 
      * @type {TvInfo}
      * @memberof LocationInfo
      */
-    tvInfo?: TvInfo;
+    TvInfo?: TvInfo;
     /**
      * 
      * @type {MunicipalityInfo}
      * @memberof LocationInfo
      */
-    municipalityInfo?: MunicipalityInfo;
+    MunicipalityInfo?: MunicipalityInfo;
     /**
      * 
      * @type {DistrictInfo}
      * @memberof LocationInfo
      */
-    districtInfo?: DistrictInfo;
+    DistrictInfo?: DistrictInfo;
     /**
      * 
      * @type {AreaInfo}
      * @memberof LocationInfo
      */
-    areaInfo?: AreaInfo;
+    AreaInfo?: AreaInfo;
 }

@@ -27,155 +27,161 @@ export interface Measuringpoint {
      * @type {LicenseInfo}
      * @memberof Measuringpoint
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof Measuringpoint
      */
-    firstImport?: Date | null;
+    FirstImport?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof Measuringpoint
      */
-    lastUpdate?: Date;
+    LastUpdate?: Date;
     /**
      * 
      * @type {Date}
      * @memberof Measuringpoint
      */
-    lastChange?: Date | null;
+    LastChange?: Date | null;
     /**
      * 
      * @type {boolean}
      * @memberof Measuringpoint
      */
-    active?: boolean;
+    Active?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Measuringpoint
      */
-    smgActive?: boolean;
+    SmgActive?: boolean;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    gpstype?: string | null;
+    Gpstype?: string | null;
     /**
      * 
      * @type {number}
      * @memberof Measuringpoint
      */
-    latitude?: number;
+    Latitude?: number;
     /**
      * 
      * @type {number}
      * @memberof Measuringpoint
      */
-    longitude?: number;
+    Longitude?: number;
     /**
      * 
      * @type {number}
      * @memberof Measuringpoint
      */
-    altitude?: number | null;
+    Altitude?: number | null;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    altitudeUnitofMeasure?: string | null;
+    AltitudeUnitofMeasure?: string | null;
     /**
      * 
      * @type {DistanceInfo}
      * @memberof Measuringpoint
      */
-    distanceInfo?: DistanceInfo;
+    DistanceInfo?: DistanceInfo;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    snowHeight?: string | null;
+    SnowHeight?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    newSnowHeight?: string | null;
+    NewSnowHeight?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    temperature?: string | null;
+    Temperature?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof Measuringpoint
      */
-    lastSnowDate?: Date;
+    LastSnowDate?: Date;
     /**
      * 
      * @type {Array<WeatherObservation>}
      * @memberof Measuringpoint
      */
-    weatherObservation?: Array<WeatherObservation> | null;
+    WeatherObservation?: Array<WeatherObservation> | null;
     /**
      * 
      * @type {LocationInfo}
      * @memberof Measuringpoint
      */
-    locationInfo?: LocationInfo;
+    LocationInfo?: LocationInfo;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    ownerId?: string | null;
+    OwnerId?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof Measuringpoint
      */
-    areaIds?: Array<string> | null;
+    AreaIds?: Array<string> | null;
     /**
      * generated field
      * @type {{ [key: string]: GpsInfo; }}
      * @memberof Measuringpoint
      */
-    gpsPoints?: { [key: string]: GpsInfo; } | null;
+    GpsPoints?: { [key: string]: GpsInfo; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof Measuringpoint
      */
-    publishedOn?: Array<string> | null;
+    PublishedOn?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof Measuringpoint
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof Measuringpoint
      */
-    mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    Mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof Measuringpoint
+     */
+    SkiAreaIds?: Array<string> | null;
 }

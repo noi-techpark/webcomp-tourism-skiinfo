@@ -23,47 +23,47 @@ export interface Webcam {
      * @type {string}
      * @memberof Webcam
      */
-    webcamId?: string | null;
+    WebcamId?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof Webcam
      */
-    webcamname?: { [key: string]: string; } | null;
+    Webcamname?: { [key: string]: string; } | null;
     /**
      * 
      * @type {string}
      * @memberof Webcam
      */
-    webcamurl?: string | null;
+    Webcamurl?: string | null;
     /**
      * 
      * @type {GpsInfo}
      * @memberof Webcam
      */
-    gpsInfo?: GpsInfo;
+    GpsInfo?: GpsInfo;
     /**
      * 
      * @type {number}
      * @memberof Webcam
      */
-    listPosition?: number | null;
+    ListPosition?: number | null;
     /**
      * 
      * @type {string}
      * @memberof Webcam
      */
-    streamurl?: string | null;
+    Streamurl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Webcam
      */
-    previewurl?: string | null;
+    Previewurl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Webcam
      */
-    source?: string | null;
+    Source?: string | null;
 }

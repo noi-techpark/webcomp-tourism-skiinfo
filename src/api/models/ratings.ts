@@ -22,29 +22,29 @@ export interface Ratings {
      * @type {string}
      * @memberof Ratings
      */
-    stamina?: string | null;
+    Stamina?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Ratings
      */
-    experience?: string | null;
+    Experience?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Ratings
      */
-    landscape?: string | null;
+    Landscape?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Ratings
      */
-    difficulty?: string | null;
+    Difficulty?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Ratings
      */
-    technique?: string | null;
+    Technique?: string | null;
 }

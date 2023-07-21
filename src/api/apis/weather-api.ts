@@ -16,11 +16,11 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { BezirksWeather } from '../models/bezirks-weather';
-import { Measuringpoint } from '../models/measuringpoint';
-import { SnowReportBaseData } from '../models/snow-report-base-data';
-import { Weather } from '../models/weather';
-import { WeatherRealTime } from '../models/weather-real-time';
+import { BezirksWeather } from '../models';
+import { Measuringpoint } from '../models';
+import { SnowReportBaseData } from '../models';
+import { Weather } from '../models';
+import { WeatherRealTime } from '../models';
 /**
  * WeatherApi - axios parameter creator
  * @export

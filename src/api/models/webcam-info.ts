@@ -25,131 +25,131 @@ export interface WebcamInfo {
      * @type {LicenseInfo}
      * @memberof WebcamInfo
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfo
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfo
      */
-    streamurl?: string | null;
+    Streamurl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfo
      */
-    previewurl?: string | null;
+    Previewurl?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof WebcamInfo
      */
-    lastChange?: Date | null;
+    LastChange?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof WebcamInfo
      */
-    firstImport?: Date | null;
+    FirstImport?: Date | null;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfo
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof WebcamInfo
      */
-    active?: boolean;
+    Active?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof WebcamInfo
      */
-    smgActive?: boolean;
+    SmgActive?: boolean;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfo
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {Array<PublishedonObject>}
      * @memberof WebcamInfo
      */
-    webcamAssignedOn?: Array<PublishedonObject> | null;
+    WebcamAssignedOn?: Array<PublishedonObject> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof WebcamInfo
      */
-    areaIds?: Array<string> | null;
+    AreaIds?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof WebcamInfo
      */
-    smgTags?: Array<string> | null;
+    SmgTags?: Array<string> | null;
     /**
      * generated field
      * @type {{ [key: string]: GpsInfo; }}
      * @memberof WebcamInfo
      */
-    gpsPoints?: { [key: string]: GpsInfo; } | null;
+    GpsPoints?: { [key: string]: GpsInfo; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof WebcamInfo
      */
-    publishedOn?: Array<string> | null;
+    PublishedOn?: Array<string> | null;
     /**
      * 
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof WebcamInfo
      */
-    mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    Mapping?: { [key: string]: { [key: string]: string; }; } | null;
     /**
      * 
      * @type {Array<GpsInfo>}
      * @memberof WebcamInfo
      */
-    gpsInfos?: Array<GpsInfo> | null;
+    GpsInfos?: Array<GpsInfo> | null;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfo
      */
-    webcamId?: string | null;
+    WebcamId?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof WebcamInfo
      */
-    webcamname?: { [key: string]: string; } | null;
+    Webcamname?: { [key: string]: string; } | null;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfo
      */
-    webcamurl?: string | null;
+    Webcamurl?: string | null;
     /**
      * 
      * @type {GpsInfo}
      * @memberof WebcamInfo
      */
-    gpsInfo?: GpsInfo;
+    GpsInfo?: GpsInfo;
     /**
      * 
      * @type {number}
      * @memberof WebcamInfo
      */
-    listPosition?: number | null;
+    ListPosition?: number | null;
 }

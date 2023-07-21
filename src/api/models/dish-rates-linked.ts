@@ -22,35 +22,35 @@ export interface DishRatesLinked {
      * @type {string}
      * @memberof DishRatesLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof DishRatesLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof DishRatesLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {number}
      * @memberof DishRatesLinked
      */
-    minAmount?: number;
+    MinAmount?: number;
     /**
      * 
      * @type {number}
      * @memberof DishRatesLinked
      */
-    maxAmount?: number;
+    MaxAmount?: number;
     /**
      * 
      * @type {string}
      * @memberof DishRatesLinked
      */
-    currencyCode?: string | null;
+    CurrencyCode?: string | null;
 }

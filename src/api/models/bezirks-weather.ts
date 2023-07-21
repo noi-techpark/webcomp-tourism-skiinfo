@@ -24,35 +24,35 @@ export interface BezirksWeather {
      * @type {number}
      * @memberof BezirksWeather
      */
-    id?: number;
+    Id?: number;
     /**
      * 
      * @type {string}
      * @memberof BezirksWeather
      */
-    districtName?: string | null;
+    DistrictName?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof BezirksWeather
      */
-    date?: Date;
+    Date?: Date;
     /**
      * 
      * @type {Array<string>}
      * @memberof BezirksWeather
      */
-    tourismVereinIds?: Array<string> | null;
+    TourismVereinIds?: Array<string> | null;
     /**
      * 
      * @type {Array<BezirksForecast>}
      * @memberof BezirksWeather
      */
-    bezirksForecast?: Array<BezirksForecast> | null;
+    BezirksForecast?: Array<BezirksForecast> | null;
     /**
      * 
      * @type {LicenseInfo}
      * @memberof BezirksWeather
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
 }

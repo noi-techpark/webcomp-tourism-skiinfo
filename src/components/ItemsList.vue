@@ -5,81 +5,63 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div class="list">
-    <h2 class="page-title">SkiAreas</h2>
-    <!-- <h3>parameter: {{ contentType }} - {{ language }} - {{ category }} - {{ sourceFilter }} - {{ locFilter }} - {{ withImageOnly }}</h3> -->
-    <div class="search-bar">
+  <div class="w-100 d-flex flex-column align-items-stretch gap-4">
+    <div class="d-flex align-items-center gap-3">
       <input
         type="text"
-        class="search-input"
+        class="form-control card border-0 rounded-pill shadow-sm"
         :placeholder="$t('searchSkiArea')"
         v-model="searchInput"
         @keyup="searchSkiAreaList"
       />
-      <div class="search-button">
-        <search-icon
-          @click="loadSkiAreaList(currentPage)"
-          width="24px"
-          height="24pxs"
-        ></search-icon>
-      </div>
+      <search-icon
+        class="pointer"
+        @click="loadSkiAreaList(currentPage)"
+      ></search-icon>
     </div>
-    <paging
-      :current-page="currentPage"
-      :total-pages="totalPages"
-      @next-page="nextPage"
-      @last-page="lastPage"
-      @go-to-page="goToPage"
-    ></paging>
-    <template v-if="items.length > 0">
-      <div
-        v-for="item of items"
-        :key="item.id"
-        @click.prevent="showDetail(item.Id)"
-        class="item-container"
-      >
-        <hr class="solid" />
-        <div class="list-item">
-          <div v-if="enablePlaceholder">
-            <div
-            v-if="item.ImageGallery === null || item.ImageGallery.length === 0"
-          >
-            <div class="thumbnail">           
-              <POIPlaceholder
-                class="poiSvg"
-                viewBox="0 0 595.3 367.54"
-                width="60px"
-                height="60px"
-                preserveAspectRatio="xMidYMid slice"                
-              ></POIPlaceholder>
+
+    <div v-if="items.length > 0" class="flex-grow-1">
+      <div class="row g-3">
+        <div
+          v-for="item of items"
+          :key="item.Id"
+          @click.prevent="showDetail(item.Id)"
+          class="col-12 col-lg-6"
+        >
+          <div class="card border-0 rounded-4 overflow-hidden shadow pointer h-100">
+            <div class="d-flex flex-row align-items-center gap-3">
+              <div style="height: 110px; width: 110px" class="ratio ratio-1x1 flex-shrink-0">
+                <POIPlaceholder
+                  v-if="enablePlaceholder && (!item.ImageGallery || item.ImageGallery.length === 0)"
+                  class="object-fit-cover"
+                ></POIPlaceholder>
+                <img v-else class="object-fit-cover" :src="item.ImageGallery[0].ImageUrl + '&height=200'" />
+              </div>
+
+              <div class="flex-shrink-1 text-truncate" >
+                <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
+                <div
+                  class="text-truncate"
+                  v-for="info, i of getSkiAreaShortInfo(item)"
+                  :key="i"
+                  :title="info"
+                >{{ info }}</div>
+              </div>
+
+              <div class="flex-grow-1 flex-shrink-0 px-2 text-end">
+                <arrow-icon-right height="30" width="30" class="text-black" viewBox="0 0 24 24"/>
+              </div>
             </div>
-          </div>
-          <div v-else>
-            <img class="thumbnail" :src="item.ImageGallery[0].ImageUrl + '&height=200'" />
-          </div>
-          </div>
-         
-          <div class="info">
-            <div class="title">{{ getTitle(item, language) }}</div>
-               {{ getSkiAreaShortInfo(item) }}
-          </div>
-          <div class="arrow-icon">
-            <arrow-icon-right viewBox="0 0 24 24" width="100%" height="100%" />
+
           </div>
         </div>
       </div>
-    </template>
-    <div v-else-if="isLoading" class="loading-spinner">
+    </div>
+
+    <div v-else-if="isLoading" class="flex-grow-1 d-flex align-items-center justify-content-center">
       <spinner></spinner>
     </div>
-    <div class="noResult" v-else>{{ $t('noResults') }}</div>
-    <div v-if="items.length === 1" class="item-container"></div>
-    <div class="bottom-divider" v-if="items.length > 0">
-      <hr class="solid" />
-    </div>
-    <div class="bottom-divider bottom-divider2" v-if="items.length > 1">
-      <hr class="solid" />
-    </div>
+    <div class="flex-grow-1 d-flex align-items-center justify-content-center" v-else>{{ $t('noResults') }}</div>
     <paging
       :current-page="currentPage"
       :total-pages="totalPages"
@@ -90,13 +72,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { CommonApi } from '@/api';
-import Paging from '@/components/Paging';
+import { APIResponse } from '@/types';
+import Paging from '@/components/Paging.vue';
 import ArrowIconRight from '@/assets/img/arrow_right.svg';
 import POIPlaceholder from '@/assets/img/POI-Placeholder.svg';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/components/Spinner.vue';
 import SearchIcon from '@/assets/img/ic_search.svg';
+import { SkiAreaLinked } from '@/api/models/ski-area-linked';
 
 export default {
   components: {
@@ -111,14 +95,10 @@ export default {
       type: String,
       default: 'en',
     },
-    contentIdList: {
-      type: String,
-      default: null,
-    },
     pageSize: {
       type: Number,
       default: 20,
-    },   
+    },
     locFilter: {
       type: String,
       default: null,
@@ -127,10 +107,6 @@ export default {
       type: String,
       default: null,
     },
-    currentPage: {
-      type: Number,
-      default: 1,
-    },    
     withImageOnly: {
       type: Boolean,
       default: false,
@@ -141,58 +117,52 @@ export default {
     },
   },
   data() {
-    return {
+    const data: {
+      items: SkiAreaLinked[],
+      totalPages: number,
+      isLoading: boolean,
+      searchInput: string,
+      currentPage: number
+    } = {
       items: [],
       totalPages: 0,
       isLoading: false,
       searchInput: '',
+      currentPage: 1
     };
+
+    return data;
   },
-  created() {        
-    this.loadSkiAreaList(this.currentPage);    
+  created() {
+    this.loadSkiAreaList(this.currentPage);
   },
-  // computed: {
-  //   placeholderImage() {
-  //     if (this.contentType === 'Gastronomy') {
-  //       return 'gastro';
-  //     } else if (this.contentType === 'Activity') {
-  //       return 'activity';
-  //     } else {
-  //       return 'poi';
-  //     }
-  //   },
-  // },
+  watch: {
+    currentPage: function (val) { this.loadSkiAreaList(val) }
+  },
   methods: {
     nextPage() {
-      this.items = [];
-      this.loadSkiAreaList(this.currentPage + 1);      
-      this.$emit('change-current-page', this.currentPage + 1);
+      this.currentPage + 1;
     },
     lastPage() {
-      this.items = [];
-      this.loadSkiAreaList(this.currentPage - 1);     
-      this.$emit('change-current-page', this.currentPage - 1);
+      this.currentPage - 1;
     },
-    goToPage(pageNum) {
-      this.items = [];
-      this.loadSkiAreaList(pageNum);     
-      this.$emit('change-current-page', pageNum);
+    goToPage(pageNum: number) {
+      this.currentPage = pageNum;
     },
-    showDetail(contentId) {
+    showDetail(contentId: string) {
       this.$emit('show-detail', contentId);
     },
     searchSkiAreaList() {
-      clearTimeout(this.timer);
-      this.timer = setTimeout(this.loadSkiAreaList, 300, 1);
+      this.loadSkiAreaList(1);
     },
-    loadSkiAreaList(pageNum) {
+    loadSkiAreaList(pageNum: number) {
       this.isLoading = true;
       const commonApi = new CommonApi();
       commonApi
-        .v1SkiAreaGet(          
+        .v1SkiAreaGet(
           pageNum,
           this.pageSize,
-          this.contentIdList == null ? undefined : this.contentIdList,        
+          this.contentIdList == null ? undefined : this.contentIdList,
           undefined,
           true,
           undefined,
@@ -203,259 +173,52 @@ export default {
           undefined,
           undefined,
           undefined,
-          this.searchInput, 
-          undefined, undefined, undefined, 
+          this.searchInput,
+          undefined, undefined, undefined,
           undefined,
           undefined,
-          false, 
-          []       
+          false
         )
         .then((value) => {
-          this.items = value?.data?.Items ?? [];
-          this.$emit('change-current-page', value?.data?.CurrentPage);
-          this.totalPages = value?.data?.TotalPages;
+          const apiResponse = value.data as unknown as APIResponse<SkiAreaLinked>;
+          this.items = apiResponse?.Items ?? [];
+          this.$emit('change-current-page', apiResponse?.CurrentPage);
+          this.totalPages = apiResponse?.TotalPages;
           this.isLoading = false;
         });
-    },    
-    getSkiAreaShortInfo(item) {
+    },
+    getSkiAreaShortInfo(item: SkiAreaLinked): string[] {
       const shortInfo = [];
-      // shortInfo.push(...this.getSkiAreaDetails(item));
-      
-      // if (item?.LocationInfo?.MunicipalityInfo?.Name[this.language]) {
-      //    const municipality =
-      //      this.$t('location') + ': ' + item.LocationInfo.MunicipalityInfo.Name[this.language];
-      //    shortInfo.push(municipality);
-      // };
 
-      shortInfo.push(this.getSkiAreaLocationInfo(item)); 
+      shortInfo.push(this.getSkiAreaLocationInfo(item));
+
       if (item?.SkiRegionName[this.language]) {
         const skiregion =
           this.$t('skiregion') + ': ' + item.SkiRegionName[this.language];
         shortInfo.push(skiregion);
       }
-      
-      return shortInfo.filter((info) => info != null).join(', ');
+
+      return shortInfo.filter((info) => info != null);
     },
-    getSkiAreaDetails(item) {      
-      const categories = [];      
-      
-      if (item?.AdditionalPoiInfos[this.language]?.Categories){
-        item?.AdditionalPoiInfos[this.language]?.Categories.forEach(
-          categoryname => categories.push(categoryname)
-          );        
-      }
-      return categories;
-    },
-    getSkiAreaLocationInfo(item) {      
+    getSkiAreaLocationInfo(item: SkiAreaLinked) {
       let region = "";
       let tv = "";
 
       if (item?.LocationInfo?.RegionInfo?.Name[this.language]) {
-        region = item?.LocationInfo?.RegionInfo?.Name[this.language];                       
-      }     
-      if (item?.LocationInfo?.TvInfo?.Name[this.language] ) {        
-        tv = ' - ' + item?.LocationInfo?.TvInfo?.Name[this.language];                
-      }     
+        region = item?.LocationInfo?.RegionInfo?.Name[this.language];
+      }
+      if (item?.LocationInfo?.TvInfo?.Name[this.language] ) {
+        tv = ' - ' + item?.LocationInfo?.TvInfo?.Name[this.language];
+      }
 
       const location =
-          this.$t('location') + ': ' + region + tv; 
-      
+          this.$t('location') + ': ' + region + tv;
+
       return location;
-    },         
-    getTitle(item, language) {
+    },
+    getTitle(item: SkiAreaLinked, language: string) {
       return item?.Detail?.[language]?.Title ?? '';
-    },    
+    },
   },
 };
 </script>
-<style scoped lang="scss">
-.list-item {
-  display: flex;
-  flex-direction: row;
-  padding: 8px 40px 8px 40px;
-  align-items: center;
-}
-
-.thumbnail {
-  min-height: 60px;
-  min-width: 60px;
-  max-width: 60px;
-  max-height: 60px;
-  background-color: #e8ecf1;
-  object-fit: cover;
-}
-
-.poiSvg g {
-  .a,
-  .d {
-    fill: none;
-  }
-  .b {
-    fill: #e8ecf1;
-  }
-  .c {
-    clip-path: url(#a);
-  }
-  .d {
-    stroke: #fff;
-    stroke-miterlimit: 10;
-    stroke-width: 9px;
-  }
-  .e {
-    fill: #fff;
-  }
-}
-
-.gastroSvg g {
-  .a,
-  .e {
-    fill: none;
-  }
-  .b {
-    fill: #e8ecf1;
-  }
-  .c {
-    clip-path: url(#a);
-  }
-  .d {
-    fill: #fff;
-  }
-  .e {
-    stroke: #fff;
-    stroke-miterlimit: 10;
-    stroke-width: 9px;
-  }
-}
-
-.activitySvg g {
-  .a {
-    fill: #e8ecf1;
-  }
-  .b {
-    fill: #fff;
-  }
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  padding-left: 24px;
-}
-
-hr.solid {
-  border-top: 1px solid #e8ecf1;
-  margin: 8px 40px 8px 40px;
-}
-
-.title {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.short-info {
-  font-size: 14px;
-  word-break: break-word;
-  color: #888888;
-}
-
-.page-title {
-  font-weight: bold;
-  font-size: 36px;
-  padding-left: 40px;
-  padding-right: 40px;
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.item-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  cursor: pointer;
-}
-
-.bottom-divider {
-  width: 100%;
-}
-
-.bottom-divider2 {
-  visibility: hidden;
-}
-
-@media (min-width: 768px) {
-  .item-container {
-    width: 50%;
-  }
-
-  .bottom-divider {
-    width: 50%;
-  }
-
-  .bottom-divider2 {
-    visibility: visible;
-  }
-}
-
-.loading-spinner {
-  height: 70vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.noResult {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  width: 100%;
-}
-
-.arrow-icon {
-  min-height: 40px;
-  min-width: 40px;
-  max-height: 40px;
-  max-width: 40px;
-  display: flex;
-}
-
-input:focus {
-  outline: none;
-}
-
-.search-bar {
-  width: 100%;
-  margin: 16px;
-  display: flex;
-  border: 1px solid #e8ecf1;
-  align-items: center;
-}
-
-.search-input {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  flex-grow: 1;
-}
-
-.search-button {
-  padding-top: 4px;
-  padding-right: 20px;
-  cursor: pointer;
-  min-width: 24px;
-  max-width: 24px;
-  min-height: 24px;
-  max-height: 24px;
-}
-</style>

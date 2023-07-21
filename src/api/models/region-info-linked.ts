@@ -22,17 +22,17 @@ export interface RegionInfoLinked {
      * @type {string}
      * @memberof RegionInfoLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RegionInfoLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * Deprecated use the Id/Selflink to retrieve correct names from the appropriate Endpoint
      * @type {{ [key: string]: string; }}
      * @memberof RegionInfoLinked
      */
-    name?: { [key: string]: string; } | null;
+    Name?: { [key: string]: string; } | null;
 }

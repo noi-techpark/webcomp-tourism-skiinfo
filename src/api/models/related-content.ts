@@ -22,29 +22,29 @@ export interface RelatedContent {
      * @type {string}
      * @memberof RelatedContent
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * Use the name of the referenced data
      * @type {string}
      * @memberof RelatedContent
      */
-    name?: string | null;
+    Name?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RelatedContent
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RelatedContent
      */
-    link?: string | null;
+    Link?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RelatedContent
      */
-    self?: string | null;
+    Self?: string | null;
 }

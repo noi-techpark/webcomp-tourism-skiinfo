@@ -23,35 +23,35 @@ export interface Metadata {
      * @type {string}
      * @memberof Metadata
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Metadata
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof Metadata
      */
-    lastUpdate?: Date | null;
+    LastUpdate?: Date | null;
     /**
      * 
      * @type {string}
      * @memberof Metadata
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof Metadata
      */
-    reduced?: boolean;
+    Reduced?: boolean;
     /**
      * 
      * @type {UpdateInfo}
      * @memberof Metadata
      */
-    updateInfo?: UpdateInfo;
+    UpdateInfo?: UpdateInfo;
 }

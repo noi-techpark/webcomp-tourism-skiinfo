@@ -22,17 +22,17 @@ export interface MunicipalityInfoLinked {
      * @type {string}
      * @memberof MunicipalityInfoLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MunicipalityInfoLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * Deprecated use the Id/Selflink to retrieve correct names from the appropriate Endpoint
      * @type {{ [key: string]: string; }}
      * @memberof MunicipalityInfoLinked
      */
-    name?: { [key: string]: string; } | null;
+    Name?: { [key: string]: string; } | null;
 }

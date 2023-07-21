@@ -22,17 +22,17 @@ export interface TvInfoLinked {
      * @type {string}
      * @memberof TvInfoLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TvInfoLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * Deprecated use the Id/Selflink to retrieve correct names from the appropriate Endpoint
      * @type {{ [key: string]: string; }}
      * @memberof TvInfoLinked
      */
-    name?: { [key: string]: string; } | null;
+    Name?: { [key: string]: string; } | null;
 }

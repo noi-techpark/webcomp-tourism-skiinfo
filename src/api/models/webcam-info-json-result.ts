@@ -23,41 +23,41 @@ export interface WebcamInfoJsonResult {
      * @type {number}
      * @memberof WebcamInfoJsonResult
      */
-    totalResults?: number;
+    TotalResults?: number;
     /**
      * 
      * @type {number}
      * @memberof WebcamInfoJsonResult
      */
-    totalPages?: number;
+    TotalPages?: number;
     /**
      * 
      * @type {number}
      * @memberof WebcamInfoJsonResult
      */
-    currentPage?: number;
+    CurrentPage?: number;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfoJsonResult
      */
-    previousPage?: string | null;
+    PreviousPage?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfoJsonResult
      */
-    nextPage?: string | null;
+    NextPage?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WebcamInfoJsonResult
      */
-    seed?: string | null;
+    Seed?: string | null;
     /**
      * 
      * @type {Array<WebcamInfo>}
      * @memberof WebcamInfoJsonResult
      */
-    items?: Array<WebcamInfo> | null;
+    Items?: Array<WebcamInfo> | null;
 }

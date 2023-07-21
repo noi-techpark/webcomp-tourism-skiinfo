@@ -119,15 +119,4 @@ svg.spinner {
     stroke-dashoffset: (0.66 * $spinnerSize);
   }
 }
-
-/* Not important */
-body {
-  padding: 60px 0;
-  margin: 0;
-
-  svg {
-    display: block;
-    margin: 0 auto;
-  }
-}
 </style>

@@ -22,17 +22,17 @@ export interface DistrictInfoLinked {
      * @type {string}
      * @memberof DistrictInfoLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof DistrictInfoLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * Deprecated use the Id/Selflink to retrieve correct names from the appropriate Endpoint
      * @type {{ [key: string]: string; }}
      * @memberof DistrictInfoLinked
      */
-    name?: { [key: string]: string; } | null;
+    Name?: { [key: string]: string; } | null;
 }

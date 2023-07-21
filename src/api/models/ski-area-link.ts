@@ -22,11 +22,11 @@ export interface SkiAreaLink {
      * @type {string}
      * @memberof SkiAreaLink
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLink
      */
-    self?: string | null;
+    Self?: string | null;
 }

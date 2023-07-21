@@ -16,7 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { TagLinked } from '../models/tag-linked';
+import { TagLinked } from '../models';
 /**
  * TagApi - axios parameter creator
  * @export

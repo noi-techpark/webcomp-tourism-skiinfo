@@ -22,95 +22,95 @@ export interface Detail {
      * @type {string}
      * @memberof Detail
      */
-    header?: string | null;
+    Header?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    subHeader?: string | null;
+    SubHeader?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    introText?: string | null;
+    IntroText?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    baseText?: string | null;
+    BaseText?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    title?: string | null;
+    Title?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    additionalText?: string | null;
+    AdditionalText?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    metaTitle?: string | null;
+    MetaTitle?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    metaDesc?: string | null;
+    MetaDesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    getThereText?: string | null;
+    GetThereText?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    language?: string | null;
+    Language?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof Detail
      */
-    keywords?: Array<string> | null;
+    Keywords?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    parkingInfo?: string | null;
+    ParkingInfo?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    publicTransportationInfo?: string | null;
+    PublicTransportationInfo?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    authorTip?: string | null;
+    AuthorTip?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    safetyInfo?: string | null;
+    SafetyInfo?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Detail
      */
-    equipmentInfo?: string | null;
+    EquipmentInfo?: string | null;
 }

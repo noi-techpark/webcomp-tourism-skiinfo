@@ -1,0 +1,19 @@
+$box-shadow: 0 0.3rem 1.5rem rgba(black, .15);
+$box-shadow-sm: 0 0.1rem 0.8rem rgba(black, .15);
+
+$nav-underline-link-active-color: rgb(255, 255, 255);
+$nav-link-color: rgb(255, 255, 255);
+$nav-link-hover-color: rgb(255, 255, 255);
+$nav-link-font-size: 1.2rem;
+
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
+
+.pointer {
+  cursor: pointer;
+}
+
+.gradient-black-transparent {
+  background: rgb(32,34,54);
+  background: linear-gradient(0deg, rgba(32,34,54,1) 0%, rgba(255,255,255,0) 100%);
+}

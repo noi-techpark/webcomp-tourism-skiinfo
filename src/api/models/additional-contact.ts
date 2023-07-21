@@ -23,17 +23,17 @@ export interface AdditionalContact {
      * @type {string}
      * @memberof AdditionalContact
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * 
      * @type {ContactInfos}
      * @memberof AdditionalContact
      */
-    contactInfos?: ContactInfos;
+    ContactInfos?: ContactInfos;
     /**
      * 
      * @type {string}
      * @memberof AdditionalContact
      */
-    description?: string | null;
+    Description?: string | null;
 }

@@ -22,11 +22,11 @@ export interface AreaInfo {
      * @type {string}
      * @memberof AreaInfo
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * Deprecated use the Id/Selflink to retrieve correct names from the appropriate Endpoint
      * @type {{ [key: string]: string; }}
      * @memberof AreaInfo
      */
-    name?: { [key: string]: string; } | null;
+    Name?: { [key: string]: string; } | null;
 }

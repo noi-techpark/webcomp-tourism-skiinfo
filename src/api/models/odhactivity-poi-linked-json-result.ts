@@ -23,41 +23,41 @@ export interface ODHActivityPoiLinkedJsonResult {
      * @type {number}
      * @memberof ODHActivityPoiLinkedJsonResult
      */
-    totalResults?: number;
+    TotalResults?: number;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinkedJsonResult
      */
-    totalPages?: number;
+    TotalPages?: number;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinkedJsonResult
      */
-    currentPage?: number;
+    CurrentPage?: number;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinkedJsonResult
      */
-    previousPage?: string | null;
+    PreviousPage?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinkedJsonResult
      */
-    nextPage?: string | null;
+    NextPage?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinkedJsonResult
      */
-    seed?: string | null;
+    Seed?: string | null;
     /**
      * 
      * @type {Array<ODHActivityPoiLinked>}
      * @memberof ODHActivityPoiLinkedJsonResult
      */
-    items?: Array<ODHActivityPoiLinked> | null;
+    Items?: Array<ODHActivityPoiLinked> | null;
 }

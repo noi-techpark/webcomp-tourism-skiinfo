@@ -35,203 +35,203 @@ export interface ArticlesLinked {
      * @type {Metadata}
      * @memberof ArticlesLinked
      */
-    meta?: Metadata;
+    Meta?: Metadata;
     /**
      * 
      * @type {string}
      * @memberof ArticlesLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof ArticlesLinked
      */
-    odhActive?: boolean;
+    OdhActive?: boolean;
     /**
      * 
      * @type {Array<ODHActivityPoiTypesLink>}
      * @memberof ArticlesLinked
      */
-    articleTypes?: Array<ODHActivityPoiTypesLink> | null;
+    ArticleTypes?: Array<ODHActivityPoiTypesLink> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ArticlesLinked
      */
-    articleTypeList?: Array<string> | null;
+    ArticleTypeList?: Array<string> | null;
     /**
      * 
      * @type {Array<ODHTags>}
      * @memberof ArticlesLinked
      */
-    oDHTags?: Array<ODHTags> | null;
+    ODHTags?: Array<ODHTags> | null;
     /**
      * 
      * @type {LicenseInfo}
      * @memberof ArticlesLinked
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
     /**
      * 
      * @type {string}
      * @memberof ArticlesLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof ArticlesLinked
      */
-    active?: boolean;
+    Active?: boolean;
     /**
      * 
      * @type {string}
      * @memberof ArticlesLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof ArticlesLinked
      */
-    highlight?: boolean;
+    Highlight?: boolean;
     /**
      * 
      * @type {string}
      * @memberof ArticlesLinked
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ArticlesLinked
      */
-    subType?: string | null;
+    SubType?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof ArticlesLinked
      */
-    firstImport?: Date | null;
+    FirstImport?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof ArticlesLinked
      */
-    lastChange?: Date | null;
+    LastChange?: Date | null;
     /**
      * 
      * @type {boolean}
      * @memberof ArticlesLinked
      */
-    smgActive?: boolean;
+    SmgActive?: boolean;
     /**
      * 
      * @type {Date}
      * @memberof ArticlesLinked
      */
-    articleDate?: Date | null;
+    ArticleDate?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof ArticlesLinked
      */
-    articleDateTo?: Date | null;
+    ArticleDateTo?: Date | null;
     /**
      * 
      * @type {Array<OperationSchedule>}
      * @memberof ArticlesLinked
      */
-    operationSchedule?: Array<OperationSchedule> | null;
+    OperationSchedule?: Array<OperationSchedule> | null;
     /**
      * 
      * @type {Array<GpsInfo>}
      * @memberof ArticlesLinked
      */
-    gpsInfo?: Array<GpsInfo> | null;
+    GpsInfo?: Array<GpsInfo> | null;
     /**
      * 
      * @type {Array<GpsTrack>}
      * @memberof ArticlesLinked
      */
-    gpsTrack?: Array<GpsTrack> | null;
+    GpsTrack?: Array<GpsTrack> | null;
     /**
      * 
      * @type {Array<ImageGallery>}
      * @memberof ArticlesLinked
      */
-    imageGallery?: Array<ImageGallery> | null;
+    ImageGallery?: Array<ImageGallery> | null;
     /**
      * 
      * @type {{ [key: string]: Detail; }}
      * @memberof ArticlesLinked
      */
-    detail?: { [key: string]: Detail; } | null;
+    Detail?: { [key: string]: Detail; } | null;
     /**
      * 
      * @type {{ [key: string]: ContactInfos; }}
      * @memberof ArticlesLinked
      */
-    contactInfos?: { [key: string]: ContactInfos; } | null;
+    ContactInfos?: { [key: string]: ContactInfos; } | null;
     /**
      * 
      * @type {{ [key: string]: AdditionalArticleInfos; }}
      * @memberof ArticlesLinked
      */
-    additionalArticleInfos?: { [key: string]: AdditionalArticleInfos; } | null;
+    AdditionalArticleInfos?: { [key: string]: AdditionalArticleInfos; } | null;
     /**
      * 
      * @type {{ [key: string]: ArticleLinkInfo; }}
      * @memberof ArticlesLinked
      */
-    articleLinkInfo?: { [key: string]: ArticleLinkInfo; } | null;
+    ArticleLinkInfo?: { [key: string]: ArticleLinkInfo; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ArticlesLinked
      */
-    smgTags?: Array<string> | null;
+    SmgTags?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ArticlesLinked
      */
-    hasLanguage?: Array<string> | null;
+    HasLanguage?: Array<string> | null;
     /**
      * 
      * @type {Date}
      * @memberof ArticlesLinked
      */
-    expirationDate?: Date | null;
+    ExpirationDate?: Date | null;
     /**
      * generated field
      * @type {{ [key: string]: GpsInfo; }}
      * @memberof ArticlesLinked
      */
-    gpsPoints?: { [key: string]: GpsInfo; } | null;
+    GpsPoints?: { [key: string]: GpsInfo; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ArticlesLinked
      */
-    publishedOn?: Array<string> | null;
+    PublishedOn?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof ArticlesLinked
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof ArticlesLinked
      */
-    mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    Mapping?: { [key: string]: { [key: string]: string; }; } | null;
     /**
      * 
      * @type {DistanceInfo}
      * @memberof ArticlesLinked
      */
-    distanceInfo?: DistanceInfo;
+    DistanceInfo?: DistanceInfo;
 }

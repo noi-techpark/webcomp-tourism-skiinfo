@@ -27,59 +27,59 @@ export interface Weather {
      * @type {number}
      * @memberof Weather
      */
-    id?: number;
+    Id?: number;
     /**
      * 
      * @type {Date}
      * @memberof Weather
      */
-    date?: Date;
+    Date?: Date;
     /**
      * 
      * @type {string}
      * @memberof Weather
      */
-    evolutiontitle?: string | null;
+    Evolutiontitle?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Weather
      */
-    evolution?: string | null;
+    Evolution?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Weather
      */
-    language?: string | null;
+    Language?: string | null;
     /**
      * 
      * @type {Array<Conditions>}
      * @memberof Weather
      */
-    conditions?: Array<Conditions> | null;
+    Conditions?: Array<Conditions> | null;
     /**
      * 
      * @type {Array<Forecast>}
      * @memberof Weather
      */
-    forecast?: Array<Forecast> | null;
+    Forecast?: Array<Forecast> | null;
     /**
      * 
      * @type {Array<Mountain>}
      * @memberof Weather
      */
-    mountain?: Array<Mountain> | null;
+    Mountain?: Array<Mountain> | null;
     /**
      * 
      * @type {Array<Stationdata>}
      * @memberof Weather
      */
-    stationdata?: Array<Stationdata> | null;
+    Stationdata?: Array<Stationdata> | null;
     /**
      * 
      * @type {LicenseInfo}
      * @memberof Weather
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
 }

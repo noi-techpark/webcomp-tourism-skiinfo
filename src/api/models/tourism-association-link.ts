@@ -22,11 +22,11 @@ export interface TourismAssociationLink {
      * @type {string}
      * @memberof TourismAssociationLink
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof TourismAssociationLink
      */
-    self?: string | null;
+    Self?: string | null;
 }

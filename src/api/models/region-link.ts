@@ -22,11 +22,11 @@ export interface RegionLink {
      * @type {string}
      * @memberof RegionLink
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof RegionLink
      */
-    self?: string | null;
+    Self?: string | null;
 }

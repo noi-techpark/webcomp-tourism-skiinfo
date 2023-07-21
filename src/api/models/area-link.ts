@@ -22,11 +22,11 @@ export interface AreaLink {
      * @type {string}
      * @memberof AreaLink
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AreaLink
      */
-    self?: string | null;
+    Self?: string | null;
 }

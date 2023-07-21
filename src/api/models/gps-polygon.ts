@@ -22,11 +22,11 @@ export interface GpsPolygon {
      * @type {number}
      * @memberof GpsPolygon
      */
-    latitude?: number;
+    Latitude?: number;
     /**
      * 
      * @type {number}
      * @memberof GpsPolygon
      */
-    longitude?: number;
+    Longitude?: number;
 }

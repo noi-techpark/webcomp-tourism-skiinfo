@@ -22,17 +22,17 @@ export interface LocHelperclass {
      * @type {string}
      * @memberof LocHelperclass
      */
-    typ?: string | null;
+    Typ?: string | null;
     /**
      * 
      * @type {string}
      * @memberof LocHelperclass
      */
-    name?: string | null;
+    Name?: string | null;
     /**
      * 
      * @type {string}
      * @memberof LocHelperclass
      */
-    id?: string | null;
+    Id?: string | null;
 }

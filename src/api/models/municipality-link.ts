@@ -22,11 +22,11 @@ export interface MunicipalityLink {
      * @type {string}
      * @memberof MunicipalityLink
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof MunicipalityLink
      */
-    self?: string | null;
+    Self?: string | null;
 }

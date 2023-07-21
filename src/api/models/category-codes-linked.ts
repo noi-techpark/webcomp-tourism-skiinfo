@@ -22,17 +22,17 @@ export interface CategoryCodesLinked {
      * @type {string}
      * @memberof CategoryCodesLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CategoryCodesLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CategoryCodesLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
 }

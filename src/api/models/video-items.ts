@@ -22,71 +22,71 @@ export interface VideoItems {
      * @type {string}
      * @memberof VideoItems
      */
-    name?: string | null;
+    Name?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    url?: string | null;
+    Url?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    videoSource?: string | null;
+    VideoSource?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    videoType?: string | null;
+    VideoType?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    streamingSource?: string | null;
+    StreamingSource?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    videoTitle?: string | null;
+    VideoTitle?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    videoDesc?: string | null;
+    VideoDesc?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof VideoItems
      */
-    active?: boolean | null;
+    Active?: boolean | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    copyRight?: string | null;
+    CopyRight?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    license?: string | null;
+    License?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    licenseHolder?: string | null;
+    LicenseHolder?: string | null;
     /**
      * 
      * @type {string}
      * @memberof VideoItems
      */
-    language?: string | null;
+    Language?: string | null;
 }

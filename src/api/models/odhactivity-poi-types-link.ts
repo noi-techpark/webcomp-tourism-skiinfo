@@ -22,17 +22,17 @@ export interface ODHActivityPoiTypesLink {
      * @type {string}
      * @memberof ODHActivityPoiTypesLink
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiTypesLink
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiTypesLink
      */
-    type?: string | null;
+    Type?: string | null;
 }

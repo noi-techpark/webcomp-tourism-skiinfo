@@ -22,23 +22,23 @@ export interface CapacityCeremonyLinked {
      * @type {string}
      * @memberof CapacityCeremonyLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CapacityCeremonyLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof CapacityCeremonyLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {number}
      * @memberof CapacityCeremonyLinked
      */
-    maxSeatingCapacity?: number;
+    MaxSeatingCapacity?: number;
 }

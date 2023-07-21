@@ -33,179 +33,179 @@ export interface SkiRegionLinked {
      * @type {Metadata}
      * @memberof SkiRegionLinked
      */
-    meta?: Metadata;
+    Meta?: Metadata;
     /**
      * 
      * @type {string}
      * @memberof SkiRegionLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {Array<ODHTags>}
      * @memberof SkiRegionLinked
      */
-    oDHTags?: Array<ODHTags> | null;
+    ODHTags?: Array<ODHTags> | null;
     /**
      * 
      * @type {boolean}
      * @memberof SkiRegionLinked
      */
-    odhActive?: boolean;
+    OdhActive?: boolean;
     /**
      * 
      * @type {Array<GpsPolygon>}
      * @memberof SkiRegionLinked
      */
-    gpsPolygon?: Array<GpsPolygon> | null;
+    GpsPolygon?: Array<GpsPolygon> | null;
     /**
      * 
      * @type {Array<Webcam>}
      * @memberof SkiRegionLinked
      */
-    webcam?: Array<Webcam> | null;
+    Webcam?: Array<Webcam> | null;
     /**
      * 
      * @type {Array<RelatedContent>}
      * @memberof SkiRegionLinked
      */
-    relatedContent?: Array<RelatedContent> | null;
+    RelatedContent?: Array<RelatedContent> | null;
     /**
      * 
      * @type {LicenseInfo}
      * @memberof SkiRegionLinked
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
     /**
      * 
      * @type {string}
      * @memberof SkiRegionLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof SkiRegionLinked
      */
-    active?: boolean;
+    Active?: boolean;
     /**
      * 
      * @type {string}
      * @memberof SkiRegionLinked
      */
-    customId?: string | null;
+    CustomId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiRegionLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * Deprecated, use GpsPoints
      * @type {string}
      * @memberof SkiRegionLinked
      */
-    gpstype?: string | null;
+    Gpstype?: string | null;
     /**
      * Deprecated, use GpsPoints
      * @type {number}
      * @memberof SkiRegionLinked
      */
-    latitude?: number;
+    Latitude?: number;
     /**
      * Deprecated, use GpsPoints
      * @type {number}
      * @memberof SkiRegionLinked
      */
-    longitude?: number;
+    Longitude?: number;
     /**
      * Deprecated, use GpsPoints
      * @type {number}
      * @memberof SkiRegionLinked
      */
-    altitude?: number | null;
+    Altitude?: number | null;
     /**
      * Deprecated, use GpsPoints
      * @type {string}
      * @memberof SkiRegionLinked
      */
-    altitudeUnitofMeasure?: string | null;
+    AltitudeUnitofMeasure?: string | null;
     /**
      * 
      * @type {{ [key: string]: Detail; }}
      * @memberof SkiRegionLinked
      */
-    detail?: { [key: string]: Detail; } | null;
+    Detail?: { [key: string]: Detail; } | null;
     /**
      * 
      * @type {{ [key: string]: ContactInfos; }}
      * @memberof SkiRegionLinked
      */
-    contactInfos?: { [key: string]: ContactInfos; } | null;
+    ContactInfos?: { [key: string]: ContactInfos; } | null;
     /**
      * 
      * @type {Array<ImageGallery>}
      * @memberof SkiRegionLinked
      */
-    imageGallery?: Array<ImageGallery> | null;
+    ImageGallery?: Array<ImageGallery> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiRegionLinked
      */
-    smgTags?: Array<string> | null;
+    SmgTags?: Array<string> | null;
     /**
      * 
      * @type {boolean}
      * @memberof SkiRegionLinked
      */
-    smgActive?: boolean;
+    SmgActive?: boolean;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiRegionLinked
      */
-    hasLanguage?: Array<string> | null;
+    HasLanguage?: Array<string> | null;
     /**
      * 
      * @type {Date}
      * @memberof SkiRegionLinked
      */
-    lastChange?: Date | null;
+    LastChange?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof SkiRegionLinked
      */
-    firstImport?: Date | null;
+    FirstImport?: Date | null;
     /**
      * generated field
      * @type {{ [key: string]: GpsInfo; }}
      * @memberof SkiRegionLinked
      */
-    gpsPoints?: { [key: string]: GpsInfo; } | null;
+    GpsPoints?: { [key: string]: GpsInfo; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiRegionLinked
      */
-    publishedOn?: Array<string> | null;
+    PublishedOn?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof SkiRegionLinked
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof SkiRegionLinked
      */
-    mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    Mapping?: { [key: string]: { [key: string]: string; }; } | null;
     /**
      * 
      * @type {DistanceInfo}
      * @memberof SkiRegionLinked
      */
-    distanceInfo?: DistanceInfo;
+    DistanceInfo?: DistanceInfo;
 }

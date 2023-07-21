@@ -22,35 +22,35 @@ export interface SmgPoiTypes {
      * @type {string}
      * @memberof SmgPoiTypes
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {number}
      * @memberof SmgPoiTypes
      */
-    bitmask?: number;
+    Bitmask?: number;
     /**
      * 
      * @type {string}
      * @memberof SmgPoiTypes
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SmgPoiTypes
      */
-    parent?: string | null;
+    Parent?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SmgPoiTypes
      */
-    key?: string | null;
+    Key?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof SmgPoiTypes
      */
-    typeDesc?: { [key: string]: string; } | null;
+    TypeDesc?: { [key: string]: string; } | null;
 }

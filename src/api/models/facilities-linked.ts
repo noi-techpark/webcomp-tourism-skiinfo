@@ -22,17 +22,17 @@ export interface FacilitiesLinked {
      * @type {string}
      * @memberof FacilitiesLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof FacilitiesLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof FacilitiesLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
 }

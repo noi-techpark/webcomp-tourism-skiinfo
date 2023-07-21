@@ -23,7 +23,7 @@ export interface SnowReportBaseData {
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
@@ -35,215 +35,215 @@ export interface SnowReportBaseData {
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    skiregion?: string | null;
+    Skiregion?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    areaname?: string | null;
+    Areaname?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof SnowReportBaseData
      */
-    lastUpdate?: Date;
+    LastUpdate?: Date;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    lang?: string | null;
+    Lang?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    skiAreaSlopeKm?: string | null;
+    SkiAreaSlopeKm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    skiMapUrl?: string | null;
+    SkiMapUrl?: string | null;
     /**
      * 
      * @type {Array<MeasuringpointReduced>}
      * @memberof SnowReportBaseData
      */
-    measuringpoints?: Array<MeasuringpointReduced> | null;
+    Measuringpoints?: Array<MeasuringpointReduced> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SnowReportBaseData
      */
-    webcamUrl?: Array<string> | null;
+    WebcamUrl?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totalskilift?: string | null;
+    Totalskilift?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    openskilift?: string | null;
+    Openskilift?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totalskiliftkm?: string | null;
+    Totalskiliftkm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    openskiliftkm?: string | null;
+    Openskiliftkm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totalskislopes?: string | null;
+    Totalskislopes?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    openskislopes?: string | null;
+    Openskislopes?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totalskislopeskm?: string | null;
+    Totalskislopeskm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    openskislopeskm?: string | null;
+    Openskislopeskm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totaltracks?: string | null;
+    Totaltracks?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    opentracks?: string | null;
+    Opentracks?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totaltrackskm?: string | null;
+    Totaltrackskm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    opentrackskm?: string | null;
+    Opentrackskm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totalslides?: string | null;
+    Totalslides?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    opentslides?: string | null;
+    Opentslides?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totalslideskm?: string | null;
+    Totalslideskm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    opentslideskm?: string | null;
+    Opentslideskm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    totaliceskating?: string | null;
+    Totaliceskating?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    openiceskating?: string | null;
+    Openiceskating?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactadress?: string | null;
+    Contactadress?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contacttel?: string | null;
+    Contacttel?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactcap?: string | null;
+    Contactcap?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactcity?: string | null;
+    Contactcity?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactfax?: string | null;
+    Contactfax?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactweburl?: string | null;
+    Contactweburl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactmail?: string | null;
+    Contactmail?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactlogo?: string | null;
+    Contactlogo?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactgpsnorth?: string | null;
+    Contactgpsnorth?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SnowReportBaseData
      */
-    contactgpseast?: string | null;
+    Contactgpseast?: string | null;
 }

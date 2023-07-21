@@ -16,8 +16,8 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { WebcamInfo } from '../models/webcam-info';
-import { WebcamInfoJsonResult } from '../models/webcam-info-json-result';
+import { WebcamInfo } from '../models';
+import { WebcamInfoJsonResult } from '../models';
 /**
  * WebcamInfoApi - axios parameter creator
  * @export

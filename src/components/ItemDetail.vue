@@ -5,166 +5,169 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div>
-    <div class="back-button" @click.prevent="close" v-if="isListAvailable">
-      <div style="min-height: 40px; min-width: 40px; max-height: 40px; max-width: 40px">
-        <arrow-icon-left viewBox="0 0 24 24" width="100%" height="40px" />
-      </div>
-      <span>{{ $t('back') }}</span>
-    </div>    
-    <div v-if="isItemEmpty && !isLoading" class="item-empty">
+  <div class="d-flex flex-column w-100">
+
+    <div v-if="isItemEmpty && !isLoading" class="flex-grow-1 d-flex flex-row align-items-center">
+      <span
+        class="p-1 pe-3 card border-0 rounded-pill shadow-sm d-inline-flex flex-row align-items-center"
+        @click.prevent="close" v-if="isListAvailable"
+      >
+        <arrow-icon-left viewBox="0 0 24 24" height="30" width="30" />
+        <span>{{ $t('back') }}</span>
+      </span>
       {{ $t('noItemData') }}
     </div>
-    <div v-else-if="item" class="item">
-      <div class="title-container" :style="titleImage">
-        <div class="title">
-          <h1>{{ itemDetail.Title }}</h1>         
+
+    <div v-else-if="item" class="d-flex flex-column card rounded-4 border-0 shadow overflow-hidden">
+      <div class="d-flex flex-column align-items-start justify-content-between" :style="titleImage">
+
+        <span
+          class="m-4 p-1 pe-3 card border-0 rounded-pill shadow-sm d-inline-flex flex-row align-items-center"
+          @click.prevent="close" v-if="isListAvailable"
+        >
+          <arrow-icon-left viewBox="0 0 24 24" height="30" width="30" />
+          <span>{{ $t('back') }}</span>
+        </span>
+
+        <div class="p-4 w-100 gradient-black-transparent d-flex align-items-end">
+          <h1 class="mb-0 mt-5 text-white fs-1">{{ itemDetail.Title }}</h1>
+          <div class="flex-grow-1">
+            <nav class="nav nav-underline justify-content-end gap-4">
+              <div
+                v-for="menu in menus"
+                :key="menu"
+                class="nav-item"
+              >
+                <a
+                  class="nav-link"
+                  :class="selectedMenu === menu ? 'active' : ''"
+                  @click="selectedMenu = menu"
+                >{{ menu }}</a>
+              </div>
+            </nav>
+          </div>
         </div>
+
       </div>
 
-      <div class="detail-box">
-        <ul class="props">
-       
-          <!-- Show SkiRegion -->
-          <li v-if="item.SkiRegionName[language]">
+      <div class="d-flex flex-column p-4 gap-4" v-if="selectedMenu === 'Info'">
+        <div class="row g-2">
+          <!-- SkiRegion -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <map-icon class="map-icon icon"></map-icon>
-             <span class="prop-key">{{ $t('skiregion') }}:</span>
-            <span class="text-dark">{{ item.SkiRegionName[language] }}</span>
-          </li>
+            <span>{{ $t('skiregion') }}:</span>
+            <span class="fw-bold">{{ item.SkiRegionName[language] }}</span>
+          </div>
 
-          <!-- Show Lift Count -->
-          <li v-if="item.LiftCount">
+          <!-- Lift Count -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <highlight class="highlight icon"></highlight>
-            <span class="prop-key">{{ $t('props.LiftCount') }}:</span>
-            <span class="text-dark">{{ item.LiftCount }}</span>
-          </li>
+              <span>{{ $t('props.LiftCount') }}:</span>
+              <span class="fw-bold">{{ item.LiftCount }}</span>
+          </div>
 
-          <!-- Show Total Slope KM with colors -->
-          <li v-if="item.TotalSlopeKm">
+          <!-- Total Slope KM with colors -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <distance-length  class="distance-length icon"></distance-length>
-            <span class="prop-key">{{ $t('props.TotalSlopeKm') }}:</span>
-            <span class="text-dark">{{ item.TotalSlopeKm }} km</span> (
+            <span>{{ $t('props.TotalSlopeKm') }}:</span>
+            <span class="fw-bold">{{ item.TotalSlopeKm }} km</span> (
             <span style="color:blue">{{ item.SlopeKmBlue }}</span> /
             <span style="color:red">{{ item.SlopeKmRed }}</span> /
             <span style="color:black">{{ item.SlopeKmBlack }}</span> )
-          </li>          
+          </div>
 
-          <!-- Altitude
-          <li v-if="item.AltitudeTo && item.AltitudeFrom">
+          <!-- Altitude -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <altitude-difference class="altitude-difference icon"></altitude-difference>
-            <span class="prop-key">{{ $t('props.Altitude') }}:</span>
-            <span class="text-dark">{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span>
-          </li> -->
+            <span>{{ $t('props.Altitude') }}:</span>
+            <span class="fw-bold">{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span>
+          </div>
 
-
-          <li v-if="item.AltitudeFrom">
+          <!-- Altitude from
+          <div class="col-4 d-flex align-items-center gap-1">
             <altitude-lowest-point
-              class="altitude-lowest-point icon"
-            ></altitude-lowest-point>
-            <span class="prop-key"
-              >{{ $t('props.AltitudeFrom') }}:
-            </span>
-            <span class="text-dark">{{ item.AltitudeFrom }} m</span>
-          </li>
+                class="altitude-lowest-point icon"
+              ></altitude-lowest-point>
+              <span>{{ $t('props.AltitudeFrom') }}:
+              </span>
+              <span class="fw-bold">{{ item.AltitudeFrom }} m</span>
+          </div>
 
-          <li v-if="item.AltitudeTo">
+          Altitude to
+          <div class="col-4 d-flex align-items-center gap-1">
             <altitude-highest-point
-              class="altitude-highest-point icon"
-            ></altitude-highest-point>
-            <span class="prop-key"
-              >{{ $t('props.AltitudeTo') }}:
-            </span>
-            <span class="text-dark">{{ item.AltitudeTo }} m</span>
-          </li> 
-        
-          <!-- <li v-if="item.Altitude">
-            <altitude-difference
-              class="altitude-difference icon"
-            ></altitude-difference>
-            <span class="prop-key">{{ $t('altitude') }}: </span>
-            <span class="text-dark">{{ item.Altitude }} m</span>
-          </li>
-          <li v-if="item.AltitudeDifference">
-            <altitude-difference
-              class="altitude-difference icon"
-            ></altitude-difference>
-            <span class="prop-key">{{ $t('props.AltitudeDifference') }}: </span>
-            <span class="text-dark">{{ item.AltitudeDifference }} m</span>
-          </li>
-                  -->
-          <!-- <li v-if="itemContactInfos.City">
+                class="altitude-highest-point icon"
+              ></altitude-highest-point>
+              <span>{{ $t('props.AltitudeTo') }}:
+              </span>
+              <span class="fw-bold">{{ item.AltitudeTo }} m</span>
+          </div> -->
+
+          <!-- Location info -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <map-icon class="map-icon icon"></map-icon>
-            <span class="prop-key">{{ $t('location') }}: </span>
-            <span class="text-dark">{{ itemContactInfos.City }}</span>
-          </li> -->
-          <li v-if="itemMunicpalityInfos && itemDistrictInfos">
-            <map-icon class="map-icon icon"></map-icon>
-            <span class="prop-key">{{ $t('location') }}: </span>
-            <span class="text-dark">{{ getItemLocationInfo }}</span>
-          </li>
-          <li v-if="itemContactInfos.Url">
+            <span>{{ $t('location') }}: </span>
+            <span class="fw-bold text-truncate" :title="getItemLocationInfo">{{ getItemLocationInfo }}</span>
+          </div>
+
+          <!-- Contact info -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <external-link class="external-link icon"></external-link>
-            <span class="prop-key">{{ $t('web') }}: </span>
+            <span>{{ $t('web') }}: </span>
             <a :href="itemContactInfos.Url" target="_blank">
               Homepage
             </a>
-          </li>
-          <li v-if="itemContactInfos.Phonenumber">
+          </div>
+
+          <!-- Phone info -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <phone class="phone icon"></phone>
-            <span class="prop-key">{{ $t('phone') }}: </span>
-            <span class="text-dark">{{ itemContactInfos.Phonenumber }}</span>
-          </li>
-          <li v-if="googleMapsLink">
+            <span>{{ $t('phone') }}: </span>
+            <span class="fw-bold">{{ itemContactInfos.Phonenumber }}</span>
+          </div>
+
+          <!-- Google Maps Link -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <map-icon class="map-icon icon"></map-icon>
-            <a :href="googleMapsLink" target="_blank">Google Maps</a>
-          </li>
-          <li v-if="isSkiAreaOpen != null">
+              <a :href="googleMapsLink" target="_blank">Google Maps</a>
+          </div>
+
+          <!-- Open / Closed -->
+          <div class="col-4 d-flex align-items-center gap-1">
             <calendar class="calendar icon"></calendar>
-            <span v-if="isSkiAreaOpen === true" style="color:#9BC320">{{
-              $t(`scheduleTypes.1`)
-            }}</span>
-            <span v-if="isSkiAreaOpen === false" style="color:red">{{
-              $t(`scheduleTypes.2`)
-            }}</span>
-          </li>
-          <li v-else-if="item.IsOpen != null">
-            <calendar class="calendar icon"></calendar>
-            <span v-if="item.IsOpen === true" style="color:#9BC320">{{ 
-              $t('scheduleTypes.1')
-            }}</span>
-            <span v-if="item.IsOpen === false" style="color:red">{{ 
-              $t('scheduleTypes.2')
-            }}</span>
-          </li>
-        </ul>
+              <span v-if="isSkiAreaOpen === true" style="color:#9BC320">{{
+                $t(`scheduleTypes.1`)
+              }}</span>
+              <span v-if="isSkiAreaOpen === false" style="color:red">{{
+                $t(`scheduleTypes.2`)
+              }}</span>
+          </div>
+        </div>
+
+        <div
+          v-if="itemDetail.BaseText"
+          v-html="itemDetail.BaseText"
+        ></div>
       </div>
 
-      <div class="detail-box-lifts">
-
+      <div v-if="selectedMenu === 'Lifts'">
+        <div class="detail-box-lifts">
           <ul class="props">
             <li class="text" v-for="(liftvalue, key) of itemLifts" :key="key">
               <span class="prop-key">{{ liftvalue.title }} / {{ liftvalue.category }} </span>
-              
-              <span v-if="liftvalue.IsOpen === true" style="color:#9BC320">{{ 
+
+              <span v-if="liftvalue.IsOpen === true" style="color:#9BC320">{{
               $t('scheduleTypes.1')
             }}</span>
-            <span v-if="liftvalue.IsOpen === false" style="color:red">{{ 
+            <span v-if="liftvalue.IsOpen === false" style="color:red">{{
               $t('scheduleTypes.2')
-            }}</span>                       
+            }}</span>
             </li>
           </ul>
-    
-        
-
-        
-
+        </div>
       </div>
 
-      <div
-        v-if="itemDetail.BaseText"
-        v-html="itemDetail.BaseText"
-        class="text-justify"
-      ></div>
+
 
       <!-- COMMON -->
       <div v-if="isSkiAreaOpen != null && isSkiAreaOpen.length">
@@ -190,8 +193,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             </div>
             <!-- Season -->
             <div v-if="schedule.Type === '3'">
-              {{ schedule.Start | dateFormat }} {{ $t('to') }}
-              {{ schedule.Stop | dateFormat }}
+              {{ dateFormat(schedule.Start) }} {{ $t('to') }}
+              {{ dateFormat(schedule.Stop) }}
             </div>
           </div>
         </div>
@@ -209,43 +212,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </ul>
       </div> -->
 
-      <div v-for="(ms, i) of itemMeasuringpoints" :key="i" class="additional-props-box">        
+      <div v-for="(ms, i) of itemMeasuringpoints" :key="i" class="additional-props-box">
         <ul class="props">
           <li v-for="(value, key) of ms" :key="key" class="text">
             <span class="prop-key">{{ key }}:</span>{{ value }}
           </li>
         </ul>
-      </div>
-      
-
-      <div v-if="itemCeremonies.length">
-        <div class="subtitle">{{ $t('ceremonies') }}</div>
-        <ul>
-          <li v-for="(value, i) of itemCeremonies" :key="i" class="text">
-            <span class="text-dark">{{ value.name }}</span> (max.
-            {{ value.maxSeatingCapacity }} {{ $t('persons') }})
-          </li>
-        </ul>
-      </div>
-
-      <div v-if="itemDishRates.length">
-        <div class="subtitle">{{ $t('dishRates') }}</div>
-        <ul>
-          <li v-for="(value, i) of itemDishRates" :key="i" class="text">
-            <span class="text-dark">{{ value.name }}</span> ({{ $t('from') }}
-            {{ value.minAmount }} {{ $t('to') }} {{ value.maxAmount }}
-            {{ value.currencyCode }})
-          </li>
-        </ul>
-      </div>
-
-      <div v-for="type of itemGastronomyTypes" :key="type.type">
-        <div style="text-align: center; color: #949494">{{ type.name }}</div>
-        <div class="gastronomyTypes">
-          <div v-for="(value, i) of type.values" :key="i" class="category">
-            {{ value }}
-          </div>
-        </div>
       </div>
 
       <div v-if="imageGallery">
@@ -261,63 +233,34 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       </div>
 
       <small class="text">
-        {{ $t('lastChange') }}: {{ item.LastChange | dateFormat }}
+        {{ $t('lastChange') }}: {{ item.LastChange }}
       </small>
       <small class="text-id"> Opendatahub ID: {{ this.contentId }} </small>
     </div>
-    <image-detail
-      :imgUrl="imageUrl"
-      v-if="showImage"
-      :hasMultipleImgs="hasMultipleImgs"
-      @close="closeImageDetail"
-      @next-image="nextImage"
-      @last-image="lastImage"
-    ></image-detail>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import ArrowIconLeft from '@/assets/img/arrow_left.svg';
 import ExternalLink from '@/assets/img/ic_external-link.svg';
-//import AltitudeDifference from '@/assets/img/ic_altitudedifference.svg';
-import AltitudeHighestPoint from '@/assets/img/ic_altitudehighestpoint.svg';
-import AltitudeLowestPoint from '@/assets/img/ic_altitudelowestpoint.svg';
+import AltitudeDifference from '@/assets/img/ic_altitudedifference.svg';
 import Calendar from '@/assets/img/ic_calendar.svg';
-// import DistanceDuration from '@/assets/img/ic_distanceduration.svg';
 import DistanceLength from '@/assets/img/ic_distancelength.svg';
 import Highlight from '@/assets/img/ic_highlight.svg';
 import MapIcon from '@/assets/img/ic_map.svg';
 import Phone from '@/assets/img/ic_phone.svg';
-import { CommonApi, GastronomyApi, ODHActivityPoiApi, WeatherApi, TagApi } from '@/api';
-import ImageDetail from '@/components/ImageDetail';
+import { CommonApi, ODHActivityPoiApi, WeatherApi, TagApi } from '@/api';
+import { Measuringpoint, SkiAreaLinked, ODHActivityPoiLinked, TagLinked } from '@/api/models';
+import { APIResponse } from '@/types';
 
-const GASTRONOMY_TYPES = [
-  'DishCodes',
-  'CuisineCodes',
-  'FacilityCodes_CreditCard',
-  'FacilityCodes_Equipment',
-  'FacilityCodes_QualitySeals',
-];
-
-const SCHEDULE_DAYS = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-];
+type Menu = "Info" | "Slopes" | "Lifts" | "Weather" | "Webcam";
 
 export default {
   components: {
-    ImageDetail,
     ArrowIconLeft,
     ExternalLink,
-    //AltitudeDifference,
-    AltitudeHighestPoint,
-    AltitudeLowestPoint,
-    Calendar,    
+    AltitudeDifference,
+    Calendar,
     DistanceLength,
     MapIcon,
     Phone,
@@ -338,17 +281,37 @@ export default {
     },
   },
   data() {
-    return {
+    const data: {
+      item: SkiAreaLinked,
+      lifts: ODHActivityPoiLinked[],
+      measuringpoints: Measuringpoint[],
+      lifttypes: TagLinked[],
+      showImage: boolean,
+      imageUrl: string,
+      selectedImage: null,
+      isLoading: boolean,
+      menus: Menu[],
+      selectedMenu: Menu,
+    } = {
       item: null,
       lifts: [],
       measuringpoints: [],
-      gastronomyTypes: [],
       lifttypes: [],
       showImage: false,
       imageUrl: null,
       selectedImage: null,
       isLoading: false,
+      menus: [
+        "Info",
+        "Slopes",
+        "Lifts",
+        "Weather",
+        "Webcam",
+      ],
+      selectedMenu: "Info",
     };
+
+    return data;
   },
   computed: {
     titleImage() {
@@ -367,32 +330,11 @@ export default {
     imageGallery() {
       return this.item?.ImageGallery || [];
     },
-    hasMultipleImgs() {
-      return this.imageGallery.length > 1;
-    },
-    itemDetail() {
-      return this.item?.Detail?.[this.language] || {};
-    },
-    itemContactInfos() {
-      return this.item?.ContactInfos?.[this.language] || {};
-    },
-    itemMunicpalityInfos() {
-      return this.item?.LocationInfo?.MunicipalityInfo?.Name[this.language] || {};
-    },
-    itemRegionInfos() {
-      return this.item?.LocationInfo?.RegionInfo?.Name[this.language] || {};
-    },
-    itemTvInfos() {
-      return this.item?.LocationInfo?.TvInfo?.Name[this.language] || {};
-    },
-    itemDistrictInfos() {
-      return this.item?.LocationInfo?.DistrictInfo?.Name[this.language] || {};
-    },    
     googleMapsLink() {
       return this.item?.GpsPoints['position']?.Latitude && this.item?.GpsPoints['position']?.Longitude
         ? `https://www.google.com/maps/search/?api=1&query=${this.item.GpsPoints['position']?.Latitude},${this.item.GpsPoints['position']?.Longitude}`
         : null;
-    },    
+    },
     itemProps() {
       if (!this.item) {
         return {};
@@ -406,25 +348,25 @@ export default {
 
       const props = {};
       for (const key of showProps) {
-                 
+
         if (!!this.item[key] && this.item[key] !== '0.0') {
-            props[key] = this.item[key]; 
+            props[key] = this.item[key];
         }
       }
 
       return props;
-    },    
+    },
     itemMeasuringpoints() {
       if (this.measuringpoints.length == 0) {
         return {};
       }
-      
+
       const showMeasuringpointProps = [
         'Shortname',
         'Temperature',
         'SnowHeight',
-        'newSnowHeight',        
-        'LastSnowDate'        
+        'newSnowHeight',
+        'LastSnowDate'
       ];
 
       const measuringpointprops = [];
@@ -434,18 +376,18 @@ export default {
         function(measuringpoint){
 
           const measuringpointprop = {};
-         
-          for (const key of showMeasuringpointProps) {                               
+
+          for (const key of showMeasuringpointProps) {
                  if (measuringpoint[key]) {
-                     measuringpointprop[key] = measuringpoint[key]; 
-                 }                          
-              }             
-            measuringpointprops.push(measuringpointprop);           
+                     measuringpointprop[key] = measuringpoint[key];
+                 }
+              }
+            measuringpointprops.push(measuringpointprop);
         }
       );
-      
+
       return measuringpointprops;
-    },    
+    },
     itemLifts(){
 
       const liftsdetail = [];
@@ -453,160 +395,89 @@ export default {
       if (this.lifts.length == 0) {
         return {};
       }
-      
+
       const showLiftProps = [
         'Detail.' + this.language + '.Title',
         'IsOpen',
         'DistanceLength',
-        'DistanceDuration',        
+        'DistanceDuration',
         'AltitudeDifference',
         'AltitudeLowestPoint',
         'AltitudeHighestPoint'
       ];
 
-      const availablelifttypes = this.lifttypes;      
+      const availablelifttypes = this.lifttypes;
       const mylanguage = this.language;
-     
+
       this.lifts.forEach(
 
         function(lift){
 
-          const liftprop = {};                                  
-          
+          const liftprop = {};
+
           liftprop['title'] = lift?.Detail[mylanguage].Title;
 
           liftprop['category'] = lift?.Tags?.map(
                       (c) =>
                       availablelifttypes?.find((t) => t.Id === c.Id)?.TagName[mylanguage]
                     ).filter(n => n!==undefined).join(', ')
-                   
-          for (const key of showLiftProps) {                               
+
+          for (const key of showLiftProps) {
                  if (key in lift) {
-                  liftprop[key] = lift[key]; 
-                 }                          
-              }             
-          liftsdetail.push(liftprop);           
+                  liftprop[key] = lift[key];
+                 }
+              }
+          liftsdetail.push(liftprop);
         }
       );
 
       return liftsdetail;
     },
-    itemGastroCategoryInfo() {
-      //console.log(this.item?.CategoryCodes);
-      return (        
-        this.item?.CategoryCodes?.map(
-          (c) =>
-            this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
-              this.language
-            ]
-        ).join(', ') || ''
-      );
-    },
-    itemCeremonies() {
-      return (
-        this.item?.CapacityCeremony?.map((c) => ({
-          name: this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
-            this.language
-          ],
-          maxSeatingCapacity: c.MaxSeatingCapacity,
-        })) || []
-      );
-    },
-    itemDishRates() {
-      return (
-        this.item?.DishRates?.map((c) => ({
-          name: this.gastronomyTypes.find((t) => t.Id === c.Id)?.TypeDesc[
-            this.language
-          ],
-          maxAmount: c.MaxAmount,
-          minAmount: c.MinAmount,
-          currencyCode: c.CurrencyCode,
-        })) || []
-      );
-    },
-    itemGastronomyTypes() {
-      const filteredArray = this.gastronomyTypes.filter((t) =>
-        this.item.Facilities?.find((f) => t.Id === f.Id)
-      );
-      return GASTRONOMY_TYPES.map((type) => ({
-        name: this.$t(`gastronomyTypes.${type}`),
-        values: filteredArray
-          .filter((t) => t.Type === type)
-          .map((t) => t.TypeDesc[this.language]),
-      })).filter((t) => t.values.length);
-    },
-    isGastronomyItemOpen() {
-      const schedules = this.item.OperationSchedule?.filter((s) => {
-        const start = new Date(s.Start);
-        const stop = new Date(s.Stop);
-        const now = new Date();
-        return (
-          (((s.Type === '1' || s.Type === '2') && s.OperationScheduleTime) ||
-            s.Type === '3') &&
-          now.getTime() <= stop.getTime() &&
-          now.getTime() >= start.getTime()
-        );
-      });
-      const schedule =
-       schedules !== undefined && schedules !== null && schedules.length > 0 ? schedules[0] : null;
-      let open = null;
-      if (schedule !== null) {
-        for (const time of schedule.OperationScheduleTime) {
-          if (time.State === 1) {
-            open = true;
-          }
-          else if (time.State === 2) {
-            open = false;
-          }
-        }
-      }
-      return open;
-    },
-    isSkiAreaOpen() {
-      const schedules = this.item.OperationSchedule?.filter((s) => {
-        const start = new Date(s.Start);
-        const stop = new Date(s.Stop);
-        const now = new Date();
-        return ((s.Type === '1' || s.Type === '2' ||  s.Type === '3'));
-      });
-      const schedule =
-       schedules !== undefined && schedules !== null && schedules.length > 0 ? schedules[0] : null;
-      let open = null;
-      if (schedule !== null) {
-                
+    // isSkiAreaOpen() {
+    //   const schedules = this.item.OperationSchedule?.filter((s) => {
+    //     const start = new Date(s.Start);
+    //     const stop = new Date(s.Stop);
+    //     const now = new Date();
+    //     return ((s.Type === '1' || s.Type === '2' ||  s.Type === '3'));
+    //   });
+    //   const schedule =
+    //    schedules !== undefined && schedules !== null && schedules.length > 0 ? schedules[0] : null;
+    //   let open = null;
+    //   if (schedule !== null) {
 
-        if(schedule.start < new Date() && schedule.stop > new Date())
-            open = true;
-        else
-            open = false;
 
-      }
+    //     if(schedule.start < new Date() && schedule.stop > new Date())
+    //         open = true;
+    //     else
+    //         open = false;
 
-      //console.log(open);
+    //   }
 
-      return open;
-    },
-    getItemScheduleDays() {
-      return (scheduleTime) =>
-        SCHEDULE_DAYS.map((day) =>
-          scheduleTime[day] ? this.$t(`scheduleDays.${day}`) : null
-        )
-          .filter((day) => day != null)
-          .join(', ');
-    },
-    getItemLocationInfo() {      
+    //   //console.log(open);
+
+    //   return open;
+    // },
+    // getItemScheduleDays() {
+    //   return (scheduleTime) =>
+    //     SCHEDULE_DAYS.map((day) =>
+    //       scheduleTime[day] ? this.$t(`scheduleDays.${day}`) : null
+    //     )
+    //       .filter((day) => day != null)
+    //       .join(', ');
+    // },
+    getItemLocationInfo() {
       let tv = "";
       let region = "";
 
       if (this.item?.LocationInfo?.TvInfo?.Name[this.language]) {
-        tv = this.item?.LocationInfo?.TvInfo?.Name[this.language];                       
-      }     
+        tv = this.item?.LocationInfo?.TvInfo?.Name[this.language];
+      }
       if (this.item?.LocationInfo?.RegionInfo?.Name[this.language] ) {
 
         if(tv != this.item?.LocationInfo?.RegionInfo?.Name[this.language]){
-          region = ' - ' + this.item?.LocationInfo?.RegionInfo?.Name[this.language];                
-        }        
-      }     
+          region = ' - ' + this.item?.LocationInfo?.RegionInfo?.Name[this.language];
+        }
+      }
 
       return tv + region;
     },
@@ -621,19 +492,17 @@ export default {
     this.loadLiftTypes();
     this.loadSkiAreaLifts();
   },
-  filters: {
-    dateFormat(dateString) {
+  methods: {
+    dateFormat (dateString) {
       const d = new Date(dateString);
       const day = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
-      let month = d.getMonth() + 1;
-      month = month < 10 ? '0' + month : month;
-      return `${day}/${month}/${d.getFullYear()}`;
+      const month = d.getMonth() + 1;
+      const monthStr = month < 10 ? '0' + month : month;
+      return `${day}/${monthStr}/${d.getFullYear()}`;
     },
-  },
-  methods: {
     loadSkiAreaItem() {
       new CommonApi()
-        .singleSkiArea(this.contentId, '', this.language)
+        .singleSkiArea(this.contentId, null, this.language)
         .then((value) => {
           this.item = value.data;
           this.isLoading = false;
@@ -644,25 +513,25 @@ export default {
         .v1ODHActivityPoiGet(this.language,
         1, 0, undefined, undefined, undefined, undefined, undefined, undefined, undefined, this.language, "ska" + this.contentId, undefined, undefined,
         "aufstiegsanlagen", undefined, undefined, true, undefined, undefined, undefined, undefined, undefined, undefined,undefined,undefined,undefined,undefined,
-        undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, false, [])
+        undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, false, null)
         .then((value) => {
-          this.lifts = value.data.Items;          
+          this.lifts = value.data.Items;
         });
-    },    
+    },
     loadSkiAreaMeasuringpoints(){
       new WeatherApi()
         .v1WeatherMeasuringpointGet(1, 25, undefined, undefined, undefined, this.contentId, this.language, undefined, true, undefined, undefined, undefined,
-        undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, false, [])
+        undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, false, null)
         .then((value) => {
-          this.measuringpoints = value.data.Items;          
+          this.measuringpoints = (value.data as undefined as APIResponse<Measuringpoint>).Items;
         });
     },
     loadLiftTypes(){
       new TagApi()
-      .v1TagGet(1, 0, this.language, undefined, undefined, undefined, undefined, undefined, 'Id,TagName',
-        undefined, 'eq(Mapping.odh.parent_id,"Aufstiegsanlagen")', undefined, undefined, false, [])
+      .v1TagGet(1, 0, this.language, undefined, undefined, undefined, undefined, undefined, ['Id', 'TagName'],
+        undefined, 'eq(Mapping.odh.parent_id,"Aufstiegsanlagen")', undefined, undefined, false, null)
         .then((value) => {
-          this.lifttypes = value.data.Items;
+          this.lifttypes = (value.data as undefined as APIResponse<TagLinked>).Items;
         });
     },
     close() {
@@ -793,13 +662,6 @@ h2 {
   padding-bottom: 8px;
 }
 
-.gastronomyTypes {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .category {
   padding: 4px 12px 4px 12px;
   margin-right: 8px;
@@ -826,7 +688,7 @@ ul {
 .text-justify{
   color: #2e3131;
   text-align: justify;
-  padding: 6px 4px 4px 6px; 
+  padding: 6px 4px 4px 6px;
 }
 
 .text-id {

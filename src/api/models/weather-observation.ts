@@ -22,35 +22,35 @@ export interface WeatherObservation {
      * @type {string}
      * @memberof WeatherObservation
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WeatherObservation
      */
-    level?: string | null;
+    Level?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WeatherObservation
      */
-    levelId?: string | null;
+    LevelId?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof WeatherObservation
      */
-    weatherStatus?: { [key: string]: string; } | null;
+    WeatherStatus?: { [key: string]: string; } | null;
     /**
      * 
      * @type {string}
      * @memberof WeatherObservation
      */
-    iconID?: string | null;
+    IconID?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof WeatherObservation
      */
-    date?: Date | null;
+    Date?: Date | null;
 }

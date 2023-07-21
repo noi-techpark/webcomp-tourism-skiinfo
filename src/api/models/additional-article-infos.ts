@@ -22,11 +22,11 @@ export interface AdditionalArticleInfos {
      * @type {string}
      * @memberof AdditionalArticleInfos
      */
-    language?: string | null;
+    Language?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof AdditionalArticleInfos
      */
-    elements?: { [key: string]: string; } | null;
+    Elements?: { [key: string]: string; } | null;
 }

@@ -48,485 +48,485 @@ export interface ODHActivityPoiLinked {
      * @type {Metadata}
      * @memberof ODHActivityPoiLinked
      */
-    meta?: Metadata;
+    Meta?: Metadata;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    odhActive?: boolean;
+    OdhActive?: boolean;
     /**
      * 
      * @type {Array<ODHTags>}
      * @memberof ODHActivityPoiLinked
      */
-    oDHTags?: Array<ODHTags> | null;
+    ODHTags?: Array<ODHTags> | null;
     /**
      * 
      * @type {Array<ODHActivityPoiTypesLink>}
      * @memberof ODHActivityPoiLinked
      */
-    oDHActivityPoiTypes?: Array<ODHActivityPoiTypesLink> | null;
+    ODHActivityPoiTypes?: Array<ODHActivityPoiTypesLink> | null;
     /**
      * 
      * @type {Array<AreaLink>}
      * @memberof ODHActivityPoiLinked
      */
-    areas?: Array<AreaLink> | null;
+    Areas?: Array<AreaLink> | null;
     /**
      * 
      * @type {Array<CategoryCodesLinked>}
      * @memberof ODHActivityPoiLinked
      */
-    categoryCodes?: Array<CategoryCodesLinked> | null;
+    CategoryCodes?: Array<CategoryCodesLinked> | null;
     /**
      * 
      * @type {Array<DishRatesLinked>}
      * @memberof ODHActivityPoiLinked
      */
-    dishRates?: Array<DishRatesLinked> | null;
+    DishRates?: Array<DishRatesLinked> | null;
     /**
      * 
      * @type {Array<CapacityCeremonyLinked>}
      * @memberof ODHActivityPoiLinked
      */
-    capacityCeremony?: Array<CapacityCeremonyLinked> | null;
+    CapacityCeremony?: Array<CapacityCeremonyLinked> | null;
     /**
      * 
      * @type {Array<FacilitiesLinked>}
      * @memberof ODHActivityPoiLinked
      */
-    facilities?: Array<FacilitiesLinked> | null;
+    Facilities?: Array<FacilitiesLinked> | null;
     /**
      * 
      * @type {LocationInfoLinked}
      * @memberof ODHActivityPoiLinked
      */
-    locationInfo?: LocationInfoLinked;
+    LocationInfo?: LocationInfoLinked;
     /**
      * 
      * @type {Array<LTSTagsLinked>}
      * @memberof ODHActivityPoiLinked
      */
-    lTSTags?: Array<LTSTagsLinked> | null;
+    LTSTags?: Array<LTSTagsLinked> | null;
     /**
      * Id on the primary data Source
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    customId?: string | null;
+    CustomId?: string | null;
     /**
      * 
      * @type {Array<Webcam>}
      * @memberof ODHActivityPoiLinked
      */
-    webcam?: Array<Webcam> | null;
+    Webcam?: Array<Webcam> | null;
     /**
      * 
      * @type {{ [key: string]: Array<PoiProperty>; }}
      * @memberof ODHActivityPoiLinked
      */
-    poiProperty?: { [key: string]: Array<PoiProperty>; } | null;
+    PoiProperty?: { [key: string]: Array<PoiProperty>; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    poiServices?: Array<string> | null;
+    PoiServices?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    syncSourceInterface?: string | null;
+    SyncSourceInterface?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    syncUpdateMode?: string | null;
+    SyncUpdateMode?: string | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    ageFrom?: number | null;
+    AgeFrom?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    ageTo?: number | null;
+    AgeTo?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    maxSeatingCapacity?: number | null;
+    MaxSeatingCapacity?: number | null;
     /**
      * 
      * @type {Array<RelatedContent>}
      * @memberof ODHActivityPoiLinked
      */
-    relatedContent?: Array<RelatedContent> | null;
+    RelatedContent?: Array<RelatedContent> | null;
     /**
      * 
      * @type {{ [key: string]: Array<AdditionalContact>; }}
      * @memberof ODHActivityPoiLinked
      */
-    additionalContact?: { [key: string]: Array<AdditionalContact>; } | null;
+    AdditionalContact?: { [key: string]: Array<AdditionalContact>; } | null;
     /**
      * generated field
      * @type {{ [key: string]: GpsInfo; }}
      * @memberof ODHActivityPoiLinked
      */
-    gpsPoints?: { [key: string]: GpsInfo; } | null;
+    GpsPoints?: { [key: string]: GpsInfo; } | null;
     /**
      * 
      * @type {LicenseInfo}
      * @memberof ODHActivityPoiLinked
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    outdooractiveID?: string | null;
+    OutdooractiveID?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    outdooractiveElevationID?: string | null;
+    OutdooractiveElevationID?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    copyrightChecked?: boolean | null;
+    CopyrightChecked?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    active?: boolean;
+    Active?: boolean;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    smgId?: string | null;
+    SmgId?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    highlight?: boolean | null;
+    Highlight?: boolean | null;
     /**
      * Use Ratings.Difficulty
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    difficulty?: string | null;
+    Difficulty?: string | null;
     /**
      * Use AdditionalPoiInfos.Categories instead
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * Use AdditionalPoiInfos.Categories instead
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    subType?: string | null;
+    SubType?: string | null;
     /**
      * Use AdditionalPoiInfos.Categories instead
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    poiType?: string | null;
+    PoiType?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof ODHActivityPoiLinked
      */
-    firstImport?: Date | null;
+    FirstImport?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof ODHActivityPoiLinked
      */
-    lastChange?: Date | null;
+    LastChange?: Date | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    smgActive?: boolean;
+    SmgActive?: boolean;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    tourismorganizationId?: string | null;
+    TourismorganizationId?: string | null;
     /**
      * Deprecated use AreaIds
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    areaId?: Array<string> | null;
+    AreaId?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    areaIds?: Array<string> | null;
+    AreaIds?: Array<string> | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    altitudeDifference?: number | null;
+    AltitudeDifference?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    altitudeHighestPoint?: number | null;
+    AltitudeHighestPoint?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    altitudeLowestPoint?: number | null;
+    AltitudeLowestPoint?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    altitudeSumUp?: number | null;
+    AltitudeSumUp?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    altitudeSumDown?: number | null;
+    AltitudeSumDown?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    distanceDuration?: number | null;
+    DistanceDuration?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    distanceLength?: number | null;
+    DistanceLength?: number | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    isOpen?: boolean | null;
+    IsOpen?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    isPrepared?: boolean | null;
+    IsPrepared?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    runToValley?: boolean | null;
+    RunToValley?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    isWithLigth?: boolean | null;
+    IsWithLigth?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    hasRentals?: boolean | null;
+    HasRentals?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    hasFreeEntrance?: boolean | null;
+    HasFreeEntrance?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    liftAvailable?: boolean | null;
+    LiftAvailable?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    feetClimb?: boolean | null;
+    FeetClimb?: boolean | null;
     /**
      * 
      * @type {boolean}
      * @memberof ODHActivityPoiLinked
      */
-    bikeTransport?: boolean | null;
+    BikeTransport?: boolean | null;
     /**
      * 
      * @type {Array<OperationSchedule>}
      * @memberof ODHActivityPoiLinked
      */
-    operationSchedule?: Array<OperationSchedule> | null;
+    OperationSchedule?: Array<OperationSchedule> | null;
     /**
      * 
      * @type {Array<GpsInfo>}
      * @memberof ODHActivityPoiLinked
      */
-    gpsInfo?: Array<GpsInfo> | null;
+    GpsInfo?: Array<GpsInfo> | null;
     /**
      * 
      * @type {Array<GpsTrack>}
      * @memberof ODHActivityPoiLinked
      */
-    gpsTrack?: Array<GpsTrack> | null;
+    GpsTrack?: Array<GpsTrack> | null;
     /**
      * 
      * @type {Array<ImageGallery>}
      * @memberof ODHActivityPoiLinked
      */
-    imageGallery?: Array<ImageGallery> | null;
+    ImageGallery?: Array<ImageGallery> | null;
     /**
      * 
      * @type {{ [key: string]: Detail; }}
      * @memberof ODHActivityPoiLinked
      */
-    detail?: { [key: string]: Detail; } | null;
+    Detail?: { [key: string]: Detail; } | null;
     /**
      * 
      * @type {{ [key: string]: ContactInfos; }}
      * @memberof ODHActivityPoiLinked
      */
-    contactInfos?: { [key: string]: ContactInfos; } | null;
+    ContactInfos?: { [key: string]: ContactInfos; } | null;
     /**
      * 
      * @type {{ [key: string]: AdditionalPoiInfos; }}
      * @memberof ODHActivityPoiLinked
      */
-    additionalPoiInfos?: { [key: string]: AdditionalPoiInfos; } | null;
+    AdditionalPoiInfos?: { [key: string]: AdditionalPoiInfos; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    smgTags?: Array<string> | null;
+    SmgTags?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    hasLanguage?: Array<string> | null;
+    HasLanguage?: Array<string> | null;
     /**
      * 
      * @type {Ratings}
      * @memberof ODHActivityPoiLinked
      */
-    ratings?: Ratings;
+    Ratings?: Ratings;
     /**
      * 
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    exposition?: Array<string> | null;
+    Exposition?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    ownerRid?: string | null;
+    OwnerRid?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    childPoiIds?: Array<string> | null;
+    ChildPoiIds?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    masterPoiIds?: Array<string> | null;
+    MasterPoiIds?: Array<string> | null;
     /**
      * 
      * @type {number}
      * @memberof ODHActivityPoiLinked
      */
-    wayNumber?: number | null;
+    WayNumber?: number | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    number?: string | null;
+    Number?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ODHActivityPoiLinked
      */
-    publishedOn?: Array<string> | null;
+    PublishedOn?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof ODHActivityPoiLinked
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof ODHActivityPoiLinked
      */
-    mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    Mapping?: { [key: string]: { [key: string]: string; }; } | null;
     /**
      * 
      * @type {DistanceInfo}
      * @memberof ODHActivityPoiLinked
      */
-    distanceInfo?: DistanceInfo;
+    DistanceInfo?: DistanceInfo;
     /**
      * 
      * @type {Array<Tags>}
      * @memberof ODHActivityPoiLinked
      */
-    tags?: Array<Tags> | null;
+    Tags?: Array<Tags> | null;
     /**
      * 
      * @type {{ [key: string]: Array<VideoItems>; }}
      * @memberof ODHActivityPoiLinked
      */
-    videoItems?: { [key: string]: Array<VideoItems>; } | null;
+    VideoItems?: { [key: string]: Array<VideoItems>; } | null;
 }

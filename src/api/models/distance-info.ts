@@ -22,11 +22,11 @@ export interface DistanceInfo {
      * @type {number}
      * @memberof DistanceInfo
      */
-    distanceToMunicipality?: number | null;
+    DistanceToMunicipality?: number | null;
     /**
      * 
      * @type {number}
      * @memberof DistanceInfo
      */
-    distanceToDistrict?: number | null;
+    DistanceToDistrict?: number | null;
 }

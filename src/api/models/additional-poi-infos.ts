@@ -22,35 +22,35 @@ export interface AdditionalPoiInfos {
      * @type {string}
      * @memberof AdditionalPoiInfos
      */
-    novelty?: string | null;
+    Novelty?: string | null;
     /**
      * Use Categories instead
      * @type {string}
      * @memberof AdditionalPoiInfos
      */
-    mainType?: string | null;
+    MainType?: string | null;
     /**
      * Use Categories instead
      * @type {string}
      * @memberof AdditionalPoiInfos
      */
-    subType?: string | null;
+    SubType?: string | null;
     /**
      * Use Categories instead
      * @type {string}
      * @memberof AdditionalPoiInfos
      */
-    poiType?: string | null;
+    PoiType?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AdditionalPoiInfos
      */
-    language?: string | null;
+    Language?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof AdditionalPoiInfos
      */
-    categories?: Array<string> | null;
+    Categories?: Array<string> | null;
 }

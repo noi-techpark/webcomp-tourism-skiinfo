@@ -22,29 +22,29 @@ export interface GpsInfo {
      * @type {string}
      * @memberof GpsInfo
      */
-    gpstype?: string | null;
+    Gpstype?: string | null;
     /**
      * 
      * @type {number}
      * @memberof GpsInfo
      */
-    latitude?: number;
+    Latitude?: number;
     /**
      * 
      * @type {number}
      * @memberof GpsInfo
      */
-    longitude?: number;
+    Longitude?: number;
     /**
      * 
      * @type {number}
      * @memberof GpsInfo
      */
-    altitude?: number | null;
+    Altitude?: number | null;
     /**
      * 
      * @type {string}
      * @memberof GpsInfo
      */
-    altitudeUnitofMeasure?: string | null;
+    AltitudeUnitofMeasure?: string | null;
 }

@@ -29,103 +29,103 @@ export interface AreaLinked {
      * @type {Metadata}
      * @memberof AreaLinked
      */
-    meta?: Metadata;
+    Meta?: Metadata;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof AreaLinked
      */
-    odhActive?: boolean;
+    OdhActive?: boolean;
     /**
      * 
      * @type {RegionLink}
      * @memberof AreaLinked
      */
-    region?: RegionLink;
+    Region?: RegionLink;
     /**
      * 
      * @type {MunicipalityLink}
      * @memberof AreaLinked
      */
-    municipality?: MunicipalityLink;
+    Municipality?: MunicipalityLink;
     /**
      * 
      * @type {TourismAssociationLink}
      * @memberof AreaLinked
      */
-    tourismassociation?: TourismAssociationLink;
+    Tourismassociation?: TourismAssociationLink;
     /**
      * 
      * @type {SkiAreaLink}
      * @memberof AreaLinked
      */
-    skiArea?: SkiAreaLink;
+    SkiArea?: SkiAreaLink;
     /**
      * 
      * @type {LicenseInfo}
      * @memberof AreaLinked
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof AreaLinked
      */
-    active?: boolean;
+    Active?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof AreaLinked
      */
-    smgActive?: boolean;
+    SmgActive?: boolean;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    customId?: string | null;
+    CustomId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    regionId?: string | null;
+    RegionId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    tourismvereinId?: string | null;
+    TourismvereinId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    municipalityId?: string | null;
+    MunicipalityId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    skiAreaID?: string | null;
+    SkiAreaID?: string | null;
     /**
      * 
      * @type {string}
@@ -137,47 +137,47 @@ export interface AreaLinked {
      * @type {string}
      * @memberof AreaLinked
      */
-    ltsID?: string | null;
+    LtsID?: string | null;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    areaType?: string | null;
+    AreaType?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof AreaLinked
      */
-    lastChange?: Date | null;
+    LastChange?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof AreaLinked
      */
-    firstImport?: Date | null;
+    FirstImport?: Date | null;
     /**
      * 
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof AreaLinked
      */
-    mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    Mapping?: { [key: string]: { [key: string]: string; }; } | null;
     /**
      * 
      * @type {string}
      * @memberof AreaLinked
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {{ [key: string]: Detail; }}
      * @memberof AreaLinked
      */
-    detail?: { [key: string]: Detail; } | null;
+    Detail?: { [key: string]: Detail; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof AreaLinked
      */
-    publishedOn?: Array<string> | null;
+    PublishedOn?: Array<string> | null;
 }

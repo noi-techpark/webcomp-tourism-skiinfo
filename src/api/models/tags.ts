@@ -22,17 +22,17 @@ export interface Tags {
      * @type {string}
      * @memberof Tags
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Tags
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Tags
      */
-    self?: string | null;
+    Self?: string | null;
 }

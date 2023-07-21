@@ -22,7 +22,7 @@ export interface LTSTins {
      * @type {string}
      * @memberof LTSTins
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
@@ -34,5 +34,5 @@ export interface LTSTins {
      * @type {{ [key: string]: string; }}
      * @memberof LTSTins
      */
-    tinName?: { [key: string]: string; } | null;
+    TinName?: { [key: string]: string; } | null;
 }

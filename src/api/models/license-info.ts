@@ -22,23 +22,23 @@ export interface LicenseInfo {
      * @type {string}
      * @memberof LicenseInfo
      */
-    license?: string | null;
+    License?: string | null;
     /**
      * 
      * @type {string}
      * @memberof LicenseInfo
      */
-    licenseHolder?: string | null;
+    LicenseHolder?: string | null;
     /**
      * 
      * @type {string}
      * @memberof LicenseInfo
      */
-    author?: string | null;
+    Author?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof LicenseInfo
      */
-    closedData?: boolean;
+    ClosedData?: boolean;
 }

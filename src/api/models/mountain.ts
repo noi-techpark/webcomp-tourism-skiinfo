@@ -22,149 +22,149 @@ export interface Mountain {
      * @type {Date}
      * @memberof Mountain
      */
-    date?: Date;
+    Date?: Date;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    title?: string | null;
+    Title?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    conditions?: string | null;
+    Conditions?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    weatherdesc?: string | null;
+    Weatherdesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    zerolimit?: string | null;
+    Zerolimit?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    mountainImgurl?: string | null;
+    MountainImgurl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    reliability?: string | null;
+    Reliability?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    sunrise?: string | null;
+    Sunrise?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    sunset?: string | null;
+    Sunset?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    moonrise?: string | null;
+    Moonrise?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    moonset?: string | null;
+    Moonset?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    northcode?: string | null;
+    Northcode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    northdesc?: string | null;
+    Northdesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    northimgurl?: string | null;
+    Northimgurl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    southcode?: string | null;
+    Southcode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    southdesc?: string | null;
+    Southdesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    southimgurl?: string | null;
+    Southimgurl?: string | null;
     /**
      * 
      * @type {number}
      * @memberof Mountain
      */
-    temp1000?: number;
+    Temp1000?: number;
     /**
      * 
      * @type {number}
      * @memberof Mountain
      */
-    temp2000?: number;
+    Temp2000?: number;
     /**
      * 
      * @type {number}
      * @memberof Mountain
      */
-    temp3000?: number;
+    Temp3000?: number;
     /**
      * 
      * @type {number}
      * @memberof Mountain
      */
-    temp4000?: number;
+    Temp4000?: number;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    windcode?: string | null;
+    Windcode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    winddesc?: string | null;
+    Winddesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof Mountain
      */
-    windImgurl?: string | null;
+    WindImgurl?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof Mountain
      */
-    snowlimit?: Array<string> | null;
+    Snowlimit?: Array<string> | null;
 }

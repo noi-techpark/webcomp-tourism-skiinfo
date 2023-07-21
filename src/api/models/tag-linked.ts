@@ -11,7 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-//import { LTSTaggingInfo } from './ltstagging-info';
+import { LTSTaggingInfo } from './ltstagging-info';
 import { LicenseInfo } from './license-info';
 import { Metadata } from './metadata';
 /**
@@ -25,113 +25,113 @@ export interface TagLinked {
      * @type {Metadata}
      * @memberof TagLinked
      */
-    meta?: Metadata;
+    Meta?: Metadata;
     /**
      * 
      * @type {string}
      * @memberof TagLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof TagLinked
      */
-    oDHTagIds?: Array<string> | null;
+    ODHTagIds?: Array<string> | null;
     /**
      * 
      * @type {LicenseInfo}
      * @memberof TagLinked
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
     /**
      * 
      * @type {string}
      * @memberof TagLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * Deprecated, refer to TagName
      * @type {string}
      * @memberof TagLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof TagLinked
      */
-    tagName?: { [key: string]: string; } | null;
+    TagName?: { [key: string]: string; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof TagLinked
      */
-    validForEntity?: Array<string> | null;
+    ValidForEntity?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof TagLinked
      */
-    source?: Array<string> | null;
+    Source?: Array<string> | null;
     /**
      * 
      * @type {Date}
      * @memberof TagLinked
      */
-    firstImport?: Date | null;
+    FirstImport?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof TagLinked
      */
-    lastChange?: Date | null;
+    LastChange?: Date | null;
     /**
      * 
      * @type {boolean}
      * @memberof TagLinked
      */
-    displayAsCategory?: boolean | null;
+    DisplayAsCategory?: boolean | null;
     /**
      * Deprecated, use Mapping or MappedIds
      * @type {{ [key: string]: string; }}
      * @memberof TagLinked
      */
-    iDMCategoryMapping?: { [key: string]: string; } | null;
+    IDMCategoryMapping?: { [key: string]: string; } | null;
     /**
      * 
      * @type {LTSTaggingInfo}
      * @memberof TagLinked
      */
-    //lTSTaggingInfo?: LTSTaggingInfo;
+    LTSTaggingInfo?: LTSTaggingInfo;
     /**
      * Deprecated, use ValidForEntity
      * @type {string}
      * @memberof TagLinked
      */
-    mainEntity?: string | null;
+    MainEntity?: string | null;
     /**
      * 
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof TagLinked
      */
-    mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    Mapping?: { [key: string]: { [key: string]: string; }; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof TagLinked
      */
-    mappedTagIds?: Array<string> | null;
+    MappedTagIds?: Array<string> | null;
     /**
      * 
      * @type {{ [key: string]: boolean; }}
      * @memberof TagLinked
      */
-    publishDataWithTagOn?: { [key: string]: boolean; } | null;
+    PublishDataWithTagOn?: { [key: string]: boolean; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof TagLinked
      */
-    publishedOn?: Array<string> | null;
+    PublishedOn?: Array<string> | null;
 }

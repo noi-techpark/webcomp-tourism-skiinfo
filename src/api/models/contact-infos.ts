@@ -22,101 +22,101 @@ export interface ContactInfos {
      * @type {string}
      * @memberof ContactInfos
      */
-    address?: string | null;
+    Address?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    city?: string | null;
+    City?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    zipCode?: string | null;
+    ZipCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    countryCode?: string | null;
+    CountryCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    countryName?: string | null;
+    CountryName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    surname?: string | null;
+    Surname?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    givenname?: string | null;
+    Givenname?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    namePrefix?: string | null;
+    NamePrefix?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    email?: string | null;
+    Email?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    phonenumber?: string | null;
+    Phonenumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    faxnumber?: string | null;
+    Faxnumber?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    url?: string | null;
+    Url?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    language?: string | null;
+    Language?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    companyName?: string | null;
+    CompanyName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    vat?: string | null;
+    Vat?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    tax?: string | null;
+    Tax?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ContactInfos
      */
-    logoUrl?: string | null;
+    LogoUrl?: string | null;
 }

@@ -23,29 +23,29 @@ export interface OperationSchedule {
      * @type {{ [key: string]: string; }}
      * @memberof OperationSchedule
      */
-    operationscheduleName?: { [key: string]: string; } | null;
+    OperationscheduleName?: { [key: string]: string; } | null;
     /**
      * 
      * @type {Date}
      * @memberof OperationSchedule
      */
-    start?: Date;
+    Start?: Date;
     /**
      * 
      * @type {Date}
      * @memberof OperationSchedule
      */
-    stop?: Date;
+    Stop?: Date;
     /**
      * 1 - Standard, 2 - Only day + month recurring (year not to consider) 3 - only month recurring (season: year and day not to consider), Wiki Article on <a href='https://github.com/noi-techpark/odh-docs/wiki/Operationschedule-Format' target='_blank'>Wiki Article</a>
      * @type {string}
      * @memberof OperationSchedule
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * 
      * @type {Array<OperationScheduleTime>}
      * @memberof OperationSchedule
      */
-    operationScheduleTime?: Array<OperationScheduleTime> | null;
+    OperationScheduleTime?: Array<OperationScheduleTime> | null;
 }

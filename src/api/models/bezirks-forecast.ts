@@ -22,95 +22,95 @@ export interface BezirksForecast {
      * @type {Date}
      * @memberof BezirksForecast
      */
-    date?: Date;
+    Date?: Date;
     /**
      * 
      * @type {string}
      * @memberof BezirksForecast
      */
-    weatherCode?: string | null;
+    WeatherCode?: string | null;
     /**
      * 
      * @type {string}
      * @memberof BezirksForecast
      */
-    weatherDesc?: string | null;
+    WeatherDesc?: string | null;
     /**
      * 
      * @type {string}
      * @memberof BezirksForecast
      */
-    weatherImgUrl?: string | null;
+    WeatherImgUrl?: string | null;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    maxTemp?: number;
+    MaxTemp?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    minTemp?: number;
+    MinTemp?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    freeze?: number;
+    Freeze?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    rainFrom?: number;
+    RainFrom?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    rainTo?: number;
+    RainTo?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    part1?: number;
+    Part1?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    part2?: number;
+    Part2?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    part3?: number;
+    Part3?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    part4?: number;
+    Part4?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    thunderstorm?: number;
+    Thunderstorm?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    symbolId?: number;
+    SymbolId?: number;
     /**
      * 
      * @type {number}
      * @memberof BezirksForecast
      */
-    reliability?: number | null;
+    Reliability?: number | null;
 }

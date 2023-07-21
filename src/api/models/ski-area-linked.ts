@@ -39,311 +39,311 @@ export interface SkiAreaLinked {
      * @type {Metadata}
      * @memberof SkiAreaLinked
      */
-    meta?: Metadata;
+    Meta?: Metadata;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {Array<ODHTags>}
      * @memberof SkiAreaLinked
      */
-    oDHTags?: Array<ODHTags> | null;
+    ODHTags?: Array<ODHTags> | null;
     /**
      * 
      * @type {boolean}
      * @memberof SkiAreaLinked
      */
-    odhActive?: boolean;
+    OdhActive?: boolean;
     /**
      * 
      * @type {SkiRegionLink}
      * @memberof SkiAreaLinked
      */
-    skiRegion?: SkiRegionLink;
+    SkiRegion?: SkiRegionLink;
     /**
      * 
      * @type {Array<AreaLink>}
      * @memberof SkiAreaLinked
      */
-    areas?: Array<AreaLink> | null;
+    Areas?: Array<AreaLink> | null;
     /**
      * 
      * @type {Array<TourismAssociationLink>}
      * @memberof SkiAreaLinked
      */
-    tourismAssociations?: Array<TourismAssociationLink> | null;
+    TourismAssociations?: Array<TourismAssociationLink> | null;
     /**
      * 
      * @type {Array<RegionLink>}
      * @memberof SkiAreaLinked
      */
-    regions?: Array<RegionLink> | null;
+    Regions?: Array<RegionLink> | null;
     /**
      * 
      * @type {LocationInfoLinked}
      * @memberof SkiAreaLinked
      */
-    locationInfo?: LocationInfoLinked;
+    LocationInfo?: LocationInfoLinked;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    skiRegionId?: string | null;
+    SkiRegionId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    skiAreaMapURL?: string | null;
+    SkiAreaMapURL?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    totalSlopeKm?: string | null;
+    TotalSlopeKm?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    slopeKmBlue?: string | null;
+    SlopeKmBlue?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    slopeKmRed?: string | null;
+    SlopeKmRed?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    slopeKmBlack?: string | null;
+    SlopeKmBlack?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    liftCount?: string | null;
+    LiftCount?: string | null;
     /**
      * 
      * @type {number}
      * @memberof SkiAreaLinked
      */
-    altitudeFrom?: number | null;
+    AltitudeFrom?: number | null;
     /**
      * 
      * @type {number}
      * @memberof SkiAreaLinked
      */
-    altitudeTo?: number | null;
+    AltitudeTo?: number | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof SkiAreaLinked
      */
-    skiRegionName?: { [key: string]: string; } | null;
+    SkiRegionName?: { [key: string]: string; } | null;
     /**
      * Deprecated use AreaIds
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    areaId?: Array<string> | null;
+    AreaId?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    areaIds?: Array<string> | null;
+    AreaIds?: Array<string> | null;
     /**
      * 
      * @type {Array<Webcam>}
      * @memberof SkiAreaLinked
      */
-    webcam?: Array<Webcam> | null;
+    Webcam?: Array<Webcam> | null;
     /**
      * 
      * @type {Array<OperationSchedule>}
      * @memberof SkiAreaLinked
      */
-    operationSchedule?: Array<OperationSchedule> | null;
+    OperationSchedule?: Array<OperationSchedule> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    tourismvereinIds?: Array<string> | null;
+    TourismvereinIds?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    regionIds?: Array<string> | null;
+    RegionIds?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    municipalityIds?: Array<string> | null;
+    MunicipalityIds?: Array<string> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    districtIds?: Array<string> | null;
+    DistrictIds?: Array<string> | null;
     /**
      * 
      * @type {Array<GpsPolygon>}
      * @memberof SkiAreaLinked
      */
-    gpsPolygon?: Array<GpsPolygon> | null;
+    GpsPolygon?: Array<GpsPolygon> | null;
     /**
      * 
      * @type {Array<RelatedContent>}
      * @memberof SkiAreaLinked
      */
-    relatedContent?: Array<RelatedContent> | null;
+    RelatedContent?: Array<RelatedContent> | null;
     /**
      * 
      * @type {LicenseInfo}
      * @memberof SkiAreaLinked
      */
-    licenseInfo?: LicenseInfo;
+    LicenseInfo?: LicenseInfo;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof SkiAreaLinked
      */
-    active?: boolean;
+    Active?: boolean;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    customId?: string | null;
+    CustomId?: string | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    shortname?: string | null;
+    Shortname?: string | null;
     /**
      * Deprecated, use GpsPoints
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    gpstype?: string | null;
+    Gpstype?: string | null;
     /**
      * Deprecated, use GpsPoints
      * @type {number}
      * @memberof SkiAreaLinked
      */
-    latitude?: number;
+    Latitude?: number;
     /**
      * Deprecated, use GpsPoints
      * @type {number}
      * @memberof SkiAreaLinked
      */
-    longitude?: number;
+    Longitude?: number;
     /**
      * Deprecated, use GpsPoints
      * @type {number}
      * @memberof SkiAreaLinked
      */
-    altitude?: number | null;
+    Altitude?: number | null;
     /**
      * Deprecated, use GpsPoints
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    altitudeUnitofMeasure?: string | null;
+    AltitudeUnitofMeasure?: string | null;
     /**
      * 
      * @type {{ [key: string]: Detail; }}
      * @memberof SkiAreaLinked
      */
-    detail?: { [key: string]: Detail; } | null;
+    Detail?: { [key: string]: Detail; } | null;
     /**
      * 
      * @type {{ [key: string]: ContactInfos; }}
      * @memberof SkiAreaLinked
      */
-    contactInfos?: { [key: string]: ContactInfos; } | null;
+    ContactInfos?: { [key: string]: ContactInfos; } | null;
     /**
      * 
      * @type {Array<ImageGallery>}
      * @memberof SkiAreaLinked
      */
-    imageGallery?: Array<ImageGallery> | null;
+    ImageGallery?: Array<ImageGallery> | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    smgTags?: Array<string> | null;
+    SmgTags?: Array<string> | null;
     /**
      * 
      * @type {boolean}
      * @memberof SkiAreaLinked
      */
-    smgActive?: boolean;
+    SmgActive?: boolean;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    hasLanguage?: Array<string> | null;
+    HasLanguage?: Array<string> | null;
     /**
      * 
      * @type {Date}
      * @memberof SkiAreaLinked
      */
-    lastChange?: Date | null;
+    LastChange?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof SkiAreaLinked
      */
-    firstImport?: Date | null;
+    FirstImport?: Date | null;
     /**
      * generated field
      * @type {{ [key: string]: GpsInfo; }}
      * @memberof SkiAreaLinked
      */
-    gpsPoints?: { [key: string]: GpsInfo; } | null;
+    GpsPoints?: { [key: string]: GpsInfo; } | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof SkiAreaLinked
      */
-    publishedOn?: Array<string> | null;
+    PublishedOn?: Array<string> | null;
     /**
      * 
      * @type {string}
      * @memberof SkiAreaLinked
      */
-    source?: string | null;
+    Source?: string | null;
     /**
      * 
      * @type {{ [key: string]: { [key: string]: string; }; }}
      * @memberof SkiAreaLinked
      */
-    mapping?: { [key: string]: { [key: string]: string; }; } | null;
+    Mapping?: { [key: string]: { [key: string]: string; }; } | null;
     /**
      * 
      * @type {DistanceInfo}
      * @memberof SkiAreaLinked
      */
-    distanceInfo?: DistanceInfo;
+    DistanceInfo?: DistanceInfo;
 }

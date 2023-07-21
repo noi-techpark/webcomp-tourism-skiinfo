@@ -22,11 +22,11 @@ export interface ArticleLinkInfo {
      * @type {string}
      * @memberof ArticleLinkInfo
      */
-    language?: string | null;
+    Language?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof ArticleLinkInfo
      */
-    elements?: { [key: string]: string; } | null;
+    Elements?: { [key: string]: string; } | null;
 }

@@ -22,11 +22,11 @@ export interface PoiProperty {
      * @type {string}
      * @memberof PoiProperty
      */
-    name?: string | null;
+    Name?: string | null;
     /**
      * 
      * @type {string}
      * @memberof PoiProperty
      */
-    value?: string | null;
+    Value?: string | null;
 }

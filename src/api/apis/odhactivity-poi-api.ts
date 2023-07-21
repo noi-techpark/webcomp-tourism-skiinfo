@@ -16,9 +16,9 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { ODHActivityPoiLinked } from '../models/odhactivity-poi-linked';
-import { ODHActivityPoiLinkedJsonResult } from '../models/odhactivity-poi-linked-json-result';
-import { SmgPoiTypes } from '../models/smg-poi-types';
+import { ODHActivityPoiLinked } from '../models';
+import { ODHActivityPoiLinkedJsonResult } from '../models';
+import { SmgPoiTypes } from '../models';
 /**
  * ODHActivityPoiApi - axios parameter creator
  * @export

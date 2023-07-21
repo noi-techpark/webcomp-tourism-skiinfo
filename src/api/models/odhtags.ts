@@ -22,11 +22,11 @@ export interface ODHTags {
      * @type {string}
      * @memberof ODHTags
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ODHTags
      */
-    self?: string | null;
+    Self?: string | null;
 }

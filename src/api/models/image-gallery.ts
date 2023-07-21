@@ -22,95 +22,95 @@ export interface ImageGallery {
      * @type {string}
      * @memberof ImageGallery
      */
-    imageName?: string | null;
+    ImageName?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ImageGallery
      */
-    imageUrl?: string | null;
+    ImageUrl?: string | null;
     /**
      * 
      * @type {number}
      * @memberof ImageGallery
      */
-    width?: number | null;
+    Width?: number | null;
     /**
      * 
      * @type {number}
      * @memberof ImageGallery
      */
-    height?: number | null;
+    Height?: number | null;
     /**
      * 
      * @type {string}
      * @memberof ImageGallery
      */
-    imageSource?: string | null;
+    ImageSource?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof ImageGallery
      */
-    imageTitle?: { [key: string]: string; } | null;
+    ImageTitle?: { [key: string]: string; } | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof ImageGallery
      */
-    imageDesc?: { [key: string]: string; } | null;
+    ImageDesc?: { [key: string]: string; } | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof ImageGallery
      */
-    imageAltText?: { [key: string]: string; } | null;
+    ImageAltText?: { [key: string]: string; } | null;
     /**
      * 
      * @type {boolean}
      * @memberof ImageGallery
      */
-    isInGallery?: boolean | null;
+    IsInGallery?: boolean | null;
     /**
      * 
      * @type {number}
      * @memberof ImageGallery
      */
-    listPosition?: number | null;
+    ListPosition?: number | null;
     /**
      * 
      * @type {Date}
      * @memberof ImageGallery
      */
-    validFrom?: Date | null;
+    ValidFrom?: Date | null;
     /**
      * 
      * @type {Date}
      * @memberof ImageGallery
      */
-    validTo?: Date | null;
+    ValidTo?: Date | null;
     /**
      * 
      * @type {string}
      * @memberof ImageGallery
      */
-    copyRight?: string | null;
+    CopyRight?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ImageGallery
      */
-    license?: string | null;
+    License?: string | null;
     /**
      * 
      * @type {string}
      * @memberof ImageGallery
      */
-    licenseHolder?: string | null;
+    LicenseHolder?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof ImageGallery
      */
-    imageTags?: Array<string> | null;
+    ImageTags?: Array<string> | null;
 }

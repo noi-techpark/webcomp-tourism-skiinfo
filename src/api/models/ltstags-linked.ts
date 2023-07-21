@@ -23,19 +23,19 @@ export interface LTSTagsLinked {
      * @type {string}
      * @memberof LTSTagsLinked
      */
-    self?: string | null;
+    Self?: string | null;
     /**
      * 
      * @type {string}
      * @memberof LTSTagsLinked
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {number}
      * @memberof LTSTagsLinked
      */
-    level?: number;
+    Level?: number;
     /**
      * 
      * @type {string}
@@ -47,11 +47,11 @@ export interface LTSTagsLinked {
      * @type {{ [key: string]: string; }}
      * @memberof LTSTagsLinked
      */
-    tagName?: { [key: string]: string; } | null;
+    TagName?: { [key: string]: string; } | null;
     /**
      * 
      * @type {Array<LTSTins>}
      * @memberof LTSTagsLinked
      */
-    lTSTins?: Array<LTSTins> | null;
+    LTSTins?: Array<LTSTins> | null;
 }

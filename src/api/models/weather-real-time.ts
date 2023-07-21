@@ -23,155 +23,155 @@ export interface WeatherRealTime {
      * @type {number}
      * @memberof WeatherRealTime
      */
-    altitude?: number;
+    Altitude?: number;
     /**
      * Indicates whether the weather stations are: [1] in the valley, [2] gauge stations, [3] on the mountain
      * @type {number}
      * @memberof WeatherRealTime
      */
-    categoryId?: number;
+    CategoryId?: number;
     /**
      * 
      * @type {string}
      * @memberof WeatherRealTime
      */
-    code?: string | null;
+    Code?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WeatherRealTime
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * Wind direction
      * @type {string}
      * @memberof WeatherRealTime
      */
-    dd?: string | null;
+    Dd?: string | null;
     /**
      * Wind speed (km/h)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    ff?: string | null;
+    Ff?: string | null;
     /**
      * Snow depth (cm)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    hs?: string | null;
+    Hs?: string | null;
     /**
      * 
      * @type {Date}
      * @memberof WeatherRealTime
      */
-    lastUpdated?: Date;
+    LastUpdated?: Date;
     /**
      * 
      * @type {number}
      * @memberof WeatherRealTime
      */
-    latitude?: number;
+    Latitude?: number;
     /**
      * 
      * @type {number}
      * @memberof WeatherRealTime
      */
-    longitude?: number;
+    Longitude?: number;
     /**
      * Only for weather stations on the mountain: [1] if the weather station is a snow measuring field, [2] if the weather station is a wind station, [null] otherwise
      * @type {string}
      * @memberof WeatherRealTime
      */
-    lwdType?: string | null;
+    LwdType?: string | null;
     /**
      * Precipitation from midnight (mm)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    n?: string | null;
+    N?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WeatherRealTime
      */
-    name?: string | null;
+    Name?: string | null;
     /**
      * Atmospheric pressure (hPa)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    p?: string | null;
+    P?: string | null;
     /**
      * Flow rate (m³/s)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    q?: string | null;
+    Q?: string | null;
     /**
      * Relative humidity (rH)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    rh?: string | null;
+    Rh?: string | null;
     /**
      * Air temperature (°C)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    t?: string | null;
+    T?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WeatherRealTime
      */
-    vaxcode?: string | null;
+    Vaxcode?: string | null;
     /**
      * Water level (cm)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    w?: string | null;
+    W?: string | null;
     /**
      * Wind gust
      * @type {string}
      * @memberof WeatherRealTime
      */
-    wMax?: string | null;
+    WMax?: string | null;
     /**
      * Sunshine duration (h)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    sd?: string | null;
+    Sd?: string | null;
     /**
      * Global radiation
      * @type {string}
      * @memberof WeatherRealTime
      */
-    gs?: string | null;
+    Gs?: string | null;
     /**
      * Water temperature (°C)
      * @type {string}
      * @memberof WeatherRealTime
      */
-    wt?: string | null;
+    Wt?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WeatherRealTime
      */
-    visibility?: string | null;
+    Visibility?: string | null;
     /**
      * 
      * @type {string}
      * @memberof WeatherRealTime
      */
-    zoomLevel?: string | null;
+    ZoomLevel?: string | null;
     /**
      * 
      * @type {Array<RealTimeMeasurements>}
      * @memberof WeatherRealTime
      */
-    measurements?: Array<RealTimeMeasurements> | null;
+    Measurements?: Array<RealTimeMeasurements> | null;
 }

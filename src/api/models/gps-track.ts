@@ -22,29 +22,29 @@ export interface GpsTrack {
      * @type {string}
      * @memberof GpsTrack
      */
-    id?: string | null;
+    Id?: string | null;
     /**
      * 
      * @type {{ [key: string]: string; }}
      * @memberof GpsTrack
      */
-    gpxTrackDesc?: { [key: string]: string; } | null;
+    GpxTrackDesc?: { [key: string]: string; } | null;
     /**
      * 
      * @type {string}
      * @memberof GpsTrack
      */
-    gpxTrackUrl?: string | null;
+    GpxTrackUrl?: string | null;
     /**
      * 
      * @type {string}
      * @memberof GpsTrack
      */
-    type?: string | null;
+    Type?: string | null;
     /**
      * 
      * @type {string}
      * @memberof GpsTrack
      */
-    format?: string | null;
+    Format?: string | null;
 }

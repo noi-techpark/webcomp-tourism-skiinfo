@@ -16,9 +16,16 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { AreaLinked } from '../models/area-linked';
-import { SkiAreaLinked } from '../models/ski-area-linked';
-import { SkiRegionLinked } from '../models/ski-region-linked';
+import { AreaLinked } from '../models';
+import { DistrictLinked } from '../models';
+import { ExperienceAreaLinked } from '../models';
+import { MetaRegionLinked } from '../models';
+import { MunicipalityLinked } from '../models';
+import { RegionLinked } from '../models';
+import { SkiAreaLinked } from '../models';
+import { SkiRegionLinked } from '../models';
+import { TourismvereinLinked } from '../models';
+import { WineLinked } from '../models';
 /**
  * CommonApi - axios parameter creator
  * @export
@@ -89,7 +96,327 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
-         /**
+        /**
+         * 
+         * @summary GET District Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        singleDistrict: async (id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling singleDistrict.');
+            }
+            const localVarPath = `/v1/District/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET ExperienceArea Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        singleExperienceArea: async (id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling singleExperienceArea.');
+            }
+            const localVarPath = `/v1/ExperienceArea/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET MetaRegion Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        singleMetaRegion: async (id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling singleMetaRegion.');
+            }
+            const localVarPath = `/v1/MetaRegion/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET Municipality Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        singleMunicipality: async (id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling singleMunicipality.');
+            }
+            const localVarPath = `/v1/Municipality/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET Region Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        singleRegion: async (id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling singleRegion.');
+            }
+            const localVarPath = `/v1/Region/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * 
          * @summary GET SkiArea Single
          * @param {string} id ID of the requested data
@@ -216,7 +543,135 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
                 options: localVarRequestOptions,
             };
-        },      
+        },
+        /**
+         * 
+         * @summary GET TourismAssociation Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        singleTourismAssociation: async (id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling singleTourismAssociation.');
+            }
+            const localVarPath = `/v1/TourismAssociation/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET Wine Award Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        singleWineAward: async (id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling singleWineAward.');
+            }
+            const localVarPath = `/v1/WineAward/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary GET Area List
@@ -344,7 +799,737 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
                 options: localVarRequestOptions,
             };
-        },       
+        },
+        /**
+         * 
+         * @summary GET District List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1DistrictGet: async (pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, visibleinsearch?: boolean, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/District`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (pagenumber !== undefined) {
+                localVarQueryParameter['pagenumber'] = pagenumber;
+            }
+
+            if (pagesize !== undefined) {
+                localVarQueryParameter['pagesize'] = pagesize;
+            }
+
+            if (idlist !== undefined) {
+                localVarQueryParameter['idlist'] = idlist;
+            }
+
+            if (odhtagfilter !== undefined) {
+                localVarQueryParameter['odhtagfilter'] = odhtagfilter;
+            }
+
+            if (active !== undefined) {
+                localVarQueryParameter['active'] = active;
+            }
+
+            if (odhactive !== undefined) {
+                localVarQueryParameter['odhactive'] = odhactive;
+            }
+
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+
+            if (visibleinsearch !== undefined) {
+                localVarQueryParameter['visibleinsearch'] = visibleinsearch;
+            }
+
+            if (latitude !== undefined) {
+                localVarQueryParameter['latitude'] = latitude;
+            }
+
+            if (longitude !== undefined) {
+                localVarQueryParameter['longitude'] = longitude;
+            }
+
+            if (radius !== undefined) {
+                localVarQueryParameter['radius'] = radius;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (langfilter !== undefined) {
+                localVarQueryParameter['langfilter'] = langfilter;
+            }
+
+            if (updatefrom !== undefined) {
+                localVarQueryParameter['updatefrom'] = updatefrom;
+            }
+
+            if (seed !== undefined) {
+                localVarQueryParameter['seed'] = seed;
+            }
+
+            if (publishedon !== undefined) {
+                localVarQueryParameter['publishedon'] = publishedon;
+            }
+
+            if (searchfilter !== undefined) {
+                localVarQueryParameter['searchfilter'] = searchfilter;
+            }
+
+            if (rawfilter !== undefined) {
+                localVarQueryParameter['rawfilter'] = rawfilter;
+            }
+
+            if (rawsort !== undefined) {
+                localVarQueryParameter['rawsort'] = rawsort;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET Experiencearea List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1ExperienceAreaGet: async (pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, visibleinsearch?: boolean, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/ExperienceArea`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (pagenumber !== undefined) {
+                localVarQueryParameter['pagenumber'] = pagenumber;
+            }
+
+            if (pagesize !== undefined) {
+                localVarQueryParameter['pagesize'] = pagesize;
+            }
+
+            if (idlist !== undefined) {
+                localVarQueryParameter['idlist'] = idlist;
+            }
+
+            if (odhtagfilter !== undefined) {
+                localVarQueryParameter['odhtagfilter'] = odhtagfilter;
+            }
+
+            if (active !== undefined) {
+                localVarQueryParameter['active'] = active;
+            }
+
+            if (odhactive !== undefined) {
+                localVarQueryParameter['odhactive'] = odhactive;
+            }
+
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+
+            if (visibleinsearch !== undefined) {
+                localVarQueryParameter['visibleinsearch'] = visibleinsearch;
+            }
+
+            if (latitude !== undefined) {
+                localVarQueryParameter['latitude'] = latitude;
+            }
+
+            if (longitude !== undefined) {
+                localVarQueryParameter['longitude'] = longitude;
+            }
+
+            if (radius !== undefined) {
+                localVarQueryParameter['radius'] = radius;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (langfilter !== undefined) {
+                localVarQueryParameter['langfilter'] = langfilter;
+            }
+
+            if (updatefrom !== undefined) {
+                localVarQueryParameter['updatefrom'] = updatefrom;
+            }
+
+            if (seed !== undefined) {
+                localVarQueryParameter['seed'] = seed;
+            }
+
+            if (publishedon !== undefined) {
+                localVarQueryParameter['publishedon'] = publishedon;
+            }
+
+            if (searchfilter !== undefined) {
+                localVarQueryParameter['searchfilter'] = searchfilter;
+            }
+
+            if (rawfilter !== undefined) {
+                localVarQueryParameter['rawfilter'] = rawfilter;
+            }
+
+            if (rawsort !== undefined) {
+                localVarQueryParameter['rawsort'] = rawsort;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET MetaRegion List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1MetaRegionGet: async (pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/MetaRegion`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (pagenumber !== undefined) {
+                localVarQueryParameter['pagenumber'] = pagenumber;
+            }
+
+            if (pagesize !== undefined) {
+                localVarQueryParameter['pagesize'] = pagesize;
+            }
+
+            if (idlist !== undefined) {
+                localVarQueryParameter['idlist'] = idlist;
+            }
+
+            if (odhtagfilter !== undefined) {
+                localVarQueryParameter['odhtagfilter'] = odhtagfilter;
+            }
+
+            if (active !== undefined) {
+                localVarQueryParameter['active'] = active;
+            }
+
+            if (odhactive !== undefined) {
+                localVarQueryParameter['odhactive'] = odhactive;
+            }
+
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+
+            if (latitude !== undefined) {
+                localVarQueryParameter['latitude'] = latitude;
+            }
+
+            if (longitude !== undefined) {
+                localVarQueryParameter['longitude'] = longitude;
+            }
+
+            if (radius !== undefined) {
+                localVarQueryParameter['radius'] = radius;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (langfilter !== undefined) {
+                localVarQueryParameter['langfilter'] = langfilter;
+            }
+
+            if (updatefrom !== undefined) {
+                localVarQueryParameter['updatefrom'] = updatefrom;
+            }
+
+            if (seed !== undefined) {
+                localVarQueryParameter['seed'] = seed;
+            }
+
+            if (publishedon !== undefined) {
+                localVarQueryParameter['publishedon'] = publishedon;
+            }
+
+            if (searchfilter !== undefined) {
+                localVarQueryParameter['searchfilter'] = searchfilter;
+            }
+
+            if (rawfilter !== undefined) {
+                localVarQueryParameter['rawfilter'] = rawfilter;
+            }
+
+            if (rawsort !== undefined) {
+                localVarQueryParameter['rawsort'] = rawsort;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET Municipality List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1MunicipalityGet: async (pagenumber?: number, pagesize?: number, visibleinsearch?: boolean, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/Municipality`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (pagenumber !== undefined) {
+                localVarQueryParameter['pagenumber'] = pagenumber;
+            }
+
+            if (pagesize !== undefined) {
+                localVarQueryParameter['pagesize'] = pagesize;
+            }
+
+            if (visibleinsearch !== undefined) {
+                localVarQueryParameter['visibleinsearch'] = visibleinsearch;
+            }
+
+            if (idlist !== undefined) {
+                localVarQueryParameter['idlist'] = idlist;
+            }
+
+            if (odhtagfilter !== undefined) {
+                localVarQueryParameter['odhtagfilter'] = odhtagfilter;
+            }
+
+            if (active !== undefined) {
+                localVarQueryParameter['active'] = active;
+            }
+
+            if (odhactive !== undefined) {
+                localVarQueryParameter['odhactive'] = odhactive;
+            }
+
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+
+            if (latitude !== undefined) {
+                localVarQueryParameter['latitude'] = latitude;
+            }
+
+            if (longitude !== undefined) {
+                localVarQueryParameter['longitude'] = longitude;
+            }
+
+            if (radius !== undefined) {
+                localVarQueryParameter['radius'] = radius;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (langfilter !== undefined) {
+                localVarQueryParameter['langfilter'] = langfilter;
+            }
+
+            if (updatefrom !== undefined) {
+                localVarQueryParameter['updatefrom'] = updatefrom;
+            }
+
+            if (seed !== undefined) {
+                localVarQueryParameter['seed'] = seed;
+            }
+
+            if (publishedon !== undefined) {
+                localVarQueryParameter['publishedon'] = publishedon;
+            }
+
+            if (searchfilter !== undefined) {
+                localVarQueryParameter['searchfilter'] = searchfilter;
+            }
+
+            if (rawfilter !== undefined) {
+                localVarQueryParameter['rawfilter'] = rawfilter;
+            }
+
+            if (rawsort !== undefined) {
+                localVarQueryParameter['rawsort'] = rawsort;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET Region List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1RegionGet: async (pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/Region`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (pagenumber !== undefined) {
+                localVarQueryParameter['pagenumber'] = pagenumber;
+            }
+
+            if (pagesize !== undefined) {
+                localVarQueryParameter['pagesize'] = pagesize;
+            }
+
+            if (idlist !== undefined) {
+                localVarQueryParameter['idlist'] = idlist;
+            }
+
+            if (odhtagfilter !== undefined) {
+                localVarQueryParameter['odhtagfilter'] = odhtagfilter;
+            }
+
+            if (active !== undefined) {
+                localVarQueryParameter['active'] = active;
+            }
+
+            if (odhactive !== undefined) {
+                localVarQueryParameter['odhactive'] = odhactive;
+            }
+
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+
+            if (latitude !== undefined) {
+                localVarQueryParameter['latitude'] = latitude;
+            }
+
+            if (longitude !== undefined) {
+                localVarQueryParameter['longitude'] = longitude;
+            }
+
+            if (radius !== undefined) {
+                localVarQueryParameter['radius'] = radius;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (langfilter !== undefined) {
+                localVarQueryParameter['langfilter'] = langfilter;
+            }
+
+            if (updatefrom !== undefined) {
+                localVarQueryParameter['updatefrom'] = updatefrom;
+            }
+
+            if (seed !== undefined) {
+                localVarQueryParameter['seed'] = seed;
+            }
+
+            if (publishedon !== undefined) {
+                localVarQueryParameter['publishedon'] = publishedon;
+            }
+
+            if (searchfilter !== undefined) {
+                localVarQueryParameter['searchfilter'] = searchfilter;
+            }
+
+            if (rawfilter !== undefined) {
+                localVarQueryParameter['rawfilter'] = rawfilter;
+            }
+
+            if (rawsort !== undefined) {
+                localVarQueryParameter['rawsort'] = rawsort;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary GET SkiArea List
@@ -615,7 +1800,288 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
                 options: localVarRequestOptions,
             };
-        },      
+        },
+        /**
+         * 
+         * @summary GET TourismAssociation List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1TourismAssociationGet: async (pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/TourismAssociation`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (pagenumber !== undefined) {
+                localVarQueryParameter['pagenumber'] = pagenumber;
+            }
+
+            if (pagesize !== undefined) {
+                localVarQueryParameter['pagesize'] = pagesize;
+            }
+
+            if (idlist !== undefined) {
+                localVarQueryParameter['idlist'] = idlist;
+            }
+
+            if (odhtagfilter !== undefined) {
+                localVarQueryParameter['odhtagfilter'] = odhtagfilter;
+            }
+
+            if (active !== undefined) {
+                localVarQueryParameter['active'] = active;
+            }
+
+            if (odhactive !== undefined) {
+                localVarQueryParameter['odhactive'] = odhactive;
+            }
+
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+
+            if (latitude !== undefined) {
+                localVarQueryParameter['latitude'] = latitude;
+            }
+
+            if (longitude !== undefined) {
+                localVarQueryParameter['longitude'] = longitude;
+            }
+
+            if (radius !== undefined) {
+                localVarQueryParameter['radius'] = radius;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (langfilter !== undefined) {
+                localVarQueryParameter['langfilter'] = langfilter;
+            }
+
+            if (updatefrom !== undefined) {
+                localVarQueryParameter['updatefrom'] = updatefrom;
+            }
+
+            if (seed !== undefined) {
+                localVarQueryParameter['seed'] = seed;
+            }
+
+            if (publishedon !== undefined) {
+                localVarQueryParameter['publishedon'] = publishedon;
+            }
+
+            if (searchfilter !== undefined) {
+                localVarQueryParameter['searchfilter'] = searchfilter;
+            }
+
+            if (rawfilter !== undefined) {
+                localVarQueryParameter['rawfilter'] = rawfilter;
+            }
+
+            if (rawsort !== undefined) {
+                localVarQueryParameter['rawsort'] = rawsort;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary GET Wine Awards List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [wineid] Filter by Wine Id, (default:&#x27;null&#x27;)
+         * @param {string} [companyid] Filter by Company Id, (default:&#x27;null&#x27;)
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        v1WineAwardGet: async (pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, wineid?: string, companyid?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, rawfilter?: string, rawsort?: string, publishedon?: string, searchfilter?: string, removenullvalues?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/WineAward`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oauth2 required
+            // oauth required
+            if (configuration && configuration.accessToken) {
+                const localVarAccessTokenValue = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken("oauth2", [])
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarAccessTokenValue;
+            }
+
+            if (pagenumber !== undefined) {
+                localVarQueryParameter['pagenumber'] = pagenumber;
+            }
+
+            if (pagesize !== undefined) {
+                localVarQueryParameter['pagesize'] = pagesize;
+            }
+
+            if (idlist !== undefined) {
+                localVarQueryParameter['idlist'] = idlist;
+            }
+
+            if (odhtagfilter !== undefined) {
+                localVarQueryParameter['odhtagfilter'] = odhtagfilter;
+            }
+
+            if (active !== undefined) {
+                localVarQueryParameter['active'] = active;
+            }
+
+            if (odhactive !== undefined) {
+                localVarQueryParameter['odhactive'] = odhactive;
+            }
+
+            if (source !== undefined) {
+                localVarQueryParameter['source'] = source;
+            }
+
+            if (wineid !== undefined) {
+                localVarQueryParameter['wineid'] = wineid;
+            }
+
+            if (companyid !== undefined) {
+                localVarQueryParameter['companyid'] = companyid;
+            }
+
+            if (fields) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+            if (language !== undefined) {
+                localVarQueryParameter['language'] = language;
+            }
+
+            if (langfilter !== undefined) {
+                localVarQueryParameter['langfilter'] = langfilter;
+            }
+
+            if (updatefrom !== undefined) {
+                localVarQueryParameter['updatefrom'] = updatefrom;
+            }
+
+            if (seed !== undefined) {
+                localVarQueryParameter['seed'] = seed;
+            }
+
+            if (rawfilter !== undefined) {
+                localVarQueryParameter['rawfilter'] = rawfilter;
+            }
+
+            if (rawsort !== undefined) {
+                localVarQueryParameter['rawsort'] = rawsort;
+            }
+
+            if (publishedon !== undefined) {
+                localVarQueryParameter['publishedon'] = publishedon;
+            }
+
+            if (searchfilter !== undefined) {
+                localVarQueryParameter['searchfilter'] = searchfilter;
+            }
+
+            if (removenullvalues !== undefined) {
+                localVarQueryParameter['removenullvalues'] = removenullvalues;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -641,7 +2107,92 @@ export const CommonApiFp = function(configuration?: Configuration) {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
-        },              
+        },
+        /**
+         * 
+         * @summary GET District Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleDistrict(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<DistrictLinked>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).singleDistrict(id, fields, language, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET ExperienceArea Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleExperienceArea(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ExperienceAreaLinked>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).singleExperienceArea(id, fields, language, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET MetaRegion Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleMetaRegion(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<MetaRegionLinked>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).singleMetaRegion(id, fields, language, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET Municipality Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleMunicipality(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<MunicipalityLinked>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).singleMunicipality(id, fields, language, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET Region Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleRegion(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<RegionLinked>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).singleRegion(id, fields, language, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
         /**
          * 
          * @summary GET SkiArea Single
@@ -675,7 +2226,41 @@ export const CommonApiFp = function(configuration?: Configuration) {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
-        },       
+        },
+        /**
+         * 
+         * @summary GET TourismAssociation Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleTourismAssociation(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TourismvereinLinked>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).singleTourismAssociation(id, fields, language, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET Wine Award Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleWineAward(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<WineLinked>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).singleWineAward(id, fields, language, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
         /**
          * 
          * @summary GET Area List
@@ -705,7 +2290,175 @@ export const CommonApiFp = function(configuration?: Configuration) {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
-        },       
+        },
+        /**
+         * 
+         * @summary GET District List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1DistrictGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, visibleinsearch?: boolean, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<DistrictLinked>>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).v1DistrictGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, visibleinsearch, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET Experiencearea List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1ExperienceAreaGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, visibleinsearch?: boolean, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<ExperienceAreaLinked>>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).v1ExperienceAreaGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, visibleinsearch, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET MetaRegion List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1MetaRegionGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<MetaRegionLinked>>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).v1MetaRegionGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET Municipality List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1MunicipalityGet(pagenumber?: number, pagesize?: number, visibleinsearch?: boolean, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<MunicipalityLinked>>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).v1MunicipalityGet(pagenumber, pagesize, visibleinsearch, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET Region List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1RegionGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<RegionLinked>>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).v1RegionGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
         /**
          * 
          * @summary GET SkiArea List
@@ -768,7 +2521,72 @@ export const CommonApiFp = function(configuration?: Configuration) {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
             };
-        },       
+        },
+        /**
+         * 
+         * @summary GET TourismAssociation List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1TourismAssociationGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<TourismvereinLinked>>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).v1TourismAssociationGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary GET Wine Awards List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [wineid] Filter by Wine Id, (default:&#x27;null&#x27;)
+         * @param {string} [companyid] Filter by Company Id, (default:&#x27;null&#x27;)
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1WineAwardGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, wineid?: string, companyid?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, rawfilter?: string, rawsort?: string, publishedon?: string, searchfilter?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<WineLinked>>>> {
+            const localVarAxiosArgs = await CommonApiAxiosParamCreator(configuration).v1WineAwardGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, wineid, companyid, fields, language, langfilter, updatefrom, seed, rawfilter, rawsort, publishedon, searchfilter, removenullvalues, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -790,7 +2608,72 @@ export const CommonApiFactory = function (configuration?: Configuration, basePat
          */
         async singleArea(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<AreaLinked>> {
             return CommonApiFp(configuration).singleArea(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
-        },       
+        },
+        /**
+         * 
+         * @summary GET District Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleDistrict(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<DistrictLinked>> {
+            return CommonApiFp(configuration).singleDistrict(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET ExperienceArea Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleExperienceArea(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<ExperienceAreaLinked>> {
+            return CommonApiFp(configuration).singleExperienceArea(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET MetaRegion Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleMetaRegion(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<MetaRegionLinked>> {
+            return CommonApiFp(configuration).singleMetaRegion(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET Municipality Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleMunicipality(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<MunicipalityLinked>> {
+            return CommonApiFp(configuration).singleMunicipality(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET Region Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleRegion(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<RegionLinked>> {
+            return CommonApiFp(configuration).singleRegion(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @summary GET SkiArea Single
@@ -816,7 +2699,33 @@ export const CommonApiFactory = function (configuration?: Configuration, basePat
          */
         async singleSkiRegion(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<SkiRegionLinked>> {
             return CommonApiFp(configuration).singleSkiRegion(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
-        },      
+        },
+        /**
+         * 
+         * @summary GET TourismAssociation Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleTourismAssociation(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<TourismvereinLinked>> {
+            return CommonApiFp(configuration).singleTourismAssociation(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET Wine Award Single
+         * @param {string} id ID of the requested data
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async singleWineAward(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<WineLinked>> {
+            return CommonApiFp(configuration).singleWineAward(id, fields, language, removenullvalues, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @summary GET Area List
@@ -842,7 +2751,155 @@ export const CommonApiFactory = function (configuration?: Configuration, basePat
          */
         async v1AreaGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<AreaLinked>>> {
             return CommonApiFp(configuration).v1AreaGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(axios, basePath));
-        },       
+        },
+        /**
+         * 
+         * @summary GET District List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1DistrictGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, visibleinsearch?: boolean, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<DistrictLinked>>> {
+            return CommonApiFp(configuration).v1DistrictGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, visibleinsearch, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET Experiencearea List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1ExperienceAreaGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, visibleinsearch?: boolean, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<ExperienceAreaLinked>>> {
+            return CommonApiFp(configuration).v1ExperienceAreaGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, visibleinsearch, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET MetaRegion List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1MetaRegionGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<MetaRegionLinked>>> {
+            return CommonApiFp(configuration).v1MetaRegionGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET Municipality List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1MunicipalityGet(pagenumber?: number, pagesize?: number, visibleinsearch?: boolean, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<MunicipalityLinked>>> {
+            return CommonApiFp(configuration).v1MunicipalityGet(pagenumber, pagesize, visibleinsearch, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET Region List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1RegionGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<RegionLinked>>> {
+            return CommonApiFp(configuration).v1RegionGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @summary GET SkiArea List
@@ -897,7 +2954,64 @@ export const CommonApiFactory = function (configuration?: Configuration, basePat
          */
         async v1SkiRegionGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<SkiRegionLinked>>> {
             return CommonApiFp(configuration).v1SkiRegionGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(axios, basePath));
-        },      
+        },
+        /**
+         * 
+         * @summary GET TourismAssociation List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1TourismAssociationGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<TourismvereinLinked>>> {
+            return CommonApiFp(configuration).v1TourismAssociationGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary GET Wine Awards List
+         * @param {number} [pagenumber] 
+         * @param {number} [pagesize] 
+         * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+         * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+         * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+         * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+         * @param {string} [source] 
+         * @param {string} [wineid] Filter by Wine Id, (default:&#x27;null&#x27;)
+         * @param {string} [companyid] Filter by Company Id, (default:&#x27;null&#x27;)
+         * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+         * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+         * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+         * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+         * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+         * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+         * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+         * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+         * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+         * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async v1WineAwardGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, wineid?: string, companyid?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, rawfilter?: string, rawsort?: string, publishedon?: string, searchfilter?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<WineLinked>>> {
+            return CommonApiFp(configuration).v1WineAwardGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, wineid, companyid, fields, language, langfilter, updatefrom, seed, rawfilter, rawsort, publishedon, searchfilter, removenullvalues, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -921,7 +3035,77 @@ export class CommonApi extends BaseAPI {
      */
     public async singleArea(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<AreaLinked>> {
         return CommonApiFp(this.configuration).singleArea(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
-    }    
+    }
+    /**
+     * 
+     * @summary GET District Single
+     * @param {string} id ID of the requested data
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async singleDistrict(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<DistrictLinked>> {
+        return CommonApiFp(this.configuration).singleDistrict(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET ExperienceArea Single
+     * @param {string} id ID of the requested data
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async singleExperienceArea(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<ExperienceAreaLinked>> {
+        return CommonApiFp(this.configuration).singleExperienceArea(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET MetaRegion Single
+     * @param {string} id ID of the requested data
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async singleMetaRegion(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<MetaRegionLinked>> {
+        return CommonApiFp(this.configuration).singleMetaRegion(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET Municipality Single
+     * @param {string} id ID of the requested data
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async singleMunicipality(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<MunicipalityLinked>> {
+        return CommonApiFp(this.configuration).singleMunicipality(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET Region Single
+     * @param {string} id ID of the requested data
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async singleRegion(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<RegionLinked>> {
+        return CommonApiFp(this.configuration).singleRegion(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * 
      * @summary GET SkiArea Single
@@ -949,7 +3133,35 @@ export class CommonApi extends BaseAPI {
      */
     public async singleSkiRegion(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<SkiRegionLinked>> {
         return CommonApiFp(this.configuration).singleSkiRegion(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
-    }    
+    }
+    /**
+     * 
+     * @summary GET TourismAssociation Single
+     * @param {string} id ID of the requested data
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async singleTourismAssociation(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<TourismvereinLinked>> {
+        return CommonApiFp(this.configuration).singleTourismAssociation(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET Wine Award Single
+     * @param {string} id ID of the requested data
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async singleWineAward(id: string, fields?: Array<string>, language?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<WineLinked>> {
+        return CommonApiFp(this.configuration).singleWineAward(id, fields, language, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * 
      * @summary GET Area List
@@ -976,7 +3188,160 @@ export class CommonApi extends BaseAPI {
      */
     public async v1AreaGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<AreaLinked>>> {
         return CommonApiFp(this.configuration).v1AreaGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(this.axios, this.basePath));
-    }    
+    }
+    /**
+     * 
+     * @summary GET District List
+     * @param {number} [pagenumber] 
+     * @param {number} [pagesize] 
+     * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+     * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+     * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+     * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+     * @param {string} [source] 
+     * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+     * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+     * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+     * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+     * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+     * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+     * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+     * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async v1DistrictGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, visibleinsearch?: boolean, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<DistrictLinked>>> {
+        return CommonApiFp(this.configuration).v1DistrictGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, visibleinsearch, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET Experiencearea List
+     * @param {number} [pagenumber] 
+     * @param {number} [pagesize] 
+     * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+     * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+     * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+     * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+     * @param {string} [source] 
+     * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+     * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+     * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+     * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+     * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+     * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+     * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+     * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async v1ExperienceAreaGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, visibleinsearch?: boolean, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<ExperienceAreaLinked>>> {
+        return CommonApiFp(this.configuration).v1ExperienceAreaGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, visibleinsearch, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET MetaRegion List
+     * @param {number} [pagenumber] 
+     * @param {number} [pagesize] 
+     * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+     * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+     * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+     * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+     * @param {string} [source] 
+     * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+     * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+     * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+     * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+     * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+     * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+     * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async v1MetaRegionGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<MetaRegionLinked>>> {
+        return CommonApiFp(this.configuration).v1MetaRegionGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET Municipality List
+     * @param {number} [pagenumber] 
+     * @param {number} [pagesize] 
+     * @param {boolean} [visibleinsearch] Filter only Elements flagged with visibleinsearch: (possible values: &#x27;true&#x27;,&#x27;false&#x27;), (default:&#x27;false&#x27;)
+     * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+     * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+     * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+     * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+     * @param {string} [source] 
+     * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+     * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+     * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+     * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+     * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+     * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+     * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async v1MunicipalityGet(pagenumber?: number, pagesize?: number, visibleinsearch?: boolean, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<MunicipalityLinked>>> {
+        return CommonApiFp(this.configuration).v1MunicipalityGet(pagenumber, pagesize, visibleinsearch, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET Region List
+     * @param {number} [pagenumber] 
+     * @param {number} [pagesize] 
+     * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+     * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+     * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+     * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+     * @param {string} [source] 
+     * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+     * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+     * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+     * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+     * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+     * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+     * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async v1RegionGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<RegionLinked>>> {
+        return CommonApiFp(this.configuration).v1RegionGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * 
      * @summary GET SkiArea List
@@ -1033,5 +3398,64 @@ export class CommonApi extends BaseAPI {
      */
     public async v1SkiRegionGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<SkiRegionLinked>>> {
         return CommonApiFp(this.configuration).v1SkiRegionGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(this.axios, this.basePath));
-    }   
+    }
+    /**
+     * 
+     * @summary GET TourismAssociation List
+     * @param {number} [pagenumber] 
+     * @param {number} [pagesize] 
+     * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+     * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+     * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+     * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+     * @param {string} [source] 
+     * @param {string} [latitude] GeoFilter FLOAT Latitude Format: &#x27;46.624975&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [longitude] GeoFilter FLOAT Longitude Format: &#x27;11.369909&#x27;, &#x27;null&#x27; &#x3D; disabled, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {string} [radius] Radius INTEGER to Search in Meters. Only Object withhin the given point and radius are returned and sorted by distance. Random Sorting is disabled if the GeoFilter Informations are provided, (default:&#x27;null&#x27;) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Geosorting-and-Locationfilter-usage#geosorting-functionality\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki geosort&lt;/a&gt;
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+     * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+     * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+     * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+     * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+     * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+     * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async v1TourismAssociationGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, latitude?: string, longitude?: string, radius?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, publishedon?: string, searchfilter?: string, rawfilter?: string, rawsort?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<TourismvereinLinked>>> {
+        return CommonApiFp(this.configuration).v1TourismAssociationGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, latitude, longitude, radius, fields, language, langfilter, updatefrom, seed, publishedon, searchfilter, rawfilter, rawsort, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary GET Wine Awards List
+     * @param {number} [pagenumber] 
+     * @param {number} [pagesize] 
+     * @param {string} [idlist] IDFilter (Separator &#x27;,&#x27; List of data IDs), (default:&#x27;null&#x27;)
+     * @param {string} [odhtagfilter] Taglist Filter (String, Separator &#x27;,&#x27; more Tags possible, available Tags reference to &#x27;v1/ODHTag?validforentity&#x3D;common&#x27;), (default:&#x27;null&#x27;)
+     * @param {boolean} [active] Active data Filter (possible Values: &#x27;true&#x27; only Active data, &#x27;false&#x27; only Disabled data), (default:&#x27;null&#x27;)
+     * @param {boolean} [odhactive] Odhactive (Published) data Filter (possible Values: &#x27;true&#x27; only published data, &#x27;false&#x27; only not published data, (default:&#x27;null&#x27;)
+     * @param {string} [source] 
+     * @param {string} [wineid] Filter by Wine Id, (default:&#x27;null&#x27;)
+     * @param {string} [companyid] Filter by Company Id, (default:&#x27;null&#x27;)
+     * @param {Array<string>} [fields] Select fields to display, More fields are indicated by separator &#x27;,&#x27; example fields&#x3D;Id,Active,Shortname (default:&#x27;null&#x27; all fields are displayed). &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#fields\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki fields&lt;/a&gt;
+     * @param {string} [language] Language field selector, displays data and fields in the selected language (default:&#x27;null&#x27; all languages are displayed)
+     * @param {string} [langfilter] Language filter (returns only data available in the selected Language, Separator &#x27;,&#x27; possible values: &#x27;de,it,en,nl,sc,pl,fr,ru&#x27;, &#x27;null&#x27;: Filter disabled)
+     * @param {string} [updatefrom] Returns data changed after this date Format (yyyy-MM-dd), (default: &#x27;null&#x27;)
+     * @param {string} [seed] Seed &#x27;1 - 10&#x27; for Random Sorting, &#x27;0&#x27; generates a Random Seed, &#x27;null&#x27; disables Random Sorting, (default:null)
+     * @param {string} [rawfilter] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawfilter&lt;/a&gt;
+     * @param {string} [rawsort] &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Using-rawfilter-and-rawsort-on-the-Tourism-Api#rawsort\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki rawsort&lt;/a&gt;
+     * @param {string} [publishedon] Published On Filter (Separator &#x27;,&#x27; List of publisher IDs), (default:&#x27;null&#x27;)
+     * @param {string} [searchfilter] String to search for, Title in all languages are searched, (default: null) &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters%2C-fields%2C-language%2C-searchfilter%2C-removenullvalues%2C-updatefrom#searchfilter\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Wiki searchfilter&lt;/a&gt;
+     * @param {boolean} [removenullvalues] Remove all Null values from json output. Useful for reducing json size. By default set to false. Documentation on &lt;a href&#x3D;\&quot;https://github.com/noi-techpark/odh-docs/wiki/Common-parameters,-fields,-language,-searchfilter,-removenullvalues,-updatefrom#removenullvalues\&quot; target&#x3D;\&quot;_blank\&quot;&gt;Opendatahub Wiki&lt;/a&gt;
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CommonApi
+     */
+    public async v1WineAwardGet(pagenumber?: number, pagesize?: number, idlist?: string, odhtagfilter?: string, active?: boolean, odhactive?: boolean, source?: string, wineid?: string, companyid?: string, fields?: Array<string>, language?: string, langfilter?: string, updatefrom?: string, seed?: string, rawfilter?: string, rawsort?: string, publishedon?: string, searchfilter?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<WineLinked>>> {
+        return CommonApiFp(this.configuration).v1WineAwardGet(pagenumber, pagesize, idlist, odhtagfilter, active, odhactive, source, wineid, companyid, fields, language, langfilter, updatefrom, seed, rawfilter, rawsort, publishedon, searchfilter, removenullvalues, options).then((request) => request(this.axios, this.basePath));
+    }
 }
