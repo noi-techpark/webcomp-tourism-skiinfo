@@ -16,8 +16,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     >
       <div class="container py-4 d-flex flex-direction-row align-items-stretch" style="min-height: 100vh">
         <item-detail
-          v-if="detailContentId"
-          :content-id="detailContentId"
+          v-if="item"
+          :item="item"
           :language="language"
           @close="closeDetail"
         />
@@ -46,6 +46,7 @@ import VueI18n from 'vue-i18n';
 import messagesEn from '@/assets/locales/en.json';
 import messagesDe from '@/assets/locales/de.json';
 import messagesIt from '@/assets/locales/it.json';
+import { SkiAreaLinked } from './api/models';
 
 Vue.use(VueI18n);
 
@@ -108,9 +109,9 @@ export default {
   },
   data() {
     const data: {
-      detailContentId: string,
+      item: SkiAreaLinked | null,
     } = {
-      detailContentId: null,
+      item: null,
     };
 
     return data;
@@ -142,11 +143,11 @@ export default {
     },
   },
   methods: {
-    showDetail(detailContentId: number) {
-      this.detailContentId = detailContentId;
+    showDetail(item: SkiAreaLinked) {
+      this.item = item;
     },
     closeDetail() {
-      this.detailContentId = null;
+      this.item = null;
     }
   },
 };

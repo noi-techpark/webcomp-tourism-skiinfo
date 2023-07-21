@@ -25,7 +25,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <div
           v-for="item of items"
           :key="item.Id"
-          @click.prevent="showDetail(item.Id)"
+          @click.prevent="showDetail(item)"
           class="col-12 col-lg-6"
         >
           <div class="card border-0 rounded-4 overflow-hidden shadow pointer h-100">
@@ -149,8 +149,8 @@ export default {
     goToPage(pageNum: number) {
       this.currentPage = pageNum;
     },
-    showDetail(contentId: string) {
-      this.$emit('show-detail', contentId);
+    showDetail(item: SkiAreaLinked) {
+      this.$emit('show-detail', item);
     },
     searchSkiAreaList() {
       this.loadSkiAreaList(1);
