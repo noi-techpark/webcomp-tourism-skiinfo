@@ -24,25 +24,24 @@ export default Vue.extend({
   props: {
     item: {
       type: Object as PropType<SkiAreaLinked>,
-      required: true
+      required: true,
     },
     language: {
       type: String,
       required: false,
-      default: "en"
-    }
+      default: 'en',
+    },
   },
   data() {
     const data: {
-      slopes: ODHActivityPoiLinked[] | null,
+      slopes: ODHActivityPoiLinked[] | null;
     } = {
       slopes: null,
     };
 
     return data;
   },
-  computed: {
-  },
+  computed: {},
   created() {
     this.loadSlopes();
   },
@@ -50,16 +49,56 @@ export default Vue.extend({
     loadSlopes() {
       if (!this.item.Id) return;
       new ODHActivityPoiApi()
-        .v1ODHActivityPoiGet(this.language,
-        1, 1000, undefined, undefined, undefined, undefined, undefined, undefined, undefined, this.language, "ska" + this.item.Id, undefined, undefined,
-        "pisten", undefined, undefined, true, undefined, undefined, undefined, undefined, undefined, undefined,undefined,undefined,undefined,undefined,
-        undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, false, undefined)
+        .v1ODHActivityPoiGet(
+          this.language,
+          1,
+          1000,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          this.language,
+          'ska' + this.item.Id,
+          undefined,
+          undefined,
+          'pisten',
+          undefined,
+          undefined,
+          true,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          false,
+          undefined
+        )
         .then((value) => {
-          this.slopes = !value.data.Items || value.data.Items.length === 0
-            ? null
-            : value.data.Items
+          this.slopes =
+            !value.data.Items || value.data.Items.length === 0
+              ? null
+              : value.data.Items;
         });
     },
-  }
+  },
 });
 </script>

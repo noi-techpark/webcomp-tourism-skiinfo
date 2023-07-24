@@ -19,7 +19,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
   components: {
-    ArrowIconLeft
-  }
+    ArrowIconLeft,
+  },
 });
 </script>

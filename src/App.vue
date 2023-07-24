@@ -7,14 +7,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <template>
   <div>
     <head>
-      <meta name="description" content="List of all datasets available through the Open Data Hub metadata API">
-      <link rel="stylesheet" :href="fontUrl">
+      <meta
+        name="description"
+        content="List of all datasets available through the Open Data Hub metadata API"
+      />
+      <link rel="stylesheet" :href="fontUrl" />
     </head>
-    <body
-      data-bs-theme="light"
-      :style="`font-family: ${fontFamily}`"
-    >
-      <div class="container py-4 d-flex flex-direction-row align-items-stretch" style="min-height: 100vh">
+    <body data-bs-theme="light" :style="`font-family: ${fontFamily}`">
+      <div
+        class="container py-4 d-flex flex-direction-row align-items-stretch"
+        style="min-height: 100vh"
+      >
         <item-detail
           v-if="item"
           :item="item"
@@ -104,20 +107,20 @@ export default Vue.extend({
     },
     fontUrl: {
       type: String,
-      default: "https://fonts.testingmachine.eu/open-sans/style.css",
+      default: 'https://fonts.testingmachine.eu/open-sans/style.css',
     },
     fontName: {
       type: String,
-      default: "Open Sans",
+      default: 'Open Sans',
     },
   },
   data() {
     const data: {
-      item: SkiAreaLinked | null,
-      currentPage: number
+      item: SkiAreaLinked | null;
+      currentPage: number;
     } = {
       item: null,
-      currentPage: 1
+      currentPage: 1,
     };
 
     return data;
@@ -134,11 +137,9 @@ export default Vue.extend({
         : [];
     },
     fontFamily(): string[] {
-      const fallbacks = ["Avenir", "Helvetica", "Arial", "sans-serif"];
-      return this.fontName
-        ? [this.fontName, ...fallbacks]
-        : fallbacks
-    }
+      const fallbacks = ['Avenir', 'Helvetica', 'Arial', 'sans-serif'];
+      return this.fontName ? [this.fontName, ...fallbacks] : fallbacks;
+    },
   },
   watch: {
     language: {
@@ -146,7 +147,7 @@ export default Vue.extend({
       handler(value) {
         this.$i18n.locale = value;
       },
-    }
+    },
   },
   methods: {
     showDetail(item: SkiAreaLinked) {
@@ -169,7 +170,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import "./assets/scss/styles.scss";
+@import './assets/scss/styles.scss';
 
 #app {
   -webkit-font-smoothing: antialiased;

@@ -28,40 +28,59 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           @click.prevent="showDetail(item)"
           class="col-12 col-lg-6"
         >
-          <div class="card border-0 rounded-4 overflow-hidden shadow pointer h-100">
+          <div
+            class="card border-0 rounded-4 overflow-hidden shadow pointer h-100"
+          >
             <div class="d-flex flex-row align-items-center gap-3">
-              <div style="height: 110px; width: 110px" class="ratio ratio-1x1 flex-shrink-0">
+              <div
+                style="height: 110px; width: 110px"
+                class="ratio ratio-1x1 flex-shrink-0"
+              >
                 <POIPlaceholder
-                  v-if="enablePlaceholder && (!getImage(item))"
+                  v-if="enablePlaceholder && !getImage(item)"
                   class="object-fit-cover"
                 ></POIPlaceholder>
                 <img v-else class="object-fit-cover" :src="getImage(item)" />
               </div>
 
-              <div class="flex-shrink-1 text-truncate" >
+              <div class="flex-shrink-1 text-truncate">
                 <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
                 <div
                   class="text-truncate"
-                  v-for="info, i of getShortInfo(item)"
+                  v-for="(info, i) of getShortInfo(item)"
                   :key="i"
                   :title="info"
-                >{{ info }}</div>
+                >
+                  {{ info }}
+                </div>
               </div>
 
               <div class="flex-grow-1 flex-shrink-0 px-2 text-end">
-                <arrow-icon-right height="30" width="30" class="text-black" viewBox="0 0 24 24"/>
+                <arrow-icon-right
+                  height="30"
+                  width="30"
+                  class="text-black"
+                  viewBox="0 0 24 24"
+                />
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </div>
 
-    <div v-else-if="isLoading" class="flex-grow-1 d-flex align-items-center justify-content-center">
+    <div
+      v-else-if="isLoading"
+      class="flex-grow-1 d-flex align-items-center justify-content-center"
+    >
       <spinner></spinner>
     </div>
-    <div class="flex-grow-1 d-flex align-items-center justify-content-center" v-else>{{ $t('noResults') }}</div>
+    <div
+      class="flex-grow-1 d-flex align-items-center justify-content-center"
+      v-else
+    >
+      {{ $t('noResults') }}
+    </div>
     <paging
       :current-page="currentPage"
       :total-pages="totalPages"
@@ -118,19 +137,19 @@ export default Vue.extend({
     enablePlaceholder: {
       type: Boolean,
       default: true,
-    }
+    },
   },
   data() {
     const data: {
-      items: SkiAreaLinked[],
-      totalPages: number,
-      isLoading: boolean,
-      searchInput: string
+      items: SkiAreaLinked[];
+      totalPages: number;
+      isLoading: boolean;
+      searchInput: string;
     } = {
       items: [],
       totalPages: 0,
       isLoading: false,
-      searchInput: ''
+      searchInput: '',
     };
 
     return data;
@@ -139,7 +158,9 @@ export default Vue.extend({
     this.loadSkiAreaList(this.currentPage);
   },
   watch: {
-    currentPage: function (val) { this.loadSkiAreaList(val) }
+    currentPage: function(val) {
+      this.loadSkiAreaList(val);
+    },
   },
   methods: {
     nextPage() {
@@ -176,13 +197,17 @@ export default Vue.extend({
           undefined,
           undefined,
           this.searchInput,
-          undefined, undefined, undefined,
+          undefined,
+          undefined,
+          undefined,
           undefined,
           undefined,
           false
         )
         .then((value) => {
-          const apiResponse = value.data as unknown as APIResponse<SkiAreaLinked>;
+          const apiResponse = (value.data as unknown) as APIResponse<
+            SkiAreaLinked
+          >;
           this.items = apiResponse?.Items ?? [];
           this.$emit('change-current-page', apiResponse?.CurrentPage);
           this.totalPages = apiResponse?.TotalPages;
@@ -203,18 +228,17 @@ export default Vue.extend({
       return shortInfo.filter((info) => info != null);
     },
     getLocationInfo(item: SkiAreaLinked) {
-      let region = "";
-      let tv = "";
+      let region = '';
+      let tv = '';
 
       if (item?.LocationInfo?.RegionInfo?.Name?.[this.language]) {
         region = item?.LocationInfo?.RegionInfo?.Name[this.language];
       }
-      if (item?.LocationInfo?.TvInfo?.Name?.[this.language] ) {
+      if (item?.LocationInfo?.TvInfo?.Name?.[this.language]) {
         tv = ' - ' + item?.LocationInfo?.TvInfo?.Name[this.language];
       }
 
-      const location =
-          this.$t('location') + ': ' + region + tv;
+      const location = this.$t('location') + ': ' + region + tv;
 
       return location;
     },
@@ -225,7 +249,7 @@ export default Vue.extend({
       return item.ImageGallery?.[0].ImageUrl
         ? item.ImageGallery?.[0].ImageUrl + '&height=200'
         : null;
-    }
+    },
   },
 });
 </script>

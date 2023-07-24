@@ -17,13 +17,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <!-- Lift Count -->
       <div v-if="item.LiftCount" class="col-4 d-flex align-items-center gap-1">
         <highlight class="highlight icon"></highlight>
-          <span>{{ $t('props.LiftCount') }}:</span>
-          <span class="fw-bold">{{ item.LiftCount }}</span>
+        <span>{{ $t('props.LiftCount') }}:</span>
+        <span class="fw-bold">{{ item.LiftCount }}</span>
       </div>
 
       <!-- Total Slope KM with colors -->
       <div v-if="hasSlopeInfo" class="col-4 d-flex align-items-center gap-1">
-        <distance-length  class="distance-length icon"></distance-length>
+        <distance-length class="distance-length icon"></distance-length>
         <span>{{ $t('props.TotalSlopeKm') }}:</span>
         <span class="fw-bold">{{ item.TotalSlopeKm }} km</span> (
         <span style="color:blue">{{ item.SlopeKmBlue }}</span> /
@@ -32,17 +32,26 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       </div>
 
       <!-- Altitude -->
-      <div v-if="item.AltitudeTo && item.AltitudeFrom" class="col-4 d-flex align-items-center gap-1">
-        <altitude-difference class="altitude-difference icon"></altitude-difference>
+      <div
+        v-if="item.AltitudeTo && item.AltitudeFrom"
+        class="col-4 d-flex align-items-center gap-1"
+      >
+        <altitude-difference
+          class="altitude-difference icon"
+        ></altitude-difference>
         <span>{{ $t('props.Altitude') }}:</span>
-        <span class="fw-bold">{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span>
+        <span class="fw-bold"
+          >{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span
+        >
       </div>
 
       <!-- Location info -->
       <div v-if="locationInfo" class="col-4 d-flex align-items-center gap-1">
         <map-icon class="map-icon icon"></map-icon>
         <span>{{ $t('location') }}: </span>
-        <span class="fw-bold text-truncate" :title="locationInfo">{{ locationInfo }}</span>
+        <span class="fw-bold text-truncate" :title="locationInfo">{{
+          locationInfo
+        }}</span>
       </div>
 
       <!-- Contact info -->
@@ -64,18 +73,19 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <!-- Google Maps Link -->
       <div v-if="googleMapsLink" class="col-4 d-flex align-items-center gap-1">
         <map-icon class="map-icon icon"></map-icon>
-          <a :href="googleMapsLink" target="_blank">Google Maps</a>
+        <a :href="googleMapsLink" target="_blank">Google Maps</a>
       </div>
 
       <!-- Open / Closed -->
-      <div v-if="isOpen != undefined" class="col-4 d-flex align-items-center gap-1">
+      <div
+        v-if="isOpen != undefined"
+        class="col-4 d-flex align-items-center gap-1"
+      >
         <calendar class="calendar icon"></calendar>
-          <span v-if="isOpen" style="color:#9BC320">{{
-            $t(`scheduleTypes.1`)
-          }}</span>
-          <span v-else style="color:red">{{
-            $t(`scheduleTypes.2`)
-          }}</span>
+        <span v-if="isOpen" style="color:#9BC320">{{
+          $t(`scheduleTypes.1`)
+        }}</span>
+        <span v-else style="color:red">{{ $t(`scheduleTypes.2`) }}</span>
       </div>
     </div>
     <div v-if="detail && detail.BaseText" v-html="detail.BaseText"></div>
@@ -106,44 +116,45 @@ export default Vue.extend({
   props: {
     item: {
       type: Object as PropType<SkiAreaLinked>,
-      required: true
+      required: true,
     },
     language: {
       type: String,
       required: false,
-      default: "en"
-    }
+      default: 'en',
+    },
   },
   computed: {
     skiRegionName(): string | undefined {
       return this.item.SkiRegionName?.[this.language];
     },
     locationInfo(): string | undefined {
-      let region = "";
-      let tv = "";
+      let region = '';
+      let tv = '';
 
       if (this.item?.LocationInfo?.RegionInfo?.Name?.[this.language]) {
         region = this.item?.LocationInfo?.RegionInfo?.Name[this.language];
       }
-      if (this.item?.LocationInfo?.TvInfo?.Name?.[this.language] ) {
+      if (this.item?.LocationInfo?.TvInfo?.Name?.[this.language]) {
         tv = ' - ' + this.item?.LocationInfo?.TvInfo?.Name[this.language];
       }
 
       const location = region + tv;
 
-      return location !== "" ? location : undefined;
+      return location !== '' ? location : undefined;
     },
     contactInfos(): ContactInfos | undefined {
       return this.item?.ContactInfos?.[this.language];
     },
     googleMapsLink(): string | undefined {
-      return this.item?.GpsPoints?.position?.Latitude && this.item?.GpsPoints?.position?.Longitude
+      return this.item?.GpsPoints?.position?.Latitude &&
+        this.item?.GpsPoints?.position?.Longitude
         ? `https://www.google.com/maps/search/?api=1&query=${this.item.GpsPoints['position']?.Latitude},${this.item.GpsPoints['position']?.Longitude}`
         : undefined;
     },
     isOpen(): boolean | undefined {
       const schedules = this.item.OperationSchedule?.filter((s) => {
-        return ((s.Type === '1' || s.Type === '2' ||  s.Type === '3'));
+        return s.Type === '1' || s.Type === '2' || s.Type === '3';
       });
 
       const schedule = schedules?.[0];
@@ -156,12 +167,13 @@ export default Vue.extend({
     },
     hasSlopeInfo(): boolean {
       return (
-        this.item.SlopeKmBlack != null &&
-        this.item.SlopeKmRed != null &&
-        this.item.SlopeKmBlue != null &&
-        this.item.TotalSlopeKm != null
-      ) ?? false;
-    }
-  }
+        (this.item.SlopeKmBlack != null &&
+          this.item.SlopeKmRed != null &&
+          this.item.SlopeKmBlue != null &&
+          this.item.TotalSlopeKm != null) ??
+        false
+      );
+    },
+  },
 });
 </script>
