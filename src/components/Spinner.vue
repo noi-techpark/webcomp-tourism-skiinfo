@@ -11,9 +11,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 </template>
 
 <script>
-export default {
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'Spinner',
-};
+});
 </script>
 
 <style scoped lang="scss">

@@ -36,8 +36,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <script>
 import ArrowIconLeft from '@/assets/img/arrow_left.svg';
 import ArrowIconRight from '@/assets/img/arrow_right.svg';
+import Vue from 'vue';
 
-export default {
+export default Vue.extend({
   components: { ArrowIconLeft, ArrowIconRight },
   name: 'ImageDetail',
   props: {
@@ -71,7 +72,7 @@ export default {
       this.$emit('last-image');
     },
   },
-};
+});
 </script>
 
 <style scoped>

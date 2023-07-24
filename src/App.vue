@@ -24,8 +24,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <items-list
           v-else
           @show-detail="showDetail"
+          @next-page="nextPage"
+          @last-page="lastPage"
+          @go-to-page="goToPage"
           :language="language"
           :pageSize="pageSize"
+          :current-page="currentPage"
           :loc-filter="locFilter"
           :source-filter="sourceFilter"
           :with-image-only="withImageOnly"
@@ -59,7 +63,7 @@ const i18n = new VueI18n({
   },
 });
 
-export default {
+export default Vue.extend({
   i18n,
   components: {
     ItemsList,
@@ -110,8 +114,10 @@ export default {
   data() {
     const data: {
       item: SkiAreaLinked | null,
+      currentPage: number
     } = {
       item: null,
+      currentPage: 1
     };
 
     return data;
@@ -140,7 +146,7 @@ export default {
       handler(value) {
         this.$i18n.locale = value;
       },
-    },
+    }
   },
   methods: {
     showDetail(item: SkiAreaLinked) {
@@ -148,9 +154,18 @@ export default {
     },
     closeDetail() {
       this.item = null;
-    }
+    },
+    nextPage() {
+      this.currentPage++;
+    },
+    lastPage() {
+      this.currentPage--;
+    },
+    goToPage(pageNum: number) {
+      this.currentPage = pageNum;
+    },
   },
-};
+});
 </script>
 
 <style lang="scss">

@@ -72,7 +72,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 </template>
 
 <script>
-export default {
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'Paging',
   props: {
     currentPage: {
@@ -95,5 +97,5 @@ export default {
       this.$emit('go-to-page', pageNum);
     },
   },
-};
+});
 </script>

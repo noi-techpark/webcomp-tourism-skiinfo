@@ -32,17 +32,17 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <div class="d-flex flex-row align-items-center gap-3">
               <div style="height: 110px; width: 110px" class="ratio ratio-1x1 flex-shrink-0">
                 <POIPlaceholder
-                  v-if="enablePlaceholder && (!item.ImageGallery || item.ImageGallery.length === 0)"
+                  v-if="enablePlaceholder && (!getImage(item))"
                   class="object-fit-cover"
                 ></POIPlaceholder>
-                <img v-else class="object-fit-cover" :src="item.ImageGallery[0].ImageUrl + '&height=200'" />
+                <img v-else class="object-fit-cover" :src="getImage(item)" />
               </div>
 
               <div class="flex-shrink-1 text-truncate" >
                 <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
                 <div
                   class="text-truncate"
-                  v-for="info, i of getSkiAreaShortInfo(item)"
+                  v-for="info, i of getShortInfo(item)"
                   :key="i"
                   :title="info"
                 >{{ info }}</div>
@@ -73,6 +73,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
 import { CommonApi } from '@/api';
 import { APIResponse } from '@/types';
 import Paging from '@/components/Paging.vue';
@@ -82,7 +83,7 @@ import Spinner from '@/components/Spinner.vue';
 import SearchIcon from '@/assets/img/ic_search.svg';
 import { SkiAreaLinked } from '@/api/models/ski-area-linked';
 
-export default {
+export default Vue.extend({
   components: {
     Spinner,
     Paging,
@@ -99,6 +100,9 @@ export default {
       type: Number,
       default: 20,
     },
+    currentPage: {
+      type: Number,
+    },
     locFilter: {
       type: String,
       default: null,
@@ -114,21 +118,19 @@ export default {
     enablePlaceholder: {
       type: Boolean,
       default: true,
-    },
+    }
   },
   data() {
     const data: {
       items: SkiAreaLinked[],
       totalPages: number,
       isLoading: boolean,
-      searchInput: string,
-      currentPage: number
+      searchInput: string
     } = {
       items: [],
       totalPages: 0,
       isLoading: false,
-      searchInput: '',
-      currentPage: 1
+      searchInput: ''
     };
 
     return data;
@@ -141,13 +143,13 @@ export default {
   },
   methods: {
     nextPage() {
-      this.currentPage + 1;
+      this.$emit('next-page');
     },
     lastPage() {
-      this.currentPage - 1;
+      this.$emit('last-page');
     },
     goToPage(pageNum: number) {
-      this.currentPage = pageNum;
+      this.$emit('go-to-page', pageNum);
     },
     showDetail(item: SkiAreaLinked) {
       this.$emit('show-detail', item);
@@ -162,7 +164,7 @@ export default {
         .v1SkiAreaGet(
           pageNum,
           this.pageSize,
-          this.contentIdList == null ? undefined : this.contentIdList,
+          undefined,
           undefined,
           true,
           undefined,
@@ -187,12 +189,12 @@ export default {
           this.isLoading = false;
         });
     },
-    getSkiAreaShortInfo(item: SkiAreaLinked): string[] {
+    getShortInfo(item: SkiAreaLinked): string[] {
       const shortInfo = [];
 
-      shortInfo.push(this.getSkiAreaLocationInfo(item));
+      shortInfo.push(this.getLocationInfo(item));
 
-      if (item?.SkiRegionName[this.language]) {
+      if (item?.SkiRegionName?.[this.language]) {
         const skiregion =
           this.$t('skiregion') + ': ' + item.SkiRegionName[this.language];
         shortInfo.push(skiregion);
@@ -200,14 +202,14 @@ export default {
 
       return shortInfo.filter((info) => info != null);
     },
-    getSkiAreaLocationInfo(item: SkiAreaLinked) {
+    getLocationInfo(item: SkiAreaLinked) {
       let region = "";
       let tv = "";
 
-      if (item?.LocationInfo?.RegionInfo?.Name[this.language]) {
+      if (item?.LocationInfo?.RegionInfo?.Name?.[this.language]) {
         region = item?.LocationInfo?.RegionInfo?.Name[this.language];
       }
-      if (item?.LocationInfo?.TvInfo?.Name[this.language] ) {
+      if (item?.LocationInfo?.TvInfo?.Name?.[this.language] ) {
         tv = ' - ' + item?.LocationInfo?.TvInfo?.Name[this.language];
       }
 
@@ -219,6 +221,11 @@ export default {
     getTitle(item: SkiAreaLinked, language: string) {
       return item?.Detail?.[language]?.Title ?? '';
     },
+    getImage(item: SkiAreaLinked) {
+      return item.ImageGallery?.[0].ImageUrl
+        ? item.ImageGallery?.[0].ImageUrl + '&height=200'
+        : null;
+    }
   },
-};
+});
 </script>
