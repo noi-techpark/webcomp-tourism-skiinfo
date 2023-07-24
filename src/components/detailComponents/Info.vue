@@ -26,9 +26,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <distance-length class="distance-length icon"></distance-length>
         <span>{{ $t('props.TotalSlopeKm') }}:</span>
         <span class="fw-bold">{{ item.TotalSlopeKm }} km</span> (
-        <span style="color:blue">{{ item.SlopeKmBlue }}</span> /
-        <span style="color:red">{{ item.SlopeKmRed }}</span> /
-        <span style="color:black">{{ item.SlopeKmBlack }}</span> )
+        <span class="text-slope-blue">{{ item.SlopeKmBlue }}</span> /
+        <span class="text-slope-red">{{ item.SlopeKmRed }}</span> /
+        <span class="text-slope-black">{{ item.SlopeKmBlack }}</span> )
       </div>
 
       <!-- Altitude -->
@@ -57,7 +57,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <!-- Contact info -->
       <div v-if="contactInfos" class="col-4 d-flex align-items-center gap-1">
         <external-link class=""></external-link>
-        <span>{{ $t('web') }}: </span>
         <a :href="contactInfos.Url" target="_blank">
           Homepage
         </a>
@@ -82,10 +81,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         class="col-4 d-flex align-items-center gap-1"
       >
         <calendar class="calendar icon"></calendar>
-        <span v-if="isOpen" style="color:#9BC320">{{
+        <span v-if="isOpen" class="text-open-green">{{
           $t(`scheduleTypes.1`)
         }}</span>
-        <span v-else style="color:red">{{ $t(`scheduleTypes.2`) }}</span>
+        <span v-else class="text-closed-red">{{ $t(`scheduleTypes.2`) }}</span>
       </div>
     </div>
     <div v-if="detail && detail.BaseText" v-html="detail.BaseText"></div>

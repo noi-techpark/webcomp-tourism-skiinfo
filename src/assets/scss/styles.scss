@@ -1,20 +1,27 @@
-$box-shadow: 0 0.3rem 1.5rem rgba(black, .15);
-$box-shadow-sm: 0 0.1rem 0.8rem rgba(black, .15);
+$box-shadow: 0 0.3rem 1.5rem rgba(black, 0.15);
+$box-shadow-sm: 0 0.1rem 0.8rem rgba(black, 0.15);
 
 $nav-underline-link-active-color: rgb(255, 255, 255);
 $nav-link-color: rgb(255, 255, 255);
 $nav-link-hover-color: rgb(255, 255, 255);
 $nav-link-font-size: 1.2rem;
 
+$link-color: #000;
+$link-hover-color: rgba(0, 0, 0, 0.8);
+
 // Import all of Bootstrap's CSS
-@import "bootstrap/scss/bootstrap";
+@import 'bootstrap/scss/bootstrap';
 
 .pointer {
   cursor: pointer;
 }
 
 .gradient-black-transparent {
-  background: linear-gradient(0deg, rgba(32,34,54,1) 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(
+    0deg,
+    rgba(32, 34, 54, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .s-rem {
@@ -26,3 +33,92 @@ $nav-link-font-size: 1.2rem;
   height: 1em;
   width: 1em;
 }
+
+.border-xl {
+  border-width: 0.5rem !important;
+}
+
+$slope-text-blue: rgb(66, 135, 245);
+$slope-text-red: rgb(245, 66, 66);
+$slope-text-black: rgb(0, 0, 0);
+$slope-text-other: rgb(0, 0, 0);
+
+$slope-border-blue: rgba(66, 135, 245, 0.4);
+$slope-border-red: rgba(245, 66, 66, 0.4);
+$slope-border-black: rgba(0, 0, 0, 0.3);
+$slope-border-other: rgba(0, 0, 0, 0.1);
+
+.text-slope-blue {
+  color: $slope-text-blue !important;
+}
+
+.text-slope-red {
+  color: $slope-text-red !important;
+}
+
+.text-slope-black {
+  color: $slope-text-black !important;
+}
+
+.text-slope-other {
+  color: $slope-text-other !important;
+}
+
+.border-slope-blue {
+  border-color: $slope-border-blue !important;
+}
+
+.border-slope-red {
+  border-color: $slope-border-red !important;
+}
+
+.border-slope-black {
+  border-color: $slope-border-black !important;
+}
+
+.border-slope-other {
+  border-color: $slope-border-other !important;
+}
+
+$closed-red: $slope-text-red;
+$open-green: #9bc320;
+
+.text-closed-red {
+  color: $closed-red !important;
+}
+
+.text-open-green {
+  color: $open-green !important;
+}
+
+// .marker-blue::before {
+//   background: $slope-color-blue;
+// }
+
+// .marker-red::before {
+//   background: $slope-color-red;
+// }
+
+// .marker-black::before {
+//   background: $slope-color-black;
+// }
+
+// .marker-other::before {
+//   background: $slope-color-other;
+// }
+
+// .marker {
+//   position: relative;
+//   transform-style: preserve-3d;
+//   max-width: fit-content;
+
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     width: 100%;
+//     height: 50%;
+//     left: 25%;
+//     bottom: 0;
+//     transform: skew(-12deg) translateX(-50%) translateZ(-1px);
+//   }
+// }

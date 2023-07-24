@@ -6,8 +6,22 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div>
-    <div v-if="slopes" class="row">
-      <!-- <div v-for="slopeColors" :key="color" class="col-4"></div> -->
+    <div v-if="slopeColors" class="row">
+      <div v-for="{ color, slopes } in slopeColors" :key="color" class="col">
+        <div
+          class="d-flex flex-column gap-3 pt-3 border-top border-xl"
+          :class="`border-slope-${color}`"
+        >
+          <div v-for="slope in slopes" :key="slope.Id">
+            <OpenClosed :open="slope.IsOpen">
+              <h2 class="fs-4 mb-1">
+                {{ getDetail(slope).Title }}
+              </h2>
+              <small>{{ getinfo(slope).join(' | ') }}</small>
+            </OpenClosed>
+          </div>
+        </div>
+      </div>
     </div>
     <div v-else class="text-center">
       <span>No slope data available</span>
@@ -19,8 +33,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 import { ODHActivityPoiApi } from '@/api/api';
 import { ODHActivityPoiLinked, SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
+import OpenClosed from './OpenClosed.vue';
 
 export default Vue.extend({
+  components: {
+    OpenClosed,
+  },
   props: {
     item: {
       type: Object as PropType<SkiAreaLinked>,
@@ -41,11 +59,56 @@ export default Vue.extend({
 
     return data;
   },
-  computed: {},
+  computed: {
+    slopeColors(): { color: string; slopes: ODHActivityPoiLinked[] }[] | null {
+      const colorMap: Record<string, string> = {
+        '2': 'blue',
+        '4': 'red',
+        '6': 'black',
+        other: 'other',
+      };
+
+      if (!this.slopes) return null;
+
+      return this.slopes
+        .reduce<{ color: string; slopes: ODHActivityPoiLinked[] }[]>(
+          (acc, slope) => {
+            const colorCode = slope.Ratings?.Difficulty ?? 'other';
+
+            const colorEntry = acc.find((e) => e.color === colorCode);
+            if (colorEntry) {
+              colorEntry.slopes.push(slope);
+            } else {
+              acc.push({
+                color: colorCode,
+                slopes: [slope],
+              });
+            }
+
+            return acc;
+          },
+          []
+        )
+        .sort(({ color: a }, { color: b }) => (a > b ? 1 : a < b ? -1 : 0))
+        .map((e) => {
+          e.color = colorMap[e.color];
+          return e;
+        });
+    },
+  },
   created() {
     this.loadSlopes();
   },
   methods: {
+    getDetail(slope: ODHActivityPoiLinked) {
+      return slope.Detail?.[this.language] ?? {};
+    },
+    getinfo(slope: ODHActivityPoiLinked): string[] {
+      return [
+        slope.DistanceLength ? slope.DistanceLength + ' m' : '',
+        slope.AltitudeDifference ? slope.AltitudeDifference + ' hm' : '',
+      ].filter((e) => e !== '');
+    },
     loadSlopes() {
       if (!this.item.Id) return;
       new ODHActivityPoiApi()

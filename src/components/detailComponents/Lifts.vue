@@ -6,18 +6,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div>
-    <div v-if="lifts" class="row g-2">
-      <div class="col-6 p-2" v-for="lift in lifts" :key="lift.Id">
-        <div class="d-flex gap-2">
-          <Tick class="fs-3 s-em text-success" v-if="lift.IsOpen" />
-          <Cross class="fs-3 s-em text-danger" v-else />
-          <div>
-            <h2 class="fs-4 mb-1">
-              {{ lift.Shortname }}
-            </h2>
-            <small>{{ getinfo(lift).join(' | ') }}</small>
-          </div>
-        </div>
+    <div v-if="lifts" class="row gy-3">
+      <div class="col-6" v-for="lift in lifts" :key="lift.Id">
+        <OpenClosed :open="lift.IsOpen">
+          <h2 class="fs-4 mb-1">
+            {{ lift.Shortname }}
+          </h2>
+          <small>{{ getinfo(lift).join(' | ') }}</small>
+        </OpenClosed>
       </div>
     </div>
     <div v-else class="text-center">
@@ -30,13 +26,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 import { ODHActivityPoiApi, TagApi } from '@/api';
 import { ODHActivityPoiLinked, SkiAreaLinked, TagLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
-import Tick from '@/assets/img/ic_tick.svg';
-import Cross from '@/assets/img/ic_cross.svg';
+import OpenClosed from './OpenClosed.vue';
 
 export default Vue.extend({
   components: {
-    Tick,
-    Cross,
+    OpenClosed,
   },
   props: {
     item: {
@@ -151,6 +145,7 @@ export default Vue.extend({
       return [
         this.getLiftTypes(lift)[0]?.TagName?.[this.language] ?? '',
         lift.DistanceLength ? lift.DistanceLength + ' m' : '',
+        lift.AltitudeDifference ? lift.AltitudeDifference + ' hm' : '',
       ].filter((e) => e !== '');
     },
   },
