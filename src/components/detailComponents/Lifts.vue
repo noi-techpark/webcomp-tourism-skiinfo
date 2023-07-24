@@ -88,11 +88,11 @@ export default Vue.extend({
     getLiftTypes(lift: ODHActivityPoiLinked): TagLinked[] {
       return this.allLiftTypes?.filter((liftType: TagLinked) => lift.Tags?.some((tag) => tag.Id === liftType.Id)) ?? [];
     },
-    getinfo(lift: ODHActivityPoiLinked): Record<string, any> {
+    getinfo(lift: ODHActivityPoiLinked): string[] {
       return [
-        this.getLiftTypes(lift)[0]?.TagName?.[this.language],
-        lift.DistanceLength ? lift.DistanceLength + " m" : null, 
-      ].filter((e) => e);
+        this.getLiftTypes(lift)[0]?.TagName?.[this.language] ?? "",
+        lift.DistanceLength ? lift.DistanceLength + " m" : "", 
+      ].filter((e) => e !== "");
     }
   }
 });
