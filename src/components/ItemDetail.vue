@@ -65,6 +65,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             :item="item"
             :language="language"
           />
+
+          <Weather
+            class="d-flex flex-column gap-4"
+            :class="selectedMenu !== 'Weather' ? 'd-none' : ''"
+            :item="item"
+            :language="language"
+          />
         </div>
         <div>
           <small class="d-block mt-4">
@@ -82,6 +89,7 @@ import Close from './detailComponents/Close.vue';
 import Info from './detailComponents/Info.vue';
 import Lifts from './detailComponents/Lifts.vue';
 import Slopes from './detailComponents/Slopes.vue';
+import Weather from './detailComponents/Weather.vue';
 import { WeatherApi } from '@/api';
 import {
   Detail,
@@ -100,6 +108,7 @@ export default Vue.extend({
     Info,
     Lifts,
     Slopes,
+    Weather,
   },
   props: {
     item: {
