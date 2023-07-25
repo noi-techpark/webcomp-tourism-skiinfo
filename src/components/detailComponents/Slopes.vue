@@ -8,15 +8,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <div>
     <div v-if="slopeColors" class="row">
       <div v-for="{ color, slopes } in slopeColors" :key="color" class="col">
-        <div
-          class="d-flex flex-column gap-3 pt-3 border-top border-xl"
-          :class="`border-slope-${color}`"
-        >
-          <div v-for="slope in slopes" :key="slope.Id">
-            <OpenClosed :open="slope.IsOpen">
-              <h2 class="fs-4 mb-1">
+        <div class="p-2 rounded" :class="`background-slope-${color}`">
+          <h2 class="fs-3 text-white">
+            {{ color.charAt(0).toUpperCase() + color.slice(1) }}
+          </h2>
+          <div
+            class="d-flex flex-column gap-3 p-3 rounded-1 bg-white shadow-sm"
+          >
+            <OpenClosed
+              v-for="slope in slopes"
+              :key="slope.Id"
+              :open="slope.IsOpen"
+            >
+              <h3 class="fs-4 mb-1">
                 {{ getDetail(slope).Title }}
-              </h2>
+              </h3>
               <small>{{ getinfo(slope).join(' | ') }}</small>
             </OpenClosed>
           </div>
