@@ -16,10 +16,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <div
       v-else-if="item"
-      class="d-flex flex-column rounded-4 shadow overflow-hidden"
+      class="w-100 h-100 d-flex flex-column rounded-4 shadow overflow-hidden"
     >
       <div
-        class="d-flex flex-column align-items-start justify-content-between"
+        class="flex-shrink-0 d-flex flex-column align-items-start justify-content-between"
         :style="titleImage"
       >
         <Close @close="close" />
@@ -43,32 +43,35 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
-      <div class="p-4">
-        <Info
-          class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Info' ? 'd-none' : ''"
-          :item="item"
-          :language="language"
-        />
+      <div class="flex-grow-1 p-4 d-flex flex-column justify-content-between">
+        <div>
+          <Info
+            class="d-flex flex-column gap-4"
+            :class="selectedMenu !== 'Info' ? 'd-none' : ''"
+            :item="item"
+            :language="language"
+          />
 
-        <Slopes
-          class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Slopes' ? 'd-none' : ''"
-          :item="item"
-          :language="language"
-        />
+          <Slopes
+            class="d-flex flex-column gap-4"
+            :class="selectedMenu !== 'Slopes' ? 'd-none' : ''"
+            :item="item"
+            :language="language"
+          />
 
-        <Lifts
-          class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Lifts' ? 'd-none' : ''"
-          :item="item"
-          :language="language"
-        />
-
-        <small class="d-block mt-4">
-          {{ $t('lastChange') }}: {{ item.LastChange }}
-        </small>
-        <small class="d-block"> Opendatahub ID: {{ item.Id }} </small>
+          <Lifts
+            class="d-flex flex-column gap-4"
+            :class="selectedMenu !== 'Lifts' ? 'd-none' : ''"
+            :item="item"
+            :language="language"
+          />
+        </div>
+        <div>
+          <small class="d-block mt-4">
+            {{ $t('lastChange') }}: {{ item.LastChange }}
+          </small>
+          <small class="d-block"> Opendatahub ID: {{ item.Id }} </small>
+        </div>
       </div>
     </div>
   </div>
