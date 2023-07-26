@@ -16,7 +16,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <div
       v-else-if="item"
-      class="w-100 h-100 d-flex flex-column rounded-4 shadow overflow-hidden"
+      class="h-100 d-flex flex-column shadow-sm overflow-y-auto"
+      :class="!fullscreen ? 'rounded-4' : ''"
     >
       <div
         class="flex-shrink-0 d-flex flex-column align-items-start justify-content-between"
@@ -25,9 +26,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <Close @close="close" />
 
         <div
-          class="p-4 w-100 gradient-black-transparent d-flex align-items-end"
+          class="px-4 pt-5 w-100 gradient-white-transparent d-flex align-items-end"
         >
-          <h1 class="mb-0 mt-5 text-white fs-1">{{ itemDetail.Title }}</h1>
+          <h1 class="mb-0 mt-3 fs-1">
+            {{ itemDetail.Title }}
+          </h1>
           <div class="flex-grow-1">
             <nav class="nav nav-underline justify-content-end gap-4">
               <div v-for="menu in menus" :key="menu" class="nav-item">
@@ -43,7 +46,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
-      <div class="flex-grow-1 p-4 d-flex flex-column justify-content-between">
+      <div
+        class="flex-grow-1 p-4 pt-5 d-flex flex-column justify-content-between"
+      >
         <div>
           <Info
             class="d-flex flex-column gap-4"
@@ -127,6 +132,9 @@ export default Vue.extend({
     language: {
       type: String,
       default: 'en',
+    },
+    fullscreen: {
+      type: Boolean,
     },
   },
   data() {
@@ -220,7 +228,7 @@ export default Vue.extend({
       } else {
         return {
           backgroundImage: 'url(' + image.ImageUrl + ') ',
-          height: '400px',
+          height: '300px',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         };

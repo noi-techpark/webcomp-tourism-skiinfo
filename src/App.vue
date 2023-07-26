@@ -15,13 +15,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </head>
     <body data-bs-theme="light" :style="`font-family: ${fontFamily}`">
       <div
-        class="container py-4 d-flex flex-direction-row align-items-stretch"
-        style="min-height: 100vh"
+        class="container-fluid p-0 d-flex flex-direction-row align-items-stretch"
+        :class="fullscreen ? 'vh-100' : 'container py-4'"
       >
         <item-detail
           v-if="item"
           :item="item"
           :language="language"
+          :fullscreen="fullscreen"
           @close="closeDetail"
         />
         <items-list
@@ -112,6 +113,10 @@ export default Vue.extend({
     fontName: {
       type: String,
       default: 'Open Sans',
+    },
+    fullscreen: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {

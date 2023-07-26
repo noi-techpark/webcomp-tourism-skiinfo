@@ -21,41 +21,49 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </div>
 
     <div v-if="items.length > 0" class="flex-grow-1">
-      <div class="row g-3">
+      <div class="row gy-3 mw-100 mx-0">
         <div
           v-for="item of items"
           :key="item.Id"
           @click.prevent="showDetail(item)"
           class="col-12 col-lg-6"
         >
-          <div
-            class="card border-0 rounded-4 overflow-hidden shadow pointer h-100"
-          >
-            <div class="d-flex flex-row align-items-center gap-3">
+          <div class="pointer h-100">
+            <div class="d-flex flex-row align-items-stretch gap-3">
               <div
-                style="height: 110px; width: 110px"
+                style="height: 100px; width: 100px"
                 class="ratio ratio-1x1 flex-shrink-0"
               >
                 <POIPlaceholder
                   v-if="enablePlaceholder && !getImage(item)"
-                  class="object-fit-cover"
+                  class="rounded-1 object-fit-cover"
                 ></POIPlaceholder>
-                <img v-else class="object-fit-cover" :src="getImage(item)" />
+                <img
+                  v-else
+                  class="rounded-1 object-fit-cover"
+                  :src="getImage(item)"
+                />
               </div>
 
-              <div class="flex-shrink-1 text-truncate">
+              <div
+                class="flex-shrink-1 text-truncate d-flex flex-column justify-content-around"
+              >
                 <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
-                <div
-                  class="text-truncate"
-                  v-for="(info, i) of getShortInfo(item)"
-                  :key="i"
-                  :title="info"
-                >
-                  {{ info }}
+                <div>
+                  <div
+                    class="text-truncate"
+                    v-for="(info, i) of getShortInfo(item)"
+                    :key="i"
+                    :title="info"
+                  >
+                    {{ info }}
+                  </div>
                 </div>
               </div>
 
-              <div class="flex-grow-1 flex-shrink-0 px-2 text-end">
+              <div
+                class="flex-grow-1 flex-shrink-0 d-flex align-items-center justify-content-end"
+              >
                 <arrow-icon-right
                   height="30"
                   width="30"

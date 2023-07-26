@@ -1,13 +1,18 @@
 $box-shadow: 0 0.3rem 1.5rem rgba(black, 0.15);
 $box-shadow-sm: 0 0.1rem 0.6rem rgba(black, 0.12);
 
-$nav-underline-link-active-color: rgb(255, 255, 255);
-$nav-link-color: rgb(255, 255, 255);
-$nav-link-hover-color: rgb(255, 255, 255);
+// $nav-underline-link-active-color: rgb(255, 255, 255);
+// $nav-link-color: rgb(255, 255, 255);
+// $nav-link-hover-color: rgb(255, 255, 255);
+$nav-underline-link-active-color: rgba(32, 34, 54, 1);
+$nav-link-color: rgba(32, 34, 54, 1);
+$nav-link-hover-color: rgba(32, 34, 54, 1);
 $nav-link-font-size: 1.2rem;
 
-$link-color: #000;
-$link-hover-color: rgba(0, 0, 0, 0.8);
+$link-color: rgba(32, 34, 54, 1);
+$link-hover-color: rgba(32, 34, 54, 0.8);
+
+$body-color: rgba(32, 34, 54, 1);
 
 // Import all of Bootstrap's CSS
 @import 'bootstrap/scss/bootstrap';
@@ -16,10 +21,17 @@ $link-hover-color: rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
 
-.gradient-black-transparent {
+.gradient-white-transparent {
   background: linear-gradient(
     0deg,
-    rgba(32, 34, 54, 1) 0%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.95) 10%,
+    rgba(255, 255, 255, 0.9) 20%,
+    rgba(255, 255, 255, 0.8) 30%,
+    rgba(255, 255, 255, 0.7) 40%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.15) 80%,
+    rgba(255, 255, 255, 0.05) 90%,
     rgba(255, 255, 255, 0) 100%
   );
 }
