@@ -6,9 +6,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div>
-    <div v-if="slopeColors" class="row">
-      <div v-for="{ color, slopes } in slopeColors" :key="color" class="col">
-        <div class="p-2 rounded" :class="`background-slope-${color}`">
+    <div v-if="slopeColors" class="row gy-3">
+      <div
+        v-for="{ color, slopes } in slopeColors"
+        :key="color"
+        class="col-12 col-lg-4"
+      >
+        <div class="p-2 rounded-1" :class="`background-slope-${color}`">
           <h2 class="fs-3 text-white">
             {{ color.charAt(0).toUpperCase() + color.slice(1) }}
           </h2>

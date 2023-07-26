@@ -23,19 +23,22 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         class="flex-shrink-0 d-flex flex-column align-items-start justify-content-between"
         :style="titleImage"
       >
-        <Close @close="close" />
+        <Close class="mt-4 ms-4" @close="close" />
 
         <div
-          class="px-4 pt-5 w-100 gradient-white-transparent d-flex align-items-end"
+          class="px-4 px-lg-4 pt-lg-5 w-100 gradient-white-transparent d-flex justify-content-between align-items-end"
         >
           <h1 class="mb-0 mt-3 fs-1">
             {{ itemDetail.Title }}
           </h1>
-          <div class="flex-grow-1">
-            <nav class="nav nav-underline justify-content-end gap-4">
+          <div style="flex-basis: 10%"></div>
+          <div class="flex-grow-lg-1">
+            <nav
+              class="nav nav-underline justify-content-end gap-0 flex-column flex-lg-row gap-lg-4"
+            >
               <div v-for="menu in menus" :key="menu" class="nav-item">
                 <a
-                  class="nav-link pointer"
+                  class="nav-link pointer py-1 py-lg-2 text-end"
                   :class="selectedMenu === menu ? 'active' : ''"
                   @click="selectedMenu = menu"
                   >{{ menu }}</a

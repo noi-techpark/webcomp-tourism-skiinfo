@@ -16,7 +16,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <body data-bs-theme="light" :style="`font-family: ${fontFamily}`">
       <div
         class="container-fluid p-0 d-flex flex-direction-row align-items-stretch"
-        :class="fullscreen ? 'vh-100' : 'container py-4'"
+        :class="!fullscreen ? 'container py-4' : ''"
+        :style="fullscreen ? 'min-height: 100vh;' : ''"
       >
         <item-detail
           v-if="item"

@@ -7,7 +7,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <template>
   <div>
     <div v-if="item.Webcam && !noWebcams" class="row g-4">
-      <div v-for="webcam in filteredWebcams" :key="webcam.id" class="col-6">
+      <div
+        v-for="webcam in filteredWebcams"
+        :key="webcam.id"
+        class="col-12 col-lg-6"
+      >
         <div class="h-100 d-flex position-relative">
           <img
             :src="webcam.url"
