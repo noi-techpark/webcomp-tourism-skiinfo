@@ -94,14 +94,8 @@ export default Vue.extend({
     testWebcams() {
       this.webcams?.forEach((webcam) => {
         fetch(webcam.url, { method: 'HEAD' })
-          .then((res) => {
-            console.log(res);
-            if (!res.ok) webcam.error = true;
-          })
-          .catch((e) => {
-            console.log(e);
-            webcam.error = true;
-          });
+          .then((res) => (webcam.error = !res.ok))
+          .catch(() => (webcam.error = true));
       });
     },
   },
