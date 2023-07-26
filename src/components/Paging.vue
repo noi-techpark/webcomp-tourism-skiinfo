@@ -6,8 +6,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div class="text-center" v-if="totalPages > 1">
-
-    <span class="pointer px-3" @click="lastPage" :class="currentPage !== 1 ? 'visible' : 'invisible'">
+    <span
+      class="pointer px-3"
+      @click="lastPage"
+      :class="currentPage !== 1 ? 'visible' : 'invisible'"
+    >
       {{ $t('paging.back') }}
     </span>
 
@@ -34,7 +37,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           >{{ i }}</span
         >
         <span class="px-1">...</span>
-        <span class="pointer px-1" @click="goToPage(totalPages)">{{ totalPages }}</span>
+        <span class="pointer px-1" @click="goToPage(totalPages)">{{
+          totalPages
+        }}</span>
       </span>
 
       <span v-else-if="currentPage < totalPages - 2">
@@ -43,12 +48,16 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <span class="pointer px-1" @click="goToPage(currentPage - 1)">{{
           currentPage - 1
         }}</span>
-        <span class="fw-bold pointer" @click="goToPage(currentPage + 1)">{{ currentPage }}</span>
+        <span class="fw-bold pointer" @click="goToPage(currentPage + 1)">{{
+          currentPage
+        }}</span>
         <span class="pointer px-1" @click="goToPage(currentPage + 1)">{{
           currentPage + 1
         }}</span>
         <span class="px-1">...</span>
-        <span class="pointer px-1" @click="goToPage(totalPages)">{{ totalPages }}</span>
+        <span class="pointer px-1" @click="goToPage(totalPages)">{{
+          totalPages
+        }}</span>
       </span>
 
       <span v-else>
@@ -65,7 +74,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       </span>
     </span>
 
-    <span class="pointer px-3" @click="nextPage" :class="currentPage !== totalPages ? 'visible' : 'invisible'">
+    <span
+      class="pointer px-3"
+      @click="nextPage"
+      :class="currentPage !== totalPages ? 'visible' : 'invisible'"
+    >
       {{ $t('paging.next') }}
     </span>
   </div>

@@ -5,8 +5,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div class="w-100 d-flex flex-column align-items-stretch gap-4">
-    <div class="d-flex align-items-center gap-3">
+  <div class="w-100 py-2 d-flex flex-column align-items-stretch gap-4">
+    <div class="px-2 d-flex align-items-center gap-3">
       <input
         type="text"
         class="form-control card border-0 rounded-pill shadow-sm"
