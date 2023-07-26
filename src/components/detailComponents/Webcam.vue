@@ -7,11 +7,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <template>
   <div>
     <div v-if="item.Webcam && !noWebcams" class="row g-4">
-      <div
-        v-for="webcam in webcams?.filter((webcam) => !webcam.error)"
-        :key="webcam.id"
-        class="col-6"
-      >
+      <div v-for="webcam in filteredWebcams" :key="webcam.id" class="col-6">
         <div
           class="h-100 d-flex flex-column rounded-4 shadow overflow-hidden p-2"
         >
@@ -78,6 +74,16 @@ export default Vue.extend({
     noWebcams(): boolean {
       return this.webcams?.every((webcam) => webcam.error) ?? true;
     },
+    filteredWebcams():
+      | {
+          name: string | undefined;
+          url: string;
+          id: string;
+          error: boolean;
+        }[]
+      | undefined {
+      return this.webcams?.filter((webcam) => !webcam.error);
+    },
   },
   created() {
     this.testWebcams();
@@ -85,7 +91,7 @@ export default Vue.extend({
   methods: {
     testWebcams() {
       this.webcams?.forEach((webcam) => {
-        fetch(webcam.url, { method: 'HEAD', redirect: 'manual' })
+        fetch(webcam.url, { method: 'HEAD' })
           .then((res) => {
             console.log(res);
             if (!res.ok) webcam.error = true;
