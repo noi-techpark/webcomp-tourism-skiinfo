@@ -49,49 +49,41 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
-      <div class="flex-grow-1 p-4 d-flex flex-column justify-content-between">
-        <div>
-          <Info
-            class="d-flex flex-column gap-4"
-            :class="selectedMenu !== 'Info' ? 'd-none' : ''"
-            :item="item"
-            :language="language"
-          />
+      <div class="flex-grow-1 p-4">
+        <Info
+          class="d-flex flex-column gap-4 h-100"
+          :class="selectedMenu !== 'Info' ? 'd-none' : ''"
+          :item="item"
+          :language="language"
+        />
 
-          <Slopes
-            class="d-flex flex-column gap-4"
-            :class="selectedMenu !== 'Slopes' ? 'd-none' : ''"
-            :item="item"
-            :language="language"
-          />
+        <Slopes
+          class="d-flex flex-column gap-4"
+          :class="selectedMenu !== 'Slopes' ? 'd-none' : ''"
+          :item="item"
+          :language="language"
+        />
 
-          <Lifts
-            class="d-flex flex-column gap-4"
-            :class="selectedMenu !== 'Lifts' ? 'd-none' : ''"
-            :item="item"
-            :language="language"
-          />
+        <Lifts
+          class="d-flex flex-column gap-4"
+          :class="selectedMenu !== 'Lifts' ? 'd-none' : ''"
+          :item="item"
+          :language="language"
+        />
 
-          <Weather
-            class="d-flex flex-column gap-4"
-            :class="selectedMenu !== 'Weather' ? 'd-none' : ''"
-            :item="item"
-            :language="language"
-          />
+        <Weather
+          class="d-flex flex-column gap-4"
+          :class="selectedMenu !== 'Weather' ? 'd-none' : ''"
+          :item="item"
+          :language="language"
+        />
 
-          <Webcam
-            class="d-flex flex-column gap-4"
-            :class="selectedMenu !== 'Webcam' ? 'd-none' : ''"
-            :item="item"
-            :language="language"
-          />
-        </div>
-        <div>
-          <small class="d-block mt-4">
-            {{ $t('lastChange') }}: {{ item.LastChange }}
-          </small>
-          <small class="d-block"> Opendatahub ID: {{ item.Id }} </small>
-        </div>
+        <Webcam
+          class="d-flex flex-column gap-4"
+          :class="selectedMenu !== 'Webcam' ? 'd-none' : ''"
+          :item="item"
+          :language="language"
+        />
       </div>
     </div>
   </div>

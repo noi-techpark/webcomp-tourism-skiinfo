@@ -5,110 +5,122 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div>
-    <div class="row g-2">
-      <!-- SkiRegion -->
-      <div
-        v-if="skiRegionName"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <map-icon class="map-icon icon"></map-icon>
-        <span>{{ $t('skiregion') }}:</span>
-        <span class="fw-bold text-truncate">{{ skiRegionName }}</span>
-      </div>
-
-      <!-- Lift Count -->
-      <div
-        v-if="item.LiftCount"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <highlight class="highlight icon"></highlight>
-        <span>{{ $t('props.LiftCount') }}:</span>
-        <span class="fw-bold">{{ item.LiftCount }}</span>
-      </div>
-
-      <!-- Total Slope KM with colors -->
-      <div
-        v-if="hasSlopeInfo"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <distance-length class="distance-length icon"></distance-length>
-        <span>{{ $t('props.TotalSlopeKm') }}:</span>
-        <span class="fw-bold">{{ item.TotalSlopeKm }} km</span> (
-        <span class="text-slope-blue">{{ item.SlopeKmBlue }}</span> /
-        <span class="text-slope-red">{{ item.SlopeKmRed }}</span> /
-        <span class="text-slope-black">{{ item.SlopeKmBlack }}</span> )
-      </div>
-
-      <!-- Altitude -->
-      <div
-        v-if="item.AltitudeTo && item.AltitudeFrom"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <altitude-difference
-          class="altitude-difference icon"
-        ></altitude-difference>
-        <span>{{ $t('props.Altitude') }}:</span>
-        <span class="fw-bold"
-          >{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span
+  <div class="d-flex flex-column justify-content-between">
+    <div class="d-flex flex-column gap-4">
+      <div class="row g-2">
+        <!-- SkiRegion -->
+        <div
+          v-if="skiRegionName"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
         >
+          <map-icon class="map-icon icon"></map-icon>
+          <span>{{ $t('skiregion') }}:</span>
+          <span class="fw-bold text-truncate">{{ skiRegionName }}</span>
+        </div>
+
+        <!-- Lift Count -->
+        <div
+          v-if="item.LiftCount"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+        >
+          <highlight class="highlight icon"></highlight>
+          <span>{{ $t('props.LiftCount') }}:</span>
+          <span class="fw-bold">{{ item.LiftCount }}</span>
+        </div>
+
+        <!-- Total Slope KM with colors -->
+        <div
+          v-if="hasSlopeInfo"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+        >
+          <distance-length class="distance-length icon"></distance-length>
+          <span>{{ $t('props.TotalSlopeKm') }}:</span>
+          <span class="fw-bold">{{ item.TotalSlopeKm }} km</span> (
+          <span class="text-slope-blue">{{ item.SlopeKmBlue }}</span> /
+          <span class="text-slope-red">{{ item.SlopeKmRed }}</span> /
+          <span class="text-slope-black">{{ item.SlopeKmBlack }}</span> )
+        </div>
+
+        <!-- Altitude -->
+        <div
+          v-if="item.AltitudeTo && item.AltitudeFrom"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+        >
+          <altitude-difference
+            class="altitude-difference icon"
+          ></altitude-difference>
+          <span>{{ $t('props.Altitude') }}:</span>
+          <span class="fw-bold"
+            >{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span
+          >
+        </div>
+
+        <!-- Location info -->
+        <div
+          v-if="locationInfo"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+        >
+          <map-icon class="map-icon icon"></map-icon>
+          <span>{{ $t('location') }}: </span>
+          <span class="fw-bold text-truncate" :title="locationInfo">{{
+            locationInfo
+          }}</span>
+        </div>
+
+        <!-- Contact info -->
+        <div
+          v-if="contactInfos"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+        >
+          <external-link class=""></external-link>
+          <a :href="contactInfos.Url" target="_blank">
+            Homepage
+          </a>
+        </div>
+
+        <!-- Phone info -->
+        <div
+          v-if="contactInfos"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+        >
+          <phone class="phone icon"></phone>
+          <span>{{ $t('phone') }}: </span>
+          <span class="fw-bold">{{ contactInfos.Phonenumber }}</span>
+        </div>
+
+        <!-- Google Maps Link -->
+        <div
+          v-if="googleMapsLink"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+        >
+          <map-icon class="map-icon icon"></map-icon>
+          <a :href="googleMapsLink" target="_blank">Google Maps</a>
+        </div>
+
+        <!-- Open / Closed -->
+        <div
+          v-if="isOpen != undefined"
+          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+        >
+          <calendar class="calendar icon"></calendar>
+          <span v-if="isOpen" class="text-open-green">{{
+            $t(`scheduleTypes.1`)
+          }}</span>
+          <span v-else class="text-closed-red">{{
+            $t(`scheduleTypes.2`)
+          }}</span>
+        </div>
       </div>
 
-      <!-- Location info -->
-      <div
-        v-if="locationInfo"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <map-icon class="map-icon icon"></map-icon>
-        <span>{{ $t('location') }}: </span>
-        <span class="fw-bold text-truncate" :title="locationInfo">{{
-          locationInfo
-        }}</span>
-      </div>
-
-      <!-- Contact info -->
-      <div
-        v-if="contactInfos"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <external-link class=""></external-link>
-        <a :href="contactInfos.Url" target="_blank">
-          Homepage
-        </a>
-      </div>
-
-      <!-- Phone info -->
-      <div
-        v-if="contactInfos"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <phone class="phone icon"></phone>
-        <span>{{ $t('phone') }}: </span>
-        <span class="fw-bold">{{ contactInfos.Phonenumber }}</span>
-      </div>
-
-      <!-- Google Maps Link -->
-      <div
-        v-if="googleMapsLink"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <map-icon class="map-icon icon"></map-icon>
-        <a :href="googleMapsLink" target="_blank">Google Maps</a>
-      </div>
-
-      <!-- Open / Closed -->
-      <div
-        v-if="isOpen != undefined"
-        class="col-12 col-lg-4 d-flex align-items-center gap-1"
-      >
-        <calendar class="calendar icon"></calendar>
-        <span v-if="isOpen" class="text-open-green">{{
-          $t(`scheduleTypes.1`)
-        }}</span>
-        <span v-else class="text-closed-red">{{ $t(`scheduleTypes.2`) }}</span>
-      </div>
+      <div v-if="detail && detail.BaseText" v-html="detail.BaseText"></div>
     </div>
-    <div v-if="detail && detail.BaseText" v-html="detail.BaseText"></div>
+
+    <div class="align-self-baseline">
+      <small class="d-block mt-4">
+        {{ $t('lastChange') }}: {{ item.LastChange }}
+      </small>
+      <small class="d-block"> Opendatahub ID: {{ item.Id }} </small>
+    </div>
   </div>
 </template>
 
