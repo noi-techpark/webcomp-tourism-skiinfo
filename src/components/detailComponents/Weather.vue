@@ -6,26 +6,31 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div>
-    <div v-if="measuringpoints">
-      <div class="row">
-        <div v-for="title in titles" :key="title" class="col-2 py-2">
-          <strong>{{ title }}</strong>
-        </div>
-      </div>
-      <div
-        v-for="(point, index) in measuringpoints"
-        :key="index"
-        class="row py-2"
-        :class="index % 2 === 0 ? 'bg-body-tertiary' : ''"
-      >
-        <div
-          v-for="entry in Object.entries(point)"
-          class="col-2"
-          :key="entry[0]"
-        >
-          {{ entry[1] }}
-        </div>
-      </div>
+    <div v-if="measuringpoints" class="table-responsive">
+      <table class="table table-striped ">
+        <thead>
+          <tr>
+            <th
+              v-for="title in titles"
+              :key="title"
+              class="col-2 py-2 text-nowrap"
+            >
+              {{ title }}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr
+            v-for="(point, index) in measuringpoints"
+            :key="index"
+            class="py-2"
+          >
+            <td v-for="entry in Object.entries(point)" :key="entry[0]">
+              {{ entry[1] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div v-else class="text-center">
       <span>No weather data available</span>
