@@ -72,6 +72,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             :item="item"
             :language="language"
           />
+
+          <Webcam
+            class="d-flex flex-column gap-4"
+            :class="selectedMenu !== 'Webcam' ? 'd-none' : ''"
+            :item="item"
+            :language="language"
+          />
         </div>
         <div>
           <small class="d-block mt-4">
@@ -90,6 +97,7 @@ import Info from './detailComponents/Info.vue';
 import Lifts from './detailComponents/Lifts.vue';
 import Slopes from './detailComponents/Slopes.vue';
 import Weather from './detailComponents/Weather.vue';
+import Webcam from './detailComponents/Webcam.vue';
 import { WeatherApi } from '@/api';
 import {
   Detail,
@@ -109,6 +117,7 @@ export default Vue.extend({
     Lifts,
     Slopes,
     Weather,
+    Webcam,
   },
   props: {
     item: {

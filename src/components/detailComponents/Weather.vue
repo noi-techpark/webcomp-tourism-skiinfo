@@ -73,7 +73,6 @@ export default Vue.extend({
           undefined
         )
         .then((value) => {
-          console.log(value);
           this.measuringpoints = value.data.length === 0 ? null : value.data;
         });
     },
