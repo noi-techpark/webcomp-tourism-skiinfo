@@ -49,9 +49,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
-      <div
-        class="flex-grow-1 p-4 pt-5 d-flex flex-column justify-content-between"
-      >
+      <div class="flex-grow-1 p-4 d-flex flex-column justify-content-between">
         <div>
           <Info
             class="d-flex flex-column gap-4"

@@ -24,10 +24,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
               :key="slope.Id"
               :open="slope.IsOpen"
             >
-              <h3 class="fs-4 mb-1">
+              <span class="d-block fs-5 fw-bold mb-1">
                 {{ getDetail(slope).Title }}
-              </h3>
-              <small>{{ getinfo(slope).join(' | ') }}</small>
+              </span>
+              <span>{{ getinfo(slope).join(' | ') }}</span>
             </OpenClosed>
           </div>
         </div>

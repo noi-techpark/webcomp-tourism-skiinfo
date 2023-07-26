@@ -14,7 +14,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       >
         <map-icon class="map-icon icon"></map-icon>
         <span>{{ $t('skiregion') }}:</span>
-        <span class="fw-bold">{{ skiRegionName }}</span>
+        <span class="fw-bold text-truncate">{{ skiRegionName }}</span>
       </div>
 
       <!-- Lift Count -->

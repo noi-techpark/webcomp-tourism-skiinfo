@@ -7,12 +7,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <template>
   <div>
     <div v-if="lifts" class="row gy-3">
-      <div class="col-6" v-for="lift in lifts" :key="lift.Id">
+      <div class="col-6 col-lg-4" v-for="lift in lifts" :key="lift.Id">
         <OpenClosed :open="lift.IsOpen">
-          <h2 class="fs-4 mb-1">
+          <span class="d-block fs-5 fw-bold mb-1">
             {{ lift.Shortname }}
-          </h2>
-          <small>{{ getinfo(lift).join(' | ') }}</small>
+          </span>
+          <span>{{ getinfo(lift).join(' | ') }}</span>
         </OpenClosed>
       </div>
     </div>
