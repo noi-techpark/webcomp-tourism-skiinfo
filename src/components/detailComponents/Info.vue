@@ -125,7 +125,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 </template>
 
 <script lang="ts">
-import { ContactInfos, Detail, SkiAreaLinked } from '@/api/models';
+import { Detail, SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
 import ExternalLink from '@/assets/img/ic_external-link.svg';
 import AltitudeDifference from '@/assets/img/ic_altitudedifference.svg';
@@ -175,8 +175,14 @@ export default Vue.extend({
 
       return location !== '' ? location : undefined;
     },
-    contactInfos(): ContactInfos | undefined {
-      return this.item?.ContactInfos?.[this.language];
+    contactInfos():
+      | { Url: string | undefined; Phonenumber: string | undefined }
+      | undefined {
+      return {
+        Url: this.item?.ContactInfos?.[this.language].Url ?? undefined,
+        Phonenumber:
+          this.item?.ContactInfos?.[this.language].Phonenumber ?? undefined,
+      };
     },
     googleMapsLink(): string | undefined {
       return this.item?.GpsPoints?.position?.Latitude &&
