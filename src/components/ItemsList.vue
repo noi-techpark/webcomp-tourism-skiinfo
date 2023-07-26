@@ -21,7 +21,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </div>
 
     <div v-if="items.length > 0" class="flex-grow-1">
-      <div class="row gy-3 mw-100 mx-0">
+      <div class="row gy-4 mw-100 mx-0">
         <div
           v-for="item of items"
           :key="item.Id"
