@@ -117,7 +117,7 @@ export interface Measuringpoint {
      * @type {string}
      * @memberof Measuringpoint
      */
-    NewSnowHeight?: string | null;
+    newSnowHeight?: string | null;
     /**
      * 
      * @type {string}
