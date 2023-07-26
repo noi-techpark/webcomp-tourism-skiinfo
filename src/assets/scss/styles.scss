@@ -1,5 +1,5 @@
 $box-shadow: 0 0.3rem 1.5rem rgba(black, 0.15);
-$box-shadow-sm: 0 0.1rem 0.8rem rgba(black, 0.15);
+$box-shadow-sm: 0 0.1rem 0.6rem rgba(black, 0.12);
 
 $nav-underline-link-active-color: rgb(255, 255, 255);
 $nav-link-color: rgb(255, 255, 255);
@@ -37,6 +37,11 @@ $link-hover-color: rgba(0, 0, 0, 0.8);
 .border-xl {
   border-width: 0.5rem !important;
 }
+
+// .text-shadow {
+//   text-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.6),
+//     0 0.1rem 1rem rgba(0, 0, 0, 0.6);
+// }
 
 $slope-text-blue: rgb(66, 135, 245);
 $slope-text-red: rgb(245, 66, 66);

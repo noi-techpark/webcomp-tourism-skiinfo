@@ -8,14 +8,16 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <div>
     <div v-if="item.Webcam && !noWebcams" class="row g-4">
       <div v-for="webcam in filteredWebcams" :key="webcam.id" class="col-6">
-        <div
-          class="h-100 d-flex flex-column rounded-4 shadow overflow-hidden p-2"
-        >
-          <h2 class="fs-4">{{ webcam.name }}</h2>
+        <div class="h-100 d-flex position-relative">
           <img
             :src="webcam.url"
-            class="flex-basis-full ratio ratio-16x9 rounded object-fit-cover"
+            class="flex-basis-full ratio ratio-16x9 object-fit-cover shadow-sm"
           />
+          <small
+            class="position-absolute top-0 start-50 translate-middle-x m-0 py-1 px-2 bg-white rounded-bottom text-center text-nowrap"
+          >
+            {{ webcam.name }}
+          </small>
         </div>
       </div>
     </div>
