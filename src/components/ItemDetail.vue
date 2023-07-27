@@ -5,25 +5,32 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div class="d-flex flex-column w-100">
+  <div class="d-flex flex-column w-100" :class="fullscreen ? '' : ''">
     <div
       v-if="isItemEmpty && !isLoading"
       class="flex-grow-1 d-flex flex-row align-items-center"
     >
-      <Close @close="close" />
+      <Close v-if="showBack" @close="close" />
       {{ $t('noItemData') }}
     </div>
 
     <div
       v-else-if="item"
-      class="h-100 d-flex flex-column shadow-sm overflow-y-auto"
-      :class="!fullscreen ? 'rounded-4' : ''"
+      class="d-flex flex-column shadow-sm"
+      style="min-height: 100vh"
+      :style="
+        scrollBottom
+          ? `animation: ScrollBottom ${scrollBottomDurationMillies}ms ease-in-out forwards;`
+          : ''
+      "
     >
+      <div></div>
       <div
-        class="flex-shrink-0 d-flex flex-column align-items-start justify-content-between"
+        class="flex-shrink-0 d-flex flex-column align-items-start"
+        :class="showBack ? 'justify-content-between' : 'justify-content-end'"
         :style="titleImage"
       >
-        <Close class="mt-4 ms-4" @close="close" />
+        <Close v-if="showBack" class="mt-4 ms-4" @close="close" />
 
         <div
           class="px-4 px-lg-4 pt-lg-5 w-100 gradient-white-transparent d-flex justify-content-between align-items-end"
@@ -39,7 +46,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
               <div v-for="menu in menus" :key="menu" class="nav-item">
                 <a
                   class="nav-link pointer py-1 py-lg-2 text-end"
-                  :class="selectedMenu === menu ? 'active' : ''"
+                  :class="
+                    `${selectedMenu === menu ? 'active' : ''} ${
+                      intervalMillies ? 'disabled' : ''
+                    }`
+                  "
+                  :aria-disabled="intervalMillies ? 'true' : 'false'"
                   @click="selectedMenu = menu"
                   >{{ menu }}</a
                 >
@@ -126,6 +138,21 @@ export default Vue.extend({
       type: String,
       default: 'en',
     },
+    showBack: {
+      type: Boolean,
+    },
+    intervalMillies: {
+      type: Number,
+      default: 0,
+    },
+    scrollBottomDelayMillies: {
+      type: Number,
+      default: 0,
+    },
+    scrollBottomDurationMillies: {
+      type: Number,
+      default: 0,
+    },
     fullscreen: {
       type: Boolean,
     },
@@ -137,20 +164,20 @@ export default Vue.extend({
       measuringpoints: Measuringpoint[];
       showImage: boolean;
       imageUrl: string | null;
-      selectedImage: null;
       isLoading: boolean;
       menus: Menu[];
       selectedMenu: Menu;
+      scrollBottom: boolean;
     } = {
       slopes: [],
       lifts: [],
       measuringpoints: [],
       showImage: false,
       imageUrl: null,
-      selectedImage: null,
       isLoading: false,
       menus: ['Info', 'Slopes', 'Lifts', 'Weather', 'Webcam'],
       selectedMenu: 'Info',
+      scrollBottom: false,
     };
 
     return data;
@@ -158,8 +185,36 @@ export default Vue.extend({
   created() {
     this.isLoading = true;
     this.loadSkiAreaMeasuringpoints();
+    this.scheduleScrollDown();
+    this.scheduleNextSelectedMenu();
+  },
+  watch: {
+    selectedMenu: function() {
+      this.scheduleNextSelectedMenu();
+    },
   },
   methods: {
+    scheduleNextSelectedMenu() {
+      if (!this.intervalMillies) return;
+
+      setTimeout(() => {
+        this.scheduleScrollDown();
+
+        const currentIndex = this.menus.indexOf(this.selectedMenu);
+        const nextIndex = (currentIndex + 1) % this.menus.length;
+
+        this.selectedMenu = this.menus[nextIndex];
+      }, this.intervalMillies);
+    },
+    scheduleScrollDown() {
+      if (!this.fullscreen || !this.intervalMillies) return;
+
+      this.scrollBottom = false;
+
+      setTimeout(() => {
+        this.scrollBottom = true;
+      }, this.scrollBottomDelayMillies);
+    },
     dateFormat(dateString: string) {
       const d = new Date(dateString);
       const day = d.getDate() < 10 ? '0' + d.getDate() : d.getDate();
@@ -208,23 +263,13 @@ export default Vue.extend({
     itemDetail(): Detail {
       return this.item?.Detail?.[this.language] || {};
     },
-    titleImage(): {
-      backgroundImage?: string;
-      height?: string;
-      backgroundSize?: string;
-      backgroundPosition?: string;
-    } {
+    titleImage(): string {
       const image =
         this.item?.ImageGallery != null ? this.item?.ImageGallery[0] : null;
       if (image == null) {
-        return {};
+        return '';
       } else {
-        return {
-          backgroundImage: 'url(' + image.ImageUrl + ') ',
-          height: '300px',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        };
+        return `background-image: url(${image.ImageUrl}); height: 300px; background-size: cover; background-position: center;`;
       }
     },
     isItemEmpty(): boolean {

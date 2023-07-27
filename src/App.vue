@@ -13,34 +13,43 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       />
       <link rel="stylesheet" :href="fontUrl" />
     </head>
-    <body data-bs-theme="light" :style="`font-family: ${fontFamily}`">
+    <body
+      class="container-fluid p-0 d-flex flex-direction-row align-items-stretch"
+      data-bs-theme="light"
+      :style="
+        `font-family: ${fontFamily}; min-height: ${
+          fullscreen ? '100vh' : '100%'
+        };`
+      "
+    >
+      <item-detail
+        v-if="displayedItem"
+        :item="displayedItem"
+        :language="language"
+        :show-back="!idList"
+        :interval-millies="menuIntervalMillies"
+        :scroll-bottom-delay-millies="scrollToBottomDelayMillies"
+        :scroll-bottom-duration-millies="scrollToBottomDurationMillies"
+        :fullscreen="fullscreen"
+        @close="closeDetail"
+      />
+      <items-list
+        v-else-if="!idList"
+        @show-detail="showDetail"
+        @next-page="nextPage"
+        @last-page="lastPage"
+        @go-to-page="goToPage"
+        :language="language"
+        :pageSize="pageSize"
+        :current-page="currentPage"
+        :with-image-only="withImageOnly"
+        :enable-placeholder="enablePlaceholder"
+      />
       <div
-        class="container-fluid p-0 d-flex flex-direction-row align-items-stretch"
-        :class="!fullscreen ? 'container py-4' : ''"
-        :style="fullscreen ? 'min-height: 100vh;' : ''"
+        v-else
+        class="flex-grow-1 d-flex align-items-center justify-content-center"
       >
-        <item-detail
-          v-if="item"
-          :item="item"
-          :language="language"
-          :fullscreen="fullscreen"
-          @close="closeDetail"
-        />
-        <items-list
-          v-else
-          @show-detail="showDetail"
-          @next-page="nextPage"
-          @last-page="lastPage"
-          @go-to-page="goToPage"
-          :language="language"
-          :pageSize="pageSize"
-          :current-page="currentPage"
-          :loc-filter="locFilter"
-          :source-filter="sourceFilter"
-          :with-image-only="withImageOnly"
-          :enable-placeholder="enablePlaceholder"
-          :tag-id-list="tagIdList"
-        />
+        <Spinner />
       </div>
     </body>
   </div>
@@ -51,11 +60,13 @@ import Vue from 'vue';
 import ItemsList from './components/ItemsList.vue';
 import ItemDetail from './components/ItemDetail.vue';
 import VueI18n from 'vue-i18n';
+import Spinner from './components/Spinner.vue';
 
 import messagesEn from '@/assets/locales/en.json';
 import messagesDe from '@/assets/locales/de.json';
 import messagesIt from '@/assets/locales/it.json';
 import { SkiAreaLinked } from './api/models';
+import { CommonApi } from './api';
 
 Vue.use(VueI18n);
 
@@ -73,19 +84,33 @@ export default Vue.extend({
   components: {
     ItemsList,
     ItemDetail,
+    Spinner,
   },
   props: {
-    contentIdList: {
+    idList: {
       type: String,
-      default: null,
+      default:
+        'SKI6C7D174390D44D0ABC1C9105F8C37C5E,SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKI8660FA0AAEF54865A7109BAB46AE6C23',
     },
-    locFilter: {
-      type: String,
-      default: null,
+    itemIntervalMillies: {
+      type: Number,
+      default: 25000,
     },
-    sourceFilter: {
-      type: String,
-      default: null,
+    menuIntervalMillies: {
+      type: Number,
+      default: 5000,
+    },
+    fullscreen: {
+      type: Boolean,
+      default: true,
+    },
+    scrollToBottomDelayMillies: {
+      type: Number,
+      default: 1000,
+    },
+    scrollToBottomDurationMillies: {
+      type: Number,
+      default: 3000,
     },
     language: {
       type: String,
@@ -94,10 +119,6 @@ export default Vue.extend({
     pageSize: {
       type: Number,
       default: 8,
-    },
-    tagIdList: {
-      type: String,
-      default: null,
     },
     withImageOnly: {
       type: Boolean,
@@ -115,33 +136,23 @@ export default Vue.extend({
       type: String,
       default: 'Open Sans',
     },
-    fullscreen: {
-      type: Boolean,
-      default: true,
-    },
   },
   data() {
     const data: {
-      item: SkiAreaLinked | null;
+      items: SkiAreaLinked[] | null;
+      selectedItem: SkiAreaLinked | null;
+      displayedItem: SkiAreaLinked | null;
       currentPage: number;
     } = {
-      item: null,
+      items: null,
+      selectedItem: null,
+      displayedItem: null,
       currentPage: 1,
     };
 
     return data;
   },
   computed: {
-    contentIds(): string[] {
-      return this.contentIdList !== null
-        ? this.contentIdList.split(',').map((e: string) => e.trim())
-        : [];
-    },
-    tagIds(): string[] {
-      return this.tagIdList !== null
-        ? this.tagIdList.split(',').map((e: string) => e.trim())
-        : [];
-    },
     fontFamily(): string[] {
       const fallbacks = ['Avenir', 'Helvetica', 'Arial', 'sans-serif'];
       return this.fontName ? [this.fontName, ...fallbacks] : fallbacks;
@@ -154,13 +165,30 @@ export default Vue.extend({
         this.$i18n.locale = value;
       },
     },
+    idList: function() {
+      this.loadItems;
+    },
+    items: function() {
+      this.setDisplayedItem();
+    },
+    selectedItem: function() {
+      this.setDisplayedItem();
+    },
+    displayedItem: function() {
+      this.scheduleNextDisplayedItem();
+    },
+  },
+  created() {
+    if (this.idList) {
+      this.loadItems();
+    }
   },
   methods: {
     showDetail(item: SkiAreaLinked) {
-      this.item = item;
+      this.selectedItem = item;
     },
     closeDetail() {
-      this.item = null;
+      this.selectedItem = null;
     },
     nextPage() {
       this.currentPage++;
@@ -170,6 +198,49 @@ export default Vue.extend({
     },
     goToPage(pageNum: number) {
       this.currentPage = pageNum;
+    },
+    setDisplayedItem() {
+      this.displayedItem = this.items?.[0] ?? this.selectedItem;
+    },
+    scheduleNextDisplayedItem() {
+      if (!this.itemIntervalMillies) return;
+
+      setTimeout(() => {
+        if (!this.items || !this.displayedItem) return;
+        const currentIndex = this.items.indexOf(this.displayedItem);
+        const nextIndex = (currentIndex + 1) % this.items.length;
+        // resets the detail component to prevent out of sync
+        this.displayedItem = null;
+        this.displayedItem = this.items[nextIndex];
+      }, this.itemIntervalMillies);
+    },
+    loadItems() {
+      new CommonApi()
+        .v1SkiAreaGet(
+          undefined,
+          undefined,
+          this.idList,
+          undefined,
+          true,
+          undefined,
+          undefined,
+          undefined,
+          this.language,
+          this.language,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          false
+        )
+        .then((value) => {
+          this.items = value.data.length > 0 ? value.data : null;
+        });
     },
   },
 });

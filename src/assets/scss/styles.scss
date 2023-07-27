@@ -155,3 +155,16 @@ $open-green: #9bc320;
 .flex-basis-full {
   flex-basis: 100%;
 }
+
+@keyframes ScrollBottom {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateY(calc(-1 * calc(100% - 100vh)));
+  }
+}
+
+// .scroll-bottom {
+//   animation: ScrollBottom 500ms ease-in-out 500ms forwards;
+// }

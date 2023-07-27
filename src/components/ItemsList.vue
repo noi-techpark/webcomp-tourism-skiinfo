@@ -188,8 +188,7 @@ export default Vue.extend({
     },
     loadSkiAreaList(pageNum: number) {
       this.isLoading = true;
-      const commonApi = new CommonApi();
-      commonApi
+      new CommonApi()
         .v1SkiAreaGet(
           pageNum,
           this.pageSize,
@@ -217,7 +216,6 @@ export default Vue.extend({
             SkiAreaLinked
           >;
           this.items = apiResponse?.Items ?? [];
-          this.$emit('change-current-page', apiResponse?.CurrentPage);
           this.totalPages = apiResponse?.TotalPages;
           this.isLoading = false;
         });
