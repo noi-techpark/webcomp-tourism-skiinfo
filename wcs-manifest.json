@@ -1,7 +1,7 @@
 {
   "title": "Tourism Skiinfo",
   "shortName": "tourism-skiinfo",
-  "description": "A web component to display SkiAreas with all Information",
+  "description": "A web component to display SkiAreas with all Information. This Web Component supports two modes: display mode and browse mode. Display mode: shows one or more Ski Areas and switches automatically between them. Supports automatic switching between menus and fullscreen mode in which autoscroll for menus taller than page is enabled. This is intended as a non interactive infographic. Browse mode: Shows a browsable list of all Ski Areas and enables interactive navigation within them.",
   "descriptionAbstract": "A web component to display SkiAreas with all Information",
   "license": "AGPL-3.0-or-later",
   "repositoryUrl": "https://github.com/noi-techpark/webcomp-tourism-skiinfo.git",
@@ -43,52 +43,73 @@
     "tagName": "odh-tourism-skiinfo",
     "options": [
       {
+        "key": "mode",
+        "type": "select",
+        "label": "Toggle between display mode and browse mode. (Check description)",
+        "required": true,
+        "options": {
+          "values": ["display", "browse"],
+          "default": "display"
+        }
+      },
+      {
         "key": "id-list",
         "type": "text",
-        "label": "List of ski area ids separated by ',' (see bottom left of a detail card)",
-        "required": false,
-        "options": {}
-      },
-      {
-        "key": "language",
-        "type": "select",
-        "label": "Language",
+        "label": "List of ski area ids separated by ','. (See bottom left of a detail card) (Display mode)",
         "required": false,
         "options": {
-          "values": ["en", "de", "it"],
-          "default": "de"
+          "default": "SKIFFC3B47C3CEA4426AE850E333EFE79CE,SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKIB0D17A56116D45EE9CC6EDDB9D4AD466"
         }
       },
       {
-        "key": "source-filter",
-        "type": "select",
-        "label": "Filter by dataprovider",
+        "key": "item-interval-millies",
+        "type": "number",
+        "label": "Time each Ski Area is shown for in milliseconds. Ski Areas don't change if set to 0. (Display mode)",
         "required": false,
         "options": {
-          "values": [
-            "lts",
-            "idm",
-            "siag",
-            "dss",
-            "suedtirolwein",
-            "sta",
-            "archapp"
-          ]
+          "default": 50000
         }
       },
       {
-        "key": "loc-filter",
-        "type": "text",
-        "label": "Location Filter (pass type + id check out https://tourism.opendatahub.com/v1/Location)",
+        "key": "menu-interval-millies",
+        "type": "number",
+        "label": "Time each Menu is shown for in milliseconds. Menus don't change if set to 0. (Display mode)",
         "required": false,
         "options": {
-          "default": ""
+          "default": 10000
+        }
+      },
+      {
+        "key": "fullscreen",
+        "type": "null",
+        "label": "Enables auto scroll for menus taller than screen. Disables menus. Set to true when showing as standalone infographic. Set to false when embedding on a website. (Display mode)",
+        "required": false,
+        "options": {
+          "default": true
+        }
+      },
+      {
+        "key": "scroll-to-bottom-delay-millies",
+        "type": "number",
+        "label": "Time until auto scroll starts on a menu. Auto scroll starts instantly if set to 0 (buggy!). (Display mode + Fullscreen)",
+        "required": false,
+        "options": {
+          "default": 1000
+        }
+      },
+      {
+        "key": "scroll-to-bottom-duration-millies",
+        "type": "number",
+        "label": "Time auto scroll takes to scroll to bottom. Auto scroll jumps to bottom instantly if set to 0. (Display mode + Fullscreen)",
+        "required": false,
+        "options": {
+          "default": 8000
         }
       },
       {
         "key": "enable-placeholder",
         "type": "null",
-        "label": "Enable Image Placeholder",
+        "label": "Enables image placeholders. (Browse mode)",
         "required": false,
         "options": {
           "default": true
@@ -97,10 +118,38 @@
       {
         "key": "page-size",
         "type": "number",
-        "label": "Number of list items per page",
+        "label": "Number of list items per page (Browse mode)",
         "required": false,
         "options": {
-          "default": 30
+          "default": 8
+        }
+      },
+      {
+        "key": "language",
+        "type": "select",
+        "label": "Language",
+        "required": false,
+        "options": {
+          "values": ["en", "de", "it"],
+          "default": "en"
+        }
+      },
+      {
+        "key": "font-url",
+        "type": "text",
+        "label": "URL to a valid font css file",
+        "required": false,
+        "options": {
+          "default": "https://fonts.testingmachine.eu/open-sans/style.css"
+        }
+      },
+      {
+        "key": "font-name",
+        "type": "text",
+        "label": "Name of the font loaded from the font URL",
+        "required": false,
+        "options": {
+          "default": "Open Sans"
         }
       }
     ]
