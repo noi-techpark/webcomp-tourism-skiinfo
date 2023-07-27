@@ -127,9 +127,17 @@ export default Vue.extend({
     },
   },
   created() {
-    this.loadSlopes();
+    this.init();
+  },
+  watch: {
+    item: function() {
+      this.init();
+    },
   },
   methods: {
+    init() {
+      this.loadSlopes();
+    },
     getDetail(slope: ODHActivityPoiLinked) {
       return slope.Detail?.[this.language] ?? {};
     },

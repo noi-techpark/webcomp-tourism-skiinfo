@@ -55,10 +55,18 @@ export default Vue.extend({
     return data;
   },
   created() {
-    this.loadLiftTypes();
-    this.loadLifts();
+    this.init();
+  },
+  watch: {
+    item: function() {
+      this.init();
+    },
   },
   methods: {
+    init() {
+      this.loadLiftTypes();
+      this.loadLifts();
+    },
     loadLifts() {
       new ODHActivityPoiApi()
         .v1ODHActivityPoiGet(

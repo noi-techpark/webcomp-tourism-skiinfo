@@ -183,17 +183,23 @@ export default Vue.extend({
     return data;
   },
   created() {
-    this.isLoading = true;
-    this.loadSkiAreaMeasuringpoints();
-    this.scheduleScrollDown();
-    this.scheduleNextSelectedMenu();
+    this.init();
   },
   watch: {
+    item: function() {
+      this.init();
+    },
     selectedMenu: function() {
       this.scheduleNextSelectedMenu();
     },
   },
   methods: {
+    init() {
+      this.isLoading = true;
+      this.loadSkiAreaMeasuringpoints();
+      this.scheduleScrollDown();
+      this.scheduleNextSelectedMenu();
+    },
     scheduleNextSelectedMenu() {
       if (!this.intervalMillies) return;
 

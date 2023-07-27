@@ -90,15 +90,16 @@ export default Vue.extend({
     idList: {
       type: String,
       default:
-        'SKI6C7D174390D44D0ABC1C9105F8C37C5E,SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKI8660FA0AAEF54865A7109BAB46AE6C23',
+        'SKIFFC3B47C3CEA4426AE850E333EFE79CE,SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKIB0D17A56116D45EE9CC6EDDB9D4AD466',
+      // '',
     },
     itemIntervalMillies: {
       type: Number,
-      default: 25000,
+      default: 50000,
     },
     menuIntervalMillies: {
       type: Number,
-      default: 5000,
+      default: 10000,
     },
     fullscreen: {
       type: Boolean,
@@ -110,7 +111,7 @@ export default Vue.extend({
     },
     scrollToBottomDurationMillies: {
       type: Number,
-      default: 3000,
+      default: 8000,
     },
     language: {
       type: String,
@@ -209,8 +210,6 @@ export default Vue.extend({
         if (!this.items || !this.displayedItem) return;
         const currentIndex = this.items.indexOf(this.displayedItem);
         const nextIndex = (currentIndex + 1) % this.items.length;
-        // resets the detail component to prevent out of sync
-        this.displayedItem = null;
         this.displayedItem = this.items[nextIndex];
       }, this.itemIntervalMillies);
     },

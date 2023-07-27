@@ -106,9 +106,17 @@ export default Vue.extend({
     },
   },
   created() {
-    this.loadMeasuringpoints();
+    this.init();
+  },
+  watch: {
+    item: function() {
+      this.init();
+    },
   },
   methods: {
+    init() {
+      this.loadMeasuringpoints();
+    },
     loadMeasuringpoints() {
       if (!this.item.Id) return;
       new WeatherApi()

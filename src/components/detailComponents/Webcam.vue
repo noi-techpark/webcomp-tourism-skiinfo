@@ -92,9 +92,17 @@ export default Vue.extend({
     },
   },
   created() {
-    this.testWebcams();
+    this.init();
+  },
+  watch: {
+    item: function() {
+      this.init();
+    },
   },
   methods: {
+    init() {
+      this.testWebcams();
+    },
     testWebcams() {
       this.webcams?.forEach((webcam) => {
         fetch(webcam.url, { method: 'HEAD' })

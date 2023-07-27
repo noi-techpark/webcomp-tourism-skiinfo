@@ -13,7 +13,13 @@
       "organizationUrl": "https://noi.bz.it"
     }
   ],
-  "authors": [    
+  "authors": [
+    {
+      "name": "Henri Egger",
+      "email": "h.egger@noi.bz",
+      "organization": "NOI AG",
+      "organizationUrl": "https://noi.bz.it"
+    },
     {
       "name": "Rudi Thoeni",
       "email": "r.thoeni@noi.bz",
@@ -21,15 +27,11 @@
       "organizationUrl": "https://noi.bz.it"
     }
   ],
-  "image": "wcs-logo.png",  
-  "searchTags": [
-    "skiarea"
-  ],
+  "image": "wcs-logo.png",
+  "searchTags": ["skiarea"],
   "dist": {
     "basePath": "dist",
-    "files": [
-      "odh-tourism-skiinfo.min.js"
-    ],
+    "files": ["odh-tourism-skiinfo.min.js"],
     "scripts": [
       {
         "file": "odh-tourism-skiinfo.min.js",
@@ -39,27 +41,20 @@
   },
   "configuration": {
     "tagName": "odh-tourism-skiinfo",
-    "options": [     
+    "options": [
       {
-        "key": "content-id-list",
+        "key": "id-list",
         "type": "text",
-        "label": "List of content ids (see bottom right of a detail card; must match with the content type)",
-        "required": false,
-        "options": {
-          "default": ""
-        }
-      },           
+        "label": "List of ski area ids separated by ',' (see bottom left of a detail card)",
+        "required": false
+      },
       {
         "key": "language",
         "type": "select",
-        "label": "language",
+        "label": "Language",
         "required": false,
         "options": {
-          "values": [
-            "en",
-            "de",
-            "it"
-          ],
+          "values": ["en", "de", "it"],
           "default": "de"
         }
       },
@@ -88,13 +83,13 @@
         "options": {
           "default": ""
         }
-      },     
+      },
       {
         "key": "enable-placeholder",
-        "type": "null",        
+        "type": "null",
         "label": "Enable Image Placeholder",
         "required": false,
-        "options": {          
+        "options": {
           "default": true
         }
       },
