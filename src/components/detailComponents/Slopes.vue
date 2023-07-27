@@ -12,13 +12,29 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :key="color"
         class="col-12 col-lg-4"
       >
-        <div class="p-2 rounded-1" :class="`background-slope-${color}`">
-          <h2 class="fs-3 text-white">
-            {{ color.charAt(0).toUpperCase() + color.slice(1) }}
-          </h2>
+        <div>
           <div
-            class="d-flex flex-column gap-3 p-3 rounded-1 bg-white shadow-sm"
+            class="mx-2 mt-2 p-2 d-flex align-items-baseline gap-2 border-bottom"
           >
+            <!-- <h2
+              class="ratio ratio-1x1 rounded-pill fs-4 text-white"
+              :class="`background-slope-${color}`"
+              style="flex-basis: 8%"
+            >
+              <div class="d-flex align-items-center justify-content-center">
+                <div>
+                  {{ slopes.length }}
+                </div>
+              </div>
+            </h2> -->
+            <h2 class="fs-3 mb-0 fw-bold" :class="`text-slope-${color}`">
+              {{ slopes.length }}
+              {{ color.charAt(0).toUpperCase() + color.slice(1) }}
+            </h2>
+            <small>{{ getColorInfo(color).join(' | ') }}</small>
+          </div>
+
+          <div class="mx-2 mb-2 d-flex flex-column gap-3 px-2 py-4">
             <OpenClosed
               v-for="slope in slopes"
               :key="slope.Id"
@@ -45,6 +61,8 @@ import { ODHActivityPoiLinked, SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
 import OpenClosed from './OpenClosed.vue';
 
+type Color = 'blue' | 'red' | 'black' | 'other';
+
 export default Vue.extend({
   components: {
     OpenClosed,
@@ -70,8 +88,8 @@ export default Vue.extend({
     return data;
   },
   computed: {
-    slopeColors(): { color: string; slopes: ODHActivityPoiLinked[] }[] | null {
-      const colorMap: Record<string, string> = {
+    slopeColors(): { color: Color; slopes: ODHActivityPoiLinked[] }[] | null {
+      const colorMap: Record<string, Color> = {
         '2': 'blue',
         '4': 'red',
         '6': 'black',
@@ -100,9 +118,11 @@ export default Vue.extend({
           []
         )
         .sort(({ color: a }, { color: b }) => (a > b ? 1 : a < b ? -1 : 0))
-        .map((e) => {
-          e.color = colorMap[e.color];
-          return e;
+        .map(({ color, slopes }) => {
+          return {
+            color: colorMap[color],
+            slopes,
+          };
         });
     },
   },
@@ -118,6 +138,26 @@ export default Vue.extend({
         slope.DistanceLength ? slope.DistanceLength + ' m' : '',
         slope.AltitudeDifference ? slope.AltitudeDifference + ' hm' : '',
       ].filter((e) => e !== '');
+    },
+    getColorInfo(color: Color): string[] {
+      const slopeKm =
+        color === 'blue'
+          ? this.item.SlopeKmBlue
+          : color === 'red'
+          ? this.item.SlopeKmRed
+          : color === 'black'
+          ? this.item.SlopeKmBlack
+          : '';
+
+      const openSlopes = this.slopeColors
+        ?.find(({ color: entryColor }) => entryColor === color)
+        ?.slopes.filter((slope) => slope.IsOpen)
+        .length.toString();
+
+      return [
+        slopeKm ? slopeKm + ' km' : '',
+        openSlopes ? openSlopes + ' open' : '',
+      ].filter((e) => e != '');
     },
     loadSlopes() {
       if (!this.item.Id) return;
