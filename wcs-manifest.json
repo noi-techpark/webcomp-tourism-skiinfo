@@ -46,7 +46,8 @@
         "key": "id-list",
         "type": "text",
         "label": "List of ski area ids separated by ',' (see bottom left of a detail card)",
-        "required": false
+        "required": false,
+        "options": {}
       },
       {
         "key": "language",
