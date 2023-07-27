@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <input
         type="text"
         class="form-control card border-0 rounded-pill shadow-sm"
-        :placeholder="$t('searchSkiArea')"
+        :placeholder="$t('searchSkiArea').toString()"
         v-model="searchInput"
         @keyup="searchSkiAreaList"
       />
@@ -23,8 +23,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <div v-if="items.length > 0" class="flex-grow-1">
       <div class="row gy-4 mw-100 mx-0">
         <div
-          v-for="item of items"
-          :key="item.Id"
+          v-for="(item, index) of items"
+          :key="index"
           @click.prevent="showDetail(item)"
           class="col-12 col-lg-6"
         >
@@ -256,7 +256,7 @@ export default Vue.extend({
     getImage(item: SkiAreaLinked) {
       return item.ImageGallery?.[0].ImageUrl
         ? item.ImageGallery?.[0].ImageUrl + '&height=200'
-        : null;
+        : undefined;
     },
   },
 });

@@ -7,7 +7,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <template>
   <div>
     <div v-if="lifts" class="row gy-3">
-      <div class="col-6 col-lg-4" v-for="lift in lifts" :key="lift.Id">
+      <div class="col-6 col-lg-4" v-for="(lift, index) in lifts" :key="index">
         <div class="col-lg-10 ms-auto">
           <OpenClosed :open="lift.IsOpen">
             <span class="d-block fs-5 fw-bold mb-1">
