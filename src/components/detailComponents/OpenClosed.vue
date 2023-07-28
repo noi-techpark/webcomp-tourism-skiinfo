@@ -5,27 +5,29 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div class="d-flex gap-2">
-    <Tick class="flex-shrink-0 fs-3 s-em text-success" v-if="open" />
-    <Cross class="flex-shrink-0 fs-3 s-em text-danger" v-else />
+  <div class="d-flex align-items-center gap-3">
+    <slot name="icon" />
     <div>
-      <slot />
+      <div class="d-flex align-items-center gap-2">
+        <slot name="title" />
+
+        <div v-if="!isOpen" class="badge rounded-pill text-bg-danger">
+          Closed
+        </div>
+      </div>
+      <div>
+        <slot />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Tick from '@/assets/img/ic_tick.svg';
-import Cross from '@/assets/img/ic_cross.svg';
 import Vue from 'vue';
 
 export default Vue.extend({
-  components: {
-    Tick,
-    Cross,
-  },
   props: {
-    open: {
+    isOpen: {
       type: Boolean,
     },
   },

@@ -12,14 +12,20 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         v-for="(lift, index) in lifts"
         :key="index"
       >
-        <OpenClosed :open="lift.IsOpen">
-          <span class="d-block fs-5 fw-bold mb-1">
-            {{ lift.Shortname }}
-          </span>
-          <span
-            ><img class="fs-5 s-em" :src="getIcon(lift)" alt="" /> |
-            {{ getinfo(lift).join(' | ') }}</span
-          >
+        <OpenClosed :is-open="lift.IsOpen">
+          <template #icon>
+            <img class="fs-3 s-em" :src="getIcon(lift)" alt="" />
+          </template>
+
+          <template #title>
+            <span class="fs-5 fw-bold">
+              {{ lift.Shortname }}
+            </span>
+          </template>
+
+          <template>
+            <span> {{ getinfo(lift).join(' | ') }}</span>
+          </template>
         </OpenClosed>
       </div>
     </div>

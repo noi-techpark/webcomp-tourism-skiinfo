@@ -27,12 +27,16 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <OpenClosed
               v-for="slope in slopes"
               :key="slope.Id"
-              :open="slope.IsOpen"
+              :is-open="slope.IsOpen"
             >
-              <span class="d-block fs-5 fw-bold mb-1">
-                {{ getDetail(slope).Title }}
-              </span>
-              <span>{{ getinfo(slope).join(' | ') }}</span>
+              <template #title>
+                <span class="fs-5 fw-bold mb-0">
+                  {{ getDetail(slope).Title }}
+                </span>
+              </template>
+              <template>
+                <span>{{ getinfo(slope).join(' | ') }}</span>
+              </template>
             </OpenClosed>
           </div>
         </div>
