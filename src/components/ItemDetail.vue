@@ -16,7 +16,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       class="d-flex flex-column shadow-sm"
       style="min-height: 100vh"
       :style="
-        fullscreen && scrollBottom
+        scrollBottom
           ? `animation: ScrollBottom ${scrollBottomDurationMillies}ms ease-in-out forwards;`
           : ''
       "

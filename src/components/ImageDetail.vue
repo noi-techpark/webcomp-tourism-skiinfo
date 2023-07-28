@@ -47,7 +47,7 @@ export default Vue.extend({
     },
     hasMultipleImgs: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   computed: {

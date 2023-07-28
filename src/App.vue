@@ -137,7 +137,7 @@ export default Vue.extend({
     },
     enablePlaceholder: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     fontUrl: {
       type: String,
