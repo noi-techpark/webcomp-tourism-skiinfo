@@ -16,7 +16,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           <span class="d-block fs-5 fw-bold mb-1">
             {{ lift.Shortname }}
           </span>
-          <span>{{ getinfo(lift).join(' | ') }}</span>
+          <span
+            ><img class="fs-5 s-em" :src="getIcon(lift)" alt="" /> |
+            {{ getinfo(lift).join(' | ') }}</span
+          >
         </OpenClosed>
       </div>
     </div>
@@ -31,6 +34,7 @@ import { ODHActivityPoiApi, TagApi } from '@/api';
 import { ODHActivityPoiLinked, SkiAreaLinked, TagLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
 import OpenClosed from './OpenClosed.vue';
+import icons from '../../assets/img/liftIcons';
 
 export default Vue.extend({
   components: {
@@ -166,6 +170,11 @@ export default Vue.extend({
         lift.DistanceLength ? lift.DistanceLength + ' m' : '',
         lift.AltitudeDifference ? lift.AltitudeDifference + ' hm' : '',
       ].filter((e) => e !== '');
+    },
+    getIcon(lift: ODHActivityPoiLinked): string | undefined {
+      const entries = Object.entries(icons);
+      const tag = this.getLiftTypes(lift)[0].Id ?? 'cabin train';
+      return entries.find((entry) => tag.includes(entry[0]))?.[1];
     },
   },
 });
