@@ -39,7 +39,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           )
         "
         @previous-item="
-          setDisplayedItem((items?.length ?? 1) - (displayedItem[1] ?? 1) - 1)
+          setDisplayedItem(
+            ((items?.length ?? 1) + ((displayedItem[1] ?? 1) - 1)) %
+              (items?.length ?? 1)
+          )
         "
       />
       <items-list
