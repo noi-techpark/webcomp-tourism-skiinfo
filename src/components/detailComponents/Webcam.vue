@@ -35,6 +35,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 import { SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
 
+function withProxy(url: string) {
+  return 'https://api.tourism.testingmachine.eu/v1/ODHProxy/' + url;
+}
+
 export default Vue.extend({
   props: {
     item: {
@@ -105,7 +109,7 @@ export default Vue.extend({
     },
     testWebcams() {
       this.webcams?.forEach((webcam) => {
-        fetch(webcam.url, { method: 'HEAD' })
+        fetch(withProxy(webcam.url), { method: 'HEAD' })
           .then((res) => (webcam.error = !res.ok))
           .catch(() => (webcam.error = true));
       });
