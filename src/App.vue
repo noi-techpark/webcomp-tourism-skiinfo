@@ -18,24 +18,30 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       data-bs-theme="light"
       :style="
         `font-family: ${fontFamily}; min-height: ${
-          fullscreen ? '100vh' : '100%'
+          fullscreen && mode === 'display' ? '100vh' : '100%'
         };`
       "
     >
       <item-detail
-        v-if="displayedItem"
-        :item="displayedItem"
+        v-if="(mode === 'display' && displayedItem) || selectedItem"
+        :item="mode === 'display' ? displayedItem : selectedItem"
+        :show-back="mode === 'browse'"
+        :interval-millies="mode === 'display' ? menuIntervalMillies : 0"
+        :scroll-bottom-delay-millies="
+          mode === 'display' ? scrollToBottomDelayMillies : 0
+        "
+        :scroll-bottom-duration-millies="
+          mode === 'display' ? scrollToBottomDurationMillies : 0
+        "
+        :fullscreen="fullscreen && mode === 'display'"
+        :autoplay="autoplay"
         :language="language"
-        :show-back="!idList"
-        :interval-millies="menuIntervalMillies"
-        :scroll-bottom-delay-millies="scrollToBottomDelayMillies"
-        :scroll-bottom-duration-millies="scrollToBottomDurationMillies"
-        :fullscreen="fullscreen"
-        @close="closeDetail"
+        :key="displayedItem?.Id"
+        @close="unsetSelectedItem"
       />
       <items-list
-        v-else-if="!idList"
-        @show-detail="showDetail"
+        v-else-if="mode === 'browse'"
+        @show-detail="setSelectedItem"
         @next-page="nextPage"
         @last-page="lastPage"
         @go-to-page="goToPage"
@@ -87,6 +93,10 @@ export default Vue.extend({
     Spinner,
   },
   props: {
+    mode: {
+      type: String,
+      default: 'browse',
+    },
     idList: {
       type: String,
       default:
@@ -95,11 +105,11 @@ export default Vue.extend({
     },
     itemIntervalMillies: {
       type: Number,
-      default: 50000,
+      default: 25000,
     },
     menuIntervalMillies: {
       type: Number,
-      default: 10000,
+      default: 5000,
     },
     fullscreen: {
       type: Boolean,
@@ -111,7 +121,7 @@ export default Vue.extend({
     },
     scrollToBottomDurationMillies: {
       type: Number,
-      default: 8000,
+      default: 3000,
     },
     language: {
       type: String,
@@ -142,12 +152,12 @@ export default Vue.extend({
     const data: {
       items: SkiAreaLinked[] | null;
       selectedItem: SkiAreaLinked | null;
-      displayedItem: SkiAreaLinked | null;
+      displayedItem: SkiAreaLinked | undefined;
       currentPage: number;
     } = {
       items: null,
       selectedItem: null,
-      displayedItem: null,
+      displayedItem: undefined,
       currentPage: 1,
     };
 
@@ -158,6 +168,15 @@ export default Vue.extend({
       const fallbacks = ['Avenir', 'Helvetica', 'Arial', 'sans-serif'];
       return this.fontName ? [this.fontName, ...fallbacks] : fallbacks;
     },
+    autoplay(): boolean {
+      return (
+        this.mode === 'display' &&
+        (this.itemIntervalMillies != null ||
+          this.menuIntervalMillies != null ||
+          this.scrollToBottomDelayMillies != null ||
+          this.scrollToBottomDurationMillies != null)
+      );
+    },
   },
   watch: {
     language: {
@@ -166,29 +185,29 @@ export default Vue.extend({
         this.$i18n.locale = value;
       },
     },
-    idList: function() {
+    idListChecked: function() {
       this.loadItems;
     },
     items: function() {
-      this.setDisplayedItem();
+      this.displayFirstItem();
     },
     selectedItem: function() {
-      this.setDisplayedItem();
+      this.displayFirstItem();
     },
     displayedItem: function() {
-      this.scheduleNextDisplayedItem();
+      this.scheduleDisplayNextItem();
     },
   },
   created() {
-    if (this.idList) {
+    if (this.mode === 'display') {
       this.loadItems();
     }
   },
   methods: {
-    showDetail(item: SkiAreaLinked) {
+    setSelectedItem(item: SkiAreaLinked) {
       this.selectedItem = item;
     },
-    closeDetail() {
+    unsetSelectedItem() {
       this.selectedItem = null;
     },
     nextPage() {
@@ -200,10 +219,10 @@ export default Vue.extend({
     goToPage(pageNum: number) {
       this.currentPage = pageNum;
     },
-    setDisplayedItem() {
-      this.displayedItem = this.items?.[0] ?? this.selectedItem;
+    displayFirstItem() {
+      this.displayedItem = this.items?.[0];
     },
-    scheduleNextDisplayedItem() {
+    scheduleDisplayNextItem() {
       if (!this.itemIntervalMillies) return;
 
       setTimeout(() => {

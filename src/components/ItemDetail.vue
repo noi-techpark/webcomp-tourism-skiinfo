@@ -5,11 +5,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div class="d-flex flex-column w-100" :class="fullscreen ? '' : ''">
-    <div
-      v-if="isItemEmpty && !isLoading"
-      class="flex-grow-1 d-flex flex-row align-items-center"
-    >
+  <div class="d-flex flex-column w-100">
+    <div v-if="noItem" class="flex-grow-1 d-flex flex-row align-items-center">
       <Close v-if="showBack" @close="close" />
       {{ $t('noItemData') }}
     </div>
@@ -19,7 +16,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       class="d-flex flex-column shadow-sm"
       style="min-height: 100vh"
       :style="
-        scrollBottom
+        fullscreen && scrollBottom
           ? `animation: ScrollBottom ${scrollBottomDurationMillies}ms ease-in-out forwards;`
           : ''
       "
@@ -48,10 +45,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                   class="nav-link pointer py-1 py-lg-2 text-end"
                   :class="
                     `${selectedMenu === menu ? 'active' : ''} ${
-                      intervalMillies ? 'disabled' : ''
+                      autoplay || intervalMillies ? 'disabled' : ''
                     }`
                   "
-                  :aria-disabled="intervalMillies ? 'true' : 'false'"
+                  :aria-disabled="
+                    autoplay || intervalMillies ? 'true' : 'false'
+                  "
                   @click="selectedMenu = menu"
                   >{{ menu }}</a
                 >
@@ -156,6 +155,9 @@ export default Vue.extend({
     fullscreen: {
       type: Boolean,
     },
+    autoplay: {
+      type: Boolean,
+    },
   },
   data() {
     const data: {
@@ -213,7 +215,13 @@ export default Vue.extend({
       }, this.intervalMillies);
     },
     scheduleScrollDown() {
-      if (!this.fullscreen || !this.intervalMillies) return;
+      if (
+        !this.fullscreen ||
+        !this.intervalMillies ||
+        !this.scrollBottomDelayMillies ||
+        !this.scrollBottomDurationMillies
+      )
+        return;
 
       this.scrollBottom = false;
 
@@ -278,8 +286,8 @@ export default Vue.extend({
         return `background-image: url(${image.ImageUrl}); height: 300px; background-size: cover; background-position: center;`;
       }
     },
-    isItemEmpty(): boolean {
-      return Object.keys(this.item).length === 0;
+    noItem(): boolean {
+      return !this.item;
     },
   },
 });
