@@ -11,7 +11,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- SkiRegion -->
         <div
           v-if="skiRegionName"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
           <map-icon class="map-icon icon"></map-icon>
           <span>{{ $t('skiregion') }}:</span>
@@ -21,7 +21,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- Lift Count -->
         <div
           v-if="item.LiftCount"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
           <highlight class="highlight icon"></highlight>
           <span>{{ $t('props.LiftCount') }}:</span>
@@ -31,20 +31,23 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- Total Slope KM with colors -->
         <div
           v-if="hasSlopeInfo"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
           <distance-length class="distance-length icon"></distance-length>
           <span>{{ $t('props.TotalSlopeKm') }}:</span>
-          <span class="fw-bold">{{ item.TotalSlopeKm }} km</span> (
-          <span class="text-slope-blue">{{ item.SlopeKmBlue }}</span> /
-          <span class="text-slope-red">{{ item.SlopeKmRed }}</span> /
-          <span class="text-slope-black">{{ item.SlopeKmBlack }}</span> )
+          <div class="fw-bold">
+            <span>{{ item.TotalSlopeKm }} km</span> (
+            <span class="text-slope-blue">{{ item.SlopeKmBlue }}</span> /
+            <span class="text-slope-red">{{ item.SlopeKmRed }}</span> /
+            <span class="text-slope-black">{{ item.SlopeKmBlack }}</span>
+            )
+          </div>
         </div>
 
         <!-- Altitude -->
         <div
           v-if="item.AltitudeTo && item.AltitudeFrom"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
           <altitude-difference
             class="altitude-difference icon"
@@ -58,7 +61,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- Location info -->
         <div
           v-if="locationInfo"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
           <map-icon class="map-icon icon"></map-icon>
           <span>{{ $t('location') }}: </span>
@@ -70,10 +73,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- Contact info -->
         <div
           v-if="contactInfos"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
-          <external-link class=""></external-link>
-          <a :href="contactInfos.Url" target="_blank">
+          <external-link></external-link>
+          <span>{{ $t('web') }}: </span>
+          <a class="fw-bold" :href="contactInfos.Url" target="_blank">
             Homepage
           </a>
         </div>
@@ -81,7 +85,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- Phone info -->
         <div
           v-if="contactInfos"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
           <phone class="phone icon"></phone>
           <span>{{ $t('phone') }}: </span>
@@ -91,22 +95,26 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- Google Maps Link -->
         <div
           v-if="googleMapsLink"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
           <map-icon class="map-icon icon"></map-icon>
-          <a :href="googleMapsLink" target="_blank">Google Maps</a>
+          <span>{{ $t('info.location') }}: </span>
+          <a class="fw-bold" :href="googleMapsLink" target="_blank"
+            >Google Maps</a
+          >
         </div>
 
         <!-- Open / Closed -->
         <div
           v-if="isOpen != undefined"
-          class="col-12 col-lg-4 d-flex align-items-center gap-1"
+          class="col-12 col-lg-4 d-flex align-items-center gap-2"
+          fw-bold
         >
           <calendar class="calendar icon"></calendar>
-          <span v-if="isOpen" class="text-open-green">{{
+          <span v-if="isOpen" class="text-open-green fw-bold">{{
             $t(`scheduleTypes.1`)
           }}</span>
-          <span v-else class="text-closed-red">{{
+          <span v-else class="text-closed-red fw-bold">{{
             $t(`scheduleTypes.2`)
           }}</span>
         </div>

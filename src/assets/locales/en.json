@@ -41,6 +41,9 @@
     "weather": "No Weather Data",
     "webcam": "No Webcam Data"
   },
+  "info": {
+    "location": "Location"
+  },
   "mainType": "Main Category",
   "subType": "Subcategory",
   "altitudeDifference": "Height difference",

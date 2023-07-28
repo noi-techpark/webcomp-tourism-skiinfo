@@ -41,6 +41,9 @@
     "weather": "Keine Wetterdate",
     "webcam": "Keine Webcamdaten"
   },
+  "info": {
+    "location": "Ort"
+  },
   "mainType": "Hauptkategorie",
   "subType": "Unterkategorie",
   "altitudeDifference": "Höhenunterschied",
