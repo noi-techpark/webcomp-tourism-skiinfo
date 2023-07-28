@@ -18,26 +18,25 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       data-bs-theme="light"
       :style="
         `font-family: ${fontFamily}; min-height: ${
-          fullscreen && mode === 'display' ? '100vh' : '100%'
+          autoplay && mode === 'display' ? '100vh' : '100%'
         };`
       "
     >
       <item-detail
-        v-if="(mode === 'display' && displayedItem) || selectedItem"
-        :item="mode === 'display' ? displayedItem : selectedItem"
+        v-if="(mode === 'display' && displayedItem[0]) || selectedItem"
+        :item="mode === 'display' ? displayedItem[0] : selectedItem"
         :show-back="mode === 'browse'"
-        :interval-millies="mode === 'display' ? menuIntervalMillies : 0"
-        :scroll-bottom-delay-millies="
-          mode === 'display' ? scrollToBottomDelayMillies : 0
-        "
-        :scroll-bottom-duration-millies="
-          mode === 'display' ? scrollToBottomDurationMillies : 0
-        "
-        :fullscreen="fullscreen && mode === 'display'"
-        :autoplay="autoplay"
+        :autoplay="autoplay && mode === 'display'"
+        :scrollDelay="scrollDelay"
+        :scrollFactor="scrollFactor"
         :language="language"
-        :key="displayedItem?.Id"
+        :key="displayedItem[0]?.Id"
         @close="unsetSelectedItem"
+        @next-item="
+          setDisplayedItem(
+            ((displayedItem[1] ?? -1) + 1) % (items?.length ?? 1)
+          )
+        "
       />
       <items-list
         v-else-if="mode === 'browse'"
@@ -103,25 +102,17 @@ export default Vue.extend({
         'SKIFFC3B47C3CEA4426AE850E333EFE79CE,SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKIB0D17A56116D45EE9CC6EDDB9D4AD466',
       // '',
     },
-    itemIntervalMillies: {
-      type: Number,
-      default: 25000,
-    },
-    menuIntervalMillies: {
-      type: Number,
-      default: 5000,
-    },
-    fullscreen: {
+    autoplay: {
       type: Boolean,
-      default: false,
+      default: true,
     },
-    scrollToBottomDelayMillies: {
+    scrollDelay: {
       type: Number,
-      default: 1000,
+      default: 2000,
     },
-    scrollToBottomDurationMillies: {
+    scrollFactor: {
       type: Number,
-      default: 3000,
+      default: 15,
     },
     language: {
       type: String,
@@ -152,12 +143,12 @@ export default Vue.extend({
     const data: {
       items: SkiAreaLinked[] | null;
       selectedItem: SkiAreaLinked | null;
-      displayedItem: SkiAreaLinked | undefined;
+      displayedItem: [SkiAreaLinked?, number?];
       currentPage: number;
     } = {
       items: null,
       selectedItem: null,
-      displayedItem: undefined,
+      displayedItem: [],
       currentPage: 1,
     };
 
@@ -167,15 +158,6 @@ export default Vue.extend({
     fontFamily(): string[] {
       const fallbacks = ['Avenir', 'Helvetica', 'Arial', 'sans-serif'];
       return this.fontName ? [this.fontName, ...fallbacks] : fallbacks;
-    },
-    autoplay(): boolean {
-      return (
-        this.mode === 'display' &&
-        (this.itemIntervalMillies != null ||
-          this.menuIntervalMillies != null ||
-          this.scrollToBottomDelayMillies != null ||
-          this.scrollToBottomDurationMillies != null)
-      );
     },
   },
   watch: {
@@ -189,13 +171,7 @@ export default Vue.extend({
       this.loadItems;
     },
     items: function() {
-      this.displayFirstItem();
-    },
-    selectedItem: function() {
-      this.displayFirstItem();
-    },
-    displayedItem: function() {
-      this.scheduleDisplayNextItem();
+      this.setDisplayedItem(0);
     },
   },
   created() {
@@ -219,18 +195,8 @@ export default Vue.extend({
     goToPage(pageNum: number) {
       this.currentPage = pageNum;
     },
-    displayFirstItem() {
-      this.displayedItem = this.items?.[0];
-    },
-    scheduleDisplayNextItem() {
-      if (!this.itemIntervalMillies) return;
-
-      setTimeout(() => {
-        if (!this.items || !this.displayedItem) return;
-        const currentIndex = this.items.indexOf(this.displayedItem);
-        const nextIndex = (currentIndex + 1) % this.items.length;
-        this.displayedItem = this.items[nextIndex];
-      }, this.itemIntervalMillies);
+    setDisplayedItem(index: number) {
+      this.displayedItem = [this.items?.[index], index];
     },
     loadItems() {
       new CommonApi()

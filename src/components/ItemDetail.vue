@@ -13,15 +13,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
     <div
       v-else-if="item"
+      ref="scroll"
       class="d-flex flex-column shadow-sm"
       style="min-height: 100vh"
-      :style="
-        scrollBottom
-          ? `animation: ScrollBottom ${scrollBottomDurationMillies}ms ease-in-out forwards;`
-          : ''
-      "
     >
-      <div></div>
       <div
         class="flex-shrink-0 d-flex flex-column align-items-start"
         :class="showBack ? 'justify-content-between' : 'justify-content-end'"
@@ -45,12 +40,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                   class="nav-link pointer py-1 py-lg-2 text-end"
                   :class="
                     `${selectedMenu === menu ? 'active' : ''} ${
-                      autoplay || intervalMillies ? 'disabled' : ''
+                      autoplay ? 'disabled' : ''
                     }`
                   "
-                  :aria-disabled="
-                    autoplay || intervalMillies ? 'true' : 'false'
-                  "
+                  :aria-disabled="autoplay ? 'true' : 'false'"
                   @click="selectedMenu = menu"
                   >{{ menu }}</a
                 >
@@ -60,7 +53,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
-      <div class="flex-grow-1 p-4">
+      <div ref="content" class="flex-grow-1 p-4">
         <Info
           class="d-flex flex-column gap-4 h-100"
           :class="selectedMenu !== 'Info' ? 'd-none' : ''"
@@ -140,23 +133,17 @@ export default Vue.extend({
     showBack: {
       type: Boolean,
     },
-    intervalMillies: {
-      type: Number,
-      default: 0,
-    },
-    scrollBottomDelayMillies: {
-      type: Number,
-      default: 0,
-    },
-    scrollBottomDurationMillies: {
-      type: Number,
-      default: 0,
-    },
     fullscreen: {
       type: Boolean,
     },
     autoplay: {
       type: Boolean,
+    },
+    scrollDelay: {
+      type: Number,
+    },
+    scrollFactor: {
+      type: Number,
     },
   },
   data() {
@@ -169,7 +156,7 @@ export default Vue.extend({
       isLoading: boolean;
       menus: Menu[];
       selectedMenu: Menu;
-      scrollBottom: boolean;
+      scrollTime: number;
     } = {
       slopes: [],
       lifts: [],
@@ -179,7 +166,7 @@ export default Vue.extend({
       isLoading: false,
       menus: ['Info', 'Slopes', 'Lifts', 'Weather', 'Webcam'],
       selectedMenu: 'Info',
-      scrollBottom: false,
+      scrollTime: 0,
     };
 
     return data;
@@ -187,47 +174,51 @@ export default Vue.extend({
   created() {
     this.init();
   },
+  mounted() {
+    this.scheduleScrollDown();
+  },
   watch: {
     item: function() {
       this.init();
-    },
-    selectedMenu: function() {
-      this.scheduleNextSelectedMenu();
     },
   },
   methods: {
     init() {
       this.isLoading = true;
       this.loadSkiAreaMeasuringpoints();
-      this.scheduleScrollDown();
-      this.scheduleNextSelectedMenu();
     },
-    scheduleNextSelectedMenu() {
-      if (!this.intervalMillies) return;
+    getScrollTime() {
+      return (
+        (this.$refs.content as HTMLDivElement).clientHeight * this.scrollTime
+      );
+    },
+    showNextMenu() {
+      if (!this.autoplay) return;
 
-      setTimeout(() => {
-        this.scheduleScrollDown();
+      (this.$refs.scroll as HTMLDivElement).style.animation = '';
 
-        const currentIndex = this.menus.indexOf(this.selectedMenu);
-        const nextIndex = (currentIndex + 1) % this.menus.length;
+      const currentIndex = this.menus.indexOf(this.selectedMenu);
+      const nextIndex = currentIndex + 1;
 
-        this.selectedMenu = this.menus[nextIndex];
-      }, this.intervalMillies);
+      if (nextIndex >= this.menus.length) {
+        this.$emit('next-item');
+        return;
+      }
+
+      this.selectedMenu = this.menus[nextIndex];
+      this.scheduleScrollDown();
     },
     scheduleScrollDown() {
-      if (
-        !this.fullscreen ||
-        !this.intervalMillies ||
-        !this.scrollBottomDelayMillies ||
-        !this.scrollBottomDurationMillies
-      )
-        return;
-
-      this.scrollBottom = false;
+      if (!this.autoplay) return;
 
       setTimeout(() => {
-        this.scrollBottom = true;
-      }, this.scrollBottomDelayMillies);
+        (this.$refs
+          .scroll as HTMLDivElement).style.animation = `ScrollBottom ${this.getScrollTime()}ms linear forwards`;
+
+        setTimeout(() => {
+          this.showNextMenu();
+        }, this.getScrollTime() + this.scrollDelay);
+      }, this.scrollDelay);
     },
     dateFormat(dateString: string) {
       const d = new Date(dateString);

@@ -62,48 +62,30 @@
         }
       },
       {
-        "key": "item-interval-millies",
-        "type": "number",
-        "label": "Time each Ski Area is shown for in milliseconds. Ski Areas don't change if set to 0. (Display mode)",
-        "required": false,
-        "options": {
-          "default": 50000
-        }
-      },
-      {
-        "key": "menu-interval-millies",
-        "type": "number",
-        "label": "Time each Menu is shown for in milliseconds. Menus don't change if set to 0. (Display mode)",
-        "required": false,
-        "options": {
-          "default": 10000
-        }
-      },
-      {
-        "key": "fullscreen",
+        "key": "autoplay",
         "type": "null",
-        "label": "Enable auto scroll for menus taller than screen. Disables menus. Set to true when showing as standalone infographic. Set to false when embedding on a website. (Display mode)",
+        "label": "Enable auto scroll for menus taller than screen. Disables interactive menus. Set to true when showing as standalone infographic. Set to false when embedding on a website. (Display mode)",
         "required": false,
         "options": {
           "default": true
         }
       },
       {
-        "key": "scroll-to-bottom-delay-millies",
+        "key": "scroll-delay",
         "type": "number",
-        "label": "Time until auto scroll starts on a menu. Auto scroll starts instantly if set to 0 (buggy!). (Display mode + Fullscreen)",
+        "label": "Time in milliseconds before and after scroll on a menu. Auto scroll starts instantly if set to 0 (buggy!). (Display mode + Autoplay)",
         "required": false,
         "options": {
           "default": 1000
         }
       },
       {
-        "key": "scroll-to-bottom-duration-millies",
+        "key": "scroll-factor",
         "type": "number",
-        "label": "Time auto scroll takes to scroll to bottom. Auto scroll jumps to bottom instantly if set to 0. (Display mode + Fullscreen)",
+        "label": "Time in milliseconds auto scroll takes to scroll for each pixel. Auto scroll jumps to bottom instantly if set to 0. (Display mode + Autoplay)",
         "required": false,
         "options": {
-          "default": 8000
+          "default": 15
         }
       },
       {
