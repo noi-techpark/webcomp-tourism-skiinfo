@@ -145,6 +145,9 @@ export default Vue.extend({
     scrollFactor: {
       type: Number,
     },
+    excludeMenus: {
+      type: String,
+    },
   },
   data() {
     const data: {
@@ -164,7 +167,9 @@ export default Vue.extend({
       showImage: false,
       imageUrl: null,
       isLoading: false,
-      menus: ['Info', 'Slopes', 'Lifts', 'Weather', 'Webcam'],
+      menus: ['Info', 'Slopes', 'Lifts', 'Weather', 'Webcam']
+        .map((menu) => menu as Menu)
+        .filter((menu) => !this.excludeMenus.split(',').includes(menu)),
       selectedMenu: 'Info',
       scrollTime: 0,
     };

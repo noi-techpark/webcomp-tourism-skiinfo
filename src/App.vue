@@ -29,6 +29,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :autoplay="autoplay && mode === 'display'"
         :scroll-delay="scrollDelay"
         :scroll-factor="scrollFactor"
+        :exclude-menus="mode === 'display' ? excludeMenus : ''"
         :language="language"
         :key="displayedItem[0]?.Id"
         @close="unsetSelectedItem"
@@ -113,6 +114,10 @@ export default Vue.extend({
     scrollFactor: {
       type: Number,
       default: 15,
+    },
+    excludeMenus: {
+      type: String,
+      default: '',
     },
     language: {
       type: String,

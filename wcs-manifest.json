@@ -89,6 +89,15 @@
         }
       },
       {
+        "key": "exclude-menus",
+        "type": "text",
+        "label": "Menus to exclude (Display mode)",
+        "required": false,
+        "options": {
+          "default": ""
+        }
+      },
+      {
         "key": "enable-placeholder",
         "type": "null",
         "label": "Enable image placeholders. (Browse mode)",
