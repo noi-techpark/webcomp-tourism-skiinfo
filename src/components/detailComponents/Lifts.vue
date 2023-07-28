@@ -30,7 +30,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       </div>
     </div>
     <div v-else class="text-center">
-      <span>No lift data available</span>
+      <span>{{ $t('noData.lifts') }}</span>
     </div>
   </div>
 </template>

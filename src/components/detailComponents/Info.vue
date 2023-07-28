@@ -119,7 +119,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <small class="d-block mt-4">
         {{ $t('lastChange') }}: {{ item.LastChange }}
       </small>
-      <small class="d-block"> Opendatahub ID: {{ item.Id }} </small>
+      <small class="d-block">Opendatahub ID: {{ item.Id }}</small>
     </div>
   </div>
 </template>

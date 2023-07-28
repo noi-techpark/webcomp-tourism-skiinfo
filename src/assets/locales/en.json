@@ -35,6 +35,12 @@
     "Saturday": "Sat",
     "Sunday": "Sun"
   },
+  "noData": {
+    "slopes": "No Slopes Data",
+    "lifts": "No Lifts Data",
+    "weather": "No Weather Data",
+    "webcam": "No Webcam Data"
+  },
   "mainType": "Main Category",
   "subType": "Subcategory",
   "altitudeDifference": "Height difference",

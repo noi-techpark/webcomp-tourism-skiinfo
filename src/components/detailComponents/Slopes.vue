@@ -43,7 +43,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       </div>
     </div>
     <div v-else class="text-center">
-      <span>No slope data available</span>
+      <span>{{ $t('noData.slopes') }}</span>
     </div>
   </div>
 </template>

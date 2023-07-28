@@ -26,7 +26,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       </div>
     </div>
     <div v-else class="text-center">
-      <span>No webcam data available</span>
+      <span>{{ $t('noData.webcam') }}</span>
     </div>
   </div>
 </template>

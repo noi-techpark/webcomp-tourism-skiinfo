@@ -35,6 +35,12 @@
     "Saturday": "Sab",
     "Sunday": "Do"
   },
+  "noData": {
+    "slopes": "Nessun dato sulle piste da sci",
+    "lifts": "Nessun dato sugli impianti di risalita",
+    "weather": "Nessun dato meteo",
+    "webcam": "Nessun dato di webcam"
+  },
   "mainType": "Categoria Principale",
   "subType": "Sottocategoria",
   "altitudeDifference": "Differenza di altezza",
