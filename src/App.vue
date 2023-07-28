@@ -95,7 +95,7 @@ export default Vue.extend({
   props: {
     mode: {
       type: String,
-      default: 'browse',
+      default: 'display',
     },
     idList: {
       type: String,
@@ -113,7 +113,7 @@ export default Vue.extend({
     },
     fullscreen: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     scrollToBottomDelayMillies: {
       type: Number,
