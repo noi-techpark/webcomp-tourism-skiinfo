@@ -58,7 +58,7 @@
         "label": "List of ski area ids separated by ','. (See bottom left of a detail card) (Display mode)",
         "required": false,
         "options": {
-          "default": "SKIFFC3B47C3CEA4426AE850E333EFE79CE,SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKIB0D17A56116D45EE9CC6EDDB9D4AD466"
+          "default": "SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKI34ACBD6AE92F40EB9187C3785F942DE3,SKI6C7D174390D44D0ABC1C9105F8C37C5E"
         }
       },
       {

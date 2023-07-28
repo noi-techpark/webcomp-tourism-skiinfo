@@ -38,6 +38,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             ((displayedItem[1] ?? -1) + 1) % (items?.length ?? 1)
           )
         "
+        @previous-item="
+          setDisplayedItem((items?.length ?? 1) - (displayedItem[1] ?? 1) - 1)
+        "
       />
       <items-list
         v-else-if="mode === 'browse'"
@@ -100,8 +103,7 @@ export default Vue.extend({
     idList: {
       type: String,
       default:
-        'SKIFFC3B47C3CEA4426AE850E333EFE79CE,SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKIB0D17A56116D45EE9CC6EDDB9D4AD466',
-      // '',
+        'SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKI34ACBD6AE92F40EB9187C3785F942DE3,SKI6C7D174390D44D0ABC1C9105F8C37C5E',
     },
     autoplay: {
       type: Boolean,
@@ -146,12 +148,12 @@ export default Vue.extend({
   },
   data() {
     const data: {
-      items: SkiAreaLinked[] | null;
+      items: SkiAreaLinked[] | undefined;
       selectedItem: SkiAreaLinked | null;
       displayedItem: [SkiAreaLinked?, number?];
       currentPage: number;
     } = {
-      items: null,
+      items: undefined,
       selectedItem: null,
       displayedItem: [],
       currentPage: 1,
@@ -228,7 +230,12 @@ export default Vue.extend({
           false
         )
         .then((value) => {
-          this.items = value.data.length > 0 ? value.data : null;
+          const idList = this.idList.split(',');
+          const res = value.data.length > 0 ? value.data : undefined;
+          this.items = res?.sort(
+            ({ Id: a }, { Id: b }) =>
+              idList.indexOf(a ?? '') - idList.indexOf(b ?? '')
+          );
         });
     },
   },

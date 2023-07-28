@@ -23,7 +23,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :style="titleImage"
       >
         <Close v-if="showBack" class="mt-4 ms-4" @close="close" />
-
+        <div
+          v-else-if="!autoplay"
+          class="w-100 d-flex align-items-center justify-content-between px-4"
+          style="flex-basis: 50%"
+        >
+          <Direction direction="left" @previous-item="$emit('previous-item')" />
+          <Direction direction="right" @next-item="$emit('next-item')" />
+        </div>
         <div
           class="px-4 px-lg-4 pt-lg-5 w-100 gradient-white-transparent d-flex justify-content-between align-items-end"
         >
@@ -95,6 +102,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <script lang="ts">
 import Close from './detailComponents/Close.vue';
+import Direction from './detailComponents/Direction.vue';
 import Info from './detailComponents/Info.vue';
 import Lifts from './detailComponents/Lifts.vue';
 import Slopes from './detailComponents/Slopes.vue';
@@ -115,6 +123,7 @@ type Menu = 'Info' | 'Slopes' | 'Lifts' | 'Weather' | 'Webcam';
 export default Vue.extend({
   components: {
     Close,
+    Direction,
     Info,
     Lifts,
     Slopes,
