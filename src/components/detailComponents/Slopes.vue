@@ -112,6 +112,12 @@ export default Vue.extend({
             color: colorMap[color],
             slopes,
           };
+        })
+        .map((color) => {
+          color.slopes.sort(({ IsOpen: a }, { IsOpen: b }) =>
+            !a && b ? 1 : a && !b ? -1 : 0
+          );
+          return color;
         });
     },
   },

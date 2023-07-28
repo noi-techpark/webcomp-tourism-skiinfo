@@ -49,14 +49,21 @@ export default Vue.extend({
   },
   data() {
     const data: {
-      lifts: ODHActivityPoiLinked[] | null;
+      liftsUnsorted: ODHActivityPoiLinked[] | null;
       allLiftTypes: TagLinked[] | null;
     } = {
-      lifts: null,
+      liftsUnsorted: null,
       allLiftTypes: null,
     };
 
     return data;
+  },
+  computed: {
+    lifts(): ODHActivityPoiLinked[] | undefined {
+      return this.liftsUnsorted?.sort(({ IsOpen: a }, { IsOpen: b }) =>
+        !a && b ? 1 : a && !b ? -1 : 0
+      );
+    },
   },
   created() {
     this.init();
@@ -117,7 +124,7 @@ export default Vue.extend({
           undefined
         )
         .then((value) => {
-          this.lifts =
+          this.liftsUnsorted =
             !value.data.Items || value.data.Items.length === 0
               ? null
               : value.data.Items;
