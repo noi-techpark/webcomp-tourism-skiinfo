@@ -10,23 +10,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <div
         v-for="{ color, slopes } in slopeColors"
         :key="color"
-        class="col-12 col-lg-4"
+        class="col-12 col-md-6 col-lg-4"
       >
         <div>
           <div
             class="mx-2 mt-2 p-2 d-flex align-items-baseline gap-2 border-bottom"
           >
-            <!-- <h2
-              class="ratio ratio-1x1 rounded-pill fs-4 text-white"
-              :class="`background-slope-${color}`"
-              style="flex-basis: 8%"
-            >
-              <div class="d-flex align-items-center justify-content-center">
-                <div>
-                  {{ slopes.length }}
-                </div>
-              </div>
-            </h2> -->
             <h2 class="fs-3 mb-0 fw-bold" :class="`text-slope-${color}`">
               {{ slopes.length }}
               {{ color.charAt(0).toUpperCase() + color.slice(1) }}

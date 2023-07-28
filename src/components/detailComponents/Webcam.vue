@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <div
         v-for="webcam in filteredWebcams"
         :key="webcam.id"
-        class="col-12 col-lg-6"
+        class="col-12 col-md-6"
       >
         <div class="h-100 d-flex position-relative">
           <img
