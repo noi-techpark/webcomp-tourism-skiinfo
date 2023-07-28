@@ -189,7 +189,7 @@ export default Vue.extend({
     },
     getScrollTime() {
       return (
-        (this.$refs.content as HTMLDivElement).clientHeight * this.scrollTime
+        (this.$refs.content as HTMLDivElement).clientHeight * this.scrollFactor
       );
     },
     showNextMenu() {

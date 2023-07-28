@@ -27,8 +27,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :item="mode === 'display' ? displayedItem[0] : selectedItem"
         :show-back="mode === 'browse'"
         :autoplay="autoplay && mode === 'display'"
-        :scrollDelay="scrollDelay"
-        :scrollFactor="scrollFactor"
+        :scroll-delay="scrollDelay"
+        :scroll-factor="scrollFactor"
         :language="language"
         :key="displayedItem[0]?.Id"
         @close="unsetSelectedItem"
@@ -104,7 +104,7 @@ export default Vue.extend({
     },
     autoplay: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     scrollDelay: {
       type: Number,
