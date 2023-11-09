@@ -208,7 +208,7 @@ export default Vue.extend({
   methods: {
     init() {
       this.isLoading = true;
-      this.loadSkiAreaMeasuringpoints();
+      //this.loadSkiAreaMeasuringpoints();
     },
     getScrollTime() {
       return (

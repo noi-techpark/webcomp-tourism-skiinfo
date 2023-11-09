@@ -26,7 +26,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             class="py-2"
           >
             <td v-for="entry in Object.entries(point)" :key="entry[0]">
-              {{ entry[1] }}
+               <span v-if="entry[0] == 'LastSnowDate' || entry[0] == 'LastUpdate'">{{ entry[1] }}</span>               
+               <span v-else>{{ entry[1] }} </span>               
             </td>
           </tr>
         </tbody>
@@ -79,9 +80,9 @@ export default Vue.extend({
           Shortname?: string;
           SnowHeight?: string;
           newSnowHeight?: string;
-          LastSnowDate?: Date;
+          LastSnowDate?: string;
           Altitude?: number;
-          LastUpdate?: Date;
+          LastUpdate?: string;
         }[]
       | undefined {
       return this.rawMeasuringpoints?.map(
@@ -97,9 +98,9 @@ export default Vue.extend({
             Shortname: Shortname ?? undefined,
             SnowHeight: SnowHeight ?? undefined,
             newSnowHeight: newSnowHeight ?? undefined,
-            LastSnowDate: LastSnowDate ?? undefined,
+            LastSnowDate: LastSnowDate?.toString() != '0001-01-01T00:00:00' ? LastSnowDate?.toString() : 'no info',
             Altitude: Altitude ?? undefined,
-            LastUpdate: LastUpdate ?? undefined,
+            LastUpdate: LastUpdate != null ? new Date(LastUpdate).toDateString() : undefined,
           };
         }
       );
@@ -146,6 +147,7 @@ export default Vue.extend({
         )
         .then((value) => {
           this.rawMeasuringpoints = value.data.length === 0 ? null : value.data;
+          console.log(this.rawMeasuringpoints);
         });
     },
   },

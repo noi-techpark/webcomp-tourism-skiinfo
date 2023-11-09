@@ -14,6 +14,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <div v-if="!isOpen" class="badge rounded-pill text-bg-danger">
           Closed
         </div>
+
+        <div v-if="isOpen" class="badge rounded-pill text-bg-success">
+          Open
+        </div>
       </div>
       <div>
         <slot />

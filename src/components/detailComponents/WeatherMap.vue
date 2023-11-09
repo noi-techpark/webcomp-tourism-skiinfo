@@ -12,8 +12,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :center="center"
         :zoom="zoom"
         class="map"
-        ref="map"       
-        style="height:200px;"   
+        ref="myMap"               
         @ready="doSomethingOnReady"
       >  <!-- @update:center="centerUpdated" -->
       <l-tile-layer
@@ -200,7 +199,10 @@ export default Vue.extend({
                             
           this.center = [this.item.Latitude!, this.item.Longitude!]
 
-          //this.$refs.features.mapObject.openPopup(this.center);
+          //var myobject = this.$refs.features.mapObject as L.map
+          
+          //.openPopup(this.center);
+
           //https://vue2-leaflet.netlify.app/faq/#my-map-and-or-markers-don-t-fully-render-what-gives
         });
     },
@@ -210,8 +212,15 @@ export default Vue.extend({
         
   //  },
    doSomethingOnReady() {
-        //this.$refs.map.mapObject
-        console.log("ready");
+        const mymap = (this.$refs?.myMap as unknown as L.Map);
+        console.log('ready');
+        //console.log(mymap);
+        //mymap.setZoom(10);
+
+        //vue.runtime.esm.js:3049  TypeError: mymap.invalidateSize is not a function
+        mymap.invalidateSize();
+        mymap.setView(this.center, this.zoom);
+        //mymap.setTimeout(function(){map.invalidateSize(true);},500);;
    },
    returnMarkerLatLng(marker: Measuringpoint)
    {
@@ -223,8 +232,7 @@ export default Vue.extend({
       const snowheight = "<tr><td>Snow Height: " + marker.SnowHeight + "</td></tr>";
       const newsnow = "<tr><td>New Snow: " + marker.newSnowHeight + "</td></tr>";
       const lastupdate = "<tr><td>Last Update: " + marker.LastUpdate + "</td></tr>";
-      const altitude = "<tr><td>Altitude: " + marker.Altitude + "</td></tr>";
-      
+      const altitude = "<tr><td>Altitude: " + marker.Altitude + "</td></tr>";      
 
       return "<table class=\"table table-striped\">" + mpname + snowheight + newsnow + lastupdate + altitude + "</table>";
    }
@@ -237,10 +245,11 @@ export default Vue.extend({
 /* @import 'http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css'; */
 
  .map {
-   position: absolute;
+   position: relative;
    width: 100%;
-   max-height: 500px;
-   min-height: 250px;
+   height: 500px;
+   /* max-height: 500px;
+   min-height: 250px; */
    overflow :hidden
  }
  /* #mapContainer {

@@ -132,6 +132,12 @@ export interface SkiAreaLinked {
     LiftCount?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof SkiAreaLinked
+     */
+    AreaRadius?: string | null;
+    /**
+     * 
      * @type {number}
      * @memberof SkiAreaLinked
      */
