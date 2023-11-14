@@ -147,7 +147,6 @@ export default Vue.extend({
         )
         .then((value) => {
           this.rawMeasuringpoints = value.data.length === 0 ? null : value.data;
-          console.log(this.rawMeasuringpoints);
         });
     },
   },

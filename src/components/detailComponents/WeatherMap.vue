@@ -7,19 +7,18 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <template>
   <div>
     <div>
-      <!-- <div id="mapContainer"></div> -->
       <l-map
         :center="center"
         :zoom="zoom"
         class="map"
-        ref="myMap"               
-        @ready="doSomethingOnReady"
-      >  <!-- @update:center="centerUpdated" -->
-      <l-tile-layer
+        ref="myMap"           
+        @click="resizeMap"                            
+      >
+        <l-tile-layer
           :url="url"
         >             
         </l-tile-layer>  
-      <l-marker 
+        <l-marker 
         :lat-lng="center"
         >        
         </l-marker>
@@ -28,45 +27,25 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         >                   
         <!-- <l-popup :options="{ autoClose: false, closeOnClick: false }" :content="getMarkerContent(marker)"></l-popup>   -->
         </l-marker>         
-        <l-layer-group ref="popups">
-          <l-popup>Hallo</l-popup>
-        </l-layer-group>
       </l-map>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import L from 'leaflet';
-import { LMap, LTileLayer, LMarker, LPopup, LLayerGroup, } from 'vue2-leaflet';
+import { LMap, LTileLayer, LMarker, LPopup, LLayerGroup } from 'vue2-leaflet';
 import { LatLngTuple } from 'leaflet';
 import { WeatherApi } from '@/api/api';
 import { Measuringpoint, SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
-import { Icon } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-
-type D = Icon.Default & {
-  _getIconUrl?: string;
-};
-
-delete (Icon.Default.prototype as D)._getIconUrl;
-
-//Hack to load icons
-Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-});
-
 
 export default Vue.extend({
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    LPopup,
-    LLayerGroup
+    // LPopup,
+    // LLayerGroup
   },
   props: {
     item: {
@@ -106,7 +85,7 @@ export default Vue.extend({
     return data;
   },
   // mounted() {
-  //  this.setupLeafletMap();
+  //  this.doSomethingOnReady();
   // },
   computed: {
     measuringpoints():
@@ -161,12 +140,6 @@ export default Vue.extend({
     init() {
       this.loadMeasuringpoints();
     },
-    // setupLeafletMap() {
-    //   const mapDiv = L.map("mapContainer").setView(this.center!, 13);
-    //   L.tileLayer(
-    //     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',        
-    //   ).addTo(mapDiv);
-    // },
     loadMeasuringpoints() {
       if (!this.item.Id) return;
       new WeatherApi()
@@ -198,33 +171,19 @@ export default Vue.extend({
           this.rawMeasuringpoints = value.data.length === 0 ? null : value.data;
                             
           this.center = [this.item.Latitude!, this.item.Longitude!]
-
-          //var myobject = this.$refs.features.mapObject as L.map
-          
-          //.openPopup(this.center);
-
-          //https://vue2-leaflet.netlify.app/faq/#my-map-and-or-markers-don-t-fully-render-what-gives
+                    
         });
     },
-  //   centerUpdated (center: LatLngTuple) {
-  //         this.center = center;
-  //         //L.map("mapContainer").setView(this.center!, 15);
-        
-  //  },
-   doSomethingOnReady() {
-        const mymap = (this.$refs?.myMap as unknown as L.Map);
-        console.log('ready');
+  resizeMap() {
+        const mymap = (this.$refs?.myMap as LMap).mapObject;
+
+        console.log('refresh map');
         
         //working
-        mymap.setZoom(10);
-
-        //vue.runtime.esm.js:3049  TypeError: mymap.invalidateSize is not a function
-        //mymap.invalidateSize(true);
-        //vue.runtime.esm.js:3049  TypeError: mymap.invalidateSize is not a function
-        
-        mymap.setView(this.center, this.zoom);
-        //vue.runtime.esm.js:3049  TypeError: mymap.invalidateSize is not a function
-        //mymap.setTimeout(function(){map.invalidateSize(true);},500);;
+        //mymap.setZoom(10);        
+        mymap.invalidateSize();
+        //mymap.setView([40.7225, -74.0025], 14);
+        //mymap.setTimeout(function(){mymap.invalidateSize(true);},500);;
    },
    returnMarkerLatLng(marker: Measuringpoint)
    {
