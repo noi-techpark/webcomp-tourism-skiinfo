@@ -214,12 +214,16 @@ export default Vue.extend({
    doSomethingOnReady() {
         const mymap = (this.$refs?.myMap as unknown as L.Map);
         console.log('ready');
-        //console.log(mymap);
-        //mymap.setZoom(10);
+        
+        //working
+        mymap.setZoom(10);
 
         //vue.runtime.esm.js:3049  TypeError: mymap.invalidateSize is not a function
-        mymap.invalidateSize();
+        //mymap.invalidateSize(true);
+        //vue.runtime.esm.js:3049  TypeError: mymap.invalidateSize is not a function
+        
         mymap.setView(this.center, this.zoom);
+        //vue.runtime.esm.js:3049  TypeError: mymap.invalidateSize is not a function
         //mymap.setTimeout(function(){map.invalidateSize(true);},500);;
    },
    returnMarkerLatLng(marker: Measuringpoint)
@@ -248,8 +252,8 @@ export default Vue.extend({
    position: relative;
    width: 100%;
    height: 500px;
-   /* max-height: 500px;
-   min-height: 250px; */
+   max-height: 500px;
+   min-height: 300px;
    overflow :hidden
  }
  /* #mapContainer {
