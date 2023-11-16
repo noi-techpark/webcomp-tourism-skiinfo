@@ -73,7 +73,7 @@ export default Vue.extend({
   computed: {
     noWebcams(): boolean {
       return this.webcams?.every((webcam) => webcam.error) ?? true;
-    },    
+    },
     filteredWebcams():
       | {
           name: string | undefined;
@@ -99,10 +99,11 @@ export default Vue.extend({
       //this.testWebcams();
     },
     getWebcams() {
+      const webcamids = this.item.RelatedContent?.flatMap((webcamids) =>
+        webcamids.Type == 'webcam' ? webcamids.Id : []
+      );
 
-      const webcamids = this.item.RelatedContent?.flatMap(webcamids => webcamids.Type == "webcam" ? webcamids.Id : []);
-
-          new WebcamInfoApi()
+      new WebcamInfoApi()
         .v1WebcamInfoGet(
           this.language,
           1,
@@ -120,7 +121,7 @@ export default Vue.extend({
           undefined,
           undefined,
           undefined,
-          undefined,                    
+          undefined,
           false,
           undefined
         )
@@ -130,24 +131,26 @@ export default Vue.extend({
               ? null
               : value.data.Items;
 
-              this.webcams = this.webcamsraw?.map((webcam) => {
-                const url = webcam.Webcamurl
-                  ? webcam.Webcamurl
-                  : webcam.Previewurl
-                  ? webcam.Previewurl
-                  : '';
+          this.webcams = this.webcamsraw
+            ?.map((webcam) => {
+              const url = webcam.Webcamurl
+                ? webcam.Webcamurl
+                : webcam.Previewurl
+                ? webcam.Previewurl
+                : '';
 
-                return {
-                  name: webcam.Webcamname?.[this.language],
-                  url,
-                  id: webcam.WebcamId ?? '',
-                  error: false,
-                };
-              }).filter((e) => e.url && e.id);
+              return {
+                name: webcam.Webcamname?.[this.language],
+                url,
+                id: webcam.WebcamId ?? '',
+                error: false,
+              };
+            })
+            .filter((e) => e.url && e.id);
 
-              console.log(this.webcams);
-              this.testWebcams();
-        });                        
+          console.log(this.webcams);
+          this.testWebcams();
+        });
     },
     testWebcams() {
       this.webcams?.forEach((webcam) => {

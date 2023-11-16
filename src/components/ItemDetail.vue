@@ -80,13 +80,14 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           class="d-flex flex-column gap-4"
           :item="item"
           :language="language"
-        />        
+        />
 
         <Weather
           v-else-if="selectedMenu === 'Weather'"
           class="d-flex flex-column gap-4"
           :item="item"
           :language="language"
+          :refresh-marker="weatherMapRefreshMarker"
         />
 
         <Webcam
@@ -185,13 +186,12 @@ export default Vue.extend({
       showImage: false,
       imageUrl: null,
       isLoading: false,
-      menus: ['Info', 'Lifts','Slopes', 'Weather', 'Webcam']
+      menus: ['Info', 'Lifts', 'Slopes', 'Weather', 'Webcam']
         .map((menu) => menu as Menu)
         .filter((menu) => !this.excludeMenus.split(',').includes(menu)),
       selectedMenu: 'Info',
       scrollTime: 0,
     };
-
     return {
       ...data,
       weatherMapRefreshMarker: 0,
@@ -207,16 +207,16 @@ export default Vue.extend({
     item: function() {
       this.init();
     },
-    // selectedMenu(value) {
-    //   switch (value as Menu) {
-    //     case "WeatherMap":
-    //       this.weatherMapRefreshMarker++;
-    //   }
-    // },
+    selectedMenu(value) {
+      switch (value as Menu) {
+        case 'Weather':
+          this.weatherMapRefreshMarker++;
+      }
+    },
   },
   methods: {
     init() {
-      this.isLoading = true;      
+      this.isLoading = true;
     },
     getScrollTime() {
       return (
