@@ -76,7 +76,7 @@ import Spinner from './components/Spinner.vue';
 
 import { LMap, LTileLayer, LMarker, } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
-//import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.css';
 
 Vue.component('l-map', LMap);
 Vue.component('l-tile-layer', LTileLayer);
@@ -268,7 +268,7 @@ export default Vue.extend({
 
 <style lang="scss">
 @import './assets/scss/styles.scss';
-@import 'http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css';
+// @import 'http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css';
 
 #app {
   -webkit-font-smoothing: antialiased;

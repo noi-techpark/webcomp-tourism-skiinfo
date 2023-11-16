@@ -40,12 +40,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <div v-else class="text-center">
       <span>{{ $t('noData.weather') }}</span>
     </div>  
-    <div>
+    <div v-if="measuringpoints">
     <l-map
         :center="center"
         :zoom="zoom"
         class="map"
-        ref="myMap"           
+        ref="myMap"            
       >
         <l-tile-layer
           :url="url"
@@ -231,6 +231,11 @@ export default Vue.extend({
     lastsnowdate: function (date: any) {
       return moment(date).format('DD-MM-YYYY, HH:MM');
     },
+    resizeMap() {
+        const mymap = (this.$refs?.myMap as LMap).mapObject;
+        //console.log('refresh map');             
+        mymap.invalidateSize();        
+   },
   },  
 });
 </script>
