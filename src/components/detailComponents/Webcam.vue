@@ -6,7 +6,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div>
-    <div v-if="item.Webcam && !noWebcams" class="row g-4">
+    <div v-if="!noWebcams" class="row g-4">
       <div
         v-for="webcam in filteredWebcams"
         :key="webcam.id"
@@ -32,7 +32,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 </template>
 
 <script lang="ts">
-import { SkiAreaLinked } from '@/api/models';
+import { WebcamInfoApi } from '@/api';
+import { SkiAreaLinked, WebcamInfo } from '@/api/models';
 import Vue, { PropType } from 'vue';
 
 function withProxy(url: string) {
@@ -53,6 +54,7 @@ export default Vue.extend({
   },
   data() {
     const data: {
+      webcamsraw: WebcamInfo[] | null;
       webcams:
         | {
             name: string | undefined;
@@ -62,20 +64,8 @@ export default Vue.extend({
           }[]
         | undefined;
     } = {
-      webcams: this.item.Webcam?.map((webcam) => {
-        const url = webcam.Webcamurl
-          ? webcam.Webcamurl
-          : webcam.Previewurl
-          ? webcam.Previewurl
-          : '';
-
-        return {
-          name: webcam.Webcamname?.[this.language],
-          url,
-          id: webcam.WebcamId ?? '',
-          error: false,
-        };
-      }).filter((e) => e.url && e.id),
+      webcams: undefined,
+      webcamsraw: null,
     };
 
     return data;
@@ -83,7 +73,7 @@ export default Vue.extend({
   computed: {
     noWebcams(): boolean {
       return this.webcams?.every((webcam) => webcam.error) ?? true;
-    },
+    },    
     filteredWebcams():
       | {
           name: string | undefined;
@@ -105,7 +95,59 @@ export default Vue.extend({
   },
   methods: {
     init() {
-      this.testWebcams();
+      this.getWebcams();
+      //this.testWebcams();
+    },
+    getWebcams() {
+
+      const webcamids = this.item.RelatedContent?.flatMap(webcamids => webcamids.Type == "webcam" ? webcamids.Id : []);
+
+          new WebcamInfoApi()
+        .v1WebcamInfoGet(
+          this.language,
+          1,
+          1000,
+          undefined,
+          webcamids?.join() ?? undefined,
+          true,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,                    
+          false,
+          undefined
+        )
+        .then((value) => {
+          this.webcamsraw =
+            !value.data.Items || value.data.Items.length === 0
+              ? null
+              : value.data.Items;
+
+              this.webcams = this.webcamsraw?.map((webcam) => {
+                const url = webcam.Webcamurl
+                  ? webcam.Webcamurl
+                  : webcam.Previewurl
+                  ? webcam.Previewurl
+                  : '';
+
+                return {
+                  name: webcam.Webcamname?.[this.language],
+                  url,
+                  id: webcam.WebcamId ?? '',
+                  error: false,
+                };
+              }).filter((e) => e.url && e.id);
+
+              console.log(this.webcams);
+              this.testWebcams();
+        });                        
     },
     testWebcams() {
       this.webcams?.forEach((webcam) => {

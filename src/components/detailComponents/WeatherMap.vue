@@ -20,11 +20,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <l-marker 
         :lat-lng="center"
         >        
+        <l-popup :options="{ autoClose: false, closeOnClick: false }" :content="getSkiAreaContent()"></l-popup>  
         </l-marker>
         <l-marker v-for="marker in measuringpoints" :key="marker.Id"
         :lat-lng="returnMarkerLatLng(marker)"
         >                   
-        <!-- <l-popup :options="{ autoClose: false, closeOnClick: false }" :content="getMarkerContent(marker)"></l-popup>   -->
+        <l-popup :options="{ autoClose: false, closeOnClick: false }" :content="getMarkerContent(marker)"></l-popup>  
         </l-marker>         
       </l-map>
     </div>
@@ -37,13 +38,14 @@ import { LatLngTuple } from 'leaflet';
 import { WeatherApi } from '@/api/api';
 import { Measuringpoint, SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
+import moment from 'moment';
 
 export default Vue.extend({
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    // LPopup,
+    LPopup,
     // LLayerGroup
   },
   props: {
@@ -179,13 +181,19 @@ export default Vue.extend({
    },
    getMarkerContent(marker: Measuringpoint)
    {
-      const mpname = "<tr><td><h3>" + marker.Shortname + "</h2></td></tr>";
+      const mpname = "<tr><td><h3>" + marker.Shortname + "</h3></td></tr>";
       const snowheight = "<tr><td>Snow Height: " + marker.SnowHeight + "</td></tr>";
       const newsnow = "<tr><td>New Snow: " + marker.newSnowHeight + "</td></tr>";
-      const lastupdate = "<tr><td>Last Update: " + marker.LastUpdate + "</td></tr>";
+      const lastupdate = "<tr><td>Last Update: " + moment(marker.LastUpdate).format('DD-MM-YYYY HH:MM') + "</td></tr>";
       const altitude = "<tr><td>Altitude: " + marker.Altitude + "</td></tr>";      
 
       return "<table class=\"table table-striped\">" + mpname + snowheight + newsnow + lastupdate + altitude + "</table>";
+   },
+   getSkiAreaContent()
+   {
+      const mpname = "<h3>" + this.item?.Detail?.[this.language].Title + "</h3>";
+     
+      return mpname;
    }
   },
 });
@@ -202,12 +210,5 @@ export default Vue.extend({
    max-height: 500px;
    min-height: 300px;
    overflow :hidden
- }
- /* #mapContainer {
-   position: absolute;
-   width: 100%;
-   max-height: 500px;
-   min-height: 250px;
-   overflow :hidden
- } */
+ } 
 </style>
