@@ -12,7 +12,6 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :zoom="zoom"
         class="map"
         ref="myMap"           
-        @click="resizeMap"                            
       >
         <l-tile-layer
           :url="url"
@@ -174,17 +173,6 @@ export default Vue.extend({
                     
         });
     },
-  resizeMap() {
-        const mymap = (this.$refs?.myMap as LMap).mapObject;
-
-        console.log('refresh map');
-        
-        //working
-        //mymap.setZoom(10);        
-        mymap.invalidateSize();
-        //mymap.setView([40.7225, -74.0025], 14);
-        //mymap.setTimeout(function(){mymap.invalidateSize(true);},500);;
-   },
    returnMarkerLatLng(marker: Measuringpoint)
    {
         return [marker.Latitude, marker.Longitude];
