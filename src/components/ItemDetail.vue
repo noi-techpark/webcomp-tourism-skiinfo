@@ -62,46 +62,45 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
       <div ref="content" class="flex-grow-1 p-4">
         <Info
+          v-if="selectedMenu === 'Info'"
           class="d-flex flex-column gap-4 h-100"
-          :class="selectedMenu !== 'Info' ? 'd-none' : ''"
           :item="item"
           :language="language"
         />
 
         <Slopes
+          v-else-if="selectedMenu === 'Slopes'"
           class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Slopes' ? 'd-none' : ''"
           :item="item"
           :language="language"
         />
 
         <Lifts
+          v-else-if="selectedMenu === 'Lifts'"
           class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Lifts' ? 'd-none' : ''"
           :item="item"
           :language="language"
         />
 
         <Weather
+          v-else-if="selectedMenu === 'Weather'"
           class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Weather' ? 'd-none' : ''"
           :item="item"
           :language="language"
         />
 
         <Webcam
+          v-else-if="selectedMenu === 'Webcam'"
           class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Webcam' ? 'd-none' : ''"
           :item="item"
           :language="language"
         />
 
         <WeatherMap
+          v-else-if="selectedMenu === 'WeatherMap'"
           class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'WeatherMap' ? 'd-none' : ''"
           :item="item"
           :language="language"
-          :refresh-marker="weatherMapRefreshMarker"
         />
       </div>
     </div>
