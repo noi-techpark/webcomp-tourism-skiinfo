@@ -45,7 +45,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :center="center"
         :zoom="zoom"
         class="map"
-        ref="myMap"            
+        ref="myMap"     
+        @click="resizeMap"       
       >
         <l-tile-layer
           :url="url"
