@@ -6,42 +6,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div>
-    <div v-if="measuringpoints" class="table-responsive">
-      <table class="table table-striped ">
-        <thead>
-          <tr>
-            <th
-              v-for="title in titles"
-              :key="title"
-              class="col-2 py-2 text-nowrap"
-            >
-              {{ title }}
-            </th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr
-            v-for="(point, index) in measuringpoints"
-            :key="index"
-            class="py-2"
-          >
-            <td v-for="entry in Object.entries(point).filter(x => x[0] != 'Id' && x[0] != 'Altitude' && x[0] != 'Latitude' && x[0] != 'Longitude')" 
-              :key="entry[0]">    
-              <span v-if="entry[0] == 'Shortname'">{{ entry[1] }}</span>                                                     
-               <span v-if="entry[0] == 'LastSnowDate'">{{ lastsnowdate(entry[1]) }}</span>                              
-               <span v-if="entry[0] == 'LastUpdate'">{{ lastupdate(entry[1]) }}</span>                              
-               <span v-if="entry[0] == 'SnowHeight'">{{ entry[1] }} cm</span>                              
-               <span v-if="entry[0] == 'newSnowHeight'">{{ entry[1] }} cm</span>                                             
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div v-else class="text-center">
-      <span>{{ $t('noData.weather') }}</span>
-    </div>  
     <div>
-    <l-map
+      <l-map
         :center="center"
         :zoom="zoom"
         class="map"
@@ -56,20 +22,20 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         >        
         <l-popup :options="{ autoClose: false, closeOnClick: false }" :content="getSkiAreaContent()"></l-popup>  
         </l-marker>
-        <l-marker v-for="marker in measuringpoints" 
-        :key="marker.Id"
+        <l-marker v-for="marker in measuringpoints" :key="marker.Id"
         :lat-lng="returnMarkerLatLng(marker)"
         >                   
         <l-popup :options="{ autoClose: false, closeOnClick: false }" :content="getMarkerContent(marker)"></l-popup>  
         </l-marker>         
       </l-map>
-    </div>  
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { LMap, LTileLayer, LMarker, LPopup, LLayerGroup } from 'vue2-leaflet';
-import { LatLngTuple } from 'leaflet';import { WeatherApi } from '@/api/api';
+import { LatLngTuple } from 'leaflet';
+import { WeatherApi } from '@/api/api';
 import { Measuringpoint, SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
 import moment from 'moment';
@@ -98,7 +64,7 @@ export default Vue.extend({
       rawMeasuringpoints: Measuringpoint[] | null;
       titles: string[];
       url: string;
-      center: LatLngTuple | null;        
+      center: LatLngTuple;       
       zoom: number;
       markerLatLng: LatLngTuple[] | null;
     } = {
@@ -107,17 +73,21 @@ export default Vue.extend({
         'Name',
         'Snow Height',
         'New Snow',
-        'Last Snow Date',        
+        'Last Snow Date',
+        'Altitude',
         'Last Update',
       ],
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      center: null,
+      center: [46.7728692,10.7916716],
       zoom: 13,
       markerLatLng: null
     };
 
     return data;
   },
+  // mounted() {
+  //  this.doSomethingOnReady();
+  // },
   computed: {
     measuringpoints():
       | {
@@ -168,14 +138,11 @@ export default Vue.extend({
     },
   },
   methods: {
-    init() {      
+    init() {
       this.loadMeasuringpoints();
     },
     loadMeasuringpoints() {
       if (!this.item.Id) return;
-
-      this.center = [this.item.Latitude ?? 0, this.item.Longitude ?? 0];
-
       new WeatherApi()
         .v1WeatherMeasuringpointGet(
           undefined,
@@ -203,12 +170,15 @@ export default Vue.extend({
         )
         .then((value) => {
           this.rawMeasuringpoints = value.data.length === 0 ? null : value.data;
+                            
+          this.center = [this.item.Latitude!, this.item.Longitude!]
+                    
         });
     },
-    returnMarkerLatLng(marker: Measuringpoint)
-    {
-          return [marker.Latitude, marker.Longitude];
-    },
+   returnMarkerLatLng(marker: Measuringpoint)
+   {
+        return [marker.Latitude, marker.Longitude];
+   },
    getMarkerContent(marker: Measuringpoint)
    {
       const mpname = "<tr><td><h3>" + marker.Shortname + "</h3></td></tr>";
@@ -224,18 +194,15 @@ export default Vue.extend({
       const mpname = "<h3>" + this.item?.Detail?.[this.language].Title + "</h3>";
      
       return mpname;
-   },
-   lastupdate: function (date: any) {
-      return moment(date).format('DD-MM-YYYY');
-    },
-    lastsnowdate: function (date: any) {
-      return moment(date).format('DD-MM-YYYY, HH:MM');
-    },
-  },  
+   }
+  },
 });
 </script>
 
+
 <style>
+/* @import 'http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css'; */
+
  .map {
    position: relative;
    width: 100%;

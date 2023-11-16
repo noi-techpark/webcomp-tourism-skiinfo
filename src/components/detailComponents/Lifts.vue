@@ -89,6 +89,11 @@ export default Vue.extend({
       this.loadLifts();
     },
     loadLifts() {
+
+      //To many districts inside
+      // let districtIds = "";
+      // this.item.DistrictIds?.forEach((currentElement) => districtIds = districtIds + "fra" + currentElement + ",");      
+
       new ODHActivityPoiApi()
         .v1ODHActivityPoiGet(
           this.language,
@@ -100,11 +105,11 @@ export default Vue.extend({
           undefined,
           undefined,
           undefined,
-          undefined,
+          undefined,          
           this.language,
-          'ska' + this.item.Id,
+          this.item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419' ? 'ska' + this.item.Id : undefined,
           undefined,
-          undefined,
+          this.item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419' ? 'dss' : undefined,
           'aufstiegsanlagen',
           undefined,
           undefined,
@@ -123,9 +128,9 @@ export default Vue.extend({
           undefined,
           undefined,
           undefined,
-          undefined,
-          undefined,
-          undefined,
+          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419' ? this.item.Latitude?.toString() : undefined,
+          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419' ? this.item.Longitude?.toString() : undefined,
+          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419' ? this.item.AreaRadius?.toString() : undefined,
           undefined,
           undefined,
           undefined,

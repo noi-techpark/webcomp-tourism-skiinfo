@@ -62,39 +62,46 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
       <div ref="content" class="flex-grow-1 p-4">
         <Info
+          v-if="selectedMenu === 'Info'"
           class="d-flex flex-column gap-4 h-100"
-          :class="selectedMenu !== 'Info' ? 'd-none' : ''"
-          :item="item"
-          :language="language"
-        />
-
-        <Slopes
-          class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Slopes' ? 'd-none' : ''"
           :item="item"
           :language="language"
         />
 
         <Lifts
+          v-else-if="selectedMenu === 'Lifts'"
           class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Lifts' ? 'd-none' : ''"
           :item="item"
           :language="language"
         />
 
-        <Weather
+        <Slopes
+          v-else-if="selectedMenu === 'Slopes'"
           class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Weather' ? 'd-none' : ''"
+          :item="item"
+          :language="language"
+        />        
+
+        <Weather
+          v-else-if="selectedMenu === 'Weather'"
+          class="d-flex flex-column gap-4"
           :item="item"
           :language="language"
         />
 
         <Webcam
+          v-else-if="selectedMenu === 'Webcam'"
           class="d-flex flex-column gap-4"
-          :class="selectedMenu !== 'Webcam' ? 'd-none' : ''"
           :item="item"
           :language="language"
         />
+
+        <!-- <WeatherMap
+          v-else-if="selectedMenu === 'WeatherMap'"
+          class="d-flex flex-column gap-4"
+          :item="item"
+          :language="language"
+        /> -->
       </div>
     </div>
   </div>
@@ -107,6 +114,7 @@ import Info from './detailComponents/Info.vue';
 import Lifts from './detailComponents/Lifts.vue';
 import Slopes from './detailComponents/Slopes.vue';
 import Weather from './detailComponents/Weather.vue';
+// import WeatherMap from './detailComponents/WeatherMap.vue';
 import Webcam from './detailComponents/Webcam.vue';
 import { WeatherApi } from '@/api';
 import {
@@ -118,7 +126,7 @@ import {
 import { APIResponse } from '@/types';
 import Vue, { PropType } from 'vue';
 
-type Menu = 'Info' | 'Slopes' | 'Lifts' | 'Weather' | 'Webcam';
+type Menu = 'Info' | 'Lifts' | 'Slopes' | 'Weather' | 'Webcam';
 
 export default Vue.extend({
   components: {
@@ -129,6 +137,7 @@ export default Vue.extend({
     Slopes,
     Weather,
     Webcam,
+    //WeatherMap,
   },
   props: {
     item: {
@@ -176,14 +185,17 @@ export default Vue.extend({
       showImage: false,
       imageUrl: null,
       isLoading: false,
-      menus: ['Info', 'Slopes', 'Lifts', 'Weather', 'Webcam']
+      menus: ['Info', 'Lifts','Slopes', 'Weather', 'Webcam']
         .map((menu) => menu as Menu)
         .filter((menu) => !this.excludeMenus.split(',').includes(menu)),
       selectedMenu: 'Info',
       scrollTime: 0,
     };
 
-    return data;
+    return {
+      ...data,
+      weatherMapRefreshMarker: 0,
+    };
   },
   created() {
     this.init();
@@ -195,11 +207,16 @@ export default Vue.extend({
     item: function() {
       this.init();
     },
+    // selectedMenu(value) {
+    //   switch (value as Menu) {
+    //     case "WeatherMap":
+    //       this.weatherMapRefreshMarker++;
+    //   }
+    // },
   },
   methods: {
     init() {
-      this.isLoading = true;
-      this.loadSkiAreaMeasuringpoints();
+      this.isLoading = true;      
     },
     getScrollTime() {
       return (
