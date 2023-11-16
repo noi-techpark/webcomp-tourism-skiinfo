@@ -101,6 +101,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           :class="selectedMenu !== 'WeatherMap' ? 'd-none' : ''"
           :item="item"
           :language="language"
+          :refresh-marker="weatherMapRefreshMarker"
         />
       </div>
     </div>
@@ -192,7 +193,10 @@ export default Vue.extend({
       scrollTime: 0,
     };
 
-    return data;
+    return {
+      ...data,
+      weatherMapRefreshMarker: 0,
+    };
   },
   created() {
     this.init();
@@ -203,6 +207,12 @@ export default Vue.extend({
   watch: {
     item: function() {
       this.init();
+    },
+    selectedMenu(value) {
+      switch (value as Menu) {
+        case "WeatherMap":
+          this.weatherMapRefreshMarker++;
+      }
     },
   },
   methods: {

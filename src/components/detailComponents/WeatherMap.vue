@@ -57,6 +57,10 @@ export default Vue.extend({
       required: false,
       default: 'en',
     },
+    refreshMarker: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     const data: {
@@ -134,6 +138,9 @@ export default Vue.extend({
   watch: {
     item: function() {
       this.init();
+    },
+    refreshMarker() {
+      this.resizeMap();
     },
   },
   methods: {
