@@ -53,50 +53,24 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <span>{{ $t('noData.weather') }}</span>
     </div>
     <div v-if="measuringpoints">
-      <l-map
-        :center="center"
-        :zoom="zoom"
-        class="map"
-        ref="myMap"
-        @click="resizeMap"
-      >
-        <l-tile-layer :url="url"> </l-tile-layer>
-        <l-marker :lat-lng="center">
-          <l-popup
-            :options="{ autoClose: false, closeOnClick: false }"
-            :content="getSkiAreaContent()"
-          ></l-popup>
-        </l-marker>
-        <l-marker
-          v-for="marker in measuringpoints"
-          :key="marker.Id"
-          :lat-lng="returnMarkerLatLng(marker)"
-        >
-          <l-popup
-            :options="{ autoClose: false, closeOnClick: false }"
-            :content="getMarkerContent(marker)"
-          ></l-popup>
-        </l-marker>
-      </l-map>
+      <WeatherMap :item="item" :language="language" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { LMap, LTileLayer, LMarker, LPopup, LLayerGroup } from 'vue2-leaflet';
+import { LMap } from 'vue2-leaflet';
 import { LatLngTuple } from 'leaflet';
 import { WeatherApi } from '@/api/api';
 import { Measuringpoint, SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
 import moment from 'moment';
 
+import WeatherMap from './WeatherMap.vue';
+
 export default Vue.extend({
   components: {
-    LMap,
-    LTileLayer,
-    LMarker,
-    LPopup,
-    // LLayerGroup
+    WeatherMap,
   },
   props: {
     item: {
