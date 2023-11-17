@@ -87,7 +87,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           class="d-flex flex-column gap-4"
           :item="item"
           :language="language"
-          :refresh-marker="weatherMapRefreshMarker"
+          :refreshmarker="weatherMapRefreshMarker"
         />
 
         <Webcam
@@ -211,6 +211,7 @@ export default Vue.extend({
       switch (value as Menu) {
         case 'Weather':
           this.weatherMapRefreshMarker++;
+          console.log("refreshmarker" + this.weatherMapRefreshMarker);
       }
     },
   },

@@ -108,7 +108,7 @@ export default Vue.extend({
       required: false,
       default: 'en',
     },
-    refreshMarker: {
+    refreshmarker: {
       type: Number,
       required: true,
     },
@@ -186,7 +186,8 @@ export default Vue.extend({
     item: function() {
       this.init();
     },
-    refreshMarker() {      
+    refreshmarker: function() {      
+      console.log("refreshmarker changed");
       this.resizeMap();
     },
   },
@@ -253,7 +254,7 @@ export default Vue.extend({
         '</table>'
       );
     },
-    getSkiAreaContent() {
+    getSkiAreaContent: function() {
       const mpname =
         '<h3>' + this.item?.Detail?.[this.language].Title + '</h3>';
 
@@ -265,7 +266,7 @@ export default Vue.extend({
     lastsnowdate: function(date: any) {
       return moment(date).format('DD-MM-YYYY, HH:MM');
     },
-    resizeMap() {
+    resizeMap: function() {
       const mymap = (this.$refs?.myMap as LMap).mapObject;
       console.log('refresh map');
       mymap.invalidateSize();
