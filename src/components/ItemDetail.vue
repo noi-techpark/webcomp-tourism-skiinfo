@@ -97,12 +97,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           :language="language"
         />
 
-        <!-- <WeatherMap
+        <WeatherMap
           v-else-if="selectedMenu === 'WeatherMap'"
           class="d-flex flex-column gap-4"
           :item="item"
           :language="language"
-        /> -->
+        />
       </div>
     </div>
   </div>
@@ -115,7 +115,7 @@ import Info from './detailComponents/Info.vue';
 import Lifts from './detailComponents/Lifts.vue';
 import Slopes from './detailComponents/Slopes.vue';
 import Weather from './detailComponents/Weather.vue';
-// import WeatherMap from './detailComponents/WeatherMap.vue';
+import WeatherMap from './detailComponents/WeatherMap.vue';
 import Webcam from './detailComponents/Webcam.vue';
 import { WeatherApi } from '@/api';
 import {
@@ -127,7 +127,7 @@ import {
 import { APIResponse } from '@/types';
 import Vue, { PropType } from 'vue';
 
-type Menu = 'Info' | 'Lifts' | 'Slopes' | 'Weather' | 'Webcam';
+type Menu = 'Info' | 'Lifts' | 'Slopes' | 'Weather' | 'Webcam' | 'WeatherMap';
 
 export default Vue.extend({
   components: {
@@ -138,7 +138,7 @@ export default Vue.extend({
     Slopes,
     Weather,
     Webcam,
-    //WeatherMap,
+    WeatherMap,
   },
   props: {
     item: {
@@ -186,7 +186,7 @@ export default Vue.extend({
       showImage: false,
       imageUrl: null,
       isLoading: false,
-      menus: ['Info', 'Lifts', 'Slopes', 'Weather', 'Webcam']
+      menus: ['Info', 'Lifts', 'Slopes', 'Weather', 'Webcam', 'WeatherMap']
         .map((menu) => menu as Menu)
         .filter((menu) => !this.excludeMenus.split(',').includes(menu)),
       selectedMenu: 'Info',
