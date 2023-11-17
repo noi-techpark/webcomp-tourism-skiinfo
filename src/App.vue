@@ -268,7 +268,7 @@ export default Vue.extend({
 
 <style lang="scss">
 @import './assets/scss/styles.scss';
-// @import 'http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css';
+@import '//unpkg.com/leaflet@1.9.4/dist/leaflet.css';
 
 #app {
   -webkit-font-smoothing: antialiased;
