@@ -280,6 +280,8 @@ export default Vue.extend({
   position: relative;
   width: 100%;
   min-height: 300px;
+  max-height: 300px;
+  height: 350px;
   overflow: hidden;
 }
 </style>
