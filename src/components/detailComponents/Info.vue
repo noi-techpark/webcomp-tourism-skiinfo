@@ -204,9 +204,14 @@ export default Vue.extend({
       });
 
       const schedule = schedules?.[0];
-      if (!schedule?.Start || !schedule?.Stop) return undefined;
+      if (!schedule?.Start || !schedule?.Stop) return undefined;      
 
-      return schedule.Start < new Date() && schedule.Stop > new Date();
+      const start = new Date(schedule.Start);
+      const end = new Date(schedule.Stop);
+
+      if (start < new Date() && end > new Date()) return true;
+
+      return false;
     },
     detail(): Detail | undefined {
       return this.item?.Detail?.[this.language];

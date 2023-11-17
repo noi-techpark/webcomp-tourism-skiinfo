@@ -122,7 +122,7 @@ export default Vue.extend({
   props: {
     mode: {
       type: String,
-      default: 'display',
+      default: 'browse',
     },
     idList: {
       type: String,

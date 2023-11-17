@@ -36,9 +36,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
               :key="entry[0]"
             >
               <span v-if="entry[0] == 'Shortname'">{{ entry[1] }}</span>
-              <span v-if="entry[0] == 'LastSnowDate'">{{
-                lastsnowdate(entry[1])
-              }}</span>
+              <span v-if="entry[0] == 'LastSnowDate'">{{ lastsnowdate(entry[1]) }}</span>
               <span v-if="entry[0] == 'LastUpdate'">{{
                 lastupdate(entry[1])
               }}</span>
@@ -238,7 +236,9 @@ export default Vue.extend({
       return moment(date).format('DD-MM-YYYY');
     },
     lastsnowdate: function(date: any) {
-      return moment(date).format('DD-MM-YYYY, HH:MM');
+      const lastsnowdatetemp = moment(date).format('DD-MM-YYYY');
+      if (lastsnowdatetemp == '01-01-0001') return 'no info';
+      else return lastsnowdatetemp;
     },
     resizeMap: function() {
       const mymap = (this.$refs?.myMap as LMap).mapObject;

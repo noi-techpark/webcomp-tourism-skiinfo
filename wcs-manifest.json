@@ -49,7 +49,7 @@
         "required": true,
         "options": {
           "values": ["display", "browse"],
-          "default": "display"
+          "default": "browse"
         }
       },
       {
@@ -58,7 +58,7 @@
         "label": "List of ski area ids separated by ','. (See bottom left of a detail card) (Display mode)",
         "required": false,
         "options": {
-          "default": "SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKI34ACBD6AE92F40EB9187C3785F942DE3,SKI6C7D174390D44D0ABC1C9105F8C37C5E"
+          "default": ""
         }
       },
       {
@@ -67,7 +67,7 @@
         "label": "Enable auto scroll for menus taller than screen. Disables interactive menus. Set to true when showing as standalone infographic. Set to false when embedding on a website. (Display mode)",
         "required": false,
         "options": {
-          "default": true
+          "default": false
         }
       },
       {
