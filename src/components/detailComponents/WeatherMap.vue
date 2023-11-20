@@ -77,7 +77,7 @@ export default Vue.extend({
       ],
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       center: [46.7728692, 10.7916716],
-      zoom: 13,
+      zoom: 12,
       markerLatLng: null,
     };
 
