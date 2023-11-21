@@ -304,7 +304,7 @@ export default Vue.extend({
       if (image == null) {
         return '';
       } else {
-        return `background-image: url(${image.ImageUrl}); height: 300px; background-size: cover; background-position: center;`;
+        return `background-image: url(${image.ImageUrl + '&width=1980'}); height: 300px; background-size: cover; background-position: center;`;
       }
     },
     noItem(): boolean {

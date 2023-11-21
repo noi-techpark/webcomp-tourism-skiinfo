@@ -109,7 +109,7 @@ export default Vue.extend({
 
             const colorEntry = acc.find((e) => e.color === colorCode);
             
-            console.log(colorCode);
+            //console.log(colorCode);
 
             if (colorEntry) {
 
