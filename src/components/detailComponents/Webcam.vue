@@ -149,12 +149,13 @@ export default Vue.extend({
             .filter((e) => e.url && e.id);
 
           console.log(this.webcams);
-          this.testWebcams();
+          //this.testWebcams();
         });
     },
     testWebcams() {
       this.webcams?.forEach((webcam) => {
-        fetch(withProxy(webcam.url), { method: 'HEAD' })
+        //fetch(webcam.url.startsWith('https') ? webcam.url : withProxy(webcam.url), { method: 'HEAD' })
+        fetch(webcam.url, { method: 'HEAD' })
           .then((res) => (webcam.error = !res.ok))
           .catch(() => (webcam.error = true));
       });
