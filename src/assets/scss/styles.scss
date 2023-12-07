@@ -168,3 +168,29 @@ $open-green: #9bc320;
 // .scroll-bottom {
 //   animation: ScrollBottom 500ms ease-in-out 500ms forwards;
 // }
+
+/**********************
+FOOTER
+**********************/
+
+#footer {
+  margin-top: 25px;
+}
+
+#footer > a {
+  display: flex;
+  color: darkgrey;
+  text-decoration: none;
+  z-index: 100001;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#footer-text {
+  color: darkgrey;
+  margin-right: 10px;
+}
+
+.opendatahubid{
+  color: lightgrey;
+}

@@ -124,10 +124,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     </div>
 
     <div class="align-self-baseline">
-      <small class="d-block mt-4">
+      <!-- <small class="d-block mt-4">
         {{ $t('lastChange') }}: {{ item.LastChange }}
-      </small>
-      <small class="d-block">Opendatahub ID: {{ item.Id }}</small>
+      </small> -->
+      <small class="d-block opendatahubid">Opendatahub ID: {{ item.Id }}</small>
     </div>
   </div>
 </template>
@@ -204,7 +204,7 @@ export default Vue.extend({
       });
 
       const schedule = schedules?.[0];
-      if (!schedule?.Start || !schedule?.Stop) return undefined;      
+      if (!schedule?.Start || !schedule?.Stop) return undefined;
 
       const start = new Date(schedule.Start);
       const end = new Date(schedule.Stop);
