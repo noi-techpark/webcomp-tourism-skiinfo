@@ -8,7 +8,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
   <div>
     <div>
       <l-map :center="center" :zoom="zoom" class="map" ref="myMap">
-        <l-tile-layer :url="url"> </l-tile-layer>
+        <l-tile-layer
+          attribution="<a target='_blank' href='https://opendatahub.com'>OpenDataHub.com</a> | &copy; <a target='_blank' href='https://openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
+          :url="url"
+        >
+        </l-tile-layer>
         <l-marker :lat-lng="center">
           <l-popup
             :options="{ autoClose: false, closeOnClick: false }"
@@ -131,7 +135,7 @@ export default Vue.extend({
     this.init();
   },
   watch: {
-    item: function() {
+    item: function () {
       this.init();
     },
   },
