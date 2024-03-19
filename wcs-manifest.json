@@ -28,7 +28,10 @@
     }
   ],
   "image": "wcs-logo.png",
-  "searchTags": ["skiarea"],
+  "searchTags": [
+    "ski",
+    "tourism"
+  ],
   "dist": {
     "basePath": "dist",
     "files": ["odh-tourism-skiinfo.min.js"],
