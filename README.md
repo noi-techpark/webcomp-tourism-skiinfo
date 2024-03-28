@@ -11,7 +11,7 @@ SPDX-License-Identifier: CC0-1.0
 [![CI/CD](https://github.com/noi-techpark/webcomp-tourism-skiinfo/actions/workflows/main.yml/badge.svg)](https://github.com/noi-techpark/webcomp-tourism-skiinfo/actions/workflows/main.yml)
 
 A web component to display a list and details of skiareas located in South Tyrol.
-
+ 
 - [Tourism Details](#tourism-details)
   - [Usage](#usage)
     - [Attributes](#attributes)
