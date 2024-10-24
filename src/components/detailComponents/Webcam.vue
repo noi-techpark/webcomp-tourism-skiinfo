@@ -13,15 +13,16 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         class="col-12 col-md-6"
       >
         <div class="h-100 d-flex position-relative">
-          <img v-if="!webcam.hide"
+          <img
+            v-if="!webcam.hide"
             :src="webcam.url"
             class="flex-basis-full ratio ratio-16x9 object-fit-cover shadow-sm"
-            @error="webcam.hide=true" 
+            @error="webcam.hide = true"
           />
           <small
             class="position-absolute top-0 start-50 translate-middle-x m-0 py-1 px-2 bg-white rounded-bottom text-center text-nowrap"
           >
-           <span v-if="!webcam.hide">{{ webcam.name }}</span> 
+            <span v-if="!webcam.hide">{{ webcam.name }}</span>
           </small>
         </div>
       </div>

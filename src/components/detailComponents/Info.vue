@@ -117,6 +117,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           <span v-else class="text-closed-red fw-bold">{{
             $t(`scheduleTypes.2`)
           }}</span>
+          <span class="fw bold">{{ seasonDates }}</span>
         </div>
       </div>
 
@@ -142,6 +143,7 @@ import DistanceLength from '@/assets/img/ic_distancelength.svg';
 import Highlight from '@/assets/img/ic_highlight.svg';
 import MapIcon from '@/assets/img/ic_map.svg';
 import Phone from '@/assets/img/ic_phone.svg';
+import moment from 'moment';
 
 export default Vue.extend({
   components: {
@@ -167,6 +169,24 @@ export default Vue.extend({
   computed: {
     skiRegionName(): string | undefined {
       return this.item.SkiRegionName?.[this.language];
+    },
+    seasonDates(): string | undefined {
+      const schedules = this.item.OperationSchedule?.filter((s) => {
+        return s.Type === '1' || s.Type === '2' || s.Type === '3';
+      });
+
+      const schedule = schedules?.[0];
+      if (!schedule?.Start || !schedule?.Stop) return undefined;
+      else {
+        const formatL = moment.localeData().longDateFormat('L');
+        return (
+          '(' +
+          moment(schedule?.Start).format(formatL) +
+          ' - ' +
+          moment(schedule?.Stop).format(formatL) +
+          ')'
+        );
+      }
     },
     locationInfo(): string | undefined {
       let region = '';

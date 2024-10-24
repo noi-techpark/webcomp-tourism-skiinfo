@@ -94,29 +94,30 @@ export default Vue.extend({
       return this.slopes
         .reduce<{ color: string; slopes: ODHActivityPoiLinked[] }[]>(
           (acc, slope) => {
-
             //if no color assigned assign it on other1, other2, other3
 
             let colorCode = slope.Ratings?.Difficulty ?? 'other';
 
             //if no difficutly given check tags
-            if(colorCode == 'other')
-            {
-                slope.SmgTags?.find(x => x == 'blau') ? colorCode = '2' : 'other';
-                slope.SmgTags?.find(x => x == 'rot') ? colorCode = '4' : 'other';
-                slope.SmgTags?.find(x => x == 'schwarz') ? colorCode = '6' : 'other';
+            if (colorCode == 'other') {
+              slope.SmgTags?.find((x) => x == 'blau')
+                ? (colorCode = '2')
+                : 'other';
+              slope.SmgTags?.find((x) => x == 'rot')
+                ? (colorCode = '4')
+                : 'other';
+              slope.SmgTags?.find((x) => x == 'schwarz')
+                ? (colorCode = '6')
+                : 'other';
             }
 
             const colorEntry = acc.find((e) => e.color === colorCode);
-            
+
             //console.log(colorCode);
 
             if (colorEntry) {
-
               colorEntry.slopes.push(slope);
-         
             } else {
-              
               acc.push({
                 color: colorCode,
                 slopes: [slope],

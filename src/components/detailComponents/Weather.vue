@@ -36,7 +36,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
               :key="entry[0]"
             >
               <span v-if="entry[0] == 'Shortname'">{{ entry[1] }}</span>
-              <span v-if="entry[0] == 'LastSnowDate'">{{ lastsnowdate(entry[1]) }}</span>
+              <span v-if="entry[0] == 'LastSnowDate'">{{
+                lastsnowdate(entry[1])
+              }}</span>
               <span v-if="entry[0] == 'LastUpdate'">{{
                 lastupdate(entry[1])
               }}</span>
@@ -158,8 +160,8 @@ export default Vue.extend({
     item: function() {
       this.init();
     },
-    refreshmarker: function() {      
-      console.log("refreshmarker changed");
+    refreshmarker: function() {
+      console.log('refreshmarker changed');
       this.resizeMap();
     },
   },

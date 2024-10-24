@@ -135,7 +135,7 @@ export default Vue.extend({
     this.init();
   },
   watch: {
-    item: function () {
+    item: function() {
       this.init();
     },
   },

@@ -217,7 +217,7 @@ export default Vue.extend({
       switch (value as Menu) {
         case 'Weather':
           this.weatherMapRefreshMarker++;
-          //console.log("refreshmarker" + this.weatherMapRefreshMarker);
+        //console.log("refreshmarker" + this.weatherMapRefreshMarker);
       }
     },
   },
@@ -312,7 +312,8 @@ export default Vue.extend({
       if (image == null) {
         return '';
       } else {
-        return `background-image: url(${image.ImageUrl + '&width=1980'}); height: 300px; background-size: cover; background-position: center;`;
+        return `background-image: url(${image.ImageUrl +
+          '&width=1980'}); height: 300px; background-size: cover; background-position: center;`;
       }
     },
     noItem(): boolean {
