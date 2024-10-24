@@ -60,7 +60,7 @@ export default Vue.extend({
   data() {
     const data: {
       liftsUnsorted: ODHActivityPoiLinked[] | null;
-      allLiftTypes: TagLinked[] | null;
+      allLiftTypes: TagLinked[] | null | undefined;
     } = {
       liftsUnsorted: null,
       allLiftTypes: null,
@@ -157,8 +157,8 @@ export default Vue.extend({
     loadLiftTypes() {
       new TagApi()
         .v1TagGet(
-          undefined,
-          undefined,
+          1,
+          0,
           this.language,
           undefined,
           undefined,
@@ -174,7 +174,7 @@ export default Vue.extend({
           undefined
         )
         .then((value) => {
-          this.allLiftTypes = value.data;
+          this.allLiftTypes = value.data.Items;
         });
     },
     getLiftTypes(lift: ODHActivityPoiLinked): TagLinked[] {

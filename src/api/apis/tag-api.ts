@@ -17,6 +17,7 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { TagLinked } from '../models';
+import { TagLinkedJsonResult } from '../models';
 /**
  * TagApi - axios parameter creator
  * @export
@@ -264,7 +265,7 @@ export const TagApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async v1TagGet(pagenumber?: number, pagesize?: number, language?: string, validforentity?: string, mainentity?: string, displayascategory?: boolean, publishedon?: string, source?: string, fields?: Array<string>, searchfilter?: string, rawfilter?: string, rawsort?: string, localizationlanguage?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<TagLinked>>>> {
+        async v1TagGet(pagenumber?: number, pagesize?: number, language?: string, validforentity?: string, mainentity?: string, displayascategory?: boolean, publishedon?: string, source?: string, fields?: Array<string>, searchfilter?: string, rawfilter?: string, rawsort?: string, localizationlanguage?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<TagLinkedJsonResult>>> {
             const localVarAxiosArgs = await TagApiAxiosParamCreator(configuration).v1TagGet(pagenumber, pagesize, language, validforentity, mainentity, displayascategory, publishedon, source, fields, searchfilter, rawfilter, rawsort, localizationlanguage, removenullvalues, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -316,7 +317,7 @@ export const TagApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async v1TagGet(pagenumber?: number, pagesize?: number, language?: string, validforentity?: string, mainentity?: string, displayascategory?: boolean, publishedon?: string, source?: string, fields?: Array<string>, searchfilter?: string, rawfilter?: string, rawsort?: string, localizationlanguage?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<TagLinked>>> {
+        async v1TagGet(pagenumber?: number, pagesize?: number, language?: string, validforentity?: string, mainentity?: string, displayascategory?: boolean, publishedon?: string, source?: string, fields?: Array<string>, searchfilter?: string, rawfilter?: string, rawsort?: string, localizationlanguage?: string, removenullvalues?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<TagLinkedJsonResult>> {
             return TagApiFp(configuration).v1TagGet(pagenumber, pagesize, language, validforentity, mainentity, displayascategory, publishedon, source, fields, searchfilter, rawfilter, rawsort, localizationlanguage, removenullvalues, options).then((request) => request(axios, basePath));
         },
     };
@@ -367,7 +368,7 @@ export class TagApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TagApi
      */
-    public async v1TagGet(pagenumber?: number, pagesize?: number, language?: string, validforentity?: string, mainentity?: string, displayascategory?: boolean, publishedon?: string, source?: string, fields?: Array<string>, searchfilter?: string, rawfilter?: string, rawsort?: string, localizationlanguage?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<TagLinked>>> {
+    public async v1TagGet(pagenumber?: number, pagesize?: number, language?: string, validforentity?: string, mainentity?: string, displayascategory?: boolean, publishedon?: string, source?: string, fields?: Array<string>, searchfilter?: string, rawfilter?: string, rawsort?: string, localizationlanguage?: string, removenullvalues?: boolean, options?: AxiosRequestConfig) : Promise<AxiosResponse<TagLinkedJsonResult>> {
         return TagApiFp(this.configuration).v1TagGet(pagenumber, pagesize, language, validforentity, mainentity, displayascategory, publishedon, source, fields, searchfilter, rawfilter, rawsort, localizationlanguage, removenullvalues, options).then((request) => request(this.axios, this.basePath));
     }
 }

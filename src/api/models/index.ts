@@ -142,6 +142,7 @@ export * from './snow-report-base-data';
 export * from './stationdata';
 export * from './string-string-values-key-value-pair';
 export * from './tag-linked';
+export * from './tag-linked-json-result';
 export * from './tags';
 export * from './topic-linked';
 export * from './tourism-association-link';
