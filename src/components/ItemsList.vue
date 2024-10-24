@@ -58,6 +58,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                   >
                     {{ info }}
                   </div>
+                  <span v-if="isOpen(item)" class="text-open-green fw-bold">{{
+                      $t(`scheduleTypes.1`)
+                    }} </span>
+                    <span v-else class="text-closed-red fw-bold">{{
+                      $t(`scheduleTypes.2`)
+                    }} </span>
+                    <span>{{ getOpeningTime(item) }}</span>
                 </div>
               </div>
 
@@ -117,6 +124,7 @@ import POIPlaceholder from '@/assets/img/POI-Placeholder.svg';
 import Spinner from '@/components/Spinner.vue';
 import SearchIcon from '@/assets/img/ic_search.svg';
 import { SkiAreaLinked } from '@/api/models/ski-area-linked';
+import moment from 'moment';
 
 export default Vue.extend({
   components: {
@@ -240,6 +248,52 @@ export default Vue.extend({
       }
 
       return shortInfo.filter((info) => info != null);
+    },
+    isOpen(item: SkiAreaLinked): boolean {
+      const schedules = item.OperationSchedule?.filter((s) => {
+        return s.Type === '1' || s.Type === '2' || s.Type === '3';
+      });
+
+      const schedule = schedules?.[0];
+      if (!schedule?.Start || !schedule?.Stop) return false;
+
+      const start = new Date(schedule.Start);
+      const end = new Date(schedule.Stop);
+
+      if (start < new Date() && end > new Date()) return true;
+
+      return false;
+    },
+    getOpeningTime(item: SkiAreaLinked): string {
+      const schedules = item.OperationSchedule?.filter((s) => {
+        return s.Type === '1' || s.Type === '2' || s.Type === '3';
+      });
+
+      const schedule = schedules?.[0];
+      if (!schedule?.Start || !schedule?.Stop) return "";
+      else
+      {
+        const start = new Date(schedule.Start);
+        const end = new Date(schedule.Stop);
+
+        if (start < new Date() && end > new Date())  {
+        const formatL = moment.localeData().longDateFormat('L');
+        return (
+          '(until: ' +
+          moment(schedule?.Stop).format(formatL) +
+          ')'
+        );
+      }
+      else {
+        const formatL = moment.localeData().longDateFormat('L');
+        return (
+          '(opening on: ' +
+          moment(schedule?.Start).format(formatL) +
+          ')'
+        );
+      }
+      }
+      
     },
     getLocationInfo(item: SkiAreaLinked) {
       let region = '';
