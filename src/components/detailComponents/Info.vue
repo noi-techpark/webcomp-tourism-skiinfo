@@ -121,6 +121,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
+      <div class="mb-0 mt-2 fs-4" v-if="detail && detail.SubHeader" v-html="detail.SubHeader"></div>
       <div v-if="detail && detail.BaseText" v-html="detail.BaseText"></div>
     </div>
 

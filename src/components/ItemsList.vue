@@ -31,7 +31,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           <div class="pointer h-100">
             <div class="d-flex flex-row align-items-stretch gap-4">
               <div
-                style="height: 100px; width: 100px"
+                style="height: 130px; width: 130px"
                 class="ratio ratio-1x1 flex-shrink-0"
               >
                 <POIPlaceholder
@@ -48,8 +48,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
               <div
                 class="flex-shrink-1 text-truncate d-flex flex-column justify-content-around"
               >
-                <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
-                <div
+              <div
                   style="height: 24px; width: 24px"
                   class="ratio ratio-1x1 flex-shrink-0"
                 >
@@ -64,13 +63,37 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                   <img v-if="getSkiRegionImage(item) == 'ahrntal'"
                     class="rounded-1 object-fit-cover"
                     :src="require('@/assets/icons/ahrntal.png')"
-                  />                  
+                  />
                   <img v-if="getSkiRegionImage(item) == ''"
                     class="rounded-1 object-fit-cover"
                     :src="require('@/assets/icons/empty.png')"
                   />
-                  <!-- <small class="flex-al">{{ getskiRegionName(item) }}</small> -->
+                  <div class="ms-4 small">{{ getskiRegionName(item) }}</div>
                 </div>
+                <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
+                <span class="small">{{ getSubTitle(item, language) }}</span>
+                <!-- <div
+                  style="height: 24px; width: 24px"
+                  class="ratio ratio-1x1 flex-shrink-0"
+                >
+                  <img v-if="getSkiRegionImage(item) == 'dss'"
+                    class="rounded-1 object-fit-cover"
+                    :src="require('@/assets/icons/dss.png')"
+                  />
+                  <img v-if="getSkiRegionImage(item) == 'osa'"
+                    class="rounded-1 object-fit-cover"
+                    :src="require('@/assets/icons/osa.png')"
+                  />
+                  <img v-if="getSkiRegionImage(item) == 'ahrntal'"
+                    class="rounded-1 object-fit-cover"
+                    :src="require('@/assets/icons/ahrntal.png')"
+                  />
+                  <img v-if="getSkiRegionImage(item) == ''"
+                    class="rounded-1 object-fit-cover"
+                    :src="require('@/assets/icons/empty.png')"
+                  />
+                  <small class="flex-al">{{ getskiRegionName(item) }}</small>
+                </div> -->
                 <div>
                   <div
                     class="text-truncate small"
@@ -341,12 +364,15 @@ export default Vue.extend({
         tv = ' - ' + item?.LocationInfo?.TvInfo?.Name[this.language];
       }
 
-      const location = this.$t('location') + ': ' + region + tv;
+      //const location = this.$t('location') + ': ' + region + tv;
 
-      return location;
+      return region + tv;
     },
     getTitle(item: SkiAreaLinked, language: string) {
       return item?.Detail?.[language]?.Title ?? '';
+    },
+    getSubTitle(item: SkiAreaLinked, language: string) {
+      return item?.Detail?.[language]?.SubHeader ?? '';
     },
     getImage(item: SkiAreaLinked) {
       return item.ImageGallery?.[0].ImageUrl
