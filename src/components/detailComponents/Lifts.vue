@@ -193,7 +193,7 @@ export default Vue.extend({
     },
     getIcon(lift: ODHActivityPoiLinked): string | undefined {
       const entries = Object.entries(icons);
-      console.log(lift.Shortname);
+      //console.log(lift.Shortname);
       const tag = this.getLiftTypes(lift)[0].Id ?? 'cabin train';
       return entries.find((entry) => tag.includes(entry[0]))?.[1];
     },

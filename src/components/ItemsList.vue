@@ -53,10 +53,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                   style="height: 24px; width: 24px"
                   class="ratio ratio-1x1 flex-shrink-0"
                 >
-                  <img
+                  <img v-if="getSkiRegionImage(item) == 'dss'"
                     class="rounded-1 object-fit-cover"
-                    :src="require('@/assets/icons/' + getSkiRegionImage(item))"
-                    :alt="getskiRegionName(item)"
+                    :src="require('@/assets/icons/dss.png')"
+                  />
+                  <img v-if="getSkiRegionImage(item) == 'osa'"
+                    class="rounded-1 object-fit-cover"
+                    :src="require('@/assets/icons/osa.png')"
+                  />
+                  <img v-if="getSkiRegionImage(item) == 'ahrntal'"
+                    class="rounded-1 object-fit-cover"
+                    :src="require('@/assets/icons/ahrntal.png')"
+                  />                  
+                  <img v-if="getSkiRegionImage(item) == ''"
+                    class="rounded-1 object-fit-cover"
+                    :src="require('@/assets/icons/empty.png')"
                   />
                   <!-- <small class="flex-al">{{ getskiRegionName(item) }}</small> -->
                 </div>
@@ -344,12 +355,12 @@ export default Vue.extend({
     },
     getSkiRegionImage(item: SkiAreaLinked) {
       return item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419'
-        ? 'dss96.png'
+        ? 'dss'
         : item.SkiRegionId == '121569EF80404748803057DE3C9A92C0'
-        ? 'osa96.png'
+        ? 'osa'
         : item.SkiRegionId == 'EA4E0412203E472897362FCAA2CC5F74'
-        ? 'ahrntal96.png'
-        : 'empty.png';
+        ? 'ahrntal'
+        : '';
     },
     getskiRegionName(item: SkiAreaLinked) {
       if (item?.SkiRegionName?.[this.language]) {
