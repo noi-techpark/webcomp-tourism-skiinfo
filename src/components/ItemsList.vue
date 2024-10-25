@@ -29,7 +29,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           class="col-12 col-lg-6"
         >
           <div class="pointer h-100">
-            <div class="d-flex flex-row align-items-stretch gap-3">
+            <div class="d-flex flex-row align-items-stretch gap-4">
               <div
                 style="height: 100px; width: 100px"
                 class="ratio ratio-1x1 flex-shrink-0"
@@ -49,22 +49,33 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 class="flex-shrink-1 text-truncate d-flex flex-column justify-content-around"
               >
                 <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
+                <div
+                  style="height: 24px; width: 24px"
+                  class="ratio ratio-1x1 flex-shrink-0"
+                >
+                  <img
+                    class="rounded-1 object-fit-cover"
+                    :src="require('@/assets/icons/' + getSkiRegionImage(item))"
+                    :alt="getskiRegionName(item)"
+                  />
+                  <!-- <small class="flex-al">{{ getskiRegionName(item) }}</small> -->
+                </div>
                 <div>
                   <div
-                    class="text-truncate"
+                    class="text-truncate small"
                     v-for="(info, i) of getShortInfo(item)"
                     :key="i"
                     :title="info"
                   >
                     {{ info }}
                   </div>
-                  <span v-if="isOpen(item)" class="text-open-green fw-bold">{{
-                      $t(`scheduleTypes.1`)
-                    }} </span>
-                    <span v-else class="text-closed-red fw-bold">{{
-                      $t(`scheduleTypes.2`)
-                    }} </span>
-                    <span>{{ getOpeningTime(item) }}</span>
+                  <span v-if="isOpen(item)" class="text-open-green fw-bold"
+                    >{{ $t(`scheduleTypes.1`) }}
+                  </span>
+                  <span v-else class="text-closed-red fw-bold"
+                    >{{ $t(`scheduleTypes.2`) }}
+                  </span>
+                  <span class="small">{{ getOpeningTime(item) }}</span>
                 </div>
               </div>
 
@@ -162,6 +173,14 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    skiregionList: {
+      type: String,
+      default: null,
+    },
+    sorting: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     const data: {
@@ -203,13 +222,15 @@ export default Vue.extend({
       this.loadSkiAreaList(1);
     },
     loadSkiAreaList(pageNum: number) {
+      console.log('hallo' + this.skiregionList);
+
       this.isLoading = true;
       new CommonApi()
         .v1SkiAreaGet(
           pageNum,
           this.pageSize,
           undefined,
-          undefined,
+          this.skiregionList,
           true,
           undefined,
           undefined,
@@ -217,14 +238,18 @@ export default Vue.extend({
           this.language,
           this.language,
           undefined,
-          undefined,
+          this.sorting == 'random' ? new Date().getDay().toString() : undefined,
           undefined,
           this.searchInput,
           undefined,
           undefined,
           undefined,
           undefined,
-          undefined,
+          this.sorting == 'alphabetically'
+            ? 'Detail.' + this.language + '.Title'
+            : this.sorting == 'skiregion'
+            ? 'SkiRegionName.' + this.language
+            : undefined,
           false
         )
         .then((value) => {
@@ -241,11 +266,11 @@ export default Vue.extend({
 
       shortInfo.push(this.getLocationInfo(item));
 
-      if (item?.SkiRegionName?.[this.language]) {
-        const skiregion =
-          this.$t('skiregion') + ': ' + item.SkiRegionName[this.language];
-        shortInfo.push(skiregion);
-      }
+      // if (item?.SkiRegionName?.[this.language]) {
+      //   const skiregion =
+      //     this.$t('skiregion') + ': ' + item.SkiRegionName[this.language];
+      //   shortInfo.push(skiregion);
+      // }
 
       return shortInfo.filter((info) => info != null);
     },
@@ -270,28 +295,28 @@ export default Vue.extend({
       });
 
       const schedule = schedules?.[0];
-      if (!schedule?.Start || !schedule?.Stop) return "";
-      else
-      {
+      if (!schedule?.Start || !schedule?.Stop) return '';
+      else {
         const start = new Date(schedule.Start);
         const end = new Date(schedule.Stop);
 
-        if (start < new Date() && end > new Date())  {
-        const formatL = moment.localeData().longDateFormat('L');
-        return (
-          '(' + this.$t('openingto') +
-          moment(schedule?.Stop).format(formatL) +
-          ')'
-        );
-      }
-      else {
-        const formatL = moment.localeData().longDateFormat('L');
-        return (
-          '(' + this.$t('openingon') +
-          moment(schedule?.Start).format(formatL) +
-          ')'
-        );
-      }
+        if (start < new Date() && end > new Date()) {
+          const formatL = moment.localeData().longDateFormat('L');
+          return (
+            '(' +
+            this.$t('openedto') +
+            moment(schedule?.Stop).format(formatL) +
+            ')'
+          );
+        } else {
+          const formatL = moment.localeData().longDateFormat('L');
+          return (
+            '(' +
+            this.$t('openingon') +
+            moment(schedule?.Start).format(formatL) +
+            ')'
+          );
+        }
       }
     },
     getLocationInfo(item: SkiAreaLinked) {
@@ -316,6 +341,20 @@ export default Vue.extend({
       return item.ImageGallery?.[0].ImageUrl
         ? item.ImageGallery?.[0].ImageUrl + '&height=200'
         : undefined;
+    },
+    getSkiRegionImage(item: SkiAreaLinked) {
+      return item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419'
+        ? 'dss96.png'
+        : item.SkiRegionId == '121569EF80404748803057DE3C9A92C0'
+        ? 'osa96.png'
+        : item.SkiRegionId == 'EA4E0412203E472897362FCAA2CC5F74'
+        ? 'ahrntal96.png'
+        : 'empty.png';
+    },
+    getskiRegionName(item: SkiAreaLinked) {
+      if (item?.SkiRegionName?.[this.language]) {
+        return item.SkiRegionName[this.language];
+      } else return '';
     },
   },
 });

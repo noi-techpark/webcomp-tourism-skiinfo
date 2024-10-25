@@ -56,12 +56,31 @@
         }
       },
       {
+        "key": "sorting",
+        "type": "select",
+        "label": "Sorting of the Skiareas",
+        "required": true,
+        "options": {
+          "values": ["random", "alphabetically","skiregion"],
+          "default": "random"
+        }
+      },
+      {
         "key": "id-list",
         "type": "text",
         "label": "List of ski area ids separated by ','. (See bottom left of a detail card) (Display mode)",
         "required": false,
         "options": {
           "default": ""
+        }
+      },
+      {
+        "key": "skiregion-list",
+        "type": "multiselect",
+        "label": "Skiregion Filter",
+        "required": false,
+        "options": {
+          "values": ["ortler skiarena","dolomiti superski","skiregion tauferer ahrntal","skiverbund eisacktal-wipptal"]
         }
       },
       {
