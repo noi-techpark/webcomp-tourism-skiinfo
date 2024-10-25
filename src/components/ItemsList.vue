@@ -279,7 +279,7 @@ export default Vue.extend({
         if (start < new Date() && end > new Date())  {
         const formatL = moment.localeData().longDateFormat('L');
         return (
-          '(until: ' +
+          '(' + this.$t('openingto') +
           moment(schedule?.Stop).format(formatL) +
           ')'
         );
@@ -287,13 +287,12 @@ export default Vue.extend({
       else {
         const formatL = moment.localeData().longDateFormat('L');
         return (
-          '(opening on: ' +
+          '(' + this.$t('openingon') +
           moment(schedule?.Start).format(formatL) +
           ')'
         );
       }
       }
-      
     },
     getLocationInfo(item: SkiAreaLinked) {
       let region = '';

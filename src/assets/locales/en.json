@@ -94,5 +94,7 @@
   "persons": "People",
   "noItemData": "No data available for the set language",
   "searchSkiArea": "Search",
-  "skiregion": "Destination"
+  "skiregion": "Destination",
+  "openingon": "opening on: ",
+  "openedto": "until: "
 }
