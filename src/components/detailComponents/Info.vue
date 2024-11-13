@@ -121,7 +121,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
-      <div class="mb-0 mt-2 fs-4" v-if="detail && detail.SubHeader" v-html="detail.SubHeader"></div>
+      <div
+        class="mb-0 mt-2 fs-4"
+        v-if="detail && detail.SubHeader"
+        v-html="detail.SubHeader"
+      ></div>
       <div v-if="detail && detail.BaseText" v-html="detail.BaseText"></div>
     </div>
 
@@ -179,7 +183,7 @@ export default Vue.extend({
       const schedule = schedules?.[0];
       if (!schedule?.Start || !schedule?.Stop) return undefined;
       else {
-        const formatL = moment.localeData().longDateFormat('L');
+        const formatL = moment.localeData(this.language).longDateFormat('L');
         return (
           '(' +
           moment(schedule?.Start).format(formatL) +

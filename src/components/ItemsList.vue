@@ -48,27 +48,31 @@ SPDX-License-Identifier: AGPL-3.0-or-later
               <div
                 class="flex-shrink-1 text-truncate d-flex flex-column justify-content-around"
               >
-              <div
+                <div
                   style="height: 24px; width: 24px"
                   class="ratio ratio-1x1 flex-shrink-0"
                 >
-                  <img v-if="getSkiRegionImage(item) == 'dss'"
+                  <img
+                    v-if="getSkiRegionImage(item) == 'dss'"
                     class="rounded-1 object-fit-cover"
                     :src="require('@/assets/icons/dss.png')"
                   />
-                  <img v-if="getSkiRegionImage(item) == 'osa'"
+                  <img
+                    v-if="getSkiRegionImage(item) == 'osa'"
                     class="rounded-1 object-fit-cover"
                     :src="require('@/assets/icons/osa.png')"
                   />
-                  <img v-if="getSkiRegionImage(item) == 'ahrntal'"
+                  <img
+                    v-if="getSkiRegionImage(item) == 'ahrntal'"
                     class="rounded-1 object-fit-cover"
                     :src="require('@/assets/icons/ahrntal.png')"
                   />
-                  <img v-if="getSkiRegionImage(item) == ''"
+                  <img
+                    v-if="getSkiRegionImage(item) == ''"
                     class="rounded-1 object-fit-cover"
                     :src="require('@/assets/icons/empty.png')"
                   />
-                  <div class="ms-4 small">{{ getskiRegionName(item) }}</div>
+                  <!-- <div class="ms-4 small">{{ getskiRegionName(item) }}</div> -->
                 </div>
                 <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
                 <span class="small">{{ getSubTitle(item, language) }}</span>
@@ -211,6 +215,11 @@ export default Vue.extend({
       type: String,
       default: null,
     },
+    idList: {
+      type: String,
+      default: '',
+      //'SKI1D3A1908193F46E0B2D2C3A4F420FDAE,SKID0F083267FA0476E818FFD6E0F065968,SKIEC3B49365C47477B83D124D9AE6C3259,SKIED972FD646964BB7B5C48D845FC6A790,SKI24524D1085B94B798E86556CEA0F9D27,SKIDB8A00512E8B4714BDD1B7F065C2F38F,SKI8D0B57D3EB7649A4A4E389F2807FCC2D,SKIBCEE846200D84151998854D37FFC06AF,SKI28F1AE811BE8418DBCCACBAA604272C8,SKI28AC06BDE728421B90958330F11ABBE0,SKI451F7C4C21CF443F83BC9CD007870FD9,SKI606B8A0664354FC1A4A9836DAF7415C3,SKI376CDCBA8AFD4E159D5313DD26C56D26,SKI6C7D174390D44D0ABC1C9105F8C37C5E,SKI34ACBD6AE92F40EB9187C3785F942DE3,SKIC57DA31F859141A1802E86B410FEBD70,SKI04EBE61F5AA0473F871AF0297887D6C2,SKI2C99CEA3DF2F458FB75E45CA39222E9D,SKI8660FA0AAEF54865A7109BAB46AE6C23,SKI04A713E6479A4BE4BD158019A6DA546C,SKIB0D17X57116D4A5E9CR6EJDB9D4AD466,SKIFFC3B47C3CEA4426AE850E333EFE79CE,SKIB0D17A56116D45EE9CC6EDDB9D4AD466,SKI4972D41A8DC042F88190C154D9CC8A8E,SKI0E9790D2D4BD4F84B1E0055BC96277E4,SKI4096611E0BDA4794BB8983B897A68F7C',
+    },
     sorting: {
       type: String,
       default: null,
@@ -230,6 +239,49 @@ export default Vue.extend({
     };
 
     return data;
+  },
+  computed: {
+    mappedskiareaIds(): string {
+      const nameToIdMap: { [key: string]: string } = {
+        '3 Zinnen Dolomiten ski area': 'SKI04A713E6479A4BE4BD158019A6DA546C',
+        'Kronplatz ski area': 'SKI8660FA0AAEF54865A7109BAB46AE6C23',
+        'Gitschberg - Jochtal ski area': 'SKIB0D17A56116D45EE9CC6EDDB9D4AD466',
+        'Ratschings ski area': 'SKI4972D41A8DC042F88190C154D9CC8A8E',
+        'Schwemmalm ski area': 'SKI451F7C4C21CF443F83BC9CD007870FD9',
+        'Speikboden ski area': 'SKI4096611E0BDA4794BB8983B897A68F7C',
+        'Vigiljoch ski area': 'SKI28AC06BDE728421B90958330F11ABBE0',
+        'Watles ski area': 'SKI606B8A0664354FC1A4A9836DAF7415C3',
+        'Alta Badia ski area': 'SKI04EBE61F5AA0473F871AF0297887D6C2',
+        'Trafoi ski area': 'SKI8D0B57D3EB7649A4A4E389F2807FCC2D',
+        'Meran 2000 ski area': 'SKIDB8A00512E8B4714BDD1B7F065C2F38F',
+        'Carezza Dolomites ski area': 'SKI34ACBD6AE92F40EB9187C3785F942DE3',
+        'Alpe di Siusi - Val Gardena ski area':
+          'SKIFFC3B47C3CEA4426AE850E333EFE79CE',
+        'Pfelders ski area': 'SKIED972FD646964BB7B5C48D845FC6A790',
+        'Ski area Alpin Arena Schnals/Senales':
+          'SKI24524D1085B94B798E86556CEA0F9D27',
+        'Reinswald ski area': 'SKIBCEE846200D84151998854D37FFC06AF',
+        'Obereggen ski area': 'SKIC57DA31F859141A1802E86B410FEBD70',
+        'Val Gardena - Alpe di Siusi ski area':
+          'SKI2C99CEA3DF2F458FB75E45CA39222E9D',
+        'Rosskopf ski area': 'SKID0F083267FA0476E818FFD6E0F065968',
+        'Plose ski area': 'SKI6C7D174390D44D0ABC1C9105F8C37C5E',
+        'Sulden ski area': 'SKI28F1AE811BE8418DBCCACBAA604272C8',
+        'Rittner Horn ski area': 'SKI376CDCBA8AFD4E159D5313DD26C56D26',
+        'Schöneben - Haideralm ski area': 'SKI1D3A1908193F46E0B2D2C3A4F420FDAE',
+        'Klausberg ski area': 'SKI0E9790D2D4BD4F84B1E0055BC96277E4',
+        'Jochgrimm ski area': 'SKIB0D17X57116D4A5E9CR6EJDB9D4AD466',
+        'Ladurns ski area': 'SKIEC3B49365C47477B83D124D9AE6C3259',
+      };
+
+      const names = this.idList.split(',');
+      const ids = names.map((name) => {
+        name = name.trim();
+        return nameToIdMap[name] || name;
+      });
+
+      return ids.join(',');
+    },
   },
   created() {
     this.loadSkiAreaList(this.currentPage);
@@ -263,7 +315,7 @@ export default Vue.extend({
         .v1SkiAreaGet(
           pageNum,
           this.pageSize,
-          undefined,
+          this.mappedskiareaIds,
           this.skiregionList,
           true,
           undefined,
@@ -335,7 +387,7 @@ export default Vue.extend({
         const end = new Date(schedule.Stop);
 
         if (start < new Date() && end > new Date()) {
-          const formatL = moment.localeData().longDateFormat('L');
+          const formatL = moment.localeData(this.language).longDateFormat('L');
           return (
             '(' +
             this.$t('openedto') +
@@ -343,7 +395,7 @@ export default Vue.extend({
             ')'
           );
         } else {
-          const formatL = moment.localeData().longDateFormat('L');
+          const formatL = moment.localeData(this.language).longDateFormat('L');
           return (
             '(' +
             this.$t('openingon') +

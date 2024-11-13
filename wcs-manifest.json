@@ -46,15 +46,15 @@
     "tagName": "odh-tourism-skiinfo",
     "options": [
       {
-        "key": "mode",
+        "key": "language",
         "type": "select",
-        "label": "Toggle between display mode and browse mode. (Check description)",
-        "required": true,
+        "label": "Language",
+        "required": false,
         "options": {
-          "values": ["display", "browse"],
-          "default": "browse"
+          "values": ["en", "de", "it"],
+          "default": "en"
         }
-      },
+      },      
       {
         "key": "sorting",
         "type": "select",
@@ -67,11 +67,11 @@
       },
       {
         "key": "id-list",
-        "type": "text",
-        "label": "List of ski area ids separated by ','. (See bottom left of a detail card) (Display mode)",
+        "type": "multiselect",
+        "label": "List of ski areas to display",
         "required": false,
         "options": {
-          "default": ""
+          "values": ["3 Zinnen Dolomiten ski area","Kronplatz ski area","Gitschberg - Jochtal ski area","Ratschings ski area","Schwemmalm ski area","Speikboden ski area","Vigiljoch ski area","Watles ski area","Alta Badia ski area","Trafoi ski area","Meran 2000 ski area","Carezza Dolomites ski area","Alpe di Siusi - Val Gardena ski area","Pfelders ski area","Ski area Alpin Arena Schnals/Senales","Reinswald ski area","Obereggen ski area","Val Gardena - Alpe di Siusi ski area","Rosskopf ski area","Plose ski area","Sulden ski area","Rittner Horn ski area","Schöneben - Haideralm ski area","Klausberg ski area","Jochgrimm ski area","Ladurns ski area"]
         }
       },
       {
@@ -81,6 +81,25 @@
         "required": false,
         "options": {
           "values": ["ortler skiarena","dolomiti superski","skiregion tauferer ahrntal","skiverbund eisacktal-wipptal"]
+        }
+      },
+      {
+        "key": "mode",
+        "type": "select",
+        "label": "Select between display mode (kiosk view) and browse mode (listview, browseable detailview). (Check description)",
+        "required": true,
+        "options": {
+          "values": ["display", "browse"],
+          "default": "browse"
+        }
+      },
+      {
+        "key": "page-size",
+        "type": "number",
+        "label": "Number of list items per page (Browse mode)",
+        "required": false,
+        "options": {
+          "default": 8
         }
       },
       {
@@ -127,26 +146,7 @@
         "options": {
           "default": true
         }
-      },
-      {
-        "key": "page-size",
-        "type": "number",
-        "label": "Number of list items per page (Browse mode)",
-        "required": false,
-        "options": {
-          "default": 8
-        }
-      },
-      {
-        "key": "language",
-        "type": "select",
-        "label": "Language",
-        "required": false,
-        "options": {
-          "values": ["en", "de", "it"],
-          "default": "en"
-        }
-      },
+      },       
       {
         "key": "font-url",
         "type": "text",
