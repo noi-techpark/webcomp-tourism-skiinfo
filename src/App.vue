@@ -231,7 +231,7 @@ export default Vue.extend({
         'Plose ski area': 'SKI6C7D174390D44D0ABC1C9105F8C37C5E',
         'Sulden ski area': 'SKI28F1AE811BE8418DBCCACBAA604272C8',
         'Rittner Horn ski area': 'SKI376CDCBA8AFD4E159D5313DD26C56D26',
-        'Schöneben - Haideralm ski area': 'SKI1D3A1908193F46E0B2D2C3A4F420FDAE',
+        'Schoeneben/Haideralm ski area': 'SKI1D3A1908193F46E0B2D2C3A4F420FDAE',
         'Klausberg ski area': 'SKI0E9790D2D4BD4F84B1E0055BC96277E4',
         'Jochgrimm ski area': 'SKIB0D17X57116D4A5E9CR6EJDB9D4AD466',
         'Ladurns ski area': 'SKIEC3B49365C47477B83D124D9AE6C3259',
@@ -285,7 +285,7 @@ export default Vue.extend({
       this.displayedItem = [this.items?.[index], index];
     },
     loadItems() {
-      console.log(this.mappedskiareaIds);
+      //console.log(this.mappedskiareaIds);
       new CommonApi()
         .v1SkiAreaGet(
           undefined,
