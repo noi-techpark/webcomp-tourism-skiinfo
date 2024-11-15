@@ -113,7 +113,7 @@ export default Vue.extend({
           1,
           1000,
           undefined,
-          webcamids?.join() ?? undefined,
+          webcamids?.join() ?? '123456',
           true,
           undefined,
           undefined,
