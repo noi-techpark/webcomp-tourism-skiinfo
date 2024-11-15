@@ -113,7 +113,7 @@
       {
         "key": "mode",
         "type": "select",
-        "label": "Select between display mode (kiosk view) and browse mode (listview, browseable detailview). (Check description)",
+        "label": "Select between Display mode (kiosk view) and Browse mode (listview, browseable detailview). The display mode is usually for a Display/Totem View with automatic loop between Skiareas, the browse mode is for integration in webpage and having users interact with the component.",
         "required": true,
         "options": {
           "values": ["display", "browse"],
