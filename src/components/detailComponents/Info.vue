@@ -181,7 +181,7 @@ export default Vue.extend({
       });
 
       let localelang = this.language;
-      if (localelang == 'en') localelang = 'it';
+      if (localelang == 'en') localelang = 'en-GB';
       const formatL = moment.localeData(localelang).longDateFormat('L');
     
       const schedule = schedules?.[0];
