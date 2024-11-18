@@ -385,8 +385,12 @@ export default Vue.extend({
         const start = new Date(schedule.Start);
         const end = new Date(schedule.Stop);
 
+        let localelang = this.language;
+        if (localelang == 'en') localelang = 'de';
+
+        const formatL = moment.localeData(localelang).longDateFormat('L');
+
         if (start < new Date() && end > new Date()) {
-          const formatL = moment.localeData(this.language).longDateFormat('L');
           return (
             '(' +
             this.$t('openedto') +
@@ -394,7 +398,6 @@ export default Vue.extend({
             ')'
           );
         } else {
-          const formatL = moment.localeData(this.language).longDateFormat('L');
           return (
             '(' +
             this.$t('openingon') +

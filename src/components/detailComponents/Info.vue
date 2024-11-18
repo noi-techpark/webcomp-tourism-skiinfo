@@ -180,10 +180,13 @@ export default Vue.extend({
         return s.Type === '1' || s.Type === '2' || s.Type === '3';
       });
 
+      let localelang = this.language;
+      if (localelang == 'en') localelang = 'de';
+      const formatL = moment.localeData(localelang).longDateFormat('L');
+    
       const schedule = schedules?.[0];
       if (!schedule?.Start || !schedule?.Stop) return undefined;
       else {
-        const formatL = moment.localeData(this.language).longDateFormat('L');
         return (
           '(' +
           moment(schedule?.Start).format(formatL) +
