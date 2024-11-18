@@ -386,7 +386,7 @@ export default Vue.extend({
         const end = new Date(schedule.Stop);
 
         let localelang = this.language;
-        if (localelang == 'en') localelang = 'de';
+        if (localelang == 'en') localelang = 'it';
 
         const formatL = moment.localeData(localelang).longDateFormat('L');
 
