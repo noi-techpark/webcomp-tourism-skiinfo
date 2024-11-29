@@ -41,8 +41,8 @@
     "weather": "Keine Wetterdate",
     "webcam": "Keine Webcamdaten"
   },
-  "info": {
-    "location": "Ort"
+  "maps": {
+    "location": "Standort"
   },
   "mainType": "Hauptkategorie",
   "subType": "Unterkategorie",
@@ -96,5 +96,23 @@
   "searchSkiArea": "Suche",
   "skiregion": "Destination",
   "openingon": "öffnet am: ",
-  "openedto": "bis: "
+  "openedto": "bis: ",
+  "closed": "geschlossen",
+  "open": "geöffnet",
+  "blue": "Blau",
+  "red": "Rot",
+  "black": "Schwarz",
+  "Info": "Infos",
+  "Lifts": "Lifte",
+  "Slopes": "Pisten",
+  "Weather": "Wetter",
+  "Webcam": "Webcams",
+  "weathertable":{
+    "measuringpointname":"Name",
+    "snowheight":"Schneehöhe",
+    "newsnow":"Neuschnee",
+    "lastsnowdate":"Letzter Schneefall",
+    "lastupdate":"Letzte Änderung",
+    "altitude": "Meereshöhe"
+  }
 }

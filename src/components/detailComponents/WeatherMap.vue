@@ -182,14 +182,29 @@ export default Vue.extend({
     getMarkerContent(marker: Measuringpoint) {
       const mpname = '<tr><td><h3>' + marker.Shortname + '</h3></td></tr>';
       const snowheight =
-        '<tr><td>Snow Height: ' + marker.SnowHeight + '</td></tr>';
+        '<tr><td>' +
+        this.$t('weathertable.snowheight') +
+        ': ' +
+        marker.SnowHeight +
+        '</td></tr>';
       const newsnow =
-        '<tr><td>New Snow: ' + marker.newSnowHeight + '</td></tr>';
+        '<tr><td>' +
+        this.$t('weathertable.newsnow') +
+        ': ' +
+        marker.newSnowHeight +
+        '</td></tr>';
       const lastupdate =
-        '<tr><td>Last Update: ' +
+        '<tr><td>' +
+        this.$t('weathertable.lastupdate') +
+        ': ' +
         moment(marker.LastUpdate).format('DD-MM-YYYY HH:MM') +
         '</td></tr>';
-      const altitude = '<tr><td>Altitude: ' + marker.Altitude + '</td></tr>';
+      const altitude =
+        '<tr><td>' +
+        this.$t('weathertable.altitude') +
+        ': ' +
+        marker.Altitude +
+        '</td></tr>';
 
       return (
         '<table class="table table-striped">' +

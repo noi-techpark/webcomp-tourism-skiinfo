@@ -158,10 +158,11 @@
       },
       {
         "key": "exclude-menus",
-        "type": "text",
+        "type": "multiselect",
         "label": "Menus to exclude (Display mode)",
         "required": false,
         "options": {
+          "values": ["Info", "Lifts", "Slopes", "Weather", "Webcam"],
           "default": ""
         }
       },

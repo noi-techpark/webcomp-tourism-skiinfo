@@ -52,7 +52,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                   "
                   :aria-disabled="autoplay ? 'true' : 'false'"
                   @click="selectedMenu = menu"
-                  >{{ menu }}</a
+                  >{{ $t(menu) }}</a
                 >
               </div>
             </nav>

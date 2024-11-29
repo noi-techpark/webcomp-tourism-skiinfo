@@ -17,8 +17,8 @@
     "FacilityCodes_QualitySeals": "Quality seal"
   },
   "scheduleTypes": {
-    "1": "Open",
-    "2": "Closed"
+    "1": "open",
+    "2": "closed"
   },
   "timeCodes": {
     "1": "General opening hours",
@@ -41,7 +41,7 @@
     "weather": "No Weather Data",
     "webcam": "No Webcam Data"
   },
-  "info": {
+  "maps": {
     "location": "Location"
   },
   "mainType": "Main Category",
@@ -96,5 +96,23 @@
   "searchSkiArea": "Search",
   "skiregion": "Destination",
   "openingon": "opening on: ",
-  "openedto": "until: "
+  "openedto": "until: ",
+  "closed": "closed",
+  "open": "open",
+  "blue": "blue",
+  "red": "red",
+  "black": "black",
+  "Info": "Info",
+  "Lifts": "Lifts",
+  "Slopes": "Slopes",
+  "Weather": "Weather",
+  "Webcam": "Webcams",
+  "weathertable":{
+    "measuringpointname":"name",
+    "snowheight":"snow height",
+    "newsnow":"new snow height",
+    "lastsnowdate":"last snow date",
+    "lastupdate":"last update",
+    "altitude": "altutide"
+  }
 }

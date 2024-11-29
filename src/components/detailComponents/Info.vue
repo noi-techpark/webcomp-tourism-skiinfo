@@ -98,7 +98,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           class="col-12 col-lg-4 d-flex align-items-center gap-2"
         >
           <map-icon class="map-icon icon"></map-icon>
-          <span>{{ $t('info.location') }}: </span>
+          <span>{{ $t('maps.location') }}: </span>
           <a class="fw-bold" :href="googleMapsLink" target="_blank"
             >Google Maps</a
           >
@@ -183,7 +183,7 @@ export default Vue.extend({
       let localelang = this.language;
       if (localelang == 'en') localelang = 'en-GB';
       const formatL = moment.localeData(localelang).longDateFormat('L');
-    
+
       const schedule = schedules?.[0];
       if (!schedule?.Start || !schedule?.Stop) return undefined;
       else {

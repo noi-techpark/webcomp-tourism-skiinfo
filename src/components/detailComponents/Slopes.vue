@@ -18,7 +18,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           >
             <h2 class="fs-3 mb-0 fw-bold" :class="`text-slope-${color}`">
               {{ slopes.length }}
-              {{ color.charAt(0).toUpperCase() + color.slice(1) }}
+              {{ $t(color) }}
             </h2>
             <small>{{ getColorInfo(color).join(' | ') }}</small>
           </div>
@@ -181,7 +181,7 @@ export default Vue.extend({
 
       return [
         slopeKm ? slopeKm + ' km' : '',
-        openSlopes ? openSlopes + ' open' : '',
+        openSlopes ? openSlopes + ' ' + this.$t('open') : '',
       ].filter((e) => e != '');
     },
     loadSlopes() {

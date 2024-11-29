@@ -98,11 +98,11 @@ export default Vue.extend({
     } = {
       rawMeasuringpoints: null,
       titles: [
-        'Name',
-        'Snow Height',
-        'New Snow',
-        'Last Snow Date',
-        'Last Update',
+        this.$t('weathertable.measuringpointname').toString(),
+        this.$t('weathertable.snowheight').toString(),
+        this.$t('weathertable.newsnow').toString(),
+        this.$t('weathertable.lastsnowdate').toString(),
+        this.$t('weathertable.lastupdate').toString(),
       ],
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       center: null,
