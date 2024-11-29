@@ -162,8 +162,7 @@
         "label": "Menus to exclude (Display mode)",
         "required": false,
         "options": {
-          "values": ["Info", "Lifts", "Slopes", "Weather", "Webcam"],
-          "default": ""
+          "values": ["Info", "Lifts", "Slopes", "Weather", "Webcam"]          
         }
       },
       {
