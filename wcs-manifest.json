@@ -2,7 +2,7 @@
   "title": "Tourism Skiinfo",
   "shortName": "tourism-skiinfo",
   "description": "A web component to display SkiAreas with all Information. This Web Component supports two modes: display mode and browse mode. Display mode: shows one or more Ski Areas and switches automatically between them. Supports automatic switching between menus and fullscreen mode in which autoscroll for menus taller than page is enabled. This is intended as a non interactive infographic. Browse mode: Shows a browsable list of all Ski Areas and enables interactive navigation within them.",
-  "descriptionAbstract": "A web component to display SkiAreas with all Information test",
+  "descriptionAbstract": "A web component to display SkiAreas with all Information. <a href='https://github.com/noi-techpark/odh-docs/wiki/Webcomponent-Skiareas'>More info</a>",
   "license": "AGPL-3.0-or-later",
   "repositoryUrl": "https://github.com/noi-techpark/webcomp-tourism-skiinfo.git",
   "copyrightHolders": [
