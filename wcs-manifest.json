@@ -44,16 +44,7 @@
   },
   "configuration": {
     "tagName": "odh-tourism-skiinfo",
-    "options": [
-      {
-        "key": "moreinfo",
-        "type": "text",
-        "label": "more info on <a her",
-        "required": false,
-        "options": {
-          "default": ""
-        }
-      },
+    "options": [      
       {
         "key": "language",
         "type": "select",
