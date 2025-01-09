@@ -15,7 +15,7 @@ import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'a
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, ORIGIN, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { AreaLinked } from '../models';
 import { DistrictLinked } from '../models';
 import { ExperienceAreaLinked } from '../models';
@@ -58,6 +58,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            localVarQueryParameter['origin'] = ORIGIN;
 
             // authentication oauth2 required
             // oauth required
@@ -123,6 +125,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
+
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -186,6 +190,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            localVarQueryParameter['origin'] = ORIGIN;
 
             // authentication oauth2 required
             // oauth required
@@ -251,6 +257,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
+
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -314,6 +322,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            localVarQueryParameter['origin'] = ORIGIN;
 
             // authentication oauth2 required
             // oauth required
@@ -379,6 +389,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
+
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -442,6 +454,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            localVarQueryParameter['origin'] = ORIGIN;
 
             // authentication oauth2 required
             // oauth required
@@ -507,6 +521,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
+
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -571,6 +587,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
+
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -634,6 +652,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            localVarQueryParameter['origin'] = ORIGIN;
 
             // authentication oauth2 required
             // oauth required
@@ -706,6 +726,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            localVarQueryParameter['origin'] = ORIGIN;
 
             // authentication oauth2 required
             // oauth required
@@ -838,6 +860,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            localVarQueryParameter['origin'] = ORIGIN;
 
             // authentication oauth2 required
             // oauth required
@@ -987,6 +1011,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
+
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -1134,6 +1160,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
+
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -1277,6 +1305,8 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            localVarQueryParameter['origin'] = ORIGIN;
 
             // authentication oauth2 required
             // oauth required
@@ -1425,6 +1455,7 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -1568,6 +1599,7 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -1708,6 +1740,7 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -1839,6 +1872,7 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -1981,6 +2015,7 @@ export const CommonApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {

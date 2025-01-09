@@ -15,7 +15,7 @@ import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'a
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, ORIGIN, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { LocHelperclass } from '../models';
 /**
  * LocationApi - axios parameter creator
@@ -45,6 +45,7 @@ export const LocationApiAxiosParamCreator = function (configuration?: Configurat
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {

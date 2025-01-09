@@ -15,7 +15,7 @@ import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'a
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, ORIGIN, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { ODHActivityPoiLinked } from '../models';
 import { ODHActivityPoiLinkedJsonResult } from '../models';
 import { SmgPoiTypes } from '../models';
@@ -52,6 +52,7 @@ export const ODHActivityPoiApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -116,6 +117,7 @@ export const ODHActivityPoiApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -211,6 +213,7 @@ export const ODHActivityPoiApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
@@ -571,6 +574,7 @@ export const ODHActivityPoiApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            localVarQueryParameter['origin'] = ORIGIN;
             // authentication oauth2 required
             // oauth required
             if (configuration && configuration.accessToken) {
