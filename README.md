@@ -103,6 +103,10 @@ Change directory:
 ToDo: cd webcomp-tourism-skiinfo/
 ```
 
+### Environment
+
+Copy .env.example to .env and set all needed Environment Variables.
+
 ### Dependencies
 
 Download all dependencies:
