@@ -39,7 +39,8 @@
     "slopes": "No Slopes Data",
     "lifts": "No Lifts Data",
     "weather": "No Weather Data",
-    "webcam": "No Webcam Data"
+    "webcam": "No Webcam Data",
+    "lifttype": "undefined Lift type"
   },
   "maps": {
     "location": "Location"

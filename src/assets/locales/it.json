@@ -39,7 +39,8 @@
     "slopes": "nessun dato sulle piste da sci",
     "lifts": "nessun dato sugli impianti di risalita",
     "weather": "nessun dato meteo",
-    "webcam": "nessun dato di webcam"
+    "webcam": "nessun dato di webcam",
+    "lifttype": "tipo impianto non definito"
   },
   "maps": {
     "location": "posizione"

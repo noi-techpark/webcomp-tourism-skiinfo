@@ -13,7 +13,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :key="index"
       >
         <OpenClosed :is-open="lift.IsOpen">
-          <template #icon>
+          <template #icon v-if="getIcon(lift)">
             <img class="fs-3 s-em" :src="getIcon(lift)" alt="" />
           </template>
 
@@ -24,7 +24,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           </template>
 
           <template>
-            <span> {{ getinfo(lift).join(' | ') }}</span>
+            <span v-if="getinfo(lift).join(' | ') != 'missing'">{{ getinfo(lift).join(' | ') }}</span>
+            <span v-else> {{ $t('noData.lifttype') }}</span>
           </template>
         </OpenClosed>
       </div>
@@ -186,7 +187,7 @@ export default Vue.extend({
     },
     getinfo(lift: ODHActivityPoiLinked): string[] {
       return [
-        this.getLiftTypes(lift)[0]?.TagName?.[this.language] ?? '',
+        this.getLiftTypes(lift)[0]?.TagName?.[this.language] ?? 'missing',
         lift.DistanceLength ? lift.DistanceLength + ' m' : '',
         lift.AltitudeDifference ? lift.AltitudeDifference + ' hm' : '',
       ].filter((e) => e !== '');
@@ -194,7 +195,7 @@ export default Vue.extend({
     getIcon(lift: ODHActivityPoiLinked): string | undefined {
       const entries = Object.entries(icons);
       //console.log(lift.Shortname);
-      const tag = this.getLiftTypes(lift)[0].Id ?? 'cabin train';
+      const tag = this.getLiftTypes(lift)[0]?.Id ?? 'missing';
       return entries.find((entry) => tag.includes(entry[0]))?.[1];
     },
   },

@@ -39,7 +39,8 @@
     "slopes": "Kein Pistendaten",
     "lifts": "Keine Liftdaten",
     "weather": "Keine Wetterdate",
-    "webcam": "Keine Webcamdaten"
+    "webcam": "Keine Webcamdaten",
+    "lifttype": "Lift Typ nicht definiert"
   },
   "maps": {
     "location": "Standort"
