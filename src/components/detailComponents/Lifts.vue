@@ -139,7 +139,7 @@ export default Vue.extend({
             ? this.item.Longitude?.toString()
             : undefined,
           this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419'
-            ? this.item.AreaRadius?.toString()
+            ? (this.item.AreaRadius ?? 3000).toString()
             : undefined,
           undefined,
           undefined,
@@ -181,6 +181,7 @@ export default Vue.extend({
     getLiftTypes(lift: ODHActivityPoiLinked): TagLinked[] {
       return (
         this.allLiftTypes?.filter((liftType: TagLinked) =>
+        console.log(liftType.Id)
           lift.Tags?.some((tag) => tag.Id === liftType.Id)
         ) ?? []
       );

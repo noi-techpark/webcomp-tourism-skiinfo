@@ -429,9 +429,10 @@ export default Vue.extend({
       return item?.Detail?.[language]?.SubHeader ?? '';
     },
     getImage(item: SkiAreaLinked) {
-      return item.ImageGallery?.[0].ImageUrl
-        ? item.ImageGallery?.[0].ImageUrl + '&height=200'
-        : undefined;
+      const url = item.ImageGallery?.[0].ImageUrl;
+      if (!url) return undefined;
+      const appendSize = /opendatahub\.com|testingmachine\.eu|service\.suedtirol\.info/.test(url);
+      return appendSize ? url + '&height=200' : url;
     },
     getSkiRegionImage(item: SkiAreaLinked) {
       return item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419'
