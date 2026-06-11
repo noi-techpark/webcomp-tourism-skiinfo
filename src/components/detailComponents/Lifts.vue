@@ -181,7 +181,6 @@ export default Vue.extend({
     getLiftTypes(lift: ODHActivityPoiLinked): TagLinked[] {
       return (
         this.allLiftTypes?.filter((liftType: TagLinked) =>
-        console.log(liftType.Id)
           lift.Tags?.some((tag) => tag.Id === liftType.Id)
         ) ?? []
       );
