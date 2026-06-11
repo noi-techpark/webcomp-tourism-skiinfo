@@ -180,8 +180,7 @@
         "label": "Filter ski areas by data source",
         "required": false,
         "options": {
-          "values": ["dss", "discoverswiss", "idm"],
-          "default": ""
+          "values": ["dss", "discoverswiss", "idm"],          
         }
       },
       {
