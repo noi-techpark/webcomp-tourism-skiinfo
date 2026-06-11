@@ -59,6 +59,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :skiregion-list="skiregionList"
         :id-list="idList"
         :sorting="sorting"
+        :source-filter="source"
       />
       <div
         v-else
@@ -174,6 +175,10 @@ export default Vue.extend({
     enablePlaceholder: {
       type: Boolean,
       default: false,
+    },
+    source: {
+      type: String,
+      default: '',
     },
     fontUrl: {
       type: String,
@@ -294,7 +299,7 @@ export default Vue.extend({
           this.skiregionList,
           true,
           undefined,
-          undefined,
+          this.source || undefined,
           undefined,
           this.language,
           this.language,

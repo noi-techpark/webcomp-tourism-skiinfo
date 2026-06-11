@@ -175,6 +175,16 @@
         }
       },       
       {
+        "key": "source",
+        "type": "select",
+        "label": "Filter ski areas by data source",
+        "required": false,
+        "options": {
+          "values": ["dss", "discoverswiss", "idm"],
+          "default": ""
+        }
+      },
+      {
         "key": "font-url",
         "type": "text",
         "label": "URL to a valid font css file",

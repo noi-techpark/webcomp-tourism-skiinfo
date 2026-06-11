@@ -318,7 +318,7 @@ export default Vue.extend({
           this.skiregionList,
           true,
           undefined,
-          undefined,
+          this.sourceFilter || undefined,
           undefined,
           this.language,
           this.language,
