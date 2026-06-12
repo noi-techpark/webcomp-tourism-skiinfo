@@ -117,7 +117,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           <span v-else class="text-closed-red fw-bold">{{
             $t(`scheduleTypes.2`)
           }}</span>
-          <span class="fw bold">{{ seasonDates }}</span>
+          <span v-if="scheduleOutdated" class="text-muted fst-italic">{{ $t('noSeasonInfo') }}</span>
+          <span v-else class="fw bold">{{ seasonDates }}</span>
         </div>
       </div>
 
@@ -182,26 +183,32 @@ export default Vue.extend({
     skiRegionName(): string | undefined {
       return this.item.SkiRegionName?.[this.language];
     },
-    seasonDates(): string | undefined {
-      const schedules = this.item.OperationSchedule?.filter((s) => {
+    winterSchedule() {
+      return this.item.OperationSchedule?.filter((s) => {
         return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummerSeason(s.OperationscheduleName);
-      });
+      })?.[0];
+    },
+    scheduleOutdated(): boolean {
+      const s = this.winterSchedule;
+      if (!s?.Stop) return false;
+      return new Date(s.Stop) < new Date();
+    },
+    seasonDates(): string | undefined {
+      if (this.scheduleOutdated) return undefined;
+      const schedule = this.winterSchedule;
+      if (!schedule?.Start || !schedule?.Stop) return undefined;
 
       let localelang = this.language;
       if (localelang == 'en') localelang = 'en-GB';
       const formatL = moment.localeData(localelang).longDateFormat('L');
 
-      const schedule = schedules?.[0];
-      if (!schedule?.Start || !schedule?.Stop) return undefined;
-      else {
-        return (
-          '(' +
-          moment(schedule?.Start).format(formatL) +
-          ' - ' +
-          moment(schedule?.Stop).format(formatL) +
-          ')'
-        );
-      }
+      return (
+        '(' +
+        moment(schedule.Start).format(formatL) +
+        ' - ' +
+        moment(schedule.Stop).format(formatL) +
+        ')'
+      );
     },
     locationInfo(): string | undefined {
       let region = '';
@@ -234,11 +241,8 @@ export default Vue.extend({
         : undefined;
     },
     isOpen(): boolean | undefined {
-      const schedules = this.item.OperationSchedule?.filter((s) => {
-        return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummerSeason(s.OperationscheduleName);
-      });
-
-      const schedule = schedules?.[0];
+      if (this.scheduleOutdated) return false;
+      const schedule = this.winterSchedule;
       if (!schedule?.Start || !schedule?.Stop) return undefined;
 
       const start = new Date(schedule.Start);

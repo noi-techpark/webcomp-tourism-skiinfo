@@ -175,6 +175,17 @@ import SearchIcon from '@/assets/img/ic_search.svg';
 import { SkiAreaLinked } from '@/api/models/ski-area-linked';
 import moment from 'moment';
 
+const SUMMER_SEASON_NAMES = ['Sommersaison', 'summerseason', 'stagioneestiva'];
+
+function getWinterSchedule(item: SkiAreaLinked) {
+  return item.OperationSchedule?.filter((s) => {
+    const isSummer = s.OperationscheduleName
+      ? Object.values(s.OperationscheduleName).some((v) => SUMMER_SEASON_NAMES.includes(v))
+      : false;
+    return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummer;
+  })?.[0];
+}
+
 export default Vue.extend({
   components: {
     Spinner,
@@ -360,51 +371,34 @@ export default Vue.extend({
       return shortInfo.filter((info) => info != null);
     },
     isOpen(item: SkiAreaLinked): boolean {
-      const schedules = item.OperationSchedule?.filter((s) => {
-        return s.Type === '1' || s.Type === '2' || s.Type === '3';
-      });
-
-      const schedule = schedules?.[0];
+      const schedule = getWinterSchedule(item);
       if (!schedule?.Start || !schedule?.Stop) return false;
 
-      const start = new Date(schedule.Start);
       const end = new Date(schedule.Stop);
+      if (end < new Date()) return false;
 
+      const start = new Date(schedule.Start);
       if (start < new Date() && end > new Date()) return true;
 
       return false;
     },
     getOpeningTime(item: SkiAreaLinked): string {
-      const schedules = item.OperationSchedule?.filter((s) => {
-        return s.Type === '1' || s.Type === '2' || s.Type === '3';
-      });
-
-      const schedule = schedules?.[0];
+      const schedule = getWinterSchedule(item);
       if (!schedule?.Start || !schedule?.Stop) return '';
-      else {
-        const start = new Date(schedule.Start);
-        const end = new Date(schedule.Stop);
 
-        let localelang = this.language;
-        if (localelang == 'en') localelang = 'en-GB';
+      const start = new Date(schedule.Start);
+      const end = new Date(schedule.Stop);
 
-        const formatL = moment.localeData(localelang).longDateFormat('L');
+      if (end < new Date()) return '(' + this.$t('noSeasonInfo') + ')';
 
-        if (start < new Date() && end > new Date()) {
-          return (
-            '(' +
-            this.$t('openedto') +
-            moment(schedule?.Stop).format(formatL) +
-            ')'
-          );
-        } else {
-          return (
-            '(' +
-            this.$t('openingon') +
-            moment(schedule?.Start).format(formatL) +
-            ')'
-          );
-        }
+      let localelang = this.language;
+      if (localelang == 'en') localelang = 'en-GB';
+      const formatL = moment.localeData(localelang).longDateFormat('L');
+
+      if (start < new Date() && end > new Date()) {
+        return '(' + this.$t('openedto') + moment(schedule.Stop).format(formatL) + ')';
+      } else {
+        return '(' + this.$t('openingon') + moment(schedule.Start).format(formatL) + ')';
       }
     },
     getLocationInfo(item: SkiAreaLinked) {
