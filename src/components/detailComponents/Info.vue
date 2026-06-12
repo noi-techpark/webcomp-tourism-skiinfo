@@ -150,6 +150,13 @@ import MapIcon from '@/assets/img/ic_map.svg';
 import Phone from '@/assets/img/ic_phone.svg';
 import moment from 'moment';
 
+const SUMMER_SEASON_NAMES = ['Sommersaison', 'summerseason', 'stagioneestiva'];
+
+function isSummerSeason(name?: { [key: string]: string } | null): boolean {
+  if (!name) return false;
+  return Object.values(name).some((v) => SUMMER_SEASON_NAMES.includes(v));
+}
+
 export default Vue.extend({
   components: {
     ExternalLink,
@@ -177,7 +184,7 @@ export default Vue.extend({
     },
     seasonDates(): string | undefined {
       const schedules = this.item.OperationSchedule?.filter((s) => {
-        return s.Type === '1' || s.Type === '2' || s.Type === '3';
+        return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummerSeason(s.OperationscheduleName);
       });
 
       let localelang = this.language;
@@ -228,7 +235,7 @@ export default Vue.extend({
     },
     isOpen(): boolean | undefined {
       const schedules = this.item.OperationSchedule?.filter((s) => {
-        return s.Type === '1' || s.Type === '2' || s.Type === '3';
+        return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummerSeason(s.OperationscheduleName);
       });
 
       const schedule = schedules?.[0];
