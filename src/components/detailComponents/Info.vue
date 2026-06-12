@@ -158,6 +158,18 @@ function isSummerSeason(name?: { [key: string]: string } | null): boolean {
   return Object.values(name).some((v) => SUMMER_SEASON_NAMES.includes(v));
 }
 
+function getWinterSchedule(item: SkiAreaLinked) {
+  return item.OperationSchedule?.filter((s) => {
+    return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummerSeason(s.OperationscheduleName);
+  })?.[0];
+}
+
+function isScheduleOutdated(item: SkiAreaLinked): boolean {
+  const s = getWinterSchedule(item);
+  if (!s?.Stop) return false;
+  return new Date(s.Stop) < new Date();
+}
+
 export default Vue.extend({
   components: {
     ExternalLink,
@@ -183,19 +195,12 @@ export default Vue.extend({
     skiRegionName(): string | undefined {
       return this.item.SkiRegionName?.[this.language];
     },
-    winterSchedule() {
-      return this.item.OperationSchedule?.filter((s) => {
-        return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummerSeason(s.OperationscheduleName);
-      })?.[0];
-    },
     scheduleOutdated(): boolean {
-      const s = this.winterSchedule;
-      if (!s?.Stop) return false;
-      return new Date(s.Stop) < new Date();
+      return isScheduleOutdated(this.item);
     },
     seasonDates(): string | undefined {
-      if (this.scheduleOutdated) return undefined;
-      const schedule = this.winterSchedule;
+      if (isScheduleOutdated(this.item)) return undefined;
+      const schedule = getWinterSchedule(this.item);
       if (!schedule?.Start || !schedule?.Stop) return undefined;
 
       let localelang = this.language;
@@ -241,8 +246,8 @@ export default Vue.extend({
         : undefined;
     },
     isOpen(): boolean | undefined {
-      if (this.scheduleOutdated) return false;
-      const schedule = this.winterSchedule;
+      if (isScheduleOutdated(this.item)) return false;
+      const schedule = getWinterSchedule(this.item);
       if (!schedule?.Start || !schedule?.Stop) return undefined;
 
       const start = new Date(schedule.Start);
