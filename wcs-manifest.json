@@ -66,6 +66,16 @@
         }
       },
       {
+        "key": "source",
+        "type": "select",
+        "label": "Filter ski areas by data source",
+        "required": false,
+        "options": {
+          "values": ["dss", "discoverswiss", "idm"] ,
+          "default": "idm"   
+        }
+      },
+      {
         "key": "id-list",
         "type": "multiselect",
         "label": "List of ski areas to display",
@@ -174,15 +184,6 @@
           "default": true
         }
       },       
-      {
-        "key": "source",
-        "type": "select",
-        "label": "Filter ski areas by data source",
-        "required": false,
-        "options": {
-          "values": ["dss", "discoverswiss", "idm"],          
-        }
-      },
       {
         "key": "font-url",
         "type": "text",
