@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#bcd6ee"/>
+      <stop offset="0.65" stop-color="#e7f0f9"/>
+      <stop offset="1" stop-color="#f4f7fb"/>
+    </linearGradient>
+    <linearGradient id="far" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9db7cf"/>
+      <stop offset="1" stop-color="#c9d9e8"/>
+    </linearGradient>
+    <linearGradient id="near" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5f7f9c"/>
+      <stop offset="1" stop-color="#8aa6bf"/>
+    </linearGradient>
+    <linearGradient id="snowfield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e3edf6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="600" fill="url(#sky)"/>
+  <circle cx="760" cy="115" r="42" fill="#ffffff" opacity="0.85"/>
+
+  <!-- far range -->
+  <path d="M0 330 L120 250 L210 300 L330 190 L450 285 L560 215 L690 300 L800 230 L930 290 L1060 210 L1200 280 L1200 600 L0 600 Z" fill="url(#far)"/>
+  <path d="M330 190 L370 222 L352 230 L330 214 L306 236 L296 222 Z M560 215 L590 238 L572 244 L556 234 L538 246 Z M1060 210 L1092 236 L1072 242 L1056 232 L1036 246 Z" fill="#ffffff" opacity="0.9"/>
+
+  <!-- near range -->
+  <path d="M0 420 L170 300 L260 360 L420 210 L560 350 L650 290 L760 380 L900 250 L1050 360 L1200 300 L1200 600 L0 600 Z" fill="url(#near)"/>
+  <path d="M420 210 L478 262 L452 270 L438 258 L420 274 L400 258 L384 268 L366 258 Z M900 250 L952 296 L928 302 L912 290 L896 304 L876 290 L856 296 Z M170 300 L210 328 L190 334 L176 324 L160 334 L146 318 Z" fill="#ffffff"/>
+
+  <!-- snow field and slope -->
+  <path d="M0 470 C200 420 380 400 600 420 C820 440 1000 410 1200 380 L1200 600 L0 600 Z" fill="url(#snowfield)"/>
+  <path d="M640 600 C600 540 680 500 610 452 C560 418 600 392 560 370" fill="none" stroke="#1f6fb2" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14" opacity="0.55"/>
+
+  <!-- chairlift -->
+  <path d="M250 560 L520 330" stroke="#1d2b3a" stroke-width="2.5" opacity="0.75"/>
+  <path d="M250 560 v-40 M385 445 v-40 M520 330 v-40" stroke="#1d2b3a" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+  <path d="M244 520 h12 M379 405 h12 M514 290 h12" stroke="#1d2b3a" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <g fill="#1d2b3a" opacity="0.75">
+    <path d="M312 503 v12 h-10 v6 h18 v-18 z"/>
+    <path d="M452 384 v12 h-10 v6 h18 v-18 z"/>
+  </g>
+
+  <!-- trees -->
+  <g fill="#3f6c5a" opacity="0.85">
+    <path d="M90 520 l18 -44 l18 44 z"/>
+    <path d="M118 530 l15 -36 l15 36 z"/>
+    <path d="M1010 470 l18 -44 l18 44 z"/>
+    <path d="M1042 480 l14 -34 l14 34 z"/>
+    <path d="M1080 466 l16 -40 l16 40 z"/>
+  </g>
+</svg>
