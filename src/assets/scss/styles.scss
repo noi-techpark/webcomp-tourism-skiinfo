@@ -631,6 +631,29 @@ WEATHER
     border-color: rgba($glacier, 0.45);
     box-shadow: $box-shadow;
   }
+
+  // data older than the outdated limit: shown, but visibly in the background
+  &.is-outdated {
+    background: $snow;
+    box-shadow: none;
+    color: $ink-muted;
+    transition: opacity 0.15s ease;
+    opacity: 0.75;
+
+    .weather-icon,
+    .weather-snow-label strong {
+      color: $ink-muted;
+    }
+
+    .weather-snow-bar span {
+      background: rgba($ink-muted, 0.45);
+    }
+
+    &:hover,
+    &.is-highlighted {
+      opacity: 1;
+    }
+  }
 }
 
 .weather-point-head {

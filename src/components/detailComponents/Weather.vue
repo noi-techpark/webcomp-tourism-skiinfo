@@ -98,7 +98,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
               v-for="point in points"
               :key="point.id"
               class="weather-point"
-              :class="{ 'is-highlighted': point.id === highlight }"
+              :class="{
+                'is-highlighted': point.id === highlight,
+                'is-outdated': point.outdated,
+              }"
               @mouseenter="highlight = point.id"
               @mouseleave="highlight = null"
             >
