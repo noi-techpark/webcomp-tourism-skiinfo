@@ -14,7 +14,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <link rel="stylesheet" :href="fontUrl" />
     </head>
     <body
-      class="container-fluid p-0 d-flex flex-direction-row align-items-stretch"
+      class="skiinfo-root container-fluid p-0 d-flex flex-direction-row align-items-stretch"
       data-bs-theme="light"
       :style="
         `font-family: ${fontFamily}; min-height: ${

@@ -5,17 +5,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <span class="p-1 card border-0 rounded-pill shadow-sm pointer">
+  <span class="skiinfo-icon-btn">
     <ArrowIconLeft
       v-if="direction === 'left'"
       viewBox="0 0 24 24"
-      class="s-em fs-1 text-secondary"
       @click="$emit('previous-item')"
     />
     <ArrowIconRight
       v-else-if="direction === 'right'"
       viewBox="0 0 24 24"
-      class="s-em fs-1 text-secondary"
       @click="$emit('next-item')"
     />
   </span>

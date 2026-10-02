@@ -11,15 +11,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <div class="d-flex align-items-center gap-2">
         <slot name="title" />
 
-        <div v-if="!isOpen" class="badge rounded-pill text-bg-danger">
+        <span v-if="!isOpen" class="status-badge is-closed">
           {{ $t('closed') }}
-        </div>
+        </span>
 
-        <div v-if="isOpen" class="badge rounded-pill text-bg-success">
+        <span v-if="isOpen" class="status-badge is-open">
           {{ $t('open') }}
-        </div>
+        </span>
       </div>
-      <div>
+      <div class="small text-secondary">
         <slot />
       </div>
     </div>

@@ -5,19 +5,19 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div class="w-100 py-2 d-flex flex-column align-items-stretch gap-4">
-    <div class="px-2 d-flex align-items-center gap-3">
+  <div class="w-100 p-3 d-flex flex-column align-items-stretch gap-4">
+    <div class="skiinfo-search">
+      <search-icon
+        class="search-icon pointer"
+        @click="loadSkiAreaList(currentPage)"
+      ></search-icon>
       <input
         type="text"
-        class="form-control card border-0 rounded-pill shadow-sm"
+        class="form-control rounded-pill"
         :placeholder="$t('searchSkiArea').toString()"
         v-model="searchInput"
         @keyup="searchSkiAreaList"
       />
-      <search-icon
-        class="pointer"
-        @click="loadSkiAreaList(currentPage)"
-      ></search-icon>
     </div>
 
     <div v-if="items.length > 0" class="flex-grow-1">
@@ -28,25 +28,21 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           @click.prevent="showDetail(item)"
           class="col-12 col-lg-6"
         >
-          <div class="pointer h-100">
-            <div class="d-flex flex-row align-items-stretch gap-4">
+          <div class="skiinfo-card pointer">
+            <div class="d-flex flex-row align-items-stretch gap-3">
               <div
                 style="height: 130px; width: 130px"
-                class="ratio ratio-1x1 flex-shrink-0"
+                class="skiinfo-card-image ratio ratio-1x1 flex-shrink-0"
               >
                 <POIPlaceholder
                   v-if="enablePlaceholder && !getImage(item)"
-                  class="rounded-1 object-fit-cover"
+                  class="object-fit-cover"
                 ></POIPlaceholder>
-                <img
-                  v-else
-                  class="rounded-1 object-fit-cover"
-                  :src="getImage(item)"
-                />
+                <img v-else class="object-fit-cover" :src="getImage(item)" />
               </div>
 
               <div
-                class="flex-shrink-1 text-truncate d-flex flex-column justify-content-around"
+                class="flex-shrink-1 text-truncate d-flex flex-column justify-content-around gap-1"
               >
                 <div
                   style="height: 24px; width: 24px"
@@ -74,8 +70,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                   />
                   <!-- <div class="ms-4 small">{{ getskiRegionName(item) }}</div> -->
                 </div>
-                <span class="fs-5 fw-bold">{{ getTitle(item, language) }}</span>
-                <span class="small">{{ getSubTitle(item, language) }}</span>
+                <span class="skiinfo-card-title fs-5 fw-bold text-truncate">{{
+                  getTitle(item, language)
+                }}</span>
+                <span class="small text-secondary text-truncate">{{
+                  getSubTitle(item, language)
+                }}</span>
                 <!-- <div
                   style="height: 24px; width: 24px"
                   class="ratio ratio-1x1 flex-shrink-0"
@@ -100,20 +100,24 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 </div> -->
                 <div>
                   <div
-                    class="text-truncate small"
+                    class="text-truncate small text-secondary"
                     v-for="(info, i) of getShortInfo(item)"
                     :key="i"
                     :title="info"
                   >
                     {{ info }}
                   </div>
-                  <span v-if="isOpen(item)" class="text-open-green fw-bold"
-                    >{{ $t(`scheduleTypes.1`) }}
-                  </span>
-                  <span v-else class="text-closed-red fw-bold"
-                    >{{ $t(`scheduleTypes.2`) }}
-                  </span>
-                  <span class="small">{{ getOpeningTime(item) }}</span>
+                  <div class="d-flex align-items-center flex-wrap gap-2 mt-1">
+                    <span v-if="isOpen(item)" class="status-badge is-open">{{
+                      $t(`scheduleTypes.1`)
+                    }}</span>
+                    <span v-else class="status-badge is-closed">{{
+                      $t(`scheduleTypes.2`)
+                    }}</span>
+                    <span class="small text-secondary">{{
+                      getOpeningTime(item)
+                    }}</span>
+                  </div>
                 </div>
               </div>
 
@@ -123,7 +127,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <arrow-icon-right
                   height="30"
                   width="30"
-                  class="text-black"
+                  class="skiinfo-card-arrow"
                   viewBox="0 0 24 24"
                 />
               </div>
@@ -140,7 +144,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       <spinner></spinner>
     </div>
     <div
-      class="flex-grow-1 d-flex align-items-center justify-content-center"
+      class="skiinfo-empty flex-grow-1 d-flex align-items-center justify-content-center"
       v-else
     >
       {{ $t('noResults') }}
@@ -180,7 +184,9 @@ const SUMMER_SEASON_NAMES = ['Sommersaison', 'summerseason', 'stagioneestiva'];
 function getWinterSchedule(item: SkiAreaLinked) {
   return item.OperationSchedule?.filter((s) => {
     const isSummer = s.OperationscheduleName
-      ? Object.values(s.OperationscheduleName).some((v) => SUMMER_SEASON_NAMES.includes(v))
+      ? Object.values(s.OperationscheduleName).some((v) =>
+          SUMMER_SEASON_NAMES.includes(v)
+        )
       : false;
     return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummer;
   })?.[0];
@@ -396,9 +402,19 @@ export default Vue.extend({
       const formatL = moment.localeData(localelang).longDateFormat('L');
 
       if (start < new Date() && end > new Date()) {
-        return '(' + this.$t('openedto') + moment(schedule.Stop).format(formatL) + ')';
+        return (
+          '(' +
+          this.$t('openedto') +
+          moment(schedule.Stop).format(formatL) +
+          ')'
+        );
       } else {
-        return '(' + this.$t('openingon') + moment(schedule.Start).format(formatL) + ')';
+        return (
+          '(' +
+          this.$t('openingon') +
+          moment(schedule.Start).format(formatL) +
+          ')'
+        );
       }
     },
     getLocationInfo(item: SkiAreaLinked) {
@@ -425,7 +441,9 @@ export default Vue.extend({
     getImage(item: SkiAreaLinked) {
       const url = item.ImageGallery?.[0].ImageUrl;
       if (!url) return undefined;
-      const appendSize = /opendatahub\.com|testingmachine\.eu|service\.suedtirol\.info/.test(url);
+      const appendSize = /opendatahub\.com|testingmachine\.eu|service\.suedtirol\.info/.test(
+        url
+      );
       return appendSize ? url + '&height=200' : url;
     },
     getSkiRegionImage(item: SkiAreaLinked) {

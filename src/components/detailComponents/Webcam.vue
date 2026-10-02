@@ -12,22 +12,23 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         :key="webcam.id"
         class="col-12 col-md-6"
       >
-        <div class="h-100 d-flex position-relative">
+        <div class="skiinfo-webcam h-100 d-flex position-relative">
           <img
             v-if="!webcam.hide"
             :src="webcam.url"
-            class="flex-basis-full ratio ratio-16x9 object-fit-cover shadow-sm"
+            class="flex-basis-full ratio ratio-16x9 object-fit-cover"
             @error="webcam.hide = true"
           />
           <small
-            class="position-absolute top-0 start-50 translate-middle-x m-0 py-1 px-2 bg-white rounded-bottom text-center text-nowrap"
+            v-if="!webcam.hide"
+            class="skiinfo-webcam-caption position-absolute bottom-0 start-0 m-2 py-1 px-2 rounded text-nowrap"
           >
-            <span v-if="!webcam.hide">{{ webcam.name }}</span>
+            <span>{{ webcam.name }}</span>
           </small>
         </div>
       </div>
     </div>
-    <div v-else class="text-center">
+    <div v-else class="skiinfo-empty text-center">
       <span>{{ $t('noData.webcam') }}</span>
     </div>
   </div>

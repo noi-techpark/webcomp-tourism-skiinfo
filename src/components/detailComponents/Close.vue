@@ -5,11 +5,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <span
-    class="p-1 card border-0 rounded-pill shadow-sm pointer"
-    @click="$emit('close')"
-  >
-    <ArrowIconLeft viewBox="0 0 24 24" class="s-em fs-1 text-secondary" />
+  <span class="skiinfo-icon-btn" @click="$emit('close')">
+    <ArrowIconLeft viewBox="0 0 24 24" />
   </span>
 </template>
 

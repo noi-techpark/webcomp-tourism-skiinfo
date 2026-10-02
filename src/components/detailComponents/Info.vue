@@ -9,121 +9,116 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <div class="d-flex flex-column gap-4">
       <div class="row g-2">
         <!-- SkiRegion -->
-        <div
-          v-if="skiRegionName"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
-        >
-          <map-icon class="map-icon icon"></map-icon>
-          <span>{{ $t('skiregion') }}:</span>
-          <span class="fw-bold text-truncate">{{ skiRegionName }}</span>
+        <div v-if="skiRegionName" class="col-12 col-md-6 col-lg-4">
+          <div class="info-tile d-flex align-items-center gap-2">
+            <map-icon class="map-icon icon"></map-icon>
+            <span class="info-label">{{ $t('skiregion') }}:</span>
+            <span class="fw-bold text-truncate">{{ skiRegionName }}</span>
+          </div>
         </div>
 
         <!-- Lift Count -->
-        <div
-          v-if="item.LiftCount"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
-        >
-          <highlight class="highlight icon"></highlight>
-          <span>{{ $t('props.LiftCount') }}:</span>
-          <span class="fw-bold">{{ item.LiftCount }}</span>
+        <div v-if="item.LiftCount" class="col-12 col-md-6 col-lg-4">
+          <div class="info-tile d-flex align-items-center gap-2">
+            <highlight class="highlight icon"></highlight>
+            <span class="info-label">{{ $t('props.LiftCount') }}:</span>
+            <span class="fw-bold">{{ item.LiftCount }}</span>
+          </div>
         </div>
 
         <!-- Total Slope KM with colors -->
-        <div
-          v-if="hasSlopeInfo"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
-        >
-          <distance-length class="distance-length icon"></distance-length>
-          <span>{{ $t('props.TotalSlopeKm') }}:</span>
-          <div class="fw-bold">
-            <span>{{ item.TotalSlopeKm }} km</span> (
-            <span class="text-slope-blue">{{ item.SlopeKmBlue }}</span> /
-            <span class="text-slope-red">{{ item.SlopeKmRed }}</span> /
-            <span class="text-slope-black">{{ item.SlopeKmBlack }}</span>
-            )
+        <div v-if="hasSlopeInfo" class="col-12 col-md-6 col-lg-4">
+          <div class="info-tile d-flex align-items-center gap-2">
+            <distance-length class="distance-length icon"></distance-length>
+            <span class="info-label">{{ $t('props.TotalSlopeKm') }}:</span>
+            <div class="fw-bold">
+              <span>{{ item.TotalSlopeKm }} km</span> (
+              <span class="text-slope-blue">{{ item.SlopeKmBlue }}</span> /
+              <span class="text-slope-red">{{ item.SlopeKmRed }}</span> /
+              <span class="text-slope-black">{{ item.SlopeKmBlack }}</span>
+              )
+            </div>
           </div>
         </div>
 
         <!-- Altitude -->
         <div
           v-if="item.AltitudeTo && item.AltitudeFrom"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
+          class="col-12 col-md-6 col-lg-4"
         >
-          <altitude-difference
-            class="altitude-difference icon"
-          ></altitude-difference>
-          <span>{{ $t('props.Altitude') }}:</span>
-          <span class="fw-bold"
-            >{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span
-          >
+          <div class="info-tile d-flex align-items-center gap-2">
+            <altitude-difference
+              class="altitude-difference icon"
+            ></altitude-difference>
+            <span class="info-label">{{ $t('props.Altitude') }}:</span>
+            <span class="fw-bold"
+              >{{ item.AltitudeTo }} - {{ item.AltitudeFrom }} m</span
+            >
+          </div>
         </div>
 
         <!-- Location info -->
-        <div
-          v-if="locationInfo"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
-        >
-          <map-icon class="map-icon icon"></map-icon>
-          <span>{{ $t('location') }}: </span>
-          <span class="fw-bold text-truncate" :title="locationInfo">{{
-            locationInfo
-          }}</span>
+        <div v-if="locationInfo" class="col-12 col-md-6 col-lg-4">
+          <div class="info-tile d-flex align-items-center gap-2">
+            <map-icon class="map-icon icon"></map-icon>
+            <span class="info-label">{{ $t('location') }}: </span>
+            <span class="fw-bold text-truncate" :title="locationInfo">{{
+              locationInfo
+            }}</span>
+          </div>
         </div>
 
         <!-- Contact info -->
-        <div
-          v-if="contactInfos"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
-        >
-          <external-link></external-link>
-          <span>{{ $t('web') }}: </span>
-          <a class="fw-bold" :href="contactInfos.Url" target="_blank">
-            Homepage
-          </a>
+        <div v-if="contactInfos" class="col-12 col-md-6 col-lg-4">
+          <div class="info-tile d-flex align-items-center gap-2">
+            <external-link class="icon"></external-link>
+            <span class="info-label">{{ $t('web') }}: </span>
+            <a class="fw-bold" :href="contactInfos.Url" target="_blank">
+              Homepage
+            </a>
+          </div>
         </div>
 
         <!-- Phone info -->
-        <div
-          v-if="contactInfos"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
-        >
-          <phone class="phone icon"></phone>
-          <span>{{ $t('phone') }}: </span>
-          <span class="fw-bold">{{ contactInfos.Phonenumber }}</span>
+        <div v-if="contactInfos" class="col-12 col-md-6 col-lg-4">
+          <div class="info-tile d-flex align-items-center gap-2">
+            <phone class="phone icon"></phone>
+            <span class="info-label">{{ $t('phone') }}: </span>
+            <span class="fw-bold">{{ contactInfos.Phonenumber }}</span>
+          </div>
         </div>
 
         <!-- Google Maps Link -->
-        <div
-          v-if="googleMapsLink"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
-        >
-          <map-icon class="map-icon icon"></map-icon>
-          <span>{{ $t('maps.location') }}: </span>
-          <a class="fw-bold" :href="googleMapsLink" target="_blank"
-            >Google Maps</a
-          >
+        <div v-if="googleMapsLink" class="col-12 col-md-6 col-lg-4">
+          <div class="info-tile d-flex align-items-center gap-2">
+            <map-icon class="map-icon icon"></map-icon>
+            <span class="info-label">{{ $t('maps.location') }}: </span>
+            <a class="fw-bold" :href="googleMapsLink" target="_blank"
+              >Google Maps</a
+            >
+          </div>
         </div>
 
         <!-- Open / Closed -->
-        <div
-          v-if="isOpen != undefined"
-          class="col-12 col-lg-4 d-flex align-items-center gap-2"
-          fw-bold
-        >
-          <calendar class="calendar icon"></calendar>
-          <span v-if="isOpen" class="text-open-green fw-bold">{{
-            $t(`scheduleTypes.1`)
-          }}</span>
-          <span v-else class="text-closed-red fw-bold">{{
-            $t(`scheduleTypes.2`)
-          }}</span>
-          <span v-if="scheduleOutdated" class="text-muted fst-italic">{{ $t('noSeasonInfo') }}</span>
-          <span v-else class="fw bold">{{ seasonDates }}</span>
+        <div v-if="isOpen != undefined" class="col-12 col-md-6 col-lg-4">
+          <div class="info-tile d-flex align-items-center gap-2">
+            <calendar class="calendar icon"></calendar>
+            <span v-if="isOpen" class="status-badge is-open">{{
+              $t(`scheduleTypes.1`)
+            }}</span>
+            <span v-else class="status-badge is-closed">{{
+              $t(`scheduleTypes.2`)
+            }}</span>
+            <span v-if="scheduleOutdated" class="text-muted fst-italic">{{
+              $t('noSeasonInfo')
+            }}</span>
+            <span v-else class="fw-bold">{{ seasonDates }}</span>
+          </div>
         </div>
       </div>
 
       <div
-        class="mb-0 mt-2 fs-4"
+        class="mb-0 mt-2 fs-4 fw-semibold"
         v-if="detail && detail.SubHeader"
         v-html="detail.SubHeader"
       ></div>
@@ -160,7 +155,10 @@ function isSummerSeason(name?: { [key: string]: string } | null): boolean {
 
 function getWinterSchedule(item: SkiAreaLinked) {
   return item.OperationSchedule?.filter((s) => {
-    return (s.Type === '1' || s.Type === '2' || s.Type === '3') && !isSummerSeason(s.OperationscheduleName);
+    return (
+      (s.Type === '1' || s.Type === '2' || s.Type === '3') &&
+      !isSummerSeason(s.OperationscheduleName)
+    );
   })?.[0];
 }
 

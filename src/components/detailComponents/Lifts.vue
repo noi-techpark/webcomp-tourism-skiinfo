@@ -24,7 +24,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           </template>
 
           <template>
-            <span v-if="getinfo(lift).join(' | ') != 'missing'">{{ getinfo(lift).join(' | ') }}</span>
+            <span v-if="getinfo(lift).join(' | ') != 'missing'">{{
+              getinfo(lift).join(' | ')
+            }}</span>
             <span v-else> {{ $t('noData.lifttype') }}</span>
           </template>
         </OpenClosed>
@@ -37,7 +39,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 </template>
 
 <script lang="ts">
-import { ODHActivityPoiApi, TagApi } from '@/api';
+import { TagApi } from '@/api';
+import { loadSkiAreaPois } from './skiAreaPois';
 import { ODHActivityPoiLinked, SkiAreaLinked, TagLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
 import OpenClosed from './OpenClosed.vue';
@@ -86,76 +89,28 @@ export default Vue.extend({
   },
   methods: {
     init() {
-      this.loadLiftTypes();
       this.loadLifts();
     },
     loadLifts() {
-      //To many districts inside
-      // let districtIds = "";
-      // this.item.DistrictIds?.forEach((currentElement) => districtIds = districtIds + "fra" + currentElement + ",");
-
-      new ODHActivityPoiApi()
-        .v1ODHActivityPoiGet(
-          this.language,
-          1,
-          1000,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          this.language,
-          this.item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419'
-            ? 'ska' + this.item.Id
-            : undefined,
-          undefined,
-          this.item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419'
-            ? 'dss'
-            : undefined,
-          'aufstiegsanlagen',
-          undefined,
-          undefined,
-          true,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419'
-            ? this.item.Latitude?.toString()
-            : undefined,
-          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419'
-            ? this.item.Longitude?.toString()
-            : undefined,
-          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419'
-            ? (this.item.AreaRadius ?? 3000).toString()
-            : undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          false,
-          undefined
-        )
-        .then((value) => {
-          this.liftsUnsorted =
-            !value.data.Items || value.data.Items.length === 0
-              ? null
-              : value.data.Items;
-        });
+      loadSkiAreaPois(this.item, 'lifts', this.language).then((lifts) => {
+        this.liftsUnsorted = lifts.length === 0 ? null : lifts;
+        this.loadLiftTypes(lifts);
+      });
     },
-    loadLiftTypes() {
+    loadLiftTypes(lifts: ODHActivityPoiLinked[]) {
+      // one request for the tags the loaded lifts actually carry,
+      // keeping only the lift types (children of "Aufstiegsanlagen")
+      const tagIds = Array.from(
+        new Set(
+          lifts
+            .map((lift) => lift.Tags?.map((tag) => tag.Id) ?? [])
+            .reduce((all, ids) => all.concat(ids), [])
+        )
+      ).filter((id): id is string => !!id);
+      if (tagIds.length === 0) {
+        this.allLiftTypes = null;
+        return;
+      }
       new TagApi()
         .v1TagGet(
           1,
@@ -172,7 +127,8 @@ export default Vue.extend({
           undefined,
           undefined,
           false,
-          undefined
+          // idlist is not part of the generated client, pass it as extra query param
+          { params: { idlist: tagIds.join(',') } }
         )
         .then((value) => {
           this.allLiftTypes = value.data.Items;

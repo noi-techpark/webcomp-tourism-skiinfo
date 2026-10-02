@@ -14,11 +14,11 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <div
       v-else-if="item"
       ref="scroll"
-      class="d-flex flex-column shadow-sm"
+      class="skiinfo-detail d-flex flex-column shadow-sm"
       style="min-height: 100vh"
     >
       <div
-        class="flex-shrink-0 d-flex flex-column align-items-start"
+        class="skiinfo-detail-header flex-shrink-0 d-flex flex-column align-items-start"
         :class="showBack ? 'justify-content-between' : 'justify-content-end'"
         :style="titleImage"
       >
@@ -32,9 +32,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           <Direction direction="right" @next-item="$emit('next-item')" />
         </div>
         <div
-          class="px-4 px-lg-4 pt-lg-5 w-100 gradient-white-transparent d-flex justify-content-between align-items-end"
+          class="skiinfo-detail-nav px-4 px-lg-4 pt-lg-5 w-100 gradient-white-transparent d-flex justify-content-between align-items-end"
         >
-          <h1 class="mb-0 mt-3 fs-1">
+          <h1 class="skiinfo-detail-title mb-0 mt-3 pb-2 fs-1">
             {{ itemDetail.Title }}
           </h1>
           <div style="flex-basis: 10%"></div>
@@ -60,7 +60,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
       </div>
 
-      <div ref="content" class="flex-grow-1 p-4">
+      <div ref="content" class="flex-grow-1 p-4 pt-lg-5">
         <Info
           v-if="selectedMenu === 'Info'"
           class="d-flex flex-column gap-4 h-100"
@@ -104,7 +104,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
           :language="language"
         /> -->
       </div>
-      <div id="footer">
+      <div id="footer" class="px-4 pb-3">
         <a href="https://opendatahub.com" target="_blank"
           ><span id="footer-text">powered by Open Data Hub</span>
           <img

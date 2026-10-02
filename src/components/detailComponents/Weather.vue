@@ -7,13 +7,13 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <template>
   <div>
     <div v-if="measuringpoints" class="table-responsive">
-      <table class="table table-striped ">
+      <table class="table table-striped align-middle">
         <thead>
           <tr>
             <th
               v-for="title in titles"
               :key="title"
-              class="col-2 py-2 text-nowrap"
+              class="col-2 py-2 text-nowrap text-secondary small text-uppercase"
             >
               {{ title }}
             </th>
@@ -49,7 +49,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </tbody>
       </table>
     </div>
-    <div v-else class="text-center">
+    <div v-else class="skiinfo-empty text-center">
       <span>{{ $t('noData.weather') }}</span>
     </div>
     <div v-if="measuringpoints">

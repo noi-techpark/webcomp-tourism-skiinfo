@@ -14,13 +14,15 @@ SPDX-License-Identifier: AGPL-3.0-or-later
       >
         <div>
           <div
-            class="mx-2 mt-2 p-2 d-flex align-items-baseline gap-2 border-bottom"
+            class="skiinfo-section-head mx-2 mt-2 p-2 d-flex align-items-baseline gap-2"
           >
             <h2 class="fs-3 mb-0 fw-bold" :class="`text-slope-${color}`">
               {{ slopes.length }}
               {{ $t(color) }}
             </h2>
-            <small>{{ getColorInfo(color).join(' | ') }}</small>
+            <small class="text-secondary">{{
+              getColorInfo(color).join(' | ')
+            }}</small>
           </div>
 
           <div class="mx-2 mb-2 d-flex flex-column gap-3 px-2 py-4">
@@ -49,10 +51,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 </template>
 
 <script lang="ts">
-import { ODHActivityPoiApi } from '@/api/api';
 import { ODHActivityPoiLinked, SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
 import OpenClosed from './OpenClosed.vue';
+import { loadSkiAreaPois } from './skiAreaPois';
 
 type Color = 'blue' | 'red' | 'black' | 'other';
 
@@ -186,66 +188,9 @@ export default Vue.extend({
     },
     loadSlopes() {
       if (!this.item.Id) return;
-      new ODHActivityPoiApi()
-        .v1ODHActivityPoiGet(
-          this.language,
-          1,
-          1000,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          this.language,
-          this.item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419'
-            ? 'ska' + this.item.Id
-            : undefined,
-          undefined,
-          this.item.SkiRegionId == '8260DC5B815D40B98A1B53E84EC2B419'
-            ? 'dss'
-            : undefined,
-          'pisten',
-          undefined,
-          undefined,
-          true,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419'
-            ? this.item.Latitude?.toString()
-            : undefined,
-          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419'
-            ? this.item.Longitude?.toString()
-            : undefined,
-          this.item.SkiRegionId != '8260DC5B815D40B98A1B53E84EC2B419'
-            ? (this.item.AreaRadius ?? 3000).toString()
-            : undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          false,
-          undefined
-        )
-        .then((value) => {
-          this.slopes =
-            !value.data.Items || value.data.Items.length === 0
-              ? null
-              : value.data.Items;
-        });
+      loadSkiAreaPois(this.item, 'slopes', this.language).then((slopes) => {
+        this.slopes = slopes.length === 0 ? null : slopes;
+      });
     },
   },
 });
