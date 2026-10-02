@@ -308,11 +308,11 @@ export default Vue.extend({
     checkImage() {
       // a css background image cannot report load errors, so probe the url once
       this.imageBroken = false;
-      const url = this.imageUrl;
+      const url = this.headerImageUrl;
       if (!url) return;
       const probe = new Image();
       probe.onerror = () => {
-        if (this.imageUrl === url) this.imageBroken = true;
+        if (this.headerImageUrl === url) this.imageBroken = true;
       };
       probe.src = url;
     },
@@ -321,7 +321,7 @@ export default Vue.extend({
     itemDetail(): Detail {
       return this.item?.Detail?.[this.language] || {};
     },
-    imageUrl(): string | null {
+    headerImageUrl(): string | null {
       const url = this.item?.ImageGallery?.[0]?.ImageUrl;
       if (!url) return null;
       // the ODH image service can scale images
@@ -334,7 +334,9 @@ export default Vue.extend({
     },
     titleImage(): string {
       const url =
-        this.imageUrl && !this.imageBroken ? this.imageUrl : fallbackImage;
+        this.headerImageUrl && !this.imageBroken
+          ? this.headerImageUrl
+          : fallbackImage;
       return `background-image: url("${url}"); height: 300px; background-size: cover; background-position: center;`;
     },
     noItem(): boolean {

@@ -6,42 +6,48 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <template>
   <div>
-    <div v-if="!noWebcams" class="row g-4">
+    <div v-if="visibleWebcams.length" class="row g-4">
       <div
-        v-for="webcam in filteredWebcams"
+        v-for="webcam in visibleWebcams"
         :key="webcam.id"
         class="col-12 col-md-6"
       >
         <div class="skiinfo-webcam h-100 d-flex position-relative">
           <img
-            v-if="!webcam.hide"
-            :src="webcam.url"
-            class="flex-basis-full ratio ratio-16x9 object-fit-cover"
-            @error="webcam.hide = true"
+            :src="webcam.image"
+            :alt="webcam.name"
+            loading="lazy"
+            class="skiinfo-webcam-image"
+            @error="hide(webcam.id)"
           />
           <small
-            v-if="!webcam.hide"
+            v-if="webcam.name"
             class="skiinfo-webcam-caption position-absolute bottom-0 start-0 m-2 py-1 px-2 rounded text-nowrap"
           >
-            <span>{{ webcam.name }}</span>
+            {{ webcam.name }}
           </small>
+          <a
+            v-if="webcam.liveUrl"
+            :href="webcam.liveUrl"
+            target="_blank"
+            rel="noopener"
+            class="skiinfo-webcam-live position-absolute top-0 end-0 m-2 py-1 px-2 rounded"
+          >
+            {{ $t('webcamLive') }}
+          </a>
         </div>
       </div>
     </div>
-    <div v-else class="skiinfo-empty text-center">
+    <div v-else-if="loaded" class="skiinfo-empty text-center">
       <span>{{ $t('noData.webcam') }}</span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { WebcamInfoApi } from '@/api';
-import { SkiAreaLinked, WebcamInfo } from '@/api/models';
+import { SkiAreaLinked } from '@/api/models';
 import Vue, { PropType } from 'vue';
-
-function withProxy(url: string) {
-  return 'https://api.tourism.testingmachine.eu/v1/ODHProxy/' + url;
-}
+import { loadSkiAreaWebcams, Webcam } from './webcams';
 
 export default Vue.extend({
   props: {
@@ -57,114 +63,41 @@ export default Vue.extend({
   },
   data() {
     const data: {
-      webcamsraw: WebcamInfo[] | null;
-      webcams:
-        | {
-            name: string | undefined;
-            url: string;
-            id: string;
-            error: boolean;
-            hide: boolean;
-          }[]
-        | undefined;
+      webcams: Webcam[];
+      hidden: string[];
+      loaded: boolean;
     } = {
-      webcams: undefined,
-      webcamsraw: null,
+      webcams: [],
+      hidden: [],
+      loaded: false,
     };
-
     return data;
   },
   computed: {
-    noWebcams(): boolean {
-      return this.webcams?.every((webcam) => webcam.error) ?? true;
-    },
-    filteredWebcams():
-      | {
-          name: string | undefined;
-          url: string;
-          id: string;
-          error: boolean;
-          hide: boolean;
-        }[]
-      | undefined {
-      return this.webcams?.filter((webcam) => !webcam.error);
+    visibleWebcams(): Webcam[] {
+      return this.webcams.filter((webcam) => !this.hidden.includes(webcam.id));
     },
   },
   created() {
     this.init();
   },
   watch: {
-    item: function() {
+    item() {
       this.init();
     },
   },
   methods: {
     init() {
-      this.getWebcams();
-      //this.testWebcams();
-    },
-    getWebcams() {
-      const webcamids = this.item.RelatedContent?.flatMap((webcamids) =>
-        webcamids.Type == 'webcam' ? webcamids.Id : []
-      );
-
-      new WebcamInfoApi()
-        .v1WebcamInfoGet(
-          this.language,
-          1,
-          1000,
-          undefined,
-          webcamids?.join() ?? '123456',
-          true,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          false,
-          undefined
-        )
-        .then((value) => {
-          this.webcamsraw =
-            !value.data.Items || value.data.Items.length === 0
-              ? null
-              : value.data.Items;
-
-          this.webcams = this.webcamsraw
-            ?.map((webcam) => {
-              const url = webcam.Webcamurl
-                ? webcam.Webcamurl
-                : webcam.Previewurl
-                ? webcam.Previewurl
-                : '';
-
-              return {
-                name: webcam.Webcamname?.[this.language],
-                url,
-                id: webcam.WebcamId ?? '',
-                error: false,
-                hide: false,
-              };
-            })
-            .filter((e) => e.url && e.id);
-
-          //console.log(this.webcams);
-          //this.testWebcams();
-        });
-    },
-    testWebcams() {
-      this.webcams?.forEach((webcam) => {
-        //fetch(webcam.url.startsWith('https') ? webcam.url : withProxy(webcam.url), { method: 'HEAD' })
-        fetch(webcam.url, { method: 'HEAD' })
-          .then((res) => (webcam.error = !res.ok))
-          .catch(() => (webcam.error = true));
+      this.loaded = false;
+      this.hidden = [];
+      loadSkiAreaWebcams(this.item, this.language).then((webcams) => {
+        this.webcams = webcams;
+        this.loaded = true;
       });
+    },
+    hide(id: string) {
+      // webcams whose image cannot be loaded are left out
+      this.hidden.push(id);
     },
   },
 });

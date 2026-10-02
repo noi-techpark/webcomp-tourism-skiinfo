@@ -366,6 +366,8 @@ COMPONENTS
 }
 
 .skiinfo-detail {
+  // grow with the content (long slope/webcam lists) instead of shrinking to the viewport
+  flex-shrink: 0;
   background: #fff;
 }
 
@@ -385,7 +387,10 @@ COMPONENTS
 }
 
 .info-tile {
-  height: 100%;
+  // fills its grid cell (the cell is a flex container); no % height, which breaks
+  // when the detail view is height-constrained (display mode)
+  flex: 1 1 auto;
+  min-width: 0;
   padding: 0.75rem 1rem;
   background: $snow;
   border: 1px solid $line;
@@ -421,10 +426,34 @@ COMPONENTS
   box-shadow: $box-shadow-sm;
   background: $glacier-soft;
 
+  .skiinfo-webcam-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
   .skiinfo-webcam-caption {
+    max-width: calc(100% - 1rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
     background: rgba($ink, 0.75);
     color: #fff;
     backdrop-filter: blur(4px);
+  }
+
+  .skiinfo-webcam-live {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: $ink;
+    background: rgba(#fff, 0.9);
+    box-shadow: $box-shadow-sm;
+
+    &:hover {
+      color: $glacier;
+      background: #fff;
+    }
   }
 }
 

@@ -126,5 +126,6 @@
     "wind": "Wind",
     "humidity": "Luftfeuchtigkeit",
     "precipitation": "Niederschlagswahrscheinlichkeit"
-  }
+  },
+  "webcamLive": "Live ↗"
 }

@@ -9,7 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <div class="d-flex flex-column gap-4">
       <div class="row g-2">
         <!-- SkiRegion -->
-        <div v-if="skiRegionName" class="col-12 col-md-6 col-lg-4">
+        <div v-if="skiRegionName" class="col-12 col-md-6 col-lg-4 d-flex">
           <div class="info-tile d-flex align-items-center gap-2">
             <map-icon class="map-icon icon"></map-icon>
             <span class="info-label">{{ $t('skiregion') }}:</span>
@@ -18,7 +18,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
 
         <!-- Lift Count -->
-        <div v-if="item.LiftCount" class="col-12 col-md-6 col-lg-4">
+        <div v-if="item.LiftCount" class="col-12 col-md-6 col-lg-4 d-flex">
           <div class="info-tile d-flex align-items-center gap-2">
             <highlight class="highlight icon"></highlight>
             <span class="info-label">{{ $t('props.LiftCount') }}:</span>
@@ -27,7 +27,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
 
         <!-- Total Slope KM with colors -->
-        <div v-if="hasSlopeInfo" class="col-12 col-md-6 col-lg-4">
+        <div v-if="hasSlopeInfo" class="col-12 col-md-6 col-lg-4 d-flex">
           <div class="info-tile d-flex align-items-center gap-2">
             <distance-length class="distance-length icon"></distance-length>
             <span class="info-label">{{ $t('props.TotalSlopeKm') }}:</span>
@@ -44,7 +44,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <!-- Altitude -->
         <div
           v-if="item.AltitudeTo && item.AltitudeFrom"
-          class="col-12 col-md-6 col-lg-4"
+          class="col-12 col-md-6 col-lg-4 d-flex"
         >
           <div class="info-tile d-flex align-items-center gap-2">
             <altitude-difference
@@ -58,7 +58,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
 
         <!-- Location info -->
-        <div v-if="locationInfo" class="col-12 col-md-6 col-lg-4">
+        <div v-if="locationInfo" class="col-12 col-md-6 col-lg-4 d-flex">
           <div class="info-tile d-flex align-items-center gap-2">
             <map-icon class="map-icon icon"></map-icon>
             <span class="info-label">{{ $t('location') }}: </span>
@@ -69,7 +69,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
 
         <!-- Contact info -->
-        <div v-if="contactInfos" class="col-12 col-md-6 col-lg-4">
+        <div v-if="contactInfos" class="col-12 col-md-6 col-lg-4 d-flex">
           <div class="info-tile d-flex align-items-center gap-2">
             <external-link class="icon"></external-link>
             <span class="info-label">{{ $t('web') }}: </span>
@@ -80,7 +80,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
 
         <!-- Phone info -->
-        <div v-if="contactInfos" class="col-12 col-md-6 col-lg-4">
+        <div v-if="contactInfos" class="col-12 col-md-6 col-lg-4 d-flex">
           <div class="info-tile d-flex align-items-center gap-2">
             <phone class="phone icon"></phone>
             <span class="info-label">{{ $t('phone') }}: </span>
@@ -89,7 +89,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
 
         <!-- Google Maps Link -->
-        <div v-if="googleMapsLink" class="col-12 col-md-6 col-lg-4">
+        <div v-if="googleMapsLink" class="col-12 col-md-6 col-lg-4 d-flex">
           <div class="info-tile d-flex align-items-center gap-2">
             <map-icon class="map-icon icon"></map-icon>
             <span class="info-label">{{ $t('maps.location') }}: </span>
@@ -100,7 +100,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </div>
 
         <!-- Open / Closed -->
-        <div v-if="isOpen != undefined" class="col-12 col-md-6 col-lg-4">
+        <div v-if="isOpen != undefined" class="col-12 col-md-6 col-lg-4 d-flex">
           <div class="info-tile d-flex align-items-center gap-2">
             <calendar class="calendar icon"></calendar>
             <span v-if="isOpen" class="status-badge is-open">{{
