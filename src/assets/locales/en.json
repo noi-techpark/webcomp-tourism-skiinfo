@@ -109,12 +109,22 @@
   "Slopes": "Slopes",
   "Weather": "Weather",
   "Webcam": "Webcams",
-  "weathertable":{
-    "measuringpointname":"name",
-    "snowheight":"snow height",
-    "newsnow":"new snow height",
-    "lastsnowdate":"last snow date",
-    "lastupdate":"last update",
-    "altitude": "altutide"
+  "weathertable": {
+    "measuringpointname": "Name",
+    "snowheight": "Snow depth",
+    "newsnow": "New snow",
+    "lastsnowdate": "Last snowfall",
+    "lastupdate": "Last update",
+    "altitude": "Altitude",
+    "snowdepthmax": "Snow depth (max.)",
+    "newsnowmax": "New snow (max.)",
+    "temperature": "Temperature",
+    "outdated": "outdated",
+    "forecast": "Forecast",
+    "measuringpoints": "Snow measuring points",
+    "stations": "Weather stations",
+    "wind": "Wind",
+    "humidity": "Humidity",
+    "precipitation": "Precipitation probability"
   }
 }

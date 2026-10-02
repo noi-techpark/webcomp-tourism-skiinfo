@@ -34,11 +34,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 style="height: 130px; width: 130px"
                 class="skiinfo-card-image ratio ratio-1x1 flex-shrink-0"
               >
-                <POIPlaceholder
-                  v-if="enablePlaceholder && !getImage(item)"
+                <img
                   class="object-fit-cover"
-                ></POIPlaceholder>
-                <img v-else class="object-fit-cover" :src="getImage(item)" />
+                  :src="getImage(item) || fallbackImage"
+                  alt=""
+                  @error="useFallbackImage"
+                />
               </div>
 
               <div
@@ -173,11 +174,12 @@ import { CommonApi } from '@/api';
 import { APIResponse } from '@/types';
 import Paging from '@/components/Paging.vue';
 import ArrowIconRight from '@/assets/img/arrow_right.svg';
-import POIPlaceholder from '@/assets/img/POI-Placeholder.svg';
+import fallbackImage from '@/assets/img/skiAreaFallback';
 import Spinner from '@/components/Spinner.vue';
 import SearchIcon from '@/assets/img/ic_search.svg';
 import { SkiAreaLinked } from '@/api/models/ski-area-linked';
 import moment from 'moment';
+import { skiAreaSourceFilter } from '@/skiAreaSource';
 
 const SUMMER_SEASON_NAMES = ['Sommersaison', 'summerseason', 'stagioneestiva'];
 
@@ -197,7 +199,6 @@ export default Vue.extend({
     Spinner,
     Paging,
     ArrowIconRight,
-    POIPlaceholder,
     SearchIcon,
   },
   props: {
@@ -247,11 +248,13 @@ export default Vue.extend({
       totalPages: number;
       isLoading: boolean;
       searchInput: string;
+      fallbackImage: string;
     } = {
       items: [],
       totalPages: 0,
       isLoading: false,
       searchInput: '',
+      fallbackImage,
     };
 
     return data;
@@ -327,6 +330,7 @@ export default Vue.extend({
       //console.log('hallo' + this.mappedskiareaIds);
 
       this.isLoading = true;
+      const sourceFilter = skiAreaSourceFilter(this.sourceFilter);
       new CommonApi()
         .v1SkiAreaGet(
           pageNum,
@@ -335,7 +339,7 @@ export default Vue.extend({
           this.skiregionList,
           true,
           undefined,
-          this.sourceFilter || undefined,
+          sourceFilter.source,
           undefined,
           this.language,
           this.language,
@@ -346,7 +350,7 @@ export default Vue.extend({
           undefined,
           undefined,
           undefined,
-          undefined,
+          sourceFilter.rawfilter,
           this.sorting == 'alphabetically'
             ? 'Detail.' + this.language + '.Title'
             : this.sorting == 'skiregion'
@@ -438,8 +442,12 @@ export default Vue.extend({
     getSubTitle(item: SkiAreaLinked, language: string) {
       return item?.Detail?.[language]?.SubHeader ?? '';
     },
+    useFallbackImage(event: Event) {
+      const image = event.target as HTMLImageElement;
+      if (image.src !== fallbackImage) image.src = fallbackImage;
+    },
     getImage(item: SkiAreaLinked) {
-      const url = item.ImageGallery?.[0].ImageUrl;
+      const url = item.ImageGallery?.[0]?.ImageUrl;
       if (!url) return undefined;
       const appendSize = /opendatahub\.com|testingmachine\.eu|service\.suedtirol\.info/.test(
         url

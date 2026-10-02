@@ -77,38 +77,11 @@
       },
       {
         "key": "id-list",
-        "type": "multiselect",
-        "label": "List of ski areas to display",
+        "type": "text",
+        "label": "Ski areas to display: comma separated list of ski area IDs (e.g. SKI8660FA0AAEF54865A7109BAB46AE6C23,DSS_SKIAREA_5A). Leave empty to show all ski areas.",
         "required": false,
         "options": {
-          "values": [
-            "3 Zinnen Dolomiten ski area",
-            "Alta Badia ski area",
-            "Alpe di Siusi - Val Gardena ski area",
-            "Carezza Dolomites ski area",
-            "Gitschberg - Jochtal ski area",
-            "Jochgrimm ski area",
-            "Klausberg ski area",
-            "Kronplatz ski area",
-            "Ladurns ski area",
-            "Meran 2000 ski area",
-            "Obereggen ski area",
-            "Pfelders ski area",
-            "Plose ski area",
-            "Ratschings ski area",
-            "Reinswald ski area",
-            "Rittner Horn ski area",
-            "Rosskopf ski area",
-            "Schoeneben/Haideralm ski area",
-            "Schwemmalm ski area",
-            "Ski area Alpin Arena Schnals/Senales",
-            "Speikboden ski area",
-            "Sulden ski area",
-            "Trafoi ski area",
-            "Val Gardena - Alpe di Siusi ski area",
-            "Vigiljoch ski area",
-            "Watles ski area"
-          ]
+          "default": ""
         }
       },
       {
@@ -175,15 +148,6 @@
           "values": ["Info", "Lifts", "Slopes", "Weather", "Webcam"]          
         }
       },
-      {
-        "key": "enable-placeholder",
-        "type": "null",
-        "label": "Enable image placeholders. (Browse mode)",
-        "required": false,
-        "options": {
-          "default": true
-        }
-      },       
       {
         "key": "font-url",
         "type": "text",

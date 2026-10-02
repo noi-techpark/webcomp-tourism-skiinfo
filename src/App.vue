@@ -104,6 +104,7 @@ import messagesDe from '@/assets/locales/de.json';
 import messagesIt from '@/assets/locales/it.json';
 import { SkiAreaLinked } from './api/models';
 import { CommonApi } from './api';
+import { skiAreaSourceFilter } from './skiAreaSource';
 
 Vue.use(VueI18n);
 
@@ -291,6 +292,7 @@ export default Vue.extend({
     },
     loadItems() {
       //console.log(this.mappedskiareaIds);
+      const sourceFilter = skiAreaSourceFilter(this.source);
       new CommonApi()
         .v1SkiAreaGet(
           undefined,
@@ -299,7 +301,7 @@ export default Vue.extend({
           this.skiregionList,
           true,
           undefined,
-          this.source || undefined,
+          sourceFilter.source,
           undefined,
           this.language,
           this.language,
@@ -310,7 +312,7 @@ export default Vue.extend({
           undefined,
           undefined,
           undefined,
-          undefined,
+          sourceFilter.rawfilter,
           this.sorting == 'alphabetically'
             ? 'Detail.' + this.language + '.Title'
             : this.sorting == 'skiregion'
@@ -319,11 +321,15 @@ export default Vue.extend({
           false
         )
         .then((value) => {
-          const idList = this.idList.split(',');
+          // keep the order of the configured ids
+          const idList = this.mappedskiareaIds
+            .split(',')
+            .map((id) => id.toUpperCase());
           const res = value.data.length > 0 ? value.data : undefined;
           this.items = res?.sort(
             ({ Id: a }, { Id: b }) =>
-              idList.indexOf(a ?? '') - idList.indexOf(b ?? '')
+              idList.indexOf((a ?? '').toUpperCase()) -
+              idList.indexOf((b ?? '').toUpperCase())
           );
         });
     },

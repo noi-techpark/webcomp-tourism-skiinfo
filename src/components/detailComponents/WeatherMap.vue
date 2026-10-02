@@ -5,236 +5,133 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <template>
-  <div>
-    <div>
-      <l-map :center="center" :zoom="zoom" class="map" ref="myMap">
-        <l-tile-layer
-          attribution="<a target='_blank' href='https://opendatahub.com'>OpenDataHub.com</a> | &copy; <a target='_blank' href='https://openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
-          :url="url"
-        >
-        </l-tile-layer>
-        <l-marker :lat-lng="center">
-          <l-popup
-            :options="{ autoClose: false, closeOnClick: false }"
-            :content="getSkiAreaContent()"
-          ></l-popup>
-        </l-marker>
-        <l-marker
-          v-for="marker in measuringpoints"
-          :key="marker.Id"
-          :lat-lng="returnMarkerLatLng(marker)"
-        >
-          <l-popup
-            :options="{ autoClose: false, closeOnClick: false }"
-            :content="getMarkerContent(marker)"
-          ></l-popup>
-        </l-marker>
-      </l-map>
-    </div>
+  <div class="weather-map">
+    <l-map
+      ref="map"
+      class="weather-map-canvas"
+      :bounds="bounds"
+      :options="mapOptions"
+      @ready="onReady"
+    >
+      <l-tile-layer :url="url" :attribution="attribution" />
+      <l-polygon
+        v-for="(ring, index) in rings"
+        :key="'ring' + index"
+        :lat-lngs="ring"
+        :color="colors.line"
+        :fill-color="colors.fill"
+        :fill-opacity="0.14"
+        :weight="2"
+        :interactive="false"
+      />
+      <l-circle-marker
+        v-for="point in points"
+        :key="point.id"
+        :lat-lng="point.latLng"
+        :radius="point.id === highlight ? 10 : 7"
+        :weight="2.5"
+        color="#ffffff"
+        :fill-color="
+          point.id === highlight
+            ? colors.highlight
+            : point.kind === 'station'
+            ? colors.station
+            : colors.line
+        "
+        :fill-opacity="1"
+        @mouseover="$emit('highlight', point.id)"
+        @mouseout="$emit('highlight', null)"
+      >
+        <l-tooltip :options="{ direction: 'top', offset: [0, -8] }">
+          <strong>{{ point.name }}</strong>
+          <span v-if="point.label"> · {{ point.label }}</span>
+        </l-tooltip>
+      </l-circle-marker>
+    </l-map>
   </div>
 </template>
 
 <script lang="ts">
-import { LMap, LTileLayer, LMarker, LPopup, LLayerGroup } from 'vue2-leaflet';
-import { LatLngTuple } from 'leaflet';
-import { WeatherApi } from '@/api/api';
-import { Measuringpoint, SkiAreaLinked } from '@/api/models';
+import {
+  LMap,
+  LTileLayer,
+  LPolygon,
+  LCircleMarker,
+  LTooltip,
+} from 'vue2-leaflet';
+import { latLngBounds, LatLngBounds } from 'leaflet';
 import Vue, { PropType } from 'vue';
-import moment from 'moment';
+import { LatLng } from './measuringPoints';
+
+export interface MapPoint {
+  id: string;
+  name: string;
+  label: string;
+  kind: 'snow' | 'station';
+  latLng: LatLng;
+}
 
 export default Vue.extend({
+  name: 'WeatherMap',
   components: {
     LMap,
     LTileLayer,
-    LMarker,
-    LPopup,
-    // LLayerGroup
+    LPolygon,
+    LCircleMarker,
+    LTooltip,
   },
   props: {
-    item: {
-      type: Object as PropType<SkiAreaLinked>,
-      required: true,
+    rings: {
+      type: Array as PropType<LatLng[][]>,
+      default: () => [],
     },
-    language: {
+    points: {
+      type: Array as PropType<MapPoint[]>,
+      default: () => [],
+    },
+    highlight: {
       type: String,
-      required: false,
-      default: 'en',
+      default: null,
     },
   },
   data() {
-    const data: {
-      rawMeasuringpoints: Measuringpoint[] | null;
-      titles: string[];
-      url: string;
-      center: LatLngTuple;
-      zoom: number;
-      markerLatLng: LatLngTuple[] | null;
-    } = {
-      rawMeasuringpoints: null,
-      titles: [
-        'Name',
-        'Snow Height',
-        'New Snow',
-        'Last Snow Date',
-        'Altitude',
-        'Last Update',
-      ],
+    return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      center: [46.7728692, 10.7916716],
-      zoom: 12,
-      markerLatLng: null,
+      attribution:
+        "&copy; <a target='_blank' href='https://openstreetmap.org/copyright'>OpenStreetMap</a> | <a target='_blank' href='https://opendatahub.com'>Open Data Hub</a>",
+      mapOptions: {
+        scrollWheelZoom: false,
+        zoomSnap: 0.25,
+        zoomControl: true,
+      },
+      colors: {
+        line: '#1f6fb2',
+        fill: '#1f6fb2',
+        station: '#1d2b3a',
+        highlight: '#e8a33d',
+      },
     };
-
-    return data;
   },
-  // mounted() {
-  //  this.doSomethingOnReady();
-  // },
   computed: {
-    measuringpoints():
-      | {
-          Id?: string;
-          Shortname?: string;
-          SnowHeight?: string;
-          newSnowHeight?: string;
-          LastSnowDate?: Date;
-          Altitude?: number;
-          LastUpdate?: Date;
-          Latitude?: number;
-          Longitude?: number;
-        }[]
-      | undefined {
-      return this.rawMeasuringpoints?.map(
-        ({
-          Id,
-          Shortname,
-          SnowHeight,
-          newSnowHeight,
-          LastSnowDate,
-          Altitude,
-          LastUpdate,
-          Latitude,
-          Longitude,
-        }) => {
-          return {
-            Id: Id ?? undefined,
-            Shortname: Shortname ?? undefined,
-            SnowHeight: SnowHeight ?? undefined,
-            newSnowHeight: newSnowHeight ?? undefined,
-            LastSnowDate: LastSnowDate ?? undefined,
-            Altitude: Altitude ?? undefined,
-            LastUpdate: LastUpdate ?? undefined,
-            Latitude: Latitude ?? undefined,
-            Longitude: Longitude ?? undefined,
-          };
-        }
-      );
-    },
-  },
-  created() {
-    this.init();
-  },
-  watch: {
-    item: function() {
-      this.init();
+    bounds(): LatLngBounds {
+      const latLngs = [
+        ...this.rings.reduce((all, ring) => all.concat(ring), [] as LatLng[]),
+        ...this.points.map((point) => point.latLng),
+      ];
+      return latLngBounds(latLngs).pad(0.08);
     },
   },
   methods: {
-    init() {
-      this.loadMeasuringpoints();
+    onReady() {
+      // the map is mounted while the tab becomes visible; measure again once laid out
+      setTimeout(() => this.invalidate(), 150);
     },
-    loadMeasuringpoints() {
-      if (!this.item.Id) return;
-      new WeatherApi()
-        .v1WeatherMeasuringpointGet(
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          this.item.Id,
-          undefined,
-          undefined,
-          true,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-          undefined
-        )
-        .then((value) => {
-          this.rawMeasuringpoints = value.data.length === 0 ? null : value.data;
-
-          this.center = [this.item.Latitude!, this.item.Longitude!];
-        });
-    },
-    returnMarkerLatLng(marker: Measuringpoint) {
-      return [marker.Latitude, marker.Longitude];
-    },
-    getMarkerContent(marker: Measuringpoint) {
-      const mpname = '<tr><td><h3>' + marker.Shortname + '</h3></td></tr>';
-      const snowheight =
-        '<tr><td>' +
-        this.$t('weathertable.snowheight') +
-        ': ' +
-        marker.SnowHeight +
-        '</td></tr>';
-      const newsnow =
-        '<tr><td>' +
-        this.$t('weathertable.newsnow') +
-        ': ' +
-        marker.newSnowHeight +
-        '</td></tr>';
-      const lastupdate =
-        '<tr><td>' +
-        this.$t('weathertable.lastupdate') +
-        ': ' +
-        moment(marker.LastUpdate).format('DD-MM-YYYY HH:MM') +
-        '</td></tr>';
-      const altitude =
-        '<tr><td>' +
-        this.$t('weathertable.altitude') +
-        ': ' +
-        marker.Altitude +
-        '</td></tr>';
-
-      return (
-        '<table class="table table-striped">' +
-        mpname +
-        snowheight +
-        newsnow +
-        lastupdate +
-        altitude +
-        '</table>'
-      );
-    },
-    getSkiAreaContent() {
-      const mpname =
-        '<h3>' + this.item?.Detail?.[this.language].Title + '</h3>';
-
-      return mpname;
+    invalidate() {
+      const map = (this.$refs.map as LMap | undefined)?.mapObject;
+      if (!map) return;
+      map.invalidateSize();
+      map.fitBounds(this.bounds);
     },
   },
 });
 </script>
-
-<style>
-/* @import 'http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css'; */
-
-.map {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  max-height: 500px;
-  min-height: 300px;
-  overflow: hidden;
-}
-</style>

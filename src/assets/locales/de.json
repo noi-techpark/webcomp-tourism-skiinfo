@@ -39,7 +39,7 @@
   "noData": {
     "slopes": "Kein Pistendaten",
     "lifts": "Keine Liftdaten",
-    "weather": "Keine Wetterdate",
+    "weather": "Keine Wetterdaten",
     "webcam": "Keine Webcamdaten",
     "lifttype": "Lift Typ nicht definiert"
   },
@@ -109,12 +109,22 @@
   "Slopes": "Pisten",
   "Weather": "Wetter",
   "Webcam": "Webcams",
-  "weathertable":{
-    "measuringpointname":"Name",
-    "snowheight":"Schneehöhe",
-    "newsnow":"Neuschnee",
-    "lastsnowdate":"Letzter Schneefall",
-    "lastupdate":"Letzte Änderung",
-    "altitude": "Meereshöhe"
+  "weathertable": {
+    "measuringpointname": "Name",
+    "snowheight": "Schneehöhe",
+    "newsnow": "Neuschnee",
+    "lastsnowdate": "Letzter Schneefall",
+    "lastupdate": "Letzte Aktualisierung",
+    "altitude": "Meereshöhe",
+    "snowdepthmax": "Schneehöhe (max.)",
+    "newsnowmax": "Neuschnee (max.)",
+    "temperature": "Temperatur",
+    "outdated": "veraltet",
+    "forecast": "Wettervorhersage",
+    "measuringpoints": "Schneemesspunkte",
+    "stations": "Wetterstationen",
+    "wind": "Wind",
+    "humidity": "Luftfeuchtigkeit",
+    "precipitation": "Niederschlagswahrscheinlichkeit"
   }
 }

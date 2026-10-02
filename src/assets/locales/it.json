@@ -109,12 +109,22 @@
   "Slopes": "Piste",
   "Weather": "Meteo",
   "Webcams": "Webcams",
-  "weathertable":{
-    "measuringpointname":"nome",
-    "snowheight":"altezza neve",
-    "newsnow":"neve fresca",
-    "lastsnowdate":"data ultima nevicata",
-    "lastupdate":"ultimo aggiornamento",
-    "altitude": "altitudine"
+  "weathertable": {
+    "measuringpointname": "Nome",
+    "snowheight": "Altezza neve",
+    "newsnow": "Neve fresca",
+    "lastsnowdate": "Ultima nevicata",
+    "lastupdate": "Ultimo aggiornamento",
+    "altitude": "Altitudine",
+    "snowdepthmax": "Altezza neve (max.)",
+    "newsnowmax": "Neve fresca (max.)",
+    "temperature": "Temperatura",
+    "outdated": "non aggiornato",
+    "forecast": "Previsioni meteo",
+    "measuringpoints": "Punti di misurazione neve",
+    "stations": "Stazioni meteo",
+    "wind": "Vento",
+    "humidity": "Umidità",
+    "precipitation": "Probabilità di precipitazioni"
   }
 }

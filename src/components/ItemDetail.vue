@@ -133,6 +133,7 @@ import {
 } from '@/api/models';
 import { APIResponse } from '@/types';
 import Vue, { PropType } from 'vue';
+import fallbackImage from '@/assets/img/skiAreaFallback';
 
 type Menu = 'Info' | 'Lifts' | 'Slopes' | 'Weather' | 'Webcam';
 
@@ -201,10 +202,12 @@ export default Vue.extend({
     return {
       ...data,
       weatherMapRefreshMarker: 0,
+      imageBroken: false,
     };
   },
   created() {
     this.init();
+    this.checkImage();
   },
   mounted() {
     this.scheduleScrollDown();
@@ -212,6 +215,7 @@ export default Vue.extend({
   watch: {
     item: function() {
       this.init();
+      this.checkImage();
     },
     selectedMenu(value) {
       switch (value as Menu) {
@@ -301,20 +305,37 @@ export default Vue.extend({
     close() {
       this.$emit('close');
     },
+    checkImage() {
+      // a css background image cannot report load errors, so probe the url once
+      this.imageBroken = false;
+      const url = this.imageUrl;
+      if (!url) return;
+      const probe = new Image();
+      probe.onerror = () => {
+        if (this.imageUrl === url) this.imageBroken = true;
+      };
+      probe.src = url;
+    },
   },
   computed: {
     itemDetail(): Detail {
       return this.item?.Detail?.[this.language] || {};
     },
+    imageUrl(): string | null {
+      const url = this.item?.ImageGallery?.[0]?.ImageUrl;
+      if (!url) return null;
+      // the ODH image service can scale images
+      const scalable = /opendatahub\.com|testingmachine\.eu|service\.suedtirol\.info/.test(
+        url
+      );
+      return scalable
+        ? url + (url.includes('?') ? '&' : '?') + 'width=1980'
+        : url;
+    },
     titleImage(): string {
-      const image =
-        this.item?.ImageGallery != null ? this.item?.ImageGallery[0] : null;
-      if (image == null) {
-        return '';
-      } else {
-        return `background-image: url(${image.ImageUrl +
-          '&width=1980'}); height: 300px; background-size: cover; background-position: center;`;
-      }
+      const url =
+        this.imageUrl && !this.imageBroken ? this.imageUrl : fallbackImage;
+      return `background-image: url("${url}"); height: 300px; background-size: cover; background-position: center;`;
     },
     noItem(): boolean {
       return !this.item;
