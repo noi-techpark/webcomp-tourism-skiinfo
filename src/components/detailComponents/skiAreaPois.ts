@@ -80,6 +80,10 @@ function queryPois(
     .then((value) => value.data.Items ?? []);
 }
 
+function isDssSkiArea(item: SkiAreaLinked): boolean {
+  return item.Source === 'dss' || !!item.Mapping?.dss;
+}
+
 function getPolygon(item: SkiAreaWithGeo): string | undefined {
   const geometry = item.Geo?.track?.Geometry;
   return geometry && /^(MULTI)?POLYGON/i.test(geometry) ? geometry : undefined;
@@ -88,7 +92,8 @@ function getPolygon(item: SkiAreaWithGeo): string | undefined {
 /**
  * Loads the lifts or slopes belonging to a ski area:
  * 1. ski area has a polygon (Geo.track) -> everything inside the polygon
- *    (source dss for dss ski areas, lts otherwise)
+ *    (source dss for dss ski areas and for idm ski areas mapped to a dss
+ *    ski area, lts otherwise; the lts lifts carry no lift type tags)
  * 2. discoverswiss ski area -> lifts/slopes whose Mapping.discoverswiss
  *    "locatedAt.identifier" references the ski area
  * 3. fallback -> radius search around the ski area position
@@ -102,7 +107,7 @@ export function loadSkiAreaPois(
   if (polygon) {
     return queryPois(
       {
-        source: item.Source === 'dss' ? 'dss' : 'lts',
+        source: isDssSkiArea(item) ? 'dss' : 'lts',
         tagfilter: TAGS[kind],
         active: true,
         polygon,
