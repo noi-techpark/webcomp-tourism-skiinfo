@@ -4,6 +4,7 @@
 
 import { ODHActivityPoiApi } from '@/api/api';
 import { ODHActivityPoiLinked, SkiAreaLinked } from '@/api/models';
+import { DOLOMITI_SUPERSKI_REGION_ID } from '@/skiAreaSource';
 
 export type PoiKind = 'lifts' | 'slopes';
 
@@ -80,8 +81,14 @@ function queryPois(
     .then((value) => value.data.Items ?? []);
 }
 
+// idm ski areas in the Dolomiti Superski region use the dss lifts/slopes too;
+// some (e.g. Oclini, part of dss Val di Fiemme) have no Mapping.dss
 function isDssSkiArea(item: SkiAreaLinked): boolean {
-  return item.Source === 'dss' || !!item.Mapping?.dss;
+  return (
+    item.Source === 'dss' ||
+    !!item.Mapping?.dss ||
+    item.SkiRegionId === DOLOMITI_SUPERSKI_REGION_ID
+  );
 }
 
 function getPolygon(item: SkiAreaWithGeo): string | undefined {
@@ -92,8 +99,8 @@ function getPolygon(item: SkiAreaWithGeo): string | undefined {
 /**
  * Loads the lifts or slopes belonging to a ski area:
  * 1. ski area has a polygon (Geo.track) -> everything inside the polygon
- *    (source dss for dss ski areas and for idm ski areas mapped to a dss
- *    ski area, lts otherwise; the lts lifts carry no lift type tags)
+ *    (source dss for dss ski areas and idm ski areas in the Dolomiti
+ *    Superski region, lts otherwise; the lts lifts carry no lift type tags)
  * 2. discoverswiss ski area -> lifts/slopes whose Mapping.discoverswiss
  *    "locatedAt.identifier" references the ski area
  * 3. fallback -> radius search around the ski area position

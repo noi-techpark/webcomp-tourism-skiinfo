@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-const DOLOMITI_SUPERSKI_REGION_ID = '8260DC5B815D40B98A1B53E84EC2B419';
+export const DOLOMITI_SUPERSKI_REGION_ID = '8260DC5B815D40B98A1B53E84EC2B419';
 
 /**
  * Translates the source attribute into the SkiArea API source/rawfilter.
